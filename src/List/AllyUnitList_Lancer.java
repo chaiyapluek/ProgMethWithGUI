@@ -57,6 +57,7 @@ public class AllyUnitList_Lancer {
 		Skill[] skills = new Skill[] { Enkidu_FirstSkill, Enkidu_SecondSkill, Enkidu_ThirdSkill, Enkidu_Ultimate };
 		AllyUnit Enkidu = new AllyUnit("Enkidu", "Lancer", stats, skills, statsFactors, skillRequirement);
 		Enkidu.setUrl("AllyUnit/Enkidu.png");
+		Enkidu.setIconUrl("AllyUnit/Icon/Enkidu_Icon.png");
 		return Enkidu;
 	}
 
@@ -99,6 +100,7 @@ public class AllyUnitList_Lancer {
 		Skill[] skills = new Skill[] { Karna_FirstSkill, Karna_SecondSkill, Karna_ThirdSkill, Karna_Ultimate };
 		AllyUnit Karna = new AllyUnit("Karna", "Lancer", stats, skills, statsFactors, skillRequirement);
 		Karna.setUrl("AllyUnit/Karna.png");
+		Karna.setIconUrl("AllyUnit/Icon/Karna_Icon.png");
 		return Karna;
 	}
 
@@ -138,6 +140,7 @@ public class AllyUnitList_Lancer {
 				Leonidas_Ultimate };
 		AllyUnit Leonidas = new AllyUnit("Leonidas", "Lancer", stats, skills, statsFactors, skillRequirement);
 		Leonidas.setUrl("AllyUnit/Leonidas.png");
+		Leonidas.setIconUrl("AllyUnit/Icon/Leonidas_Icon.png");
 		return Leonidas;
 	}
 }

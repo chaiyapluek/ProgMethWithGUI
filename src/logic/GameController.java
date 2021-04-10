@@ -10,6 +10,7 @@ import List.AllyUnitList;
 import Map.*;
 import UnitBase.*;
 import gui.ChooseMerPanel;
+import gui.ControlPanel;
 
 public class GameController {
 
@@ -17,6 +18,8 @@ public class GameController {
 	private static AllyUnit[] units;
 	private static Map gameMap;
 	private static ChooseMerPanel chooseMerPanel;
+	private static AllyUnit selectAllyUnit;
+	private static ControlPanel controlPanel;
 
 	public static void Intialize() {
 		gameMap = new Map();
@@ -26,16 +29,33 @@ public class GameController {
 	public static void createPlayer() {
 		Coordinate coordinate = new Coordinate(gameMap.getHeight() - 1, 0);
 		player = new Player(units, coordinate);
+		selectAllyUnit = player.getUnits()[0];
 	}
 
 	public static void addInitialUnit(AllyUnit unit) {
 		units[ChooseMerPanel.count] = unit;
+	}
+	
+	public static AllyUnit getSelectAllyUnit() {
+		return selectAllyUnit;
+	}
+	
+	public static void setSelectAllyUnit(AllyUnit unit) {
+		selectAllyUnit = unit;
 	}
 
 	public static void setChooseMerPanel(ChooseMerPanel chooseMerPanel) {
 		GameController.chooseMerPanel = chooseMerPanel;
 	}
 
+	public static void setControlPanel(ControlPanel panel) {
+		GameController.controlPanel = panel;
+	}
+	
+	public static void updateControlPanel() {
+		GameController.controlPanel.update();
+	}
+	
 	public static void chooseNext() {
 		chooseMerPanel.setLabelText();
 		chooseMerPanel.chooseNext();
@@ -57,6 +77,10 @@ public class GameController {
 		return !gameMap.getStage(i, j).isClear();
 	}
 
+	public static Player getPlayer() {
+		return player;
+	}
+	
 	public static Coordinate getPlayerCoordinate() {
 		return player.getCoordinate();
 	}

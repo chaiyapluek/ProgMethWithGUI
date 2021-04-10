@@ -1,5 +1,6 @@
 package gui;
 
+import Application.Main;
 import UnitBase.AdvanceUnit;
 import UnitBase.AllyUnit;
 import UnitBase.Unit;
@@ -58,7 +59,7 @@ public class MercenaryCell extends VBox {
 				new BackgroundImage(new Image(u.getUrl()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
 						BackgroundPosition.CENTER, new BackgroundSize(0, 100, false, true, true, false))));
 
-		skillPanel skills = new skillPanel((AdvanceUnit) u);
+		InitialSkillPanel skills = new InitialSkillPanel((AdvanceUnit) u);
 
 		HBox info = new HBox();
 		info.setAlignment(Pos.CENTER);
@@ -83,6 +84,7 @@ public class MercenaryCell extends VBox {
 					if(ChooseMerPanel.count == 3) {
 						GameController.createPlayer();
 						GameController.printUnit();
+						Main.createMainScene();
 						GameController.changeToMainScene();
 					}
 				}

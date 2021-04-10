@@ -53,6 +53,7 @@ public class AllyUnitList_Archer {
 		Skill[] skills = new Skill[] { David_FirstSkill, David_SecondSkill, David_ThirdSkill, David_Ultimate };
 		AllyUnit David = new AllyUnit("David", "Archer", stats, skills, statsFactors, skillRequirement);
 		David.setUrl("AllyUnit/David.png");
+		David.setIconUrl("AllyUnit/Icon/David_Icon.png");
 		return David;
 	}
 
@@ -91,6 +92,7 @@ public class AllyUnitList_Archer {
 		Skill[] skills = new Skill[] { Arjuna_FirstSkill, Arjuna_SecondSkill, Arjuna_ThirdSkill, Arjuna_Ultimate };
 		AllyUnit Arjuna = new AllyUnit("Arjuna", "Archer", stats, skills, statsFactors, skillRequirement);
 		Arjuna.setUrl("AllyUnit/Arjuna.png");
+		Arjuna.setIconUrl("AllyUnit/Icon/Arjuna_Icon.png");
 		return Arjuna;
 	}
 
@@ -129,6 +131,7 @@ public class AllyUnitList_Archer {
 		Skill[] skills = new Skill[] { Billy_FirstSkill, Billy_SecondSkill, Billy_ThirdSkill, Billy_Ultimate };
 		AllyUnit Billy = new AllyUnit("Billy The Kid",  "Archer", stats, skills, statsFactors, skillRequirement);
 		Billy.setUrl("AllyUnit/Billy.png");
+		Billy.setIconUrl("AllyUnit/Icon/Billy_Icon.png");
 		return Billy;
 	}
 }

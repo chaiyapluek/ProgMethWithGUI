@@ -6,9 +6,9 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.FlowPane;
 
-public class skillPanel extends FlowPane {
+public class InitialSkillPanel extends FlowPane {
 
-	public skillPanel(AdvanceUnit unit) {
+	public InitialSkillPanel(AdvanceUnit unit) {
 		this.setPadding(new Insets(10));
 		this.setAlignment(Pos.CENTER);
 		this.setVgap(20);

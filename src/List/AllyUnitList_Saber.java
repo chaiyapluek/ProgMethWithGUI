@@ -60,6 +60,7 @@ public class AllyUnitList_Saber {
 				Seigfried_Ultimate };
 		AllyUnit Seigfried = new AllyUnit("Siegfried", "Saber", stats, skills, statsFactors, skillRequirement);
 		Seigfried.setUrl("AllyUnit/Siegfried.png");
+		Seigfried.setIconUrl("AllyUnit/Icon/Siegfried_Icon.png");
 		return Seigfried;
 	}
 
@@ -100,6 +101,7 @@ public class AllyUnitList_Saber {
 
 		AllyUnit Lancelot = new AllyUnit("Lancelot", "Saber", stats, skills, statsFactors, skillRequirement);
 		Lancelot.setUrl("AllyUnit/Lancelot.png");
+		Lancelot.setIconUrl("AllyUnit/Icon/Lancelot_Icon.png");
 		return Lancelot;
 	}
 
@@ -137,6 +139,7 @@ public class AllyUnitList_Saber {
 
 		AllyUnit Artoria = new AllyUnit("Artoria", "Saber", stats, skills, statsFactors, skillRequirement);
 		Artoria.setUrl("AllyUnit/Artoria.png");
+		Artoria.setIconUrl("AllyUnit/Icon/Artoria_Icon.png");
 		return Artoria;
 	}
 

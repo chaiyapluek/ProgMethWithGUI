@@ -59,6 +59,7 @@ public class AllyUnitList_Berserker {
 				Kiyohime_Ultimate };
 		AllyUnit Kiyohime = new AllyUnit("Kiyohime", "Berserker", stats, skills, statsFactors, skillRequirement);
 		Kiyohime.setUrl("AllyUnit/Kiyohime.png");
+		Kiyohime.setIconUrl("AllyUnit/Icon/Kiyohime_Icon.png");
 		return Kiyohime;
 	}
 
@@ -99,6 +100,7 @@ public class AllyUnitList_Berserker {
 				Harecles_Ultimate };
 		AllyUnit Heracles = new AllyUnit("Heracles", "Berserker", stats, skills, statsFactors, skillRequirement);
 		Heracles.setUrl("AllyUnit/Heracles.png");
+		Heracles.setIconUrl("AllyUnit/Icon/Heracles_Icon.png");
 		return Heracles;
 	}
 
@@ -140,6 +142,7 @@ public class AllyUnitList_Berserker {
 				Asteriod_Ultimate };
 		AllyUnit Asteriod = new AllyUnit("Asterios", "Berserker", stats, skills, statsFactors, skillRequirement);
 		Asteriod.setUrl("AllyUnit/Asterios.png");
+		Asteriod.setIconUrl("AllyUnit/Icon/Asterios_Icon.png");
 		return Asteriod;
 	}
 
@@ -182,6 +185,7 @@ public class AllyUnitList_Berserker {
 		Skill[] skills = new Skill[] { Edmond_FirstSkill, Edmond_SecondSkill, Edmond_ThirdSkill, Edmond_Ultimate };
 		AllyUnit Edmond = new AllyUnit("Edmond Dantes", "Berserker", stats, skills, statsFactors, skillRequirement);
 		Edmond.setUrl("AllyUnit/Edmon.png");
+		Edmond.setIconUrl("AllyUnit/Icon/Edmond_Icon.png");
 		return Edmond;
 	}
 
@@ -225,6 +229,7 @@ public class AllyUnitList_Berserker {
 		AllyUnit Mysterious = new AllyUnit("Mysterious Heroine X", "Berserker", stats, skills, statsFactors,
 				skillRequirement);
 		Mysterious.setUrl("AllyUnit/Mysterious.png");
+		Mysterious.setIconUrl("AllyUnit/Icon/Mysterious_Icon.png");
 		return Mysterious;
 	}
 }

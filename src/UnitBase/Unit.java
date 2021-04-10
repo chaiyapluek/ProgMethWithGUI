@@ -5,6 +5,7 @@ public abstract class Unit {
 	private String name;
 	private String _class;
 	private String url;
+	private String iconUrl;
 
 	public Unit(String name, String _class) {
 		this.name = name;
@@ -19,6 +20,14 @@ public abstract class Unit {
 	
 	public void setUrl(String url) {
 		this.url = url;
+	}
+	
+	public String getIconUrl() {
+		return iconUrl;
+	}
+	
+	public void setIconUrl(String url) {
+		iconUrl = url;
 	}
 	
 	public String get_Class() {

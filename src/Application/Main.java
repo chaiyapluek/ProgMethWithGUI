@@ -32,7 +32,6 @@ public class Main extends Application{
 		stage = primaryStage;
 		GameController.Intialize();
 		createInitialScene();
-		createMainScene();
 		
 		primaryStage.setScene(initialScene);
 		primaryStage.setTitle("Test Project");
@@ -59,11 +58,11 @@ public class Main extends Application{
 		initialScene = new Scene(root,1280,720);
 	}
 	
-	public void createMainScene() {
+	public static void createMainScene() {
 		VBox root = new VBox();
 		root.setAlignment(Pos.CENTER);
 		
-		MainPanel p = new MainPanel();
+		MainPanel p = new MainPanel(GameController.getPlayer());
 		root.getChildren().add(p);
 		
 		mainScene = new Scene(root,1280,720);

@@ -120,22 +120,4 @@ public class Map {
 		}
 		return (1.0 * num) / (n * m) * 100.0;
 	}
-
-	public String toString() {
-		String str = "";
-		Coordinate coordinate = GameController.getPlayerCoordinate();
-		for (int i = 0; i < stages.length; i++) {
-			for (int j = 0; j < stages[i].length; j++) {
-				if (stages[i][j] != null) {
-					if (i == coordinate.getX() && j == coordinate.getY())
-						str += "P";
-					else
-						str += "O";
-				} else
-					str += " ";
-			}
-			str += "\n";
-		}
-		return str;
-	}
 }

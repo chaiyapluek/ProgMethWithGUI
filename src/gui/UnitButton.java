@@ -41,8 +41,10 @@ public class UnitButton extends Button {
 		this.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
 		Image img = new Image(u.getUrl());
 		ImageView imgView = new ImageView(img);
-		if (u.getName().equals("Karna") || u.getName().equals("Leonidas") || u.getName().equals("Ereshkigal")) {
+		if (u.getName().equals("Karna") || u.getName().equals("Leonidas")) {
 			imgView.setFitHeight(280);
+		} else if (u.getName().equals("Ereshkigal")) {
+			imgView.setFitHeight(300);
 		} else if (u.getName().equals("Heracles")) {
 			imgView.setFitHeight(260);
 		} else {

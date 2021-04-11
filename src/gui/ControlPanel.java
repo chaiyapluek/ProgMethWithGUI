@@ -42,6 +42,7 @@ public class ControlPanel extends HBox {
 	private Label level;
 	
 	private ActionSkillPane skillPane;
+	private MapPanel mapPanel;
 
 	public ControlPanel(Unit u) {
 
@@ -117,8 +118,13 @@ public class ControlPanel extends HBox {
 		left.add(HPAndGauge, 0, 1, 2, 1);
 		left.add(skillPane, 3, 1, 4, 1);
 		left.add(Stats, 0, 2, 2, 2);
+		
+		Pane right = new Pane();
+		mapPanel = new MapPanel();
+		right.getChildren().add(mapPanel);
 
 		this.getChildren().add(left);
+		this.getChildren().add(right);
 		this.setBorder(new Border(
 				new BorderStroke(Color.GOLD, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 	}
@@ -150,5 +156,9 @@ public class ControlPanel extends HBox {
 		critdmg.setText("CritDamage : " + Math.max(0, unit.getCritDamage()));
 		dodge.setText("Dodge : " + Math.max(0, unit.getDodgeChance()));
 		level.setText("Level : " + unit.getLevel());
+	}
+	
+	public MapPanel getMapPanel() {
+		return mapPanel;
 	}
 }

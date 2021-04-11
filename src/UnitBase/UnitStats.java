@@ -14,7 +14,7 @@ public abstract class UnitStats extends Unit {
 	private int critChance;
 	private int critDamage;
 	private int dodgeChance;
-	
+
 	private int increaseAttackAmount;
 
 	private boolean isEvade;
@@ -42,11 +42,12 @@ public abstract class UnitStats extends Unit {
 		this.isEvade = false;
 		this.sureHit = false;
 		this.ignoreDef = false;
-		
+
 		effects = new ArrayList<Effect>();
 	}
 
 	public abstract void attack(Unit target) throws Exception;
+
 	public abstract void defense();
 
 	public int getMaxHP() {
@@ -54,9 +55,9 @@ public abstract class UnitStats extends Unit {
 	}
 
 	public void setMaxHP(int maxHP) {
-		double percentHP = (this.getCurrentHP() * 100) / this.getMaxHP();
+		double percentHP = (1.0 * this.getCurrentHP() * 100) / this.getMaxHP();
 		this.maxHP = maxHP;
-		this.setCurrentHP((int) (maxHP * percentHP / 100));
+		this.setCurrentHP((int) (1.0 * maxHP * percentHP / 100));
 	}
 
 	public int getCurrentHP() {
@@ -85,7 +86,7 @@ public abstract class UnitStats extends Unit {
 	public void setAttack(int attack) {
 		this.attack = attack;
 	}
-	
+
 	public int getIncreaseAttackAmount() {
 		return increaseAttackAmount;
 	}
@@ -93,9 +94,9 @@ public abstract class UnitStats extends Unit {
 	public void setIncreaseAttackAmount(int increaseAttackAmount) {
 		this.increaseAttackAmount = increaseAttackAmount;
 	}
-	
+
 	public int getTotalAttack() {
-		return this.getAttack() + ((this.getIncreaseAttackAmount() * this.getAttack())/100);
+		return this.getAttack() + ((this.getIncreaseAttackAmount() * this.getAttack()) / 100);
 	}
 
 	public int getCritChance() {
@@ -117,7 +118,7 @@ public abstract class UnitStats extends Unit {
 	public int getDodgeChance() {
 		return this.dodgeChance;
 	}
-	
+
 	public void setDodgeChance(int dodgeChance) {
 		this.dodgeChance = dodgeChance;
 	}
@@ -129,15 +130,15 @@ public abstract class UnitStats extends Unit {
 	public void setIsDead(boolean isDead) {
 		this.isDead = isDead;
 	}
-	
+
 	public boolean getIsStun() {
 		return this.isStun;
 	}
-	
+
 	public void setIsStun(boolean isStun) {
 		this.isStun = isStun;
 	}
-	
+
 	public boolean getIsTaunt() {
 		return isTaunt;
 	}
@@ -145,7 +146,7 @@ public abstract class UnitStats extends Unit {
 	public void setIsTaunt(boolean isTaunt) {
 		this.isTaunt = isTaunt;
 	}
-	
+
 	public boolean getIsEvade() {
 		return isEvade;
 	}
@@ -153,7 +154,7 @@ public abstract class UnitStats extends Unit {
 	public void setIsEvade(boolean isEvade) {
 		this.isEvade = isEvade;
 	}
-	
+
 	public boolean isSureHit() {
 		return sureHit;
 	}
@@ -170,10 +171,10 @@ public abstract class UnitStats extends Unit {
 		this.ignoreDef = ignoreDef;
 	}
 
-	public ArrayList<Effect> getEffects(){
+	public ArrayList<Effect> getEffects() {
 		return this.effects;
 	}
-	
+
 	public void removeEffect(Effect e) {
 		e.getSubSkill().deactivate(this);
 		this.effects.remove(e);

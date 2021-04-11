@@ -83,7 +83,6 @@ public class MercenaryCell extends VBox {
 					GameController.chooseNext();
 					if(ChooseMerPanel.count == 3) {
 						GameController.createPlayer();
-						GameController.printUnit();
 						Main.createMainScene();
 						GameController.changeToMainScene();
 					}

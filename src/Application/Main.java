@@ -73,7 +73,6 @@ public class Main extends Application{
 	}
 	
 	public static void movePlayer() {
-		GameController.printMap();
 		while (true) {
 			System.out.println(GameController.getPlayerCoordinate());
 			System.out.println("Select direction to move");

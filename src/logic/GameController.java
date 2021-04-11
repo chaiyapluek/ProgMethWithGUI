@@ -20,6 +20,8 @@ public class GameController {
 	private static ChooseMerPanel chooseMerPanel;
 	private static AllyUnit selectAllyUnit;
 	private static ControlPanel controlPanel;
+	
+	private static boolean moveToggle = false;
 
 	public static void Intialize() {
 		gameMap = new Map();
@@ -56,6 +58,10 @@ public class GameController {
 		GameController.controlPanel.update();
 	}
 	
+	public static void updateMapPanel() {
+		GameController.controlPanel.getMapPanel().update();
+	}
+	
 	public static void chooseNext() {
 		chooseMerPanel.setLabelText();
 		chooseMerPanel.chooseNext();
@@ -63,12 +69,6 @@ public class GameController {
 
 	public static void changeToMainScene() {
 		Main.getStage().setScene(Main.getMainScene());
-	}
-	
-	public static void viewEnemyUnit(Coordinate coordinate) {
-		int i = coordinate.getX();
-		int j = coordinate.getY();
-		System.out.println(gameMap.getStage(i, j).toString());
 	}
 
 	public static boolean encouter(Coordinate coordinate) {
@@ -92,16 +92,16 @@ public class GameController {
 	public static void movePlayer(Coordinate coordinate) {
 		player.Move(coordinate);
 	}
-
-	public static void printUnit() {
-		AllyUnit[] units = player.getUnits();
-		System.out.println("Your Unit(s)");
-		for (AllyUnit u : units) {
-			System.out.println(u);
-		}
+	
+	public static Map getMap() {
+		return gameMap;
 	}
 
-	public static void printMap() {
-		System.out.println(gameMap);
+	public static void setMoveToggle(boolean bool) {
+		moveToggle = bool;
+	}
+	
+	public static boolean getMoveToggle() {
+		return moveToggle;
 	}
 }

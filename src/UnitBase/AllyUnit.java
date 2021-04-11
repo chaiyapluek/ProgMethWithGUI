@@ -31,9 +31,9 @@ public class AllyUnit extends AdvanceUnit {
 	}
 
 	public void levelup() {
-		double factor = statFactors[getLevel()];
-		this.setMaxHP((int) (factor * this.getMaxHP()));
-		this.setAttack((int) (factor * this.getAttack()));
+		double factor = statFactors[getLevel()] + 100;
+		this.setMaxHP((int) (0.01 * factor * this.getMaxHP()));
+		this.setAttack((int) (0.01 * factor * this.getAttack()));
 		setLevel(getLevel() + 1);
 	}
 
@@ -53,7 +53,7 @@ public class AllyUnit extends AdvanceUnit {
 			Skill skill = this.getSkills()[i];
 			str += "[" + (i + 1) + "] " + skill.getName();
 			if (skill instanceof NormalSkill) {
-				if(level >= skillRequirement[i])
+				if (level >= skillRequirement[i])
 					str += "\t\t Cooldown " + ((NormalSkill) skill).getCooldownTime() + " turn(s)\n";
 				else
 					str += "\t\t [ Unlock at level : " + skillRequirement[i] + " ]\n";

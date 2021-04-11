@@ -11,6 +11,7 @@ public abstract class Skill {
 
 	protected String name;
 	protected String description;
+	private String url;
 	protected ArrayList<SubSkill> subSkills;
 
 	private boolean toYourSelf;
@@ -35,6 +36,14 @@ public abstract class Skill {
 
 	public String getDescription() {
 		return this.description;
+	}
+	
+	public String getUrl() {
+		return this.url;
+	}
+	
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	public ArrayList<SubSkill> getSubSkills() {

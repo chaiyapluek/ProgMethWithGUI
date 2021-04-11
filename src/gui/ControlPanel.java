@@ -27,26 +27,28 @@ import logic.GameController;
 public class ControlPanel extends HBox {
 
 	private Pane Icon;
-	
+
 	private Label name;
 	private Label Class;
-	
+
 	private Label HP;
 	private Label Gauge;
-	
+
 	private Label def;
 	private Label attack;
 	private Label crit;
 	private Label critdmg;
 	private Label dodge;
 	private Label level;
+	
+	private ActionSkillPane skillPane;
 
 	public ControlPanel(Unit u) {
 
 		this.setMaxSize(1000, 300);
 		this.setMinSize(1000, 300);
 		this.setAlignment(Pos.CENTER_LEFT);
-		
+
 		GridPane left = new GridPane();
 		left.setPadding(new Insets(20));
 		left.setHgap(10);
@@ -64,8 +66,8 @@ public class ControlPanel extends HBox {
 		setIcon();
 
 		VBox NameAndClass = new VBox();
-		NameAndClass.setMinWidth(125);
-		NameAndClass.setMaxWidth(125);
+		NameAndClass.setMinWidth(150);
+		NameAndClass.setMaxWidth(150);
 		NameAndClass.setBorder(new Border(
 				new BorderStroke(Color.GOLD, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		NameAndClass.setAlignment(Pos.CENTER_RIGHT);
@@ -102,18 +104,19 @@ public class ControlPanel extends HBox {
 		dodge.setStyle("-fx-font-size: 12px; -fx-font-family:\"Arial Black\";-fx-fill: #555;");
 		level.setStyle("-fx-font-size: 12px; -fx-font-family:\"Arial Black\";-fx-fill: #555;");
 
-		Stats.getChildren().addAll(def, attack, crit, critdmg, dodge, level);
+		Stats.getChildren().addAll(attack, def, crit, critdmg, dodge, level);
 		Stats.setBorder(new Border(
 				new BorderStroke(Color.DARKGRAY, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
-
 		ActionPane actionPane = new ActionPane();
-		
-		left.add(Icon, 0, 0, 2, 1);
-		left.add(NameAndClass, 2, 0, 1, 1);
-		left.add(HPAndGauge, 0, 1, 3, 1);
+		skillPane = new ActionSkillPane();
+
+		left.add(Icon, 0, 0, 1, 1);
+		left.add(NameAndClass, 1, 0, 2, 1);
+		left.add(actionPane, 3, 0, 4, 1);
+		left.add(HPAndGauge, 0, 1, 2, 1);
+		left.add(skillPane, 3, 1, 4, 1);
 		left.add(Stats, 0, 2, 2, 2);
-		left.add(actionPane, 3, 0);
 
 		this.getChildren().add(left);
 		this.setBorder(new Border(
@@ -121,24 +124,26 @@ public class ControlPanel extends HBox {
 	}
 
 	public void setIcon() {
-		Icon.setBackground(new Background(new BackgroundImage(new Image(GameController.getSelectAllyUnit().getIconUrl()),
-				BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
-				new BackgroundSize(0, 100, false, true, false, true))));
+		Icon.setBackground(
+				new Background(new BackgroundImage(new Image(GameController.getSelectAllyUnit().getIconUrl()),
+						BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+						new BackgroundSize(0, 100, false, true, false, true))));
 	}
 
 	public void update() {
 		updateLabel();
 		setIcon();
+		skillPane.update();
 	}
-	
+
 	private void updateLabel() {
 		AllyUnit unit = GameController.getSelectAllyUnit();
 		name.setText(unit.getName());
 		Class.setText(unit.get_Class());
-		
+
 		HP.setText("HP : " + unit.getCurrentHP() + "/" + unit.getMaxHP());
 		Gauge.setText("GAUGE : " + unit.getUltiGauge() + "/" + unit.getMaxUltigauge());
-		
+
 		def.setText("Defense : " + Math.max(0, unit.getDefense()));
 		attack.setText("Attack : " + unit.getTotalAttack());
 		crit.setText("CritChance : " + Math.max(0, unit.getCritChance()));

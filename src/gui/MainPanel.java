@@ -23,7 +23,7 @@ public class MainPanel extends VBox{
 		
 		HBox unitView = new HBox();
 		unitView.setAlignment(Pos.BOTTOM_CENTER);
-		unitView.setSpacing(70);
+		unitView.setSpacing(50);
 		for(AllyUnit u : player.getUnits()) {
 			UnitButton button = new UnitButton(u);
 			unitView.getChildren().add(button);

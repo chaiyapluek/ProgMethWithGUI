@@ -31,7 +31,7 @@ public class SkillCell extends Button {
 		this.setPrefSize(35, 35);
 		this.setBorder(new Border(
 				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-		Image image = new Image("Skill/skill1.png");
+		Image image = new Image(skill.getUrl());
 		BackgroundImage bimg = new BackgroundImage(image, null, null, BackgroundPosition.CENTER,
 				new BackgroundSize(this.getWidth(), this.getHeight(), true, true, true, false));
 		Background bg = new Background(bimg);

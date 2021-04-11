@@ -43,7 +43,7 @@ public class ActionButton extends Button {
 							BackgroundPosition.CENTER, new BackgroundSize(0, 100, false, true, true, false))));
 		} else {
 			this.setBackground(new Background(
-					new BackgroundImage(new Image("attack.png"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
+					new BackgroundImage(new Image(skill.getUrl()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
 							BackgroundPosition.CENTER, new BackgroundSize(0, 100, false, true, true, false))));
 		}
 		this.setTooltip();

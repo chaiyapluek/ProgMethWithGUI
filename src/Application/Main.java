@@ -7,6 +7,7 @@ import List.AllyUnitList_Archer;
 import List.AllyUnitList_Lancer;
 import List.AllyUnitList_Saber;
 import gui.MercenaryPanel;
+import gui.StartPanel;
 import gui.ChooseMerPanel;
 import gui.MainPanel;
 import gui.MercenaryCell;
@@ -23,6 +24,7 @@ public class Main extends Application{
 	static Scanner s = new Scanner(System.in);
 	private static Stage stage;
 	
+	private static Scene startScene;
 	private static Scene initialScene;
 	private static Scene mainScene;
 
@@ -31,9 +33,11 @@ public class Main extends Application{
 		// TODO Auto-generated method stub
 		stage = primaryStage;
 		GameController.Intialize();
-		createInitialScene();
+		//createInitialScene();
+		createStartScene();
 		
-		primaryStage.setScene(initialScene);
+		//primaryStage.setScene(initialScene);
+		primaryStage.setScene(startScene);
 		primaryStage.setTitle("Test Project");
 		primaryStage.sizeToScene();
 		primaryStage.show();
@@ -47,7 +51,17 @@ public class Main extends Application{
 		return stage;
 	}
 	
-	public void createInitialScene() {
+	public void createStartScene() {
+		//VBox root = new VBox();
+		//root.setAlignment(Pos.CENTER);
+		
+		StartPanel p = new StartPanel();
+		//root.getChildren().add(p);
+		
+		startScene = new Scene(p,1280,720);
+	}
+	
+	public static void createInitialScene() {
 		VBox root = new VBox();
 		root.setAlignment(Pos.CENTER);
 		
@@ -66,6 +80,10 @@ public class Main extends Application{
 		root.getChildren().add(p);
 		
 		mainScene = new Scene(root,1280,720);
+	}
+	
+	public static Scene getInitialScene() {
+		return initialScene;
 	}
 	
 	public static Scene getMainScene() {

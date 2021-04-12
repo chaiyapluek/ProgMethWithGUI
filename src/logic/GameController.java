@@ -66,7 +66,11 @@ public class GameController {
 		chooseMerPanel.setLabelText();
 		chooseMerPanel.chooseNext();
 	}
-
+	
+	public static void changeToInitialScene() {
+		Main.getStage().setScene(Main.getInitialScene());
+	}
+	
 	public static void changeToMainScene() {
 		Main.getStage().setScene(Main.getMainScene());
 	}

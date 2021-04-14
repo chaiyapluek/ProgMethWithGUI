@@ -33,8 +33,8 @@ public class Map {
 		return false;
 	}
 
-	public Stage getStage(int i,int j) {
-		return stages[i][j];
+	public Stage getStage(Coordinate coordinate) {
+		return stages[coordinate.getX()][coordinate.getY()];
 	}
 	
 	public int getHeight() {

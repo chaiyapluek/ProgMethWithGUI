@@ -36,19 +36,27 @@ public class UnitButton extends Button {
 		this.unit = u;
 
 		this.setAlignment(Pos.BOTTOM_CENTER);
-		this.setMinSize(150, 250);
-		this.setMaxSize(150, 250);
+		this.setMinSize(150, 200);
+		this.setMaxSize(150, 200);
 		this.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
-		Image img = new Image(u.getUrl());
-		ImageView imgView = new ImageView(img);
-		if (u.getName().equals("Karna") || u.getName().equals("Leonidas")) {
-			imgView.setFitHeight(280);
-		} else if (u.getName().equals("Ereshkigal")) {
-			imgView.setFitHeight(300);
-		} else if (u.getName().equals("Heracles")) {
-			imgView.setFitHeight(260);
+		Image img;
+		ImageView imgView;
+		if (u == null) {
+			img = new Image("grave.png");
+			imgView = new ImageView(img);
+			imgView.setFitHeight(150);
 		} else {
-			imgView.setFitHeight(220);
+			img = new Image(u.getUrl());
+			imgView = new ImageView(img);
+			if (u.getName().equals("Karna") || u.getName().equals("Leonidas")) {
+				imgView.setFitHeight(280);
+			} else if (u.getName().equals("Ereshkigal")) {
+				imgView.setFitHeight(300);
+			} else if (u.getName().equals("Heracles")) {
+				imgView.setFitHeight(260);
+			} else {
+				imgView.setFitHeight(220);
+			}
 		}
 		imgView.setPreserveRatio(true);
 		this.setGraphic(imgView);
@@ -72,7 +80,7 @@ public class UnitButton extends Button {
 
 			@Override
 			public void handle(ActionEvent event) {
-				if (unit instanceof AllyUnit) {
+				if (unit != null && unit instanceof AllyUnit) {
 					GameController.setSelectAllyUnit((AllyUnit) unit);
 					GameController.updateControlPanel();
 				}

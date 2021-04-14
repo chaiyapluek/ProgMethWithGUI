@@ -2,9 +2,11 @@ package gui;
 
 import Skill.NormalSkill;
 import Skill.Skill;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -18,7 +20,7 @@ public class ActionButton extends Button {
 	private String type;
 	private Skill skill;
 
-	public ActionButton(String type,Skill skill) {
+	public ActionButton(String type, Skill skill, boolean isLock, int level) {
 		this.type = type;
 		if (type.equals("skill")) {
 			this.skill = skill;
@@ -28,6 +30,7 @@ public class ActionButton extends Button {
 
 		this.setMinSize(50, 50);
 		this.setMaxSize(50, 50);
+		this.setAlignment(Pos.CENTER);
 		if (type.equals("attack")) {
 			this.setBackground(new Background(
 					new BackgroundImage(new Image("attack.png"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
@@ -42,14 +45,22 @@ public class ActionButton extends Button {
 					new BackgroundImage(new Image("swap.png"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
 							BackgroundPosition.CENTER, new BackgroundSize(0, 100, false, true, true, false))));
 		} else {
-			this.setBackground(new Background(
-					new BackgroundImage(new Image(skill.getUrl()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
-							BackgroundPosition.CENTER, new BackgroundSize(0, 100, false, true, true, false))));
+			this.setBackground(new Background(new BackgroundImage(new Image(skill.getUrl()), BackgroundRepeat.NO_REPEAT,
+					BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+					new BackgroundSize(0, 100, false, true, true, false))));
+			if (isLock) {
+				Image img = new Image("Lock.png");
+				ImageView imgView = new ImageView(img);
+				imgView.setFitHeight(35);
+				imgView.setPreserveRatio(true);
+				this.setGraphic(imgView);
+
+			}
 		}
-		this.setTooltip();
+		this.setTooltip(isLock, level);
 	}
 
-	private void setTooltip() {
+	private void setTooltip(boolean isLock, int level) {
 		Tooltip tooltip = new Tooltip();
 		tooltip.setFont(new Font(12));
 		String txt;
@@ -63,6 +74,9 @@ public class ActionButton extends Button {
 			txt = skill.getName() + "\n" + skill.getDescription() + "\n";
 			if (skill instanceof NormalSkill) {
 				txt += "Cooldown : " + ((NormalSkill) skill).getCooldownTime() + " turn(s)";
+				if(isLock) {
+					txt += "\nUnlock at level " + level;
+				}
 			}
 		}
 		tooltip.setText(txt);

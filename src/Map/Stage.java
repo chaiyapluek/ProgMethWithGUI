@@ -54,22 +54,4 @@ public class Stage {
 		this.isHasShop = isHasShop;
 	}
 	
-	public String toString() {
-		String str = "Enemy Unit(s)\n";
-		for(int i=0;i<numberOfWave;i++) {
-			str += "Wave : \n" + (i+1);
-			for(int j=0;j<units.length;j++) {
-				str += "["+(j+1)+"] ";
-				if(units[i][j] == null) {
-					str += "-\n";
-				}else {
-					UnitStats unit = (UnitStats)units[i][j];
-					str += unit.getName() + "("+unit.get_Class()+")\n";
-					str += "    " + unit.getTotalAttack() + "\n";
-					str += "    " + unit.getMaxHP(); 
-				}
-			}
-		}
-		return str;
-	}
 }

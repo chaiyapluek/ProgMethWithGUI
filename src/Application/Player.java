@@ -7,13 +7,16 @@ import UnitBase.*;
 public class Player {
 
 	private AllyUnit[] units;
+	private AllyUnit[] backUnits;
 	private int numberOfUnits;
 	private Coordinate coordinate;
 
 	public Player(AllyUnit[] units,Coordinate coordinate) {
 		this.units = new AllyUnit[3];
+		this.backUnits = new AllyUnit[3];
 		this.numberOfUnits = 0;
 		for (int i = 0; i < 3; i++) {
+			this.backUnits[i] = null;
 			if (units[i] == null) {
 				this.units[i] = null;
 			} else {
@@ -52,6 +55,10 @@ public class Player {
 
 	public AllyUnit[] getUnits() {
 		return this.units;
+	}
+	
+	public AllyUnit[] getBackUnits() {
+		return this.backUnits;
 	}
 
 	public void play(Unit[] targets) {

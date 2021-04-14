@@ -11,15 +11,19 @@ import Map.*;
 import UnitBase.*;
 import gui.ChooseMerPanel;
 import gui.ControlPanel;
+import gui.MainPanel;
 
 public class GameController {
 
 	private static Player player;
 	private static AllyUnit[] units;
+	
 	private static Map gameMap;
-	private static ChooseMerPanel chooseMerPanel;
 	private static AllyUnit selectAllyUnit;
+	
+	private static ChooseMerPanel chooseMerPanel;
 	private static ControlPanel controlPanel;
+	private static MainPanel mainPanel;
 	
 	private static boolean moveToggle = false;
 
@@ -54,12 +58,25 @@ public class GameController {
 		GameController.controlPanel = panel;
 	}
 	
+	public static void setMainPanel(MainPanel panel) {
+		GameController.mainPanel = panel;
+	}
+	
 	public static void updateControlPanel() {
 		GameController.controlPanel.update();
 	}
 	
 	public static void updateMapPanel() {
 		GameController.controlPanel.getMapPanel().update();
+		GameController.controlPanel.updateButton();
+	}
+	
+	public static void updateAllyView() {
+		GameController.mainPanel.updateAllyPanel();
+	}
+	
+	public static void setToButtonPanel() {
+		GameController.controlPanel.setToButtonPanel();
 	}
 	
 	public static void chooseNext() {
@@ -75,22 +92,20 @@ public class GameController {
 		Main.getStage().setScene(Main.getMainScene());
 	}
 
-	public static boolean encouter(Coordinate coordinate) {
-		int i = coordinate.getX();
-		int j = coordinate.getY();
-		return !gameMap.getStage(i, j).isClear();
+	public static void viewStage() {
+		mainPanel.viewStage();
 	}
-
+	
+	public static void viewAllyUnit() {
+		mainPanel.viewAllyPane();
+	}
+	
 	public static Player getPlayer() {
 		return player;
 	}
 	
 	public static Coordinate getPlayerCoordinate() {
 		return player.getCoordinate();
-	}
-
-	public static boolean canMove(Coordinate coordinate) {
-		return !gameMap.isEmpty(coordinate);
 	}
 
 	public static void movePlayer(Coordinate coordinate) {
@@ -101,6 +116,10 @@ public class GameController {
 		return gameMap;
 	}
 
+	public static Stage getNowStage() {
+		return gameMap.getStage(GameController.getPlayerCoordinate());
+	}
+	
 	public static void setMoveToggle(boolean bool) {
 		moveToggle = bool;
 	}

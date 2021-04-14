@@ -234,7 +234,7 @@ public class AllyUnitList_Lancer {
 		s1 = new Taunt(1);
 		s2 = new Heal(3,10);
 		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1, s2));
-		description = "Applies taunt to your self and recovers HP every turn [3 turns]";
+		description = "Applies taunt to your self [1 turn] and recovers HP every turn [3 turns]";
 		Skill Jaguar_ThirdSkill = new NormalSkill("Jaguar Provoke", description, SubSkills, 6, true, false, false);
 		Jaguar_ThirdSkill.setUrl("Skill/Taunt.png");
 		

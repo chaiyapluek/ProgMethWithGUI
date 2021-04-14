@@ -33,10 +33,8 @@ public class Main extends Application{
 		// TODO Auto-generated method stub
 		stage = primaryStage;
 		GameController.Intialize();
-		//createInitialScene();
 		createStartScene();
 		
-		//primaryStage.setScene(initialScene);
 		primaryStage.setScene(startScene);
 		primaryStage.setTitle("Test Project");
 		primaryStage.sizeToScene();
@@ -74,10 +72,11 @@ public class Main extends Application{
 	
 	public static void createMainScene() {
 		VBox root = new VBox();
-		root.setAlignment(Pos.CENTER);
+		root.setAlignment(Pos.BOTTOM_CENTER);
 		
 		MainPanel p = new MainPanel(GameController.getPlayer());
 		root.getChildren().add(p);
+		GameController.setMainPanel(p);
 		
 		mainScene = new Scene(root,1280,720);
 	}
@@ -88,50 +87,6 @@ public class Main extends Application{
 	
 	public static Scene getMainScene() {
 		return mainScene;
-	}
-	
-	public static void movePlayer() {
-		while (true) {
-			System.out.println(GameController.getPlayerCoordinate());
-			System.out.println("Select direction to move");
-			System.out.println("[1] Up");
-			System.out.println("[2] Down");
-			System.out.println("[3] Left");
-			System.out.println("[4] Right");
-			System.out.println("[0] Back");
-			int opr = getOneInt();
-			if (opr < 0 || opr > 4) {
-				System.out.println("Invalid Input");
-				continue;
-			}
-			Coordinate now = GameController.getPlayerCoordinate();
-			Coordinate next = new Coordinate(0, 0);
-			if (opr == 0) {
-				break;
-			}
-			switch (opr) {
-			case 1:
-				next = new Coordinate(now.getX() - 1, now.getY());
-				break;
-			case 2:
-				next = new Coordinate(now.getX() + 1, now.getY());
-				break;
-			case 3:
-				next = new Coordinate(now.getX(), now.getY() - 1);
-				break;
-			case 4:
-				next = new Coordinate(now.getX(), now.getY() + 1);
-				break;
-			}
-			if (!GameController.canMove(next)) {
-				System.out.println("Can't move to that direction");
-				continue;
-			} else {
-				GameController.movePlayer(next);
-				System.out.println("Moved to " + next);
-				break;
-			}
-		}
 	}
 
 	public static int getOneInt() {

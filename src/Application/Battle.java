@@ -39,14 +39,10 @@ public class Battle {
 
 	public static void PlayerTurn(Player player,Bot enemy) {
 		decreaseSkillCooldown(player.getUnits());
-		printUnit(player.getUnits(), true);
-		printUnit(enemy.getUnits(),false);
 		player.play(enemy.getUnits());
 		decreaseEffectDuration(player.getUnits());
 		checkEffect(player.getUnits());
 		increseUltiGauge(player.getUnits());
-		printUnit(player.getUnits(), true);
-		printUnit(enemy.getUnits(),false);
 	}
 	
 	public static void EnemyTurn(Player player,Bot enemy) {
@@ -131,33 +127,6 @@ public class Battle {
 			}
 		}
 		return aliveUnit == 0;
-	}
-	
-	public static void printUnit(Unit[] units, boolean isAlly) {
-		if (isAlly)
-			System.out.println("Your units");
-		else
-			System.out.println("Enemy's units");
-		for (int i = 0; i < 3; i++) {
-			String str = "[" + (i + 1) + "] ";
-			if (units[i] == null) {
-				str += "-\n";
-			} else if (((UnitStats) units[i]).getIsDead()) {
-				str += "[Dead]\n";
-			} else {
-				UnitStats unit = (UnitStats) units[i];
-				str += unit.getName() + "(" + unit.get_Class() + ")\n";
-				str += "    HP: " + unit.getCurrentHP() + "/" + unit.getMaxHP();
-				if (unit instanceof AdvanceUnit)
-					str += " \tGauge: " + ((AdvanceUnit) unit).getUltiGauge() + "/"
-							+ ((AdvanceUnit) unit).getMaxUltigauge();
-				str += "\n    Effect(s)\n";
-				for (Effect e : unit.getEffects()) {
-					str += "    " + e.toString() + "\n";
-				}
-			}
-			System.out.println(str);
-		}
 	}
 
 	public static void attack(Unit attack, Unit defense) {

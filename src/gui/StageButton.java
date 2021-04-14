@@ -39,16 +39,14 @@ public class StageButton extends Button {
 			@Override
 			public void handle(MouseEvent event) {
 				// TODO Auto-generated method stub
-				setOnHover();
+				setOnEnter();
 			}
 		});
 		this.setOnMouseExited(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
 				// TODO Auto-generated method stub
-				if (coordinate.equals(GameController.getPlayerCoordinate()) && !GameController.getMoveToggle()) {
-					setBackground();
-				}
+				setOnExit();
 			}
 		});
 		this.setOnAction(new EventHandler<ActionEvent>() {
@@ -62,6 +60,7 @@ public class StageButton extends Button {
 					GameController.movePlayer(coordinate);
 					GameController.setMoveToggle(false);
 					GameController.updateMapPanel();
+					GameController.updateAllyView();
 				}
 			}
 		});
@@ -75,16 +74,30 @@ public class StageButton extends Button {
 		this.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
 	}
 
-	public void setOnHover() {
-		if (coordinate.equals(GameController.getPlayerCoordinate()) || (GameController.getMoveToggle() && canGo)) {
-			this.setCursor(javafx.scene.Cursor.HAND);
-			if (!GameController.getMoveToggle()) {
+	public void setOnEnter() {
+		if(GameController.getMoveToggle()) {
+			if(canGo) {
+				this.setCursor(javafx.scene.Cursor.HAND);
+			}
+		}else{
+			if(coordinate.equals(GameController.getPlayerCoordinate())) {
+				this.setCursor(javafx.scene.Cursor.HAND);
 				this.setBackground(
 						new Background(new BackgroundFill(Color.LIGHTGREEN, CornerRadii.EMPTY, Insets.EMPTY)));
 			}
 		}
 	}
 
+	public void setOnExit() {
+		if(GameController.getMoveToggle()) {
+			this.setCursor(javafx.scene.Cursor.DEFAULT);
+		}else{
+			if(coordinate.equals(GameController.getPlayerCoordinate())) {
+				setBackground();
+			}
+		}
+	}
+	
 	public Coordinate getCoordinate() {
 		return coordinate;
 	}

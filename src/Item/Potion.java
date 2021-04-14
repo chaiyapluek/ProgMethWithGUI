@@ -12,6 +12,7 @@ public class Potion extends Item{
 		// TODO Auto-generated constructor stub
 		this.healPoint = healPoint;
 		this.numberOfPotion = numberOfPotion;
+		this.setUrl("Item/potion-ball");
 	}
 	 
 	public void healUnit(Unit unit) throws Exception {

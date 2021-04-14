@@ -3,6 +3,8 @@ package Item;
 public abstract class Item {
 	private String name;
 	private String description;
+	private String url;
+	
 	private int price;
 	
 	public Item(String name,String description,int price) {
@@ -54,5 +56,12 @@ public abstract class Item {
 		return true;
 	}
 	
-	
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
 }

@@ -60,7 +60,7 @@ public class GearList {
 		String name = "Abdoinial Armor";
 		String description = "Increased all stats.";
 		int price = 100;
-		int stats[] = {2, 2, 2, 2, 2, 2};
+		int stats[] = {200, 2, 200, 2, 2, 2};
 		String url = "Item/abdominial-armor.png";
 		Gear abdominalArmor = new Gear(name, description, price, stats);
 		abdominalArmor.setUrl(url);
@@ -71,7 +71,7 @@ public class GearList {
 		String name = "Cape Armor";
 		String description = "Increased Attack Damage and Critical chance.";
 		int price = 200;
-		int stats[] = {0, 0, 10, 10, 0, 0};
+		int stats[] = {0, 0, 100, 10, 0, 0};
 		String url = "Item/cape-armor.png";
 		Gear capeArmor = new Gear(name, description, price, stats);
 		capeArmor.setUrl(url);
@@ -82,7 +82,7 @@ public class GearList {
 		String name = "Heart Armor";
 		String description = "Highly increased Max HP.";
 		int price = 200;
-		int stats[] = {20, 0, 0, 0, 0, 0};
+		int stats[] = {200, 0, 0, 0, 0, 0};
 		String url = "Item/heart-armor.png";
 		Gear heartArmor = new Gear(name, description, price, stats);
 		heartArmor.setUrl(url);
@@ -93,7 +93,7 @@ public class GearList {
 		String name = "Leather Armor";
 		String description = "Increased all stats.";
 		int price = 50;
-		int stats[] = {1, 1, 1, 1, 1, 1};
+		int stats[] = {100, 1, 100, 1, 1, 1};
 		String url = "Item/leather-armor.png";
 		Gear leatherArmor = new Gear(name, description, price, stats);
 		leatherArmor.setUrl(url);
@@ -104,7 +104,7 @@ public class GearList {
 		String name = "Shoulder Armor";
 		String description = "Increased all stats. (Highly Increase Critical Damage)";
 		int price = 500;
-		int stats[] = {8, 8, 8, 8, 25, 8};
+		int stats[] = {800, 8, 800, 8, 25, 8};
 		String url = "Item/shoulder-armor.png";
 		Gear shoulderArmor = new Gear(name, description, price, stats);
 		shoulderArmor.setUrl(url);
@@ -115,7 +115,7 @@ public class GearList {
 		String name = "Lamellar";
 		String description = "Increased all stats. (Highly Increase Defense)";
 		int price = 1000;
-		int stats[] = {10, 50, 10, 10, 10, 10};
+		int stats[] = {1000, 50, 1000, 10, 10, 10};
 		String url = "Item/lamellar.png";
 		Gear lamellar = new Gear(name, description, price, stats);
 		lamellar.setUrl(url);
@@ -126,7 +126,7 @@ public class GearList {
 		String name = "Chain Mail";
 		String description = "Increased all stats. (Highly Increase Dodge Chance.)";
 		int price = 1000;
-		int stats[] = {12, 12, 12, 12, 12, 35};
+		int stats[] = {1200, 12, 1200, 12, 12, 35};
 		String url = "Item/chain-mail.png";
 		Gear chainMail = new Gear(name, description, price, stats);
 		chainMail.setUrl(url);
@@ -137,7 +137,7 @@ public class GearList {
 		String name = "Breastplate";
 		String description = "Highly Increased all stats.";
 		int price = 2000;
-		int stats[] = {20, 20, 20, 20, 20, 20};
+		int stats[] = {2000, 20, 2000, 20, 20, 20};
 		String url = "Item/breastplate.png";
 		Gear breastplate = new Gear(name, description, price, stats);
 		breastplate.setUrl(url);
@@ -161,7 +161,7 @@ public class GearList {
 		String name = "Brutal Helm";
 		String description = "Increased Attack Damage.";
 		int price = 100;
-		int stats[] = {0, 0, 10, 0, 0, 0};
+		int stats[] = {0, 0, 1000, 0, 0, 0};
 		String url = "Item/brutal-helm.png";
 		Gear brutalHelm = new Gear(name, description, price, stats);
 		brutalHelm.setUrl(url);
@@ -194,7 +194,7 @@ public class GearList {
 		String name = "Crenel Crown";
 		String description = "Increased all stats.";
 		int price = 1000;
-		int stats[] = {10, 10, 10, 10, 10, 10};
+		int stats[] = {1000, 10, 1000, 10, 10, 10};
 		String url = "Item/crenel-crown.png";
 		Gear crenelCrown = new Gear(name, description, price, stats);
 		crenelCrown.setUrl(url);
@@ -205,7 +205,7 @@ public class GearList {
 		String name = "Jester hat";
 		String description = "Increased all stats. (Highly increased Dodge Chance)";
 		int price = 1000;
-		int stats[] = {5, 5, 5, 5, 5, 20};
+		int stats[] = {500, 5, 500, 5, 5, 20};
 		String url = "Item/jester-hat.png";
 		Gear jesterHat = new Gear(name, description, price, stats);
 		jesterHat.setUrl(url);
@@ -216,7 +216,7 @@ public class GearList {
 		String name = "Samurai Helmet";
 		String description = "Increased all stats. (Highly increased Attack)";
 		int price = 1500;
-		int stats[] = {8, 8, 30, 8, 8, 8};
+		int stats[] = {800, 8, 3000, 8, 8, 8};
 		String url = "Item/samurai-helmet.png";
 		Gear samuraiHelm = new Gear(name, description, price, stats);
 		samuraiHelm.setUrl(url);
@@ -227,7 +227,7 @@ public class GearList {
 		String name = "Elf Helmet";
 		String description = "Increased all stats. (Highly increased Max HP and Crit chance)";
 		int price = 1500;
-		int stats[] = {20, 7, 7, 20, 7, 7};
+		int stats[] = {2000, 7, 700, 20, 7, 7};
 		String url = "Item/elf-helmet.png";
 		Gear elfHelm = new Gear(name, description, price, stats);
 		elfHelm.setUrl(url);
@@ -238,7 +238,7 @@ public class GearList {
 		String name = "Overlord helm";
 		String description = "Highly increased all stats.";
 		int price = 2000;
-		int stats[] = {20, 20, 20, 20, 20, 20};
+		int stats[] = {2000, 20, 2000, 20, 20, 20};
 		String url = "Item/overload-helm.png";
 		Gear overlordHelm = new Gear(name, description, price, stats);
 		overlordHelm.setUrl(url);
@@ -262,7 +262,7 @@ public class GearList {
 		String name = "Tabi boot";
 		String description = "Increased all stats.";
 		int price = 100;
-		int stats[] = {2, 2, 2, 2, 2, 2};
+		int stats[] = {200, 2, 200, 2, 2, 2};
 		String url = "Item/tabi-boot.png";
 		Gear tabiBoot = new Gear(name, description, price, stats);
 		tabiBoot.setUrl(url);
@@ -284,7 +284,7 @@ public class GearList {
 		String name = "Fur boot";
 		String description = "Increased Max HP.";
 		int price = 500;
-		int stats[] = {10, 0, 0, 0, 0, 0};
+		int stats[] = {1000, 0, 0, 0, 0, 0};
 		String url = "Item/fur-boot.png";
 		Gear furBoot = new Gear(name, description, price, stats);
 		furBoot.setUrl(url);
@@ -295,7 +295,7 @@ public class GearList {
 		String name = "Leg armor";
 		String description = "Increased all stats.(Highly Increased Defense)";
 		int price = 1000;
-		int stats[] = {3, 20, 3, 3, 3, 3};
+		int stats[] = {300, 20, 300, 3, 3, 3};
 		String url = "Item/leg-armor.png";
 		Gear legArmor = new Gear(name, description, price, stats);
 		legArmor.setUrl(url);
@@ -306,7 +306,7 @@ public class GearList {
 		String name = "Metal boot";
 		String description = "Increased all stats.(Highly increased Dodge Chance)";
 		int price = 1000;
-		int stats[] = {2, 2, 2, 2, 2, 25};
+		int stats[] = {200, 2, 200, 2, 2, 25};
 		String url = "Item/metal-boot.png";
 		Gear metalBoot = new Gear(name, description, price, stats);
 		metalBoot.setUrl(url);
@@ -317,7 +317,7 @@ public class GearList {
 		String name = "Sonic Shoes";
 		String description = "Increased all stats.(Highly increased Attack and Defense)";
 		int price = 1500;
-		int stats[] = {5, 25, 25, 5, 5, 5};
+		int stats[] = {500, 25, 2500, 5, 5, 5};
 		String url = "Item/sonic-shoes.png";
 		Gear tabiBoot = new Gear(name, description, price, stats);
 		tabiBoot.setUrl(url);
@@ -328,7 +328,7 @@ public class GearList {
 		String name = "Walking boot";
 		String description = "Increased all stats.(Highly increased Critical chance and Critical damage)";
 		int price = 1500;
-		int stats[] = {2, 2, 2, 30, 30, 2};
+		int stats[] = {200, 2, 200, 30, 30, 2};
 		String url = "Item/walking-boot.png";
 		Gear walkingBoot = new Gear(name, description, price, stats);
 		walkingBoot.setUrl(url);
@@ -339,7 +339,7 @@ public class GearList {
 		String name = "Wingfoot";
 		String description = "Highly increased all stats.";
 		int price = 2000;
-		int stats[] = {20, 20, 20, 20, 20, 20};
+		int stats[] = {2000, 20, 2000, 20, 20, 20};
 		String url = "Item/wingfoot.png";
 		Gear wingfoot = new Gear(name, description, price, stats);
 		wingfoot.setUrl(url);
@@ -363,7 +363,7 @@ public class GearList {
 		String name = "Crossbow";
 		String description = "Increased Attack and Dodge chance.";
 		int price = 500;
-		int stats[] = {0, 0, 20, 0, 0, 20};
+		int stats[] = {0, 0, 2000, 0, 0, 20};
 		String url = "Item/crossbow.png";
 		Gear crossbow = new Gear(name, description, price, stats);
 		crossbow.setUrl(url);
@@ -374,7 +374,7 @@ public class GearList {
 		String name = "Pocket Bow";
 		String description = "Increased Attack and Dodge chance.";
 		int price = 2500;
-		int stats[] = {10, 10, 40, 10, 10, 40};
+		int stats[] = {1000, 10, 4000, 10, 10, 40};
 		String url = "Item/pocket-bow.png";
 		Gear pocketBow = new Gear(name, description, price, stats);
 		pocketBow.setUrl(url);
@@ -385,7 +385,7 @@ public class GearList {
 		String name = "Barbed Spear";
 		String description = "Increased Attack and Crit chance.";
 		int price = 500;
-		int stats[] = {0, 0, 20, 20, 0, 0};
+		int stats[] = {0, 0, 2000, 20, 0, 0};
 		String url = "Item/barbed-spear.png";
 		Gear barbedSpear = new Gear(name, description, price, stats);
 		barbedSpear.setUrl(url);
@@ -396,7 +396,7 @@ public class GearList {
 		String name = "Spear Hook";
 		String description = "Increased Attack and Crit chance.";
 		int price = 2500;
-		int stats[] = {10, 10, 40, 40, 10, 10};
+		int stats[] = {1000, 10, 4000, 40, 10, 10};
 		String url = "Item/spear-hook.png";
 		Gear spearHook = new Gear(name, description, price, stats);
 		spearHook.setUrl(url);
@@ -407,7 +407,7 @@ public class GearList {
 		String name = "Broadsword";
 		String description = "Increased Attack and Crit damage.";
 		int price = 500;
-		int stats[] = {0, 0, 20, 0, 20, 0};
+		int stats[] = {0, 0, 2000, 0, 20, 0};
 		String url = "Item/broadsword.png";
 		Gear broadsword = new Gear(name, description, price, stats);
 		broadsword.setUrl(url);
@@ -418,7 +418,7 @@ public class GearList {
 		String name = "Relic blade";
 		String description = "Increased Attack and Crit damage.";
 		int price = 2500;
-		int stats[] = {10, 10, 40, 10, 40, 10};
+		int stats[] = {1000, 10, 4000, 10, 40, 10};
 		String url = "Item/relic-blade.png";
 		Gear relicBlade = new Gear(name, description, price, stats);
 		relicBlade.setUrl(url);
@@ -429,7 +429,7 @@ public class GearList {
 		String name = "Dragon Shield";
 		String description = "Increased Defense";
 		int price = 2500;
-		int stats[] = {10, 35, 10, 10, 10, 10};
+		int stats[] = {1000, 35, 1000, 10, 10, 10};
 		String url = "Item/broadsword.png";
 		Gear broadsword = new Gear(name, description, price, stats);
 		broadsword.setUrl(url);
@@ -440,7 +440,7 @@ public class GearList {
 		String name = "Winged scepter";
 		String description = "Increased Max HP.";
 		int price = 2500;
-		int stats[] = {50, 10, 10, 10, 40, 10};
+		int stats[] = {5000, 10, 1000, 10, 40, 10};
 		String url = "Item/winged-scepter.png";
 		Gear wingedScepter = new Gear(name, description, price, stats);
 		wingedScepter.setUrl(url);

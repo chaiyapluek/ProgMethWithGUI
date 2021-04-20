@@ -2,8 +2,6 @@ package Skill;
 
 import java.util.ArrayList;
 
-import SubSkill.DOTDamage;
-import SubSkill.Damage;
 import SubSkill.SubSkill;
 import UnitBase.Unit;
 

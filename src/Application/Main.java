@@ -1,17 +1,8 @@
 package Application;
 
-import java.util.Scanner;
-
-import Coordinate.Coordinate;
-import List.AllyUnitList_Archer;
-import List.AllyUnitList_Lancer;
-import List.AllyUnitList_Saber;
-import gui.MercenaryPanel;
 import gui.StartPanel;
 import gui.ChooseMerPanel;
 import gui.MainPanel;
-import gui.MercenaryCell;
-import gui.StatsPane;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -21,7 +12,6 @@ import logic.GameController;
 
 public class Main extends Application{
 
-	static Scanner s = new Scanner(System.in);
 	private static Stage stage;
 	
 	private static Scene startScene;
@@ -87,32 +77,5 @@ public class Main extends Application{
 	
 	public static Scene getMainScene() {
 		return mainScene;
-	}
-
-	public static int getOneInt() {
-		int opr = 0;
-		while (true) {
-			try {
-				if (s.hasNextInt()) {
-					opr = s.nextInt();
-					s.nextLine();
-				}
-				// String in = sc.nextLine();
-				// opr = Integer.parseInt(in);
-				System.out.println("OUT!");
-				break;
-			} catch (Exception e) {
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				System.out.println("Invalid Input");
-				e.printStackTrace();
-			}
-		}
-
-		return opr;
 	}
 }

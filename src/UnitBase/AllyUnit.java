@@ -8,7 +8,8 @@ public class AllyUnit extends AdvanceUnit {
 	final static int maxLevel = 5;
 	private int[] statFactors;
 	private int[] skillRequirement;
-
+	private boolean canTakeAction = true;
+	
 	public AllyUnit(String name, String _class, int[] stats, Skill[] skills, int[] statFactors,
 			int[] skillRequirement) {
 		super(name, _class, stats, skills);
@@ -32,6 +33,14 @@ public class AllyUnit extends AdvanceUnit {
 
 	public int getSkillRequirement(int i) {
 		return skillRequirement[i];
+	}
+	
+	public boolean canTakeAction() {
+		return canTakeAction;
+	}
+	
+	public void setCanTakeAction(boolean bool) {
+		canTakeAction = bool;
 	}
 	
 	public void levelup() {

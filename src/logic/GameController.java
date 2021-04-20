@@ -1,12 +1,8 @@
 package logic;
 
-import java.util.ArrayList;
-import java.util.Random;
-
 import Application.Main;
 import Application.Player;
 import Coordinate.Coordinate;
-import List.AllyUnitList;
 import Map.*;
 import UnitBase.*;
 import gui.ChooseMerPanel;
@@ -20,12 +16,14 @@ public class GameController {
 	
 	private static Map gameMap;
 	private static AllyUnit selectAllyUnit;
+	private static Unit selectEnemyUnit;
 	
 	private static ChooseMerPanel chooseMerPanel;
 	private static ControlPanel controlPanel;
 	private static MainPanel mainPanel;
 	
 	private static boolean moveToggle = false;
+	private static boolean onBattle = false;
 
 	public static void Intialize() {
 		gameMap = new Map();
@@ -49,6 +47,14 @@ public class GameController {
 	public static void setSelectAllyUnit(AllyUnit unit) {
 		selectAllyUnit = unit;
 	}
+	
+	public static Unit getSelectEnemyUnit() {
+		return selectEnemyUnit;
+	}
+	
+	public static void setSelectEnemyUnit(Unit unit) {
+		selectEnemyUnit = unit;
+	}
 
 	public static void setChooseMerPanel(ChooseMerPanel chooseMerPanel) {
 		GameController.chooseMerPanel = chooseMerPanel;
@@ -58,17 +64,26 @@ public class GameController {
 		GameController.controlPanel = panel;
 	}
 	
+	public static void startBattle() {
+		GameController.mainPanel.viewBattlePanel();
+		BattleController.initializeBattle();
+	}
+	
 	public static void setMainPanel(MainPanel panel) {
 		GameController.mainPanel = panel;
 	}
 	
-	public static void updateControlPanel() {
-		GameController.controlPanel.update();
+	public static void updateAllyInfo() {
+		GameController.controlPanel.updateInfo();
 	}
 	
 	public static void updateMapPanel() {
 		GameController.controlPanel.getMapPanel().update();
 		GameController.controlPanel.updateButton();
+	}
+	
+	public static void updateBattlePanel() {
+		GameController.mainPanel.updateBattlePanel();
 	}
 	
 	public static void updateAllyView() {
@@ -77,6 +92,14 @@ public class GameController {
 	
 	public static void setToButtonPanel() {
 		GameController.controlPanel.setToButtonPanel();
+	}
+	
+	public static void setToEnemyInfoPanel() {
+		GameController.controlPanel.setToEnemyInfoPanel();
+	}
+	
+	public static void setNewWave() {
+		GameController.mainPanel.setNewWave();
 	}
 	
 	public static void chooseNext() {
@@ -126,5 +149,13 @@ public class GameController {
 	
 	public static boolean getMoveToggle() {
 		return moveToggle;
+	}
+	
+	public static void setOnBattle(boolean bool) {
+		onBattle = bool;
+	}
+	
+	public static boolean getOnBattle() {
+		return onBattle;
 	}
 }

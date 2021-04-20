@@ -1,7 +1,6 @@
 package gui;
 
-import Skill.NormalSkill;
-import Skill.Skill;
+import Skill.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -58,10 +57,9 @@ public class ActionSkillPane extends HBox {
 				@Override
 				public void handle(ActionEvent arg0) {
 					// TODO Auto-generated method stub
-					System.out.println("CLICKED!!");
 					if (GameController.getSelectAllyUnit().getLevel() < 5) {
 						GameController.getSelectAllyUnit().levelup();
-						GameController.updateControlPanel();
+						GameController.updateAllyInfo();
 					}
 				}
 

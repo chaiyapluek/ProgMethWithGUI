@@ -1,5 +1,7 @@
 package gui;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
@@ -8,6 +10,8 @@ import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import logic.BattleController;
+import logic.GameController;
 
 public class ActionPane extends HBox {
 
@@ -23,6 +27,28 @@ public class ActionPane extends HBox {
 		ActionButton attack = new ActionButton("attack", null, false, 0);
 		ActionButton defense = new ActionButton("defense", null, false, 0);
 		ActionButton swap = new ActionButton("swap", null, false, 0);
+		attack.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				// TODO Auto-generated method stub
+				if(GameController.getOnBattle() && GameController.getSelectAllyUnit().canTakeAction()) {
+					GameController.getSelectAllyUnit().setCanTakeAction(false);
+					BattleController.increaseNumberOfTakenAction();
+					BattleController.takeAction(attack);
+				}
+			}
+		});
+		defense.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				// TODO Auto-generated method stub
+				if(GameController.getOnBattle() && GameController.getSelectAllyUnit().canTakeAction()) {
+					GameController.getSelectAllyUnit().setCanTakeAction(false);
+					BattleController.increaseNumberOfTakenAction();
+					BattleController.takeAction(defense);
+				}
+			}
+		});
 
 		this.getChildren().addAll(attack, defense, swap);
 	}

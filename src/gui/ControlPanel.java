@@ -55,6 +55,7 @@ public class ControlPanel extends HBox {
 	
 	private MapPanel mapPanel;
 	private InventoryPanel inventoryPanel;
+	private EnemyInfoPanel enemyInfo;
 	
 	public ControlPanel(Unit u) {
 
@@ -151,18 +152,16 @@ public class ControlPanel extends HBox {
 			}
 		});
 		
-		Button clear = new Button("clear stage");
-		clear.setOnAction(new EventHandler<ActionEvent>() {
-			
+		fightButton.setOnAction(new EventHandler<ActionEvent>() {
+
 			@Override
 			public void handle(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				if(!GameController.getNowStage().isClear()) {
-					GameController.getNowStage().setClear(true);
-				}
+				GameController.setOnBattle(true);
+				GameController.startBattle();
 			}
+			
 		});
-		left.add(clear, 2, 2);
 
 		this.getChildren().add(left);
 		this.getChildren().add(rightPanel);
@@ -196,6 +195,7 @@ public class ControlPanel extends HBox {
 		
 		mapPanel = new MapPanel();
 		inventoryPanel = new InventoryPanel();
+		enemyInfo = new EnemyInfoPanel();
 		
 		return pane;
 	}
@@ -203,6 +203,12 @@ public class ControlPanel extends HBox {
 	public void setToButtonPanel() {
 		rightPanel.getChildren().clear();
 		rightPanel.getChildren().add(buttonPane);
+	}
+	
+	public void setToEnemyInfoPanel() {
+		rightPanel.getChildren().clear();
+		enemyInfo.update();
+		rightPanel.getChildren().add(enemyInfo);
 	}
 	
 	public void updateButton() {
@@ -225,7 +231,7 @@ public class ControlPanel extends HBox {
 		button.setMinSize(200, 40);
 	}
 	
-	public void update() {
+	public void updateInfo() {
 		updateLabel();
 		setIcon();
 		skillPane.update();

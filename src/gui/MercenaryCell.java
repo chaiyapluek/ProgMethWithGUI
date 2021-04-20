@@ -54,7 +54,6 @@ public class MercenaryCell extends VBox {
 		Label name = new Label(u.getName() + " [ " + u.get_Class() + " ]");
 		name.setFont(new Font(24));
 		
-		System.out.println(u.getUrl());
 		merImage.setBackground(new Background(
 				new BackgroundImage(new Image(u.getUrl()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
 						BackgroundPosition.CENTER, new BackgroundSize(0, 100, false, true, true, false))));
@@ -87,7 +86,6 @@ public class MercenaryCell extends VBox {
 						GameController.changeToMainScene();
 					}
 				}
-				System.out.println(ChooseMerPanel.count);
 			}
 		});
 		

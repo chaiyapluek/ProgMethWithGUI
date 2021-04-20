@@ -12,27 +12,22 @@ import UnitBase.*;
 public class Bot {
 
 	public Unit[] units;
-	private int numberOfUnit = 0;
 
 	public Bot(Unit[] units) {
 		this.units = new Unit[3];
 		for (int i = 0; i < 3; i++) {
-			if (units[i] == null) {
-				this.units[i] = null;
-			} else {
-				if (units[i] instanceof BasicUnit) {
-					this.units[i] = new BasicUnit((BasicUnit) (units[i]));
-					this.numberOfUnit += 1;
-				} else if (units[i] instanceof AdvanceUnit) {
-					this.units[i] = new AdvanceUnit((AdvanceUnit) (units[i]));
-					this.numberOfUnit += 1;
-				}
-			}
+			this.units[i] = units[i];
 		}
 	}
 
 	public int getNumberOfUnit() {
-		return this.numberOfUnit;
+		int num = 0;
+		for (int i = 0; i < 3; i++) {
+			if (!nullOrDead(i)) {
+				num += 1;
+			}
+		}
+		return num;
 	}
 
 	public Unit[] getUnits() {
@@ -55,8 +50,10 @@ public class Bot {
 			} else if (this.units[i] instanceof AdvanceUnit) {
 				AdvanceUnitAction(targets, i);
 			}
-			if (Battle.isEnd(targets))
+			if (Battle.isEnd(targets)) {
+				System.out.println("BOT WIN");
 				break;
+			}
 		}
 		System.out.println("----------------------");
 	}
@@ -163,7 +160,8 @@ public class Bot {
 		ArrayList<Integer> skills = new ArrayList<Integer>();
 		AdvanceUnit unit = (AdvanceUnit) units[idx];
 		for (int i = 0; i < unit.getMaxSkill(); i++) {
-			if ((unit.getSkills()[i] instanceof NormalSkill) && ((NormalSkill) unit.getSkills()[i]).getCooldown() == 0) {
+			if ((unit.getSkills()[i] instanceof NormalSkill)
+					&& ((NormalSkill) unit.getSkills()[i]).getCooldown() == 0) {
 				skills.add(i);
 			}
 		}

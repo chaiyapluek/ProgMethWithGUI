@@ -4,7 +4,6 @@ import java.util.Random;
 
 import Coordinate.Coordinate;
 import List.StageList_Difficulty1;
-import logic.GameController;
 
 public class Map {
 
@@ -65,7 +64,6 @@ public class Map {
 			n = 4 + ran.nextInt(3);
 			m = 6 + ran.nextInt(4);
 		}
-		System.out.println(n + " " + m);
 		int[][] mark = new int[n][m];
 		while (true) {
 			mark = new int[n][m];

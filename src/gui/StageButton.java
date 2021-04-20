@@ -56,11 +56,13 @@ public class StageButton extends Button {
 				if (coordinate.equals(GameController.getPlayerCoordinate()) && !GameController.getMoveToggle()) {
 					GameController.setMoveToggle(!GameController.getMoveToggle());
 					GameController.updateMapPanel();
-				}else if (GameController.getMoveToggle() && canGo) {
+				} else if (GameController.getMoveToggle() && canGo) {
 					GameController.movePlayer(coordinate);
 					GameController.setMoveToggle(false);
 					GameController.updateMapPanel();
 					GameController.updateAllyView();
+					GameController.viewAllyUnit();
+					checkIsClear();
 				}
 			}
 		});
@@ -75,12 +77,12 @@ public class StageButton extends Button {
 	}
 
 	public void setOnEnter() {
-		if(GameController.getMoveToggle()) {
-			if(canGo) {
+		if (GameController.getMoveToggle()) {
+			if (canGo) {
 				this.setCursor(javafx.scene.Cursor.HAND);
 			}
-		}else{
-			if(coordinate.equals(GameController.getPlayerCoordinate())) {
+		} else {
+			if (coordinate.equals(GameController.getPlayerCoordinate())) {
 				this.setCursor(javafx.scene.Cursor.HAND);
 				this.setBackground(
 						new Background(new BackgroundFill(Color.LIGHTGREEN, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -89,15 +91,28 @@ public class StageButton extends Button {
 	}
 
 	public void setOnExit() {
-		if(GameController.getMoveToggle()) {
+		if (GameController.getMoveToggle()) {
 			this.setCursor(javafx.scene.Cursor.DEFAULT);
-		}else{
-			if(coordinate.equals(GameController.getPlayerCoordinate())) {
+		} else {
+			if (coordinate.equals(GameController.getPlayerCoordinate())) {
 				setBackground();
 			}
 		}
 	}
-	
+
+	public void checkIsClear() {
+		if (this.stage.isClear()) {
+			GameController.setSelectEnemyUnit(null);
+		} else {
+			for (int i = 0; i < stage.getUnitAtWave(0).length; i++) {
+				if(stage.getUnitAtWave(0)[i] != null) {
+					GameController.setSelectEnemyUnit(stage.getUnitAtWave(0)[i]);
+					break;
+				}
+			}
+		}
+	}
+
 	public Coordinate getCoordinate() {
 		return coordinate;
 	}

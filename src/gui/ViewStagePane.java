@@ -75,6 +75,14 @@ public class ViewStagePane extends HBox {
 			imgView.setPreserveRatio(true);
 			unitButton.setGraphic(imgView);
 		}
+		unitButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				GameController.setSelectEnemyUnit(unit);
+				GameController.setToEnemyInfoPanel();
+			}
+		});
 		return unitButton;
 	}
 

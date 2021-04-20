@@ -16,15 +16,13 @@ public class MainPanel extends VBox {
 
 	private StackPane viewPanel;
 	private AllyUnitsPanel allyUnitsPanel;
+	private BattlePanel battlePanel;
 	private ViewStagePane stagePane;
 	
 	public MainPanel(Player player) {
 		this.setPadding(new Insets(10));
 		this.setSpacing(10);
 		this.setAlignment(Pos.BOTTOM_CENTER);
-
-		Label label = new Label("DIS SIS NEW SCENE");
-		label.setFont(new Font(24));
 		
 		viewPanel = new StackPane();
 		allyUnitsPanel = new AllyUnitsPanel(player);
@@ -33,11 +31,19 @@ public class MainPanel extends VBox {
 		ControlPanel controlPane = new ControlPanel(GameController.getSelectAllyUnit());
 		GameController.setControlPanel(controlPane);
 
-		this.getChildren().addAll(label, viewPanel, controlPane);
+		this.getChildren().addAll(viewPanel, controlPane);
 	}
 
 	public void updateAllyPanel() {
 		allyUnitsPanel.update();
+	}
+	
+	public void updateBattlePanel() {
+		battlePanel.update();
+	}
+	
+	public void setNewWave() {
+		battlePanel.setNewWave();
 	}
 	
 	public void viewStage() {
@@ -49,5 +55,11 @@ public class MainPanel extends VBox {
 	public void viewAllyPane() {
 		viewPanel.getChildren().clear();
 		viewPanel.getChildren().add(allyUnitsPanel);
+	}
+	
+	public void viewBattlePanel() {
+		viewPanel.getChildren().clear();
+		battlePanel = new BattlePanel();
+		viewPanel.getChildren().add(battlePanel);
 	}
 }

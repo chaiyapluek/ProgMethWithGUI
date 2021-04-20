@@ -74,7 +74,7 @@ public class Player {
 					System.out.println("[3] Use skill");
 					// System.out.println("[4] Swap unit");
 					System.out.println("[0] Go back");
-					int opr = Main.getOneInt();
+					int opr = 0;
 					if (opr < 0 || opr > 3) {
 						System.out.println("Out of an option");
 						continue;
@@ -107,7 +107,7 @@ public class Player {
 		int idx;
 		while (true) {
 			System.out.println("Choose your unit to take action");
-			idx = Main.getOneInt();
+			idx = 0;
 			System.out.println("IDX:"  + idx);
 			if (idx < 1 || idx > 3) {
 				System.out.println("Out of an option");
@@ -138,7 +138,7 @@ public class Player {
 		boolean finished = false;
 		while (true) {
 			System.out.println("Select enemy to attack ([0] to go back)");
-			int targetIdx = Main.getOneInt();
+			int targetIdx = 0;
 			if (targetIdx == 0)
 				break;
 			if (targetIdx < 1 || targetIdx > 3) {
@@ -175,7 +175,7 @@ public class Player {
 			} else {
 				System.out.println("Select one Enemy ([0] to go back)");
 			}
-			idx = Main.getOneInt();
+			idx = 0;
 			if (idx < 0 || idx > 3) {
 				System.out.println("Out of an option");
 				continue;
@@ -202,7 +202,7 @@ public class Player {
 		}
 		while (true) {
 			System.out.println("Select skill to use([0] to go back)");
-			int skillIdx = Main.getOneInt();
+			int skillIdx = 0;
 			if (skillIdx == 0)
 				break;
 			skillIdx -= 1;

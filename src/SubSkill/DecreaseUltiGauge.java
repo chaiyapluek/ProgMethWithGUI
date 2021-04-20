@@ -1,6 +1,5 @@
 package SubSkill;
 
-import Skill.Effect;
 import UnitBase.AdvanceUnit;
 import UnitBase.Unit;
 

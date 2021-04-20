@@ -1,24 +1,20 @@
 package gui;
 
-import java.awt.Cursor;
 
+import UnitBase.AdvanceUnit;
 import UnitBase.AllyUnit;
+import UnitBase.BasicUnit;
 import UnitBase.Unit;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
@@ -82,12 +78,19 @@ public class UnitButton extends Button {
 			public void handle(ActionEvent event) {
 				if (unit != null && unit instanceof AllyUnit) {
 					GameController.setSelectAllyUnit((AllyUnit) unit);
-					GameController.updateControlPanel();
+					GameController.updateAllyInfo();
+				}else if((unit instanceof BasicUnit) || (unit instanceof AdvanceUnit)){
+					GameController.setSelectEnemyUnit(unit);
+					GameController.setToEnemyInfoPanel();
 				}
 			}
 		});
 	}
 
+	public Unit getUnit() {
+		return unit;
+	}
+	
 	public void setBackground() {
 		this.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
 	}
@@ -98,5 +101,13 @@ public class UnitButton extends Button {
 //						BackgroundPosition.CENTER, new BackgroundSize(0, 100, false, true, false, true))));
 		this.setCursor(javafx.scene.Cursor.HAND);
 		this.setBackground(new Background(new BackgroundFill(Color.AQUAMARINE, CornerRadii.EMPTY, Insets.EMPTY)));
+	}
+	
+	public void setDeadImg() {
+		Image img = new Image("grave.png");
+		ImageView imgView = new ImageView(img);
+		imgView.setFitHeight(150);
+		imgView.setPreserveRatio(true);
+		this.setGraphic(imgView);
 	}
 }

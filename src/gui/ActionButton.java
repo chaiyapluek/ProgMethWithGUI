@@ -2,6 +2,7 @@ package gui;
 
 import Skill.NormalSkill;
 import Skill.Skill;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
@@ -13,6 +14,12 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class ActionButton extends Button {
@@ -54,10 +61,40 @@ public class ActionButton extends Button {
 				imgView.setFitHeight(35);
 				imgView.setPreserveRatio(true);
 				this.setGraphic(imgView);
-
 			}
 		}
+		this.setOnMouseExited(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				// TODO Auto-generated method stub
+				System.out.println("EXIT");
+				setOnExit();
+			}
+		});
+		this.setOnMouseEntered(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				// TODO Auto-generated method stub
+				System.out.println("ENTER");
+				setOnEnter(isLock);
+			}
+		});
 		this.setTooltip(isLock, level);
+	}
+
+	public void setOnEnter(boolean isLock) {
+		if (type.equals("skill") && !isLock) {
+			this.setCursor(javafx.scene.Cursor.HAND);
+			this.setBorder(new Border(
+				new BorderStroke(Color.BLUE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(5))));
+		}
+	}
+
+	public void setOnExit() {
+		System.out.println("HELLO");
+		this.setCursor(javafx.scene.Cursor.DEFAULT);
+		this.setBorder(new Border(
+				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(5))));
 	}
 
 	private void setTooltip(boolean isLock, int level) {
@@ -74,7 +111,7 @@ public class ActionButton extends Button {
 			txt = skill.getName() + "\n" + skill.getDescription() + "\n";
 			if (skill instanceof NormalSkill) {
 				txt += "Cooldown : " + ((NormalSkill) skill).getCooldownTime() + " turn(s)";
-				if(isLock) {
+				if (isLock) {
 					txt += "\nUnlock at level " + level;
 				}
 			}
@@ -86,6 +123,10 @@ public class ActionButton extends Button {
 		this.setOnMouseExited((MouseEvent e) -> {
 			tooltip.hide();
 		});
+	}
+
+	public String getType() {
+		return type;
 	}
 
 }

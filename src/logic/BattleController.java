@@ -28,7 +28,7 @@ public class BattleController {
 		if (type.equals("attack")) {
 			attack(GameController.getSelectAllyUnit(), GameController.getSelectEnemyUnit());
 		} else if (type.equals("defense")) {
-
+			GameController.getSelectAllyUnit().defense();
 		} else if (type.equals("swap")) {
 
 		} else if (type.equals("skill")) {
@@ -43,7 +43,7 @@ public class BattleController {
 
 		if (isWaveEnd()) {
 			nextWave();
-		} else if (!type.equals("skill")) {
+		}else {
 			System.out.println("ACTION");
 			System.out.println("-->" + numberOfTakenAction);
 			BattleController.checkPlayerTurnEnd();

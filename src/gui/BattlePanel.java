@@ -32,9 +32,9 @@ public class BattlePanel extends VBox {
 
 	public BattlePanel() {
 
-		this.setAlignment(Pos.CENTER_LEFT);
+		this.setAlignment(Pos.CENTER);
 		this.setPadding(new Insets(10));
-		this.setSpacing(30);
+		this.setSpacing(100);
 		this.setBorder(new Border(
 				new BorderStroke(Color.GOLD, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 

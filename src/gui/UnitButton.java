@@ -1,10 +1,10 @@
 package gui;
 
-
 import UnitBase.AdvanceUnit;
 import UnitBase.AllyUnit;
 import UnitBase.BasicUnit;
 import UnitBase.Unit;
+import UnitBase.UnitStats;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -79,7 +79,8 @@ public class UnitButton extends Button {
 				if (unit != null && unit instanceof AllyUnit) {
 					GameController.setSelectAllyUnit((AllyUnit) unit);
 					GameController.updateAllyInfo();
-				}else if((unit instanceof BasicUnit) || (unit instanceof AdvanceUnit)){
+				} else if (((unit instanceof BasicUnit) || (unit instanceof AdvanceUnit))
+						&& !((UnitStats) unit).getIsDead()) {
 					GameController.setSelectEnemyUnit(unit);
 					GameController.updateEnemyInfoPanel();
 				}
@@ -90,8 +91,9 @@ public class UnitButton extends Button {
 	public Unit getUnit() {
 		return unit;
 	}
-	
+
 	public void setBackground() {
+		this.setCursor(javafx.scene.Cursor.DEFAULT);
 		this.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
 	}
 
@@ -99,11 +101,17 @@ public class UnitButton extends Button {
 //		this.setBackground(new Background(
 //				new BackgroundImage(new Image("Light.png"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
 //						BackgroundPosition.CENTER, new BackgroundSize(0, 100, false, true, false, true))));
-		this.setCursor(javafx.scene.Cursor.HAND);
-		this.setBackground(new Background(new BackgroundFill(Color.AQUAMARINE, CornerRadii.EMPTY, Insets.EMPTY)));
+		if (unit != null) {
+			if ( !((UnitStats) unit).getIsDead() ) {
+				this.setCursor(javafx.scene.Cursor.HAND);
+				this.setBackground(
+						new Background(new BackgroundFill(Color.AQUAMARINE, CornerRadii.EMPTY, Insets.EMPTY)));
+			}
+		}
 	}
-	
+
 	public void setDeadImg() {
+		setBackground();
 		Image img = new Image("grave.png");
 		ImageView imgView = new ImageView(img);
 		imgView.setFitHeight(150);

@@ -4,6 +4,7 @@ import Skill.NormalSkill;
 import Skill.Skill;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
@@ -21,11 +22,13 @@ import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import logic.GameController;
 
 public class ActionButton extends Button {
 
 	private String type;
 	private Skill skill;
+	private Tooltip tooltip;
 
 	public ActionButton(String type, Skill skill, boolean isLock, int level) {
 		this.type = type;
@@ -34,10 +37,55 @@ public class ActionButton extends Button {
 		} else {
 			this.skill = null;
 		}
-
+		
 		this.setMinSize(50, 50);
 		this.setMaxSize(50, 50);
 		this.setAlignment(Pos.CENTER);
+		
+		setBackground(isLock);
+		
+		this.setTooltip(isLock, level);
+		
+		this.setOnMouseEntered(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				mouseEnter(isLock);
+			}
+			
+		});
+		
+		this.setOnMouseExited(new EventHandler<MouseEvent>() {
+
+			@Override
+			public void handle(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				mouseExit(isLock);
+			}
+		});
+	}
+	
+	private void mouseEnter(boolean isLock) {
+		boolean check = true;
+		if(type.equals("skill") && isLock)
+			check = false;
+		if(GameController.getOnBattle() && GameController.getSelectAllyUnit().canTakeAction() && check) {
+			this.setCursor(Cursor.HAND);
+			this.setBorder(new Border(
+					new BorderStroke(Color.AQUA, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		}
+	}
+	
+	private void mouseExit(boolean isLock) {
+		tooltip.hide();
+		this.setCursor(Cursor.DEFAULT);
+		this.setBorder(new Border(
+				new BorderStroke(Color.TRANSPARENT, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		setBackground(isLock);
+	}
+
+	private void setBackground(boolean isLock) {
 		if (type.equals("attack")) {
 			this.setBackground(new Background(
 					new BackgroundImage(new Image("attack.png"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
@@ -63,12 +111,10 @@ public class ActionButton extends Button {
 				this.setGraphic(imgView);
 			}
 		}
-		
-		this.setTooltip(isLock, level);
 	}
-
+	
 	private void setTooltip(boolean isLock, int level) {
-		Tooltip tooltip = new Tooltip();
+		tooltip = new Tooltip();
 		tooltip.setFont(new Font(12));
 		String txt;
 		if (type.equals("attack")) {

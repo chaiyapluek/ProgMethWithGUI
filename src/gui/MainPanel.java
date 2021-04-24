@@ -12,7 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import logic.GameController;
 
-public class MainPanel extends VBox {
+public class MainPanel extends StackPane {
 
 	private StackPane viewPanel;
 	private AllyUnitsPanel allyUnitsPanel;
@@ -21,17 +21,22 @@ public class MainPanel extends VBox {
 	
 	public MainPanel(Player player) {
 		this.setPadding(new Insets(10));
-		this.setSpacing(10);
-		this.setAlignment(Pos.BOTTOM_CENTER);
+		this.setAlignment(Pos.CENTER);
+		
+		VBox panel = new VBox();
+		panel.setPadding(new Insets(10));
+		panel.setSpacing(10);
+		panel.setAlignment(Pos.TOP_CENTER);
 		
 		viewPanel = new StackPane();
 		allyUnitsPanel = new AllyUnitsPanel(player);
-		
 		viewPanel.getChildren().add(allyUnitsPanel);
+		
 		ControlPanel controlPane = new ControlPanel(GameController.getSelectAllyUnit());
 		GameController.setControlPanel(controlPane);
 
-		this.getChildren().addAll(viewPanel, controlPane);
+		panel.getChildren().addAll(viewPanel, controlPane);
+		this.getChildren().add(panel);
 	}
 
 	public void updateAllyPanel() {

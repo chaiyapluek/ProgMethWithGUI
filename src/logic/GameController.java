@@ -94,7 +94,7 @@ public class GameController {
 		GameController.controlPanel.setToButtonPanel();
 	}
 	
-	public static void setToEnemyInfoPanel() {
+	public static void updateEnemyInfoPanel() {
 		GameController.controlPanel.setToEnemyInfoPanel();
 	}
 	

@@ -55,6 +55,7 @@ public class ControlPanel extends HBox {
 	
 	private MapPanel mapPanel;
 	private InventoryPanel inventoryPanel;
+	private ShopPanel shopPanel;
 	private EnemyInfoPanel enemyInfo;
 	
 	public ControlPanel(Unit u) {
@@ -152,6 +153,15 @@ public class ControlPanel extends HBox {
 			}
 		});
 		
+		shopButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				rightPanel.getChildren().clear();
+				rightPanel.getChildren().add(shopPanel);
+			}
+		});
+		
 		fightButton.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -189,12 +199,13 @@ public class ControlPanel extends HBox {
 		setButtonProp(shopButton);
 		setButtonProp(fightButton);
 		
-		buttonPane.getChildren().addAll(mapButton,inventoryButton);
+		updateButton();
 		
 		pane.getChildren().add(buttonPane);
 		
 		mapPanel = new MapPanel();
 		inventoryPanel = new InventoryPanel();
+		shopPanel = new ShopPanel();
 		enemyInfo = new EnemyInfoPanel();
 		
 		return pane;

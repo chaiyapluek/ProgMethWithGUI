@@ -81,7 +81,7 @@ public class UnitButton extends Button {
 					GameController.updateAllyInfo();
 				}else if((unit instanceof BasicUnit) || (unit instanceof AdvanceUnit)){
 					GameController.setSelectEnemyUnit(unit);
-					GameController.setToEnemyInfoPanel();
+					GameController.updateEnemyInfoPanel();
 				}
 			}
 		});

@@ -80,7 +80,7 @@ public class ViewStagePane extends HBox {
 			public void handle(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				GameController.setSelectEnemyUnit(unit);
-				GameController.setToEnemyInfoPanel();
+				GameController.updateEnemyInfoPanel();
 			}
 		});
 		return unitButton;

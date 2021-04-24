@@ -7,14 +7,17 @@ import gui.ActionButton;
 public class BattleController {
 
 	private static Bot bot;
-	private static int wave = 1;
-	private static int turn = 1;
-	private static int numberOfTakenAction = 0;
+	private static int wave;
+	private static int turn;
+	private static int numberOfTakenAction;
 
 	public static void initializeBattle() {
 
 		bot = new Bot(GameController.getNowStage().getUnitAtWave(0));
-		GameController.setToEnemyInfoPanel();
+		wave = 1;
+		turn = 1;
+		numberOfTakenAction = 0;
+		GameController.updateEnemyInfoPanel();
 
 	}
 
@@ -41,17 +44,19 @@ public class BattleController {
 		if (isWaveEnd()) {
 			nextWave();
 		} else if (!type.equals("skill")) {
+			System.out.println("ACTION");
+			System.out.println("-->" + numberOfTakenAction);
 			BattleController.checkPlayerTurnEnd();
 			GameController.updateAllyInfo();
-			GameController.setToEnemyInfoPanel();
+			GameController.updateEnemyInfoPanel();
 		}
 	}
 
 	public static void checkPlayerTurnEnd() {
 		if (numberOfTakenAction == 3) {
 			// pass turn
+			System.out.println("TEST!!");
 			bot.play(GameController.getPlayer().getUnits());
-			numberOfTakenAction = 0;
 			nextTurn();
 		}
 	}
@@ -62,6 +67,7 @@ public class BattleController {
 
 	private static void nextTurn() {
 		turn += 1;
+		numberOfTakenAction = 0;
 		// replace death unit with back unit
 		//
 		// -----
@@ -93,7 +99,7 @@ public class BattleController {
 			bot = new Bot(GameController.getNowStage().getUnitAtWave(wave - 1));
 			GameController.setNewWave();
 			GameController.updateAllyInfo();
-			GameController.setToEnemyInfoPanel();
+			GameController.updateEnemyInfoPanel();
 		}
 
 	}

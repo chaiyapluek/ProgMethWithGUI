@@ -20,6 +20,7 @@ public class Map {
 		this.width = mark[0].length;
 		assignStage(mark);
 		stages[height-1][0].setClear(true);
+		stages[height-1][0].setHasShop(true);
 	}
 
 	public boolean isEmpty(Coordinate coordinate) {

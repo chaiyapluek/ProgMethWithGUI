@@ -63,38 +63,8 @@ public class ActionButton extends Button {
 				this.setGraphic(imgView);
 			}
 		}
-		this.setOnMouseExited(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				// TODO Auto-generated method stub
-				System.out.println("EXIT");
-				setOnExit();
-			}
-		});
-		this.setOnMouseEntered(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				// TODO Auto-generated method stub
-				System.out.println("ENTER");
-				setOnEnter(isLock);
-			}
-		});
+		
 		this.setTooltip(isLock, level);
-	}
-
-	public void setOnEnter(boolean isLock) {
-		if (type.equals("skill") && !isLock) {
-			this.setCursor(javafx.scene.Cursor.HAND);
-			this.setBorder(new Border(
-				new BorderStroke(Color.BLUE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(5))));
-		}
-	}
-
-	public void setOnExit() {
-		System.out.println("HELLO");
-		this.setCursor(javafx.scene.Cursor.DEFAULT);
-		this.setBorder(new Border(
-				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(5))));
 	}
 
 	private void setTooltip(boolean isLock, int level) {

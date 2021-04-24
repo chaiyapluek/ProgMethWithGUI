@@ -1,6 +1,7 @@
 package Application;
 
 import Coordinate.Coordinate;
+import Inventory.Inventory;
 import Skill.*;
 import UnitBase.*;
 
@@ -10,11 +11,13 @@ public class Player {
 	private AllyUnit[] backUnits;
 	private int numberOfUnits;
 	private Coordinate coordinate;
+	private Inventory inventory;
 
 	public Player(AllyUnit[] units,Coordinate coordinate) {
 		this.units = new AllyUnit[3];
 		this.backUnits = new AllyUnit[3];
 		this.numberOfUnits = 0;
+		this.inventory = new Inventory(10);
 		for (int i = 0; i < 3; i++) {
 			this.backUnits[i] = null;
 			if (units[i] == null) {
@@ -25,6 +28,14 @@ public class Player {
 			}
 		}
 		this.coordinate = new Coordinate(coordinate);
+	}
+
+	public Inventory getInventory() {
+		return inventory;
+	}
+
+	public void setInventory(Inventory inventory) {
+		this.inventory = inventory;
 	}
 
 	public void Move(Coordinate coordinate) {

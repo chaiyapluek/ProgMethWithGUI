@@ -11,7 +11,7 @@ import UnitBase.AllyUnit;
 public class Shop {
 	private Item[] items;
 	private AllyUnit[] allyUnits;
-	
+
 	public Shop() {
 		items = new Item[10];
 		items[0] = new Potion("Small Potion", "Heal HP by 250.", 50, 250, 3);
@@ -53,13 +53,30 @@ public class Shop {
 		int[] mark = new int[30];
 		AllyUnit[] result = new AllyUnit[30];
 		for(int i=0;i<=9;i++) {
-			int idx = getRandomNum(0,29);
+			int idx = getRandomNum(0,19);
 			while(mark[idx]==1) {
-				idx = getRandomNum(0,29);
+				idx = getRandomNum(0,19);
 			}
 			mark[idx] = 1;
 			result[i] = AllyUnitList.getAllUnit().get(idx);
+			//System.out.println(idx);
 		}
 		return result;
+	}
+	
+	public Item[] getItems() {
+		return items;
+	}
+
+	public void setItems(Item[] items) {
+		this.items = items;
+	}
+	
+	public AllyUnit[] getAllyUnits() {
+		return allyUnits;
+	}
+
+	public void setAllyUnits(AllyUnit[] allyUnits) {
+		this.allyUnits = allyUnits;
 	}
 }

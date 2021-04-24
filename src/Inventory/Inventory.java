@@ -33,6 +33,7 @@ public class Inventory {
 	public void addToInventory(Item item) throws Exception {
 		if(inventorySize < maxInventorySize) {
 			inventory.add(item);
+			inventorySize++;
 		}
 		else {
 			throw new Exception();
@@ -42,10 +43,19 @@ public class Inventory {
 	public void removeFromInventory(int index) throws Exception{
 		if(index>=0&&index<maxInventorySize) {
 			inventory.remove(index);
+			inventorySize--;
 		}
 		else {
 			throw new Exception();
 		}
+	}
+	
+	public boolean isPotionExist(Potion potion) {
+		for(Item item:inventory) {
+			if(potion.equals(item));
+				return true;
+		}
+		return false;
 	}
 	
 	public int getInventorySize() {

@@ -12,7 +12,7 @@ public class Potion extends Item{
 		// TODO Auto-generated constructor stub
 		this.healPoint = healPoint;
 		this.numberOfPotion = numberOfPotion;
-		this.setUrl("Item/potion-ball");
+		this.setUrl("Item/potion-ball.png");
 	}
 	 
 	public void healUnit(Unit unit) throws Exception {
@@ -50,4 +50,27 @@ public class Potion extends Item{
 		info += "Number of Potion \t: " + this.numberOfPotion + "\n";
 		return info;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + healPoint;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Potion other = (Potion) obj;
+		if (healPoint != other.healPoint)
+			return false;
+		return true;
+	}
+	
 }

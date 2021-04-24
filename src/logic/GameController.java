@@ -13,6 +13,7 @@ public class GameController {
 
 	private static Player player;
 	private static AllyUnit[] units;
+	private static int unitsNumber;
 	
 	private static Map gameMap;
 	private static AllyUnit selectAllyUnit;
@@ -27,9 +28,40 @@ public class GameController {
 
 	public static void Intialize() {
 		gameMap = new Map();
-		units = new AllyUnit[3];
+		units = new AllyUnit[6];
+		unitsNumber = 3;
 	}
 	
+	public static boolean isUnitExist(AllyUnit unit) {
+		for(int i=0;i<6;i++) {
+			if(unit.equals(units[i]))
+				return true;
+		}
+		return false;
+	}
+	
+	public static AllyUnit[] getUnits() {
+		return units;
+	}
+
+	public static void addUnits(AllyUnit unit) throws Exception {
+		if(unitsNumber<6) {
+			units[unitsNumber]=unit;
+			unitsNumber++;
+		}
+		else {
+			throw new Exception();
+		}
+	}
+
+	public static int getUnitsNumber() {
+		return unitsNumber;
+	}
+
+	public static void setUnitsNumber(int unitsNumber) {
+		GameController.unitsNumber = unitsNumber;
+	}
+
 	public static void createPlayer() {
 		Coordinate coordinate = new Coordinate(gameMap.getHeight() - 1, 0);
 		player = new Player(units, coordinate);

@@ -61,7 +61,7 @@ public class GearList {
 		String description = "Increased all stats.";
 		int price = 100;
 		int stats[] = {200, 2, 200, 2, 2, 2};
-		String url = "Item/abdominial-armor.png";
+		String url = "Item/abdominal-armor.png";
 		Gear abdominalArmor = new Gear(name, description, price, stats);
 		abdominalArmor.setUrl(url);
 		return abdominalArmor;
@@ -239,7 +239,7 @@ public class GearList {
 		String description = "Highly increased all stats.";
 		int price = 2000;
 		int stats[] = {2000, 20, 2000, 20, 20, 20};
-		String url = "Item/overload-helm.png";
+		String url = "Item/overlord-helm.png";
 		Gear overlordHelm = new Gear(name, description, price, stats);
 		overlordHelm.setUrl(url);
 		return overlordHelm;

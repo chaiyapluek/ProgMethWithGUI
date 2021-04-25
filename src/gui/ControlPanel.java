@@ -273,4 +273,8 @@ public class ControlPanel extends HBox {
 	public MapPanel getMapPanel() {
 		return mapPanel;
 	}
+	
+	public void updateInventoryPanel() {
+		inventoryPanel.update();
+	}
 }

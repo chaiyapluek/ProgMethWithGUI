@@ -190,4 +190,8 @@ public class GameController {
 	public static boolean getOnBattle() {
 		return onBattle;
 	}
+	
+	public static void updateInventory() {
+		controlPanel.updateInventoryPanel();
+	}
 }

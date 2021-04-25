@@ -14,10 +14,10 @@ public class Shop {
 
 	public Shop() {
 		items = new Item[10];
-		items[0] = new Potion("Small Potion", "Heal HP by 250.", 50, 250, 3);
-		items[1] = new Potion("Medium Potion", "Heal HP by 1000.", 150, 1000, 3);
-		items[2] = new Potion("Large Potion", "Heal HP by 2500.", 300, 2500, 3);
-		items[3] = new Potion("Max Potion", "Heal HP by 10000.", 1000, 10000, 3);
+		items[0] = new Potion("Small Potion", "Heal HP by 250.", 50, 250, 1);
+		items[1] = new Potion("Medium Potion", "Heal HP by 1000.", 150, 1000, 1);
+		items[2] = new Potion("Large Potion", "Heal HP by 2500.", 300, 2500, 1);
+		items[3] = new Potion("Max Potion", "Heal HP by 10000.", 1000, 10000, 1);
 		Item[] result = getRandomItem();
 		for(int i=4;i<10;i++)
 			items[i] = result[i];

@@ -68,7 +68,7 @@ public class Potion extends Item{
 		if (getClass() != obj.getClass())
 			return false;
 		Potion other = (Potion) obj;
-		if (healPoint != other.healPoint)
+		if (this.getName() != other.getName())
 			return false;
 		return true;
 	}

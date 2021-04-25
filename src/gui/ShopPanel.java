@@ -97,7 +97,7 @@ public class ShopPanel extends VBox {
 							GameController.getPlayer().getInventory().addToInventory(item);
 						}
 						else {
-							if(!GameController.getPlayer().getInventory().isPotionExist((Potion) item)) {
+							if(GameController.getPlayer().getInventory().isPotionExist((Potion) item)==false) {
 								GameController.getPlayer().getInventory().addToInventory(item);
 							}
 							else {
@@ -112,6 +112,7 @@ public class ShopPanel extends VBox {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+					GameController.updateInventory();
 				}
 			});
 			hbox.getChildren().add(button);
@@ -153,10 +154,12 @@ public class ShopPanel extends VBox {
 
 				@Override
 				public void handle(ActionEvent arg0) {
+					
 					// TODO Auto-generated method stub
 					if(!GameController.isUnitExist(allyUnit)) {
 						try {
 							GameController.addUnits(allyUnit);
+							
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -169,6 +172,7 @@ public class ShopPanel extends VBox {
 							}
 						}
 					}
+					GameController.updateInventory();
 				}
 			});
 			hbox.getChildren().add(button);

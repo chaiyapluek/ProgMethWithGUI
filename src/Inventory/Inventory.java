@@ -52,7 +52,7 @@ public class Inventory {
 	
 	public boolean isPotionExist(Potion potion) {
 		for(Item item:inventory) {
-			if(potion.equals((Potion)item));
+			if(item instanceof Potion && potion.equals((Potion)item))
 				return true;
 		}
 		return false;

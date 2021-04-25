@@ -51,7 +51,7 @@ public abstract class Item {
 		if (name == null) {
 			if (other.name != null)
 				return false;
-		} else if (!name.equals(other.name))
+		} else if (name!=other.name)
 			return false;
 		return true;
 	}

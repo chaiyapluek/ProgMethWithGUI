@@ -102,10 +102,11 @@ public class ShopPanel extends VBox {
 							}
 							else {
 								for(int i=0;i<GameController.getPlayer().getInventory().getInventorySize();i++) {
-									if(item.equals(GameController.getPlayer().getInventory().getInventory().get(i))) {
+									if(GameController.getPlayer().getInventory().getInventory().get(i) instanceof Potion && ((Potion)item).equals(GameController.getPlayer().getInventory().getInventory().get(i))) {
 										((Potion)GameController.getPlayer().getInventory().getInventory().get(i)).setNumberOfPotion(((Potion)GameController.getPlayer().getInventory().getInventory().get(i)).getNumberOfPotion()+1);
 									}
 								}
+								GameController.updateInventory();
 							}
 						}
 					} catch (Exception e) {

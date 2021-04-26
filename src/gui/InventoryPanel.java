@@ -32,7 +32,6 @@ public class InventoryPanel extends VBox {
 	private Item item;
 	private int i,j;
 	private GridPane inventory;
-	private Alert[] alert= new Alert[20];
 	
 	public InventoryPanel() {
 
@@ -89,29 +88,30 @@ public class InventoryPanel extends VBox {
 				itemButton[i*5+j].setMaxSize(60, 60);
 				itemButton[i*5+j].setMinSize(60, 60);
 				itemButton[i*5+j].setOnAction(new EventHandler<ActionEvent>() {
-
+					int select = i*5+j;
+					int ii=i,jj=j;
 					@Override
 					public void handle(ActionEvent arg0) {
 						// TODO Auto-generated method stub
+						Alert alert = new Alert(AlertType.INFORMATION);
+						item = GameController.getPlayer().getInventory().getInventory().get(select);
 						if(item instanceof Potion) {
-							alert[i*5+j] = new Alert(AlertType.INFORMATION);
-							alert[i*5+j].setTitle("Potion");
-							alert[i*5+j].setHeaderText(item.getName());
-							alert[i*5+j].setContentText(item.toString());
+							alert.setTitle("Potion");
+							alert.setHeaderText(item.getName());
+							alert.setContentText(item.toString());
 							ButtonType use = new ButtonType("Use");
 							ButtonType cancel = new ButtonType("Cancel");
-							alert[i*5+j].getButtonTypes().clear();
-							alert[i*5+j].getButtonTypes().addAll(use,cancel);
-							Optional<ButtonType> option = alert[i*5+j].showAndWait();
+							alert.getButtonTypes().clear();
+							alert.getButtonTypes().addAll(use,cancel);
+							Optional<ButtonType> option = alert.showAndWait();
 							if (option.get() == use) {
 								try {
-									System.out.println(i);
-									((Potion)GameController.getPlayer().getInventory().getInventory().get(i*5+j)).healUnit(GameController.getSelectAllyUnit());
-									if(((Potion)GameController.getPlayer().getInventory().getInventory().get(i*5+j)).getNumberOfPotion()>1) {
-										((Potion)GameController.getPlayer().getInventory().getInventory().get(i*5+j)).setNumberOfPotion(((Potion)GameController.getPlayer().getInventory().getInventory().get(i*5+j)).getNumberOfPotion()-1);
+									//System.out.println(i);
+									((Potion)GameController.getPlayer().getInventory().getInventory().get(ii*5+jj)).healUnit(GameController.getSelectAllyUnit());
+									if(((Potion)GameController.getPlayer().getInventory().getInventory().get(ii*5+jj)).getNumberOfPotion()>1) {
 									}
 									else {
-										GameController.getPlayer().getInventory().getInventory().remove(i*j+5);
+										GameController.getPlayer().getInventory().removeFromInventory(ii*5+jj);
 									}
 									GameController.updateInventory();
 								} catch (Exception e) {
@@ -121,12 +121,11 @@ public class InventoryPanel extends VBox {
 						    }
 						}
 						else if(item instanceof Gear) {
-							alert[i*5+j] = new Alert(AlertType.INFORMATION);
-							alert[i*5+j].setTitle("Gear");
-							alert[i*5+j].setHeaderText(item.getName());
-							alert[i*5+j].setContentText(item.toString());
+							alert.setTitle("Gear");
+							alert.setHeaderText(item.getName());
+							alert.setContentText(item.toString());
 
-							alert[i*5+j].showAndWait();
+							alert.showAndWait();
 						}
 					}
 				});
@@ -141,6 +140,7 @@ public class InventoryPanel extends VBox {
 		Button itemButton[] = new Button[10];
 		for (i = 0; i < 2; i++) {
 			for (j = 0; j < 5; j++) {
+				//System.out.println(i);
 				if(i*5+j>=GameController.getPlayer().getInventory().getInventorySize()) {
 					itemButton[i*5+j] = new Button();
 					itemButton[i*5+j].setMaxSize(60, 60);
@@ -149,6 +149,7 @@ public class InventoryPanel extends VBox {
 					continue;
 				}
 				// item button (didn't create yet cus so lazy =.=)
+				//System.out.println(GameController.getPlayer().getInventory().getInventorySize()+" "+(i*5+j));
 				if(GameController.getPlayer().getInventory().getInventorySize()>i*5+j)
 					item = GameController.getPlayer().getInventory().getInventory().get(i*5+j);
 				itemButton[i*5+j] = new Button();
@@ -160,30 +161,31 @@ public class InventoryPanel extends VBox {
 				itemButton[i*5+j].setMaxSize(60, 60);
 				itemButton[i*5+j].setMinSize(60, 60);
 				itemButton[i*5+j].setOnAction(new EventHandler<ActionEvent>() {
-
+					int select = i*5+j;
+					int ii=i,jj=j;
 					@Override
 					public void handle(ActionEvent arg0) {
 						// TODO Auto-generated method stub
+						Alert alert= new Alert(AlertType.INFORMATION);
+						item = GameController.getPlayer().getInventory().getInventory().get(select);
 						if(item instanceof Potion) {
-							alert[i*5+j] = new Alert(AlertType.INFORMATION);
-							alert[i*5+j].setTitle("Potion");
-							alert[i*5+j].setHeaderText(item.getName());
-							alert[i*5+j].setContentText(item.toString());
+							alert.setTitle("Potion");
+							alert.setHeaderText(item.getName());
+							alert.setContentText(item.toString());
 							ButtonType use = new ButtonType("Use");
 							ButtonType cancel = new ButtonType("Cancel");
-							alert[i*5+j].getButtonTypes().clear();
-							alert[i*5+j].getButtonTypes().addAll(use,cancel);
-							Optional<ButtonType> option = alert[i*5+j].showAndWait();
+							alert.getButtonTypes().clear();
+							alert.getButtonTypes().addAll(use,cancel);
+							Optional<ButtonType> option = alert.showAndWait();
+							//System.out.println(i);
 							if (option.get() == use) {
 								try {
-									System.out.println(i);
-									System.out.println(5*i+j);
-									((Potion)GameController.getPlayer().getInventory().getInventory().get(i*5+j)).healUnit(GameController.getSelectAllyUnit());
-									if(((Potion)GameController.getPlayer().getInventory().getInventory().get(i*5+j)).getNumberOfPotion()>1) {
-										((Potion)GameController.getPlayer().getInventory().getInventory().get(i*5+j)).setNumberOfPotion(((Potion)GameController.getPlayer().getInventory().getInventory().get(i*5+j)).getNumberOfPotion()-1);
+									//System.out.println(i);
+									((Potion)GameController.getPlayer().getInventory().getInventory().get(ii*5+jj)).healUnit(GameController.getSelectAllyUnit());
+									if(((Potion)GameController.getPlayer().getInventory().getInventory().get(ii*5+jj)).getNumberOfPotion()>1) {
 									}
 									else {
-										GameController.getPlayer().getInventory().getInventory().remove(i*j+5);
+										GameController.getPlayer().getInventory().removeFromInventory(ii*5+jj);
 									}
 									GameController.updateInventory();
 								} catch (Exception e) {
@@ -193,12 +195,24 @@ public class InventoryPanel extends VBox {
 						    }
 						}
 						else if(item instanceof Gear) {
-							alert[i*5+j] = new Alert(AlertType.INFORMATION);
-							alert[i*5+j].setTitle("Gear");
-							alert[i*5+j].setHeaderText(item.getName());
-							alert[i*5+j].setContentText(item.toString());
-
-							alert[i*5+j].showAndWait();
+							alert.setTitle("Gear");
+							alert.setHeaderText(item.getName());
+							alert.setContentText(item.toString());
+							ButtonType equip = new ButtonType("Equip");
+							ButtonType discard = new ButtonType("Discard");
+							ButtonType cancel = new ButtonType("Cancel");
+							alert.getButtonTypes().clear();
+							alert.getButtonTypes().addAll(equip,discard,cancel);
+							Optional<ButtonType> option = alert.showAndWait();
+							if(option.get()==discard) {
+								try {
+									GameController.getPlayer().getInventory().removeFromInventory(ii*5+jj);
+								} catch (Exception e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							}
+							GameController.updateInventory();
 						}
 					}
 				});

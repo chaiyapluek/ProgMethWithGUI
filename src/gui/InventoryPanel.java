@@ -177,6 +177,7 @@ public class InventoryPanel extends VBox {
 							if (option.get() == use) {
 								try {
 									System.out.println(i);
+									System.out.println(5*i+j);
 									((Potion)GameController.getPlayer().getInventory().getInventory().get(i*5+j)).healUnit(GameController.getSelectAllyUnit());
 									if(((Potion)GameController.getPlayer().getInventory().getInventory().get(i*5+j)).getNumberOfPotion()>1) {
 										((Potion)GameController.getPlayer().getInventory().getInventory().get(i*5+j)).setNumberOfPotion(((Potion)GameController.getPlayer().getInventory().getInventory().get(i*5+j)).getNumberOfPotion()-1);

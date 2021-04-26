@@ -34,7 +34,7 @@ public class BattlePanel extends VBox {
 
 		this.setAlignment(Pos.CENTER);
 		this.setPadding(new Insets(10));
-		this.setSpacing(100);
+		this.setSpacing(25);
 		this.setBorder(new Border(
 				new BorderStroke(Color.GOLD, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
@@ -72,15 +72,24 @@ public class BattlePanel extends VBox {
 	public void update() {
 		setLabel();
 		setDeadImg();
+		for(UnitButton button : allyUnits) {
+			button.removeChooseIcon();
+		}
 	}
 
 	private void setDeadImg() {
 		for (UnitButton button : allyUnits) {
+			if(button.getUnit() == null) {
+				continue;
+			}
 			if (((UnitStats) button.getUnit()).getIsDead()) {
 				button.setDeadImg();
 			}
 		}
 		for (UnitButton button : enemyUnits) {
+			if(button.getUnit() == null) {
+				continue;
+			}
 			if (((UnitStats) button.getUnit()).getIsDead()) {
 				button.setDeadImg();
 			}

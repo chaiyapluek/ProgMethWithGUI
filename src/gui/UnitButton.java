@@ -1,5 +1,7 @@
 package gui;
 
+import Skill.Effect;
+import Skill.NormalSkill;
 import UnitBase.AdvanceUnit;
 import UnitBase.AllyUnit;
 import UnitBase.BasicUnit;
@@ -10,6 +12,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -20,21 +23,39 @@ import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import logic.GameController;
 
-public class UnitButton extends Button {
+public class UnitButton extends VBox {
 
 	private Unit unit;
+	private Button button;
+	private StackPane chooseIconPane;
+	private Tooltip tooltip;
 
 	public UnitButton(Unit u) {
 
 		this.unit = u;
 
+		button = new Button();
+		button.setAlignment(Pos.BOTTOM_CENTER);
+		button.setMinSize(150, 200);
+		button.setMaxSize(150, 200);
+		button.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
+
+		chooseIconPane = new StackPane();
+		chooseIconPane.setAlignment(Pos.TOP_CENTER);
+		chooseIconPane.setMaxSize(150, 50);
+		chooseIconPane.setMinSize(150, 50);
+		chooseIconPane.setBorder(new Border(
+				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+
 		this.setAlignment(Pos.BOTTOM_CENTER);
-		this.setMinSize(150, 200);
-		this.setMaxSize(150, 200);
-		this.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
+		this.setSpacing(50);
 		Image img;
 		ImageView imgView;
 		if (u == null) {
@@ -46,7 +67,7 @@ public class UnitButton extends Button {
 			imgView = new ImageView(img);
 			if (u.getName().equals("Karna") || u.getName().equals("Leonidas")) {
 				imgView.setFitHeight(280);
-			} else if (u.getName().equals("Ereshkigal")) {
+			} else if (u.getName().equals("Ereshkigal") || u.getName().equals("Wyvern")) {
 				imgView.setFitHeight(300);
 			} else if (u.getName().equals("Heracles")) {
 				imgView.setFitHeight(260);
@@ -55,30 +76,35 @@ public class UnitButton extends Button {
 			}
 		}
 		imgView.setPreserveRatio(true);
-		this.setGraphic(imgView);
+		button.setGraphic(imgView);
+
 		this.setBorder(new Border(
 				new BorderStroke(Color.GOLD, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
-		this.setOnMouseEntered(new EventHandler<MouseEvent>() {
+		button.setOnMouseEntered(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
 				setOnHoverBackground();
 			}
 		});
-		this.setOnMouseExited(new EventHandler<MouseEvent>() {
+		button.setOnMouseExited(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				// TODO Auto-generated method stub
 				setBackground();
 			}
 		});
-		this.setOnAction(new EventHandler<ActionEvent>() {
-
+		button.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				if (unit != null && unit instanceof AllyUnit) {
 					GameController.setSelectAllyUnit((AllyUnit) unit);
 					GameController.updateAllyInfo();
+					if (GameController.getOnBattle()) {
+						GameController.updateBattlePanel();
+					} else {
+						GameController.updateAllyView();
+					}
+					setChooseIcon();
 				} else if (((unit instanceof BasicUnit) || (unit instanceof AdvanceUnit))
 						&& !((UnitStats) unit).getIsDead()) {
 					GameController.setSelectEnemyUnit(unit);
@@ -86,6 +112,11 @@ public class UnitButton extends Button {
 				}
 			}
 		});
+		if (this.unit != null) {
+			setTooltip();
+		}
+
+		this.getChildren().addAll(chooseIconPane, button);
 	}
 
 	public Unit getUnit() {
@@ -93,8 +124,8 @@ public class UnitButton extends Button {
 	}
 
 	public void setBackground() {
-		this.setCursor(javafx.scene.Cursor.DEFAULT);
-		this.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
+		button.setCursor(javafx.scene.Cursor.DEFAULT);
+		button.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
 	}
 
 	public void setOnHoverBackground() {
@@ -102,12 +133,24 @@ public class UnitButton extends Button {
 //				new BackgroundImage(new Image("Light.png"), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
 //						BackgroundPosition.CENTER, new BackgroundSize(0, 100, false, true, false, true))));
 		if (unit != null) {
-			if ( !((UnitStats) unit).getIsDead() ) {
-				this.setCursor(javafx.scene.Cursor.HAND);
-				this.setBackground(
-						new Background(new BackgroundFill(Color.AQUAMARINE, CornerRadii.EMPTY, Insets.EMPTY)));
+			if (!((UnitStats) unit).getIsDead()) {
+				button.setCursor(javafx.scene.Cursor.HAND);
+//				button.setBackground(
+//						new Background(new BackgroundFill(Color.AQUAMARINE, CornerRadii.EMPTY, Insets.EMPTY)));
 			}
 		}
+	}
+
+	public void setChooseIcon() {
+		Image imgIcon = new Image("choose.png");
+		ImageView Icon = new ImageView(imgIcon);
+		Icon.setFitHeight(50);
+		Icon.setPreserveRatio(true);
+		chooseIconPane.getChildren().add(Icon);
+	}
+
+	public void removeChooseIcon() {
+		chooseIconPane.getChildren().clear();
 	}
 
 	public void setDeadImg() {
@@ -116,6 +159,25 @@ public class UnitButton extends Button {
 		ImageView imgView = new ImageView(img);
 		imgView.setFitHeight(150);
 		imgView.setPreserveRatio(true);
-		this.setGraphic(imgView);
+		button.setGraphic(imgView);
+	}
+
+	public void setTooltip() {
+		tooltip = new Tooltip();
+		tooltip.setFont(new Font(12));
+		String txt = "Effect(s) : \n";
+		UnitStats unit = (UnitStats) this.unit;
+		for (Effect e : unit.getEffects()) {
+			txt += e.toString();
+		}
+		tooltip.setText(txt);
+		if (GameController.getOnBattle()) {
+			button.setOnMouseMoved((MouseEvent e) -> {
+				tooltip.show(this, e.getScreenX(), e.getScreenY() + 10);
+			});
+			button.setOnMouseExited((MouseEvent e) -> {
+				tooltip.hide();
+			});
+		}
 	}
 }

@@ -25,14 +25,13 @@ public class ViewStagePane extends HBox {
 	public ViewStagePane(Stage stage) {
 
 		this.setAlignment(Pos.CENTER_LEFT);
-		this.setPadding(new Insets(10));
 		this.setSpacing(30);
 		this.setBorder(new Border(
 				new BorderStroke(Color.GOLD, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
 		Button backButton = new Button("<<");
 		backButton.setOnAction(new EventHandler<ActionEvent>() {
-			
+
 			@Override
 			public void handle(ActionEvent arg0) {
 				// TODO Auto-generated method stub
@@ -43,10 +42,10 @@ public class ViewStagePane extends HBox {
 
 		for (int i = 0; i < stage.getNumberOfWave(); i++) {
 			VBox pane = new VBox();
-			pane.setMaxSize(375, 300);
-			pane.setMinSize(375, 300);
+			pane.setMaxSize(350, 300);
+			pane.setMinSize(350, 300);
 			pane.setAlignment(Pos.BOTTOM_CENTER);
-			pane.setSpacing(10);
+			pane.setSpacing(100);
 			Label label = new Label("WAVE : " + (i + 1));
 			Unit[] units = stage.getUnitAtWave(i);
 			HBox unitsPane = new HBox();
@@ -71,7 +70,11 @@ public class ViewStagePane extends HBox {
 		if (unit != null) {
 			Image img = new Image(unit.getUrl());
 			ImageView imgView = new ImageView(img);
-			imgView.setFitHeight(150);
+			if (unit.getName().equals("Wyvern")) {
+				imgView.setFitHeight(200);
+			} else {
+				imgView.setFitHeight(150);
+			}
 			imgView.setPreserveRatio(true);
 			unitButton.setGraphic(imgView);
 		}

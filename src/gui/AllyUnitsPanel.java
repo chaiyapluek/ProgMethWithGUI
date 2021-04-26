@@ -1,6 +1,8 @@
 package gui;
 
 import Application.Player;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -18,6 +20,7 @@ import logic.GameController;
 public class AllyUnitsPanel extends HBox{
 
 	private StackPane viewStagePane;
+	private ObservableList<UnitButton> allyUnits = FXCollections.observableArrayList();
 	
 	public AllyUnitsPanel(Player player) {
 
@@ -32,6 +35,7 @@ public class AllyUnitsPanel extends HBox{
 		for (int i = 2; i >= 0; i--) {
 			UnitButton button = new UnitButton(player.getUnits()[i]);
 			frontUnit.getChildren().add(button);
+			allyUnits.add(button);
 		}
 		HBox backUnit = new HBox();
 		backUnit.setAlignment(Pos.BOTTOM_CENTER);
@@ -39,6 +43,7 @@ public class AllyUnitsPanel extends HBox{
 		for (int i = 2; i >= 0; i--) {
 			UnitButton button = new UnitButton(player.getBackUnits()[i]);
 			backUnit.getChildren().add(button);
+			allyUnits.add(button);
 		}
 		viewStagePane = new StackPane();
 		viewStagePane.setMaxWidth(50);
@@ -64,6 +69,10 @@ public class AllyUnitsPanel extends HBox{
 			viewStagePane.getChildren().add(viewStageButton);
 		}else {
 			viewStagePane.getChildren().clear();
+		}
+		
+		for(UnitButton button : allyUnits) {
+			button.removeChooseIcon();
 		}
 	}
 }

@@ -7,6 +7,7 @@ import Skill.NormalSkill;
 import Skill.Skill;
 import SubSkill.*;
 import UnitBase.AdvanceUnit;
+import logic.BattleController;
 import UnitBase.*;
 
 public class Bot {
@@ -50,10 +51,6 @@ public class Bot {
 			} else if (this.units[i] instanceof AdvanceUnit) {
 				AdvanceUnitAction(targets, i);
 			}
-			if (Battle.isEnd(targets)) {
-				System.out.println("BOT WIN");
-				break;
-			}
 		}
 		System.out.println("----------------------");
 	}
@@ -61,7 +58,7 @@ public class Bot {
 	public void BasicUnitAction(Unit[] targets, int idx) {
 		Random ran = new Random();
 		int num = ran.nextInt(100);
-		if (num < 70) {
+		if (num < 90) {
 			// Attack
 			int targetIdx = ran.nextInt(3);
 			while (true) {
@@ -77,7 +74,7 @@ public class Bot {
 				targetIdx = tauntCheck(targets);
 			System.out.println(units[idx].getName() + " attacked " + targets[targetIdx].getName());
 			// sleep(1000);
-			Battle.attack(units[idx], targets[targetIdx]);
+			BattleController.attack(units[idx], targets[targetIdx]);
 		} else {
 			// Defense
 			System.out.println(this.units[idx].getName() + " defense up");
@@ -87,26 +84,9 @@ public class Bot {
 
 	public void AdvanceUnitAction(Unit[] targets, int idx) {
 		AdvanceUnit unit = (AdvanceUnit) units[idx];
-		if (unit.getUltiGauge() == unit.getMaxUltigauge()) {
-			// useUlti
-		}
-		if (shouldHeal(idx)) {
-			for (int i = 0; i < unit.getMaxSkill(); i++) {
-				for (SubSkill s : unit.getSkills()[i].getSubSkills()) {
-					if (unit.getSkills()[i] instanceof NormalSkill) {
-						if ((s instanceof Heal) && (((NormalSkill) unit.getSkills()[i]).getCooldown() == 0)) {
-							heal(unit, i);
-							return;
-						}
-					}
-				}
-			}
-		}
 		Random ran = new Random();
 		int num = ran.nextInt(100);
 		ArrayList<Integer> useableSkill = useableSkill(idx);
-		System.out.println(units[idx].getName());
-		System.out.println(useableSkill.size());
 		int targetIdx = ran.nextInt(3);
 		while (true) {
 			if (targets[targetIdx] == null) {
@@ -117,13 +97,17 @@ public class Bot {
 				break;
 			targetIdx = ran.nextInt(3);
 		}
+		if (unit.getUltiGauge() == unit.getMaxUltigauge()) {
+			// useUlti
+			useSkill(targets, unit, unit.getMaxSkill() - 1, targetIdx);
+			return;
+		}
 		if (num < 50) {
 			// Attack
 			if (tauntCheck(targets) != -1)
 				targetIdx = tauntCheck(targets);
 			System.out.println(units[idx].getName() + " attacked " + targets[targetIdx].getName());
-			// sleep(1000);
-			Battle.attack(units[idx], targets[targetIdx]);
+			BattleController.attack(units[idx], targets[targetIdx]);
 		} else if (num < 60) {
 			// Defense
 			System.out.println(this.units[idx].getName() + " defense up");
@@ -136,7 +120,7 @@ public class Bot {
 		} else {
 			System.out.println(units[idx].getName() + " attacked " + targets[targetIdx].getName());
 			// sleep(1000);
-			Battle.attack(units[idx], targets[targetIdx]);
+			BattleController.attack(units[idx], targets[targetIdx]);
 		}
 	}
 
@@ -166,37 +150,6 @@ public class Bot {
 			}
 		}
 		return skills;
-	}
-
-	public void heal(AdvanceUnit skillUser, int skillIdx) {
-		if (skillUser.getSkills()[skillIdx].getIsSingle()) {
-			int max = 0;
-			int idx = 0;
-			for (int i = 0; i < 3; i++) {
-				if (nullOrDead(i))
-					continue;
-				int num = 0;
-				UnitStats unit = (UnitStats) units[i];
-				if ((int) (unit.getCurrentHP() * 100 / unit.getMaxHP()) < 60) {
-					num += 1;
-					if (unit instanceof AdvanceUnit)
-						num += 1;
-					if ((int) (unit.getCurrentHP() * 100 / unit.getMaxHP()) < 30)
-						num += 2;
-				}
-				if (num > max) {
-					max = num;
-					idx = i;
-				}
-			}
-			skillUser.getSkills()[skillIdx].use(skillUser, units[idx]);
-		} else {
-			for (int i = 0; i < 3; i++) {
-				if (nullOrDead(i))
-					continue;
-				skillUser.getSkills()[skillIdx].use(skillUser, units[i]);
-			}
-		}
 	}
 
 	public void useSkill(Unit[] targets, AdvanceUnit skillUser, int skillIdx, int targetIdx) {

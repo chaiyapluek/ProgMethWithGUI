@@ -159,7 +159,6 @@ public class ShopPanel extends VBox {
 					if(!GameController.isUnitExist(allyUnit)) {
 						try {
 							GameController.addUnits(allyUnit);
-							
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();

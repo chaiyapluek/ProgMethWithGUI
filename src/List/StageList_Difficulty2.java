@@ -27,23 +27,23 @@ public class StageList_Difficulty2 {
 
 	public static Stage Stage1() {
 
-		int[] stats = new int[] { getHP(1500), 15, getAttack(150), 5, 100, 5, 0 };
-		BasicUnit enemyUnit1 = new BasicUnit("Soldier", "Saber", stats);
+		int[] stats = new int[] { getHP(2000), 10, getAttack(300), 5, 100, 5, 0 };
+		BasicUnit enemyUnit1 = BasicUnitList.Celtic_Saber(stats);
 
-		stats = new int[] { getHP(1500), 15, getAttack(150), 5, 100, 5, 0 };
-		BasicUnit enemyUnit2 = new BasicUnit("Soldier", "Saber", stats);
+		stats = new int[] { getHP(2300), 10, getAttack(300), 5, 100, 5, 0 };
+		BasicUnit enemyUnit2 = BasicUnitList.Celtic_Saber(stats);
 
-		stats = new int[] { getHP(2000), 15, getAttack(200), 5, 100, 5, 0 };
-		BasicUnit enemyUnit3 = new BasicUnit("Soldier", "Berserker", stats);
+		stats = new int[] { getHP(3000), 10, getAttack(350), 5, 100, 5, 0 };
+		BasicUnit enemyUnit3 = BasicUnitList.SteelGolem(stats);
 
-		stats = new int[] { getHP(2000), 15, getAttack(200), 5, 100, 5, 0 };
-		BasicUnit enemyUnit4 = new BasicUnit("Soldier", "Saber", stats);
+		stats = new int[] { getHP(2500), 10, getAttack(300), 5, 100, 5, 0 };
+		BasicUnit enemyUnit4 = BasicUnitList.SteelGolem(stats);
 
-		stats = new int[] { getHP(2000), 15, getAttack(200), 5, 100, 5, 0 };
-		BasicUnit enemyUnit5 = new BasicUnit("Soldier", "Saber", stats);
+		stats = new int[] { getHP(2700), 12, getAttack(325), 5, 100, 5, 0 };
+		BasicUnit enemyUnit5 = BasicUnitList.Celtic_Saber(stats);
 
-		stats = new int[] { getHP(2500), 15, getAttack(250), 5, 100, 5, 0 };
-		BasicUnit enemyUnit6 = new BasicUnit("Spartan Soldier", "Berserker", stats);
+		stats = new int[] { getHP(3000), 12, getAttack(350), 5, 100, 5, 0 };
+		BasicUnit enemyUnit6 = BasicUnitList.SteelGolem(stats);
 
 		Unit[][] units = new Unit[][] { { enemyUnit1, enemyUnit2, enemyUnit3 },
 				{ enemyUnit4, enemyUnit5, enemyUnit6 } };
@@ -55,23 +55,23 @@ public class StageList_Difficulty2 {
 
 	public static Stage Stage2() {
 
-		int[] stats = new int[] { getHP(1500), 15, getAttack(150), 5, 100, 5, 0 };
-		BasicUnit enemyUnit1 = new BasicUnit("Soldier", "Lancer", stats);
+		int[] stats = new int[] { getHP(2000), 10, getAttack(300), 5, 100, 5, 0 };
+		BasicUnit enemyUnit1 = BasicUnitList.Celtic_Lancer(stats);
 
-		stats = new int[] { getHP(1500), 15, getAttack(150), 5, 100, 5, 0 };
-		BasicUnit enemyUnit2 = new BasicUnit("Soldier", "Lancer", stats);
+		stats = new int[] { getHP(2300), 10, getAttack(300), 5, 100, 5, 0 };
+		BasicUnit enemyUnit2 = BasicUnitList.Celtic_Lancer(stats);
 
-		stats = new int[] { getHP(2000), 15, getAttack(200), 5, 100, 5, 0 };
-		BasicUnit enemyUnit3 = new BasicUnit("Soldier", "Berserker", stats);
+		stats = new int[] { getHP(3000), 10, getAttack(350), 5, 100, 5, 0 };
+		BasicUnit enemyUnit3 = BasicUnitList.SteelGolem(stats);
 
-		stats = new int[] { getHP(2000), 15, getAttack(200), 5, 100, 5, 0 };
-		BasicUnit enemyUnit4 = new BasicUnit("Soldier", "Lancer", stats);
+		stats = new int[] { getHP(2700), 12, getAttack(325), 5, 100, 5, 0 };
+		BasicUnit enemyUnit4 = BasicUnitList.Celtic_Lancer(stats);
 
-		stats = new int[] { getHP(2000), 15, getAttack(200), 5, 100, 5, 0 };
-		BasicUnit enemyUnit5 = new BasicUnit("Soldier", "Lancer", stats);
+		stats = new int[] { getHP(2500), 12, getAttack(300), 5, 100, 5, 0 };
+		BasicUnit enemyUnit5 = BasicUnitList.SteelGolem(stats);
 
-		stats = new int[] { getHP(2500), 15, getAttack(250), 5, 100, 5, 0 };
-		BasicUnit enemyUnit6 = new BasicUnit("Spartan Soldier", "Berserker", stats);
+		stats = new int[] { getHP(3500), 12, getAttack(350), 5, 100, 5, 0 };
+		BasicUnit enemyUnit6 = BasicUnitList.SteelGolem(stats);
 
 		Unit[][] units = new Unit[][] { { enemyUnit1, enemyUnit2, enemyUnit3 },
 				{ enemyUnit4, enemyUnit5, enemyUnit6 } };
@@ -83,23 +83,23 @@ public class StageList_Difficulty2 {
 	
 	public static Stage Stage3() {
 
-		int[] stats = new int[] { getHP(1500), 15, getAttack(150), 5, 100, 5, 0 };
-		BasicUnit enemyUnit1 = new BasicUnit("Soldier", "Archer", stats);
+		int[] stats = new int[] { getHP(2000), 10, getAttack(300), 5, 100, 5, 0 };
+		BasicUnit enemyUnit1 = BasicUnitList.Celtic_Archer(stats);
 
-		stats = new int[] { getHP(1500), 15, getAttack(150), 5, 100, 5, 0 };
-		BasicUnit enemyUnit2 = new BasicUnit("Soldier", "Archer", stats);
+		stats = new int[] { getHP(2300), 10, getAttack(300), 5, 100, 5, 0 };
+		BasicUnit enemyUnit2 = BasicUnitList.Celtic_Archer(stats);
 
-		stats = new int[] { getHP(2000), 15, getAttack(200), 5, 100, 5, 0 };
-		BasicUnit enemyUnit3 = new BasicUnit("Soldier", "Berserker", stats);
+		stats = new int[] { getHP(3000), 10, getAttack(200), 5, 100, 5, 0 };
+		BasicUnit enemyUnit3 = BasicUnitList.SteelGolem(stats);
 
-		stats = new int[] { getHP(2000), 15, getAttack(200), 5, 100, 5, 0 };
-		BasicUnit enemyUnit4 = new BasicUnit("Soldier", "Archer", stats);
+		stats = new int[] { getHP(2700), 12, getAttack(350), 5, 100, 5, 0 };
+		BasicUnit enemyUnit4 = BasicUnitList.Celtic_Archer(stats);
 
-		stats = new int[] { getHP(2000), 15, getAttack(200), 5, 100, 5, 0 };
-		BasicUnit enemyUnit5 = new BasicUnit("Soldier", "Archer", stats);
+		stats = new int[] { getHP(2500), 12, getAttack(300), 5, 100, 5, 0 };
+		BasicUnit enemyUnit5 = BasicUnitList.SteelGolem(stats);
 
-		stats = new int[] { getHP(2500), 15, getAttack(250), 5, 100, 5, 0 };
-		BasicUnit enemyUnit6 = new BasicUnit("Spartan Soldier", "Berserker", stats);
+		stats = new int[] { getHP(3500), 12, getAttack(350), 5, 100, 5, 0 };
+		BasicUnit enemyUnit6 = BasicUnitList.SteelGolem(stats);
 
 		Unit[][] units = new Unit[][] { { enemyUnit1, enemyUnit2, enemyUnit3 },
 				{ enemyUnit4, enemyUnit5, enemyUnit6 } };
@@ -111,23 +111,23 @@ public class StageList_Difficulty2 {
 	
 	public static Stage Stage4() {
 
-		int[] stats = new int[] { getHP(1500), 15, getAttack(150), 5, 100, 5, 0 };
-		BasicUnit enemyUnit1 = new BasicUnit("Soldier", "Saber", stats);
+		int[] stats = new int[] { getHP(2500), 12, getAttack(300), 5, 100, 5, 0 };
+		BasicUnit enemyUnit1 = BasicUnitList.Celtic_Saber(stats);
 
-		stats = new int[] { getHP(1500), 15, getAttack(150), 5, 100, 5, 0 };
-		BasicUnit enemyUnit2 = new BasicUnit("Soldier", "Archer", stats);
+		stats = new int[] { getHP(2150), 12, getAttack(350), 10, 100, 10, 0 };
+		BasicUnit enemyUnit2 = BasicUnitList.Celtic_Archer(stats);
 
-		stats = new int[] { getHP(2200), 15, getAttack(200), 5, 100, 5, 0 };
-		BasicUnit enemyUnit3 = new BasicUnit("Soldier", "Archer", stats);
+		stats = new int[] { getHP(2300), 12, getAttack(200), 10, 100, 10, 0 };
+		BasicUnit enemyUnit3 = BasicUnitList.Celtic_Archer(stats);
 
-		stats = new int[] { getHP(2000), 15, getAttack(200), 5, 100, 5, 0 };
-		BasicUnit enemyUnit4 = new BasicUnit("Soldier", "Lancer", stats);
+		stats = new int[] { getHP(2350), 15, getAttack(325), 5, 100, 8, 0 };
+		BasicUnit enemyUnit4 = BasicUnitList.Celtic_Lancer(stats);
 
-		stats = new int[] { getHP(2000), 15, getAttack(200), 5, 100, 5, 0 };
-		BasicUnit enemyUnit5 = new BasicUnit("Soldier", "Archer", stats);
+		stats = new int[] { getHP(2400), 15, getAttack(325), 5, 100, 8, 0 };
+		BasicUnit enemyUnit5 = BasicUnitList.Celtic_Lancer(stats);
 
-		stats = new int[] { getHP(2500), 15, getAttack(250), 5, 100, 5, 0 };
-		BasicUnit enemyUnit6 = new BasicUnit("Spartan Soldier", "Berserker", stats);
+		stats = new int[] { getHP(3500), 10, getAttack(350), 5, 100, 5, 0 };
+		BasicUnit enemyUnit6 = BasicUnitList.SteelGolem(stats);
 
 		Unit[][] units = new Unit[][] { { enemyUnit1, enemyUnit2, enemyUnit3 },
 				{ enemyUnit4, enemyUnit5, enemyUnit6 } };
@@ -139,28 +139,19 @@ public class StageList_Difficulty2 {
 	
 	public static Stage Stage5() {
 
-		int[] stats = new int[] { getHP(2000), 15, getAttack(200), 5, 100, 5, 0 };
-		BasicUnit enemyUnit1 = new BasicUnit("Soldier", "Berserker", stats);
+		int[] stats = new int[] { getHP(6500), 10, getAttack(450), 5, 100, 5, 0 };
+		BasicUnit enemyUnit1 = BasicUnitList.SteelGolem(stats);
 
-		stats = new int[] { getHP(2000), 15, getAttack(200), 5, 100, 5, 0 };
-		BasicUnit enemyUnit2 = new BasicUnit("Soldier", "Berserker", stats);
+		stats = new int[] { getHP(7500), 10, getAttack(600), 5, 100, 5, 0 };
+		BasicUnit enemyUnit2 = BasicUnitList.SteelGolem(stats);
 
-		stats = new int[] { getHP(2000), 15, getAttack(200), 5, 100, 5, 0 };
-		BasicUnit enemyUnit3 = new BasicUnit("Soldier", "Berserker", stats);
+		stats = new int[] { getHP(9000), 15, getAttack(750), 5, 100, 5, 0 };
+		BasicUnit enemyUnit3 = BasicUnitList.Wyvern(stats);
 
-		stats = new int[] { getHP(2000), 15, getAttack(200), 5, 100, 5, 0 };
-		BasicUnit enemyUnit4 = new BasicUnit("Soldier", "Berserker", stats);
+		Unit[][] units = new Unit[][] { { null, enemyUnit1, null },
+			{ null, enemyUnit2, null } , { null, enemyUnit3, null } };
 
-		stats = new int[] { getHP(2000), 15, getAttack(200), 5, 100, 5, 0 };
-		BasicUnit enemyUnit5 = new BasicUnit("Soldier", "Berserker", stats);
-
-		stats = new int[] { getHP(2500), 15, getAttack(250), 5, 100, 5, 0 };
-		BasicUnit enemyUnit6 = new BasicUnit("Spartan Soldier", "Berserker", stats);
-
-		Unit[][] units = new Unit[][] { { enemyUnit1, enemyUnit2, enemyUnit3 },
-				{ enemyUnit4, enemyUnit5, enemyUnit6 } };
-
-		Stage stage5 = new Stage(2,false,units);	
+		Stage stage5 = new Stage(3,false,units);	
 		return stage5;
 		
 	}

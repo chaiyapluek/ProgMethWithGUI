@@ -1,6 +1,7 @@
 package logic;
 
 import Application.Bot;
+import Map.Stage;
 import UnitBase.*;
 import gui.ActionButton;
 
@@ -39,11 +40,14 @@ public class BattleController {
 		if (unit.getCurrentHP() <= 0) {
 			unit.setIsDead(true);
 			GameController.updateBattlePanel();
+			if (!isWaveEnd()) {
+				setSelectEnemyUnit();
+			}
 		}
 
 		if (isWaveEnd()) {
 			nextWave();
-		}else {
+		} else {
 			System.out.println("ACTION");
 			System.out.println("-->" + numberOfTakenAction);
 			BattleController.checkPlayerTurnEnd();
@@ -61,10 +65,22 @@ public class BattleController {
 		}
 	}
 
+	private static void setSelectEnemyUnit() {
+		Stage stage = GameController.getNowStage();
+		for (int i = 0; i < stage.getUnitAtWave(wave - 1).length; i++) {
+			if(stage.getUnitAtWave(wave-1)[i] == null)	continue;
+			UnitStats nextUnit = (UnitStats)stage.getUnitAtWave(wave-1)[i];
+			if (!nextUnit.getIsDead()) {
+				GameController.setSelectEnemyUnit(stage.getUnitAtWave(wave-1)[i]);
+				break;
+			}
+		}
+	}
+	
 	private static boolean isWaveEnd() {
 		return bot.getNumberOfUnit() == 0;
 	}
-
+	
 	private static void nextTurn() {
 		turn += 1;
 		numberOfTakenAction = 0;
@@ -97,6 +113,7 @@ public class BattleController {
 			wave += 1;
 			nextTurn();
 			bot = new Bot(GameController.getNowStage().getUnitAtWave(wave - 1));
+			setSelectEnemyUnit();
 			GameController.setNewWave();
 			GameController.updateAllyInfo();
 			GameController.updateEnemyInfoPanel();

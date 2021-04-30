@@ -21,6 +21,8 @@ public class AllyUnitsPanel extends HBox{
 
 	private StackPane viewStagePane;
 	private ObservableList<UnitButton> allyUnits = FXCollections.observableArrayList();
+	private HBox frontUnit;
+	private HBox backUnit;
 	
 	public AllyUnitsPanel(Player player) {
 
@@ -29,7 +31,7 @@ public class AllyUnitsPanel extends HBox{
 		this.setBorder(new Border(
 				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		this.setMinHeight(300);
-		HBox frontUnit = new HBox();
+		frontUnit = new HBox();
 		frontUnit.setAlignment(Pos.BOTTOM_CENTER);
 		frontUnit.setSpacing(35);
 		for (int i = 2; i >= 0; i--) {
@@ -37,7 +39,7 @@ public class AllyUnitsPanel extends HBox{
 			frontUnit.getChildren().add(button);
 			allyUnits.add(button);
 		}
-		HBox backUnit = new HBox();
+		backUnit = new HBox();
 		backUnit.setAlignment(Pos.BOTTOM_CENTER);
 		backUnit.setSpacing(35);
 		for (int i = 2; i >= 0; i--) {
@@ -56,6 +58,18 @@ public class AllyUnitsPanel extends HBox{
 	}
 	
 	public void update() {
+		frontUnit.getChildren().clear();
+		for (int i = 2; i >= 0; i--) {
+			UnitButton button = new UnitButton(GameController.getPlayer().getUnits()[i]);
+			frontUnit.getChildren().add(button);
+			allyUnits.add(button);
+		}
+		backUnit.getChildren().clear();
+		for (int i = 2; i >= 0; i--) {
+			UnitButton button = new UnitButton(GameController.getPlayer().getBackUnits()[i]);
+			backUnit.getChildren().add(button);
+			allyUnits.add(button);
+		}
 		if(!GameController.getNowStage().isClear()) {
 			Button viewStageButton = new Button(">>");
 			viewStageButton.setOnAction(new EventHandler<ActionEvent>() {

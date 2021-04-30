@@ -51,7 +51,8 @@ public class BattlePanel extends VBox {
 		HBox allyPane = new HBox();
 		allyPane.setSpacing(35);
 		allyPane.setAlignment(Pos.BOTTOM_CENTER);
-		for (Unit unit : GameController.getPlayer().getUnits()) {
+		for (int i = 2; i >= 0; i--) {
+			AllyUnit unit = GameController.getPlayer().getUnits()[i];
 			UnitButton button = new UnitButton(unit);
 			allyPane.getChildren().add(button);
 			allyUnits.add(button);
@@ -72,14 +73,26 @@ public class BattlePanel extends VBox {
 	public void update() {
 		setLabel();
 		setDeadImg();
-		for(UnitButton button : allyUnits) {
-			button.removeChooseIcon();
+		for (UnitButton button : allyUnits) {
+			button.setTooltip();
+			button.setBackground();
+		}
+		for (UnitButton button : enemyUnits) {
+			button.setTooltip();
+			button.setBackground();
+		}
+	}
+
+	public void updateEffect() {
+		for (UnitButton button : allyUnits) {
+			button.setTooltip();
+			button.setBackground();
 		}
 	}
 
 	private void setDeadImg() {
 		for (UnitButton button : allyUnits) {
-			if(button.getUnit() == null) {
+			if (button.getUnit() == null) {
 				continue;
 			}
 			if (((UnitStats) button.getUnit()).getIsDead()) {
@@ -87,7 +100,7 @@ public class BattlePanel extends VBox {
 			}
 		}
 		for (UnitButton button : enemyUnits) {
-			if(button.getUnit() == null) {
+			if (button.getUnit() == null) {
 				continue;
 			}
 			if (((UnitStats) button.getUnit()).getIsDead()) {

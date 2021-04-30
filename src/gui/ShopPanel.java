@@ -28,13 +28,12 @@ public class ShopPanel extends VBox {
 		this.setMinSize(400, 300);
 		this.setPadding(new Insets(20));
 		this.setSpacing(10);
-		
 
 		HBox backPanel = new HBox();
 		backPanel.setAlignment(Pos.CENTER_RIGHT);
 		Label money = new Label();
 		money.setText("Money : XXX");
-		money.setPadding(new Insets(0,250,0,0));
+		money.setPadding(new Insets(0, 250, 0, 0));
 		Button back = new Button("X");
 		backPanel.getChildren().add(money);
 		backPanel.getChildren().add(back);
@@ -47,16 +46,16 @@ public class ShopPanel extends VBox {
 			}
 		});
 		this.getChildren().add(backPanel);
-		
+
 		ScrollPane shopPane = new ScrollPane();
-		
+
 		VBox root = new VBox();
 		root.setAlignment(Pos.CENTER_LEFT);
 		root.setSpacing(10);
 		root.setMaxWidth(250);
 		root.setMinWidth(250);
 		root.setPadding(new Insets(10));
-		
+
 		Shop shop = new Shop();
 		Label itemLabel = new Label("Items");
 		root.getChildren().add(itemLabel);
@@ -66,12 +65,12 @@ public class ShopPanel extends VBox {
 			Button button = new Button();
 			button.setMaxSize(45, 45);
 			button.setMinSize(45, 45);
-			//System.out.println(item.getUrl());
+			// System.out.println(item.getUrl());
 			Image img = new Image(item.getUrl());
-		    ImageView view = new ImageView(img);
-		    view.setFitHeight(45);
-		    view.setPreserveRatio(true);
-		    button.setGraphic(view);
+			ImageView view = new ImageView(img);
+			view.setFitHeight(45);
+			view.setPreserveRatio(true);
+			button.setGraphic(view);
 			Button info = new Button("Info");
 			info.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -93,17 +92,20 @@ public class ShopPanel extends VBox {
 				public void handle(ActionEvent arg0) {
 					// TODO Auto-generated method stub
 					try {
-						if(item instanceof Gear) {
+						if (item instanceof Gear) {
 							GameController.getPlayer().getInventory().addToInventory(item);
-						}
-						else {
-							if(GameController.getPlayer().getInventory().isPotionExist((Potion) item)==false) {
+						} else {
+							if (GameController.getPlayer().getInventory().isPotionExist((Potion) item) == false) {
 								GameController.getPlayer().getInventory().addToInventory(item);
-							}
-							else {
-								for(int i=0;i<GameController.getPlayer().getInventory().getInventorySize();i++) {
-									if(GameController.getPlayer().getInventory().getInventory().get(i) instanceof Potion && ((Potion)item).equals(GameController.getPlayer().getInventory().getInventory().get(i))) {
-										((Potion)GameController.getPlayer().getInventory().getInventory().get(i)).setNumberOfPotion(((Potion)GameController.getPlayer().getInventory().getInventory().get(i)).getNumberOfPotion()+1);
+							} else {
+								for (int i = 0; i < GameController.getPlayer().getInventory().getInventorySize(); i++) {
+									if (GameController.getPlayer().getInventory().getInventory()
+											.get(i) instanceof Potion
+											&& ((Potion) item).equals(
+													GameController.getPlayer().getInventory().getInventory().get(i))) {
+										((Potion) GameController.getPlayer().getInventory().getInventory().get(i))
+												.setNumberOfPotion(((Potion) GameController.getPlayer().getInventory()
+														.getInventory().get(i)).getNumberOfPotion() + 1);
 									}
 								}
 								GameController.updateInventory();
@@ -132,10 +134,10 @@ public class ShopPanel extends VBox {
 			button.setMaxSize(45, 45);
 			button.setMinSize(45, 45);
 			Image img = new Image(allyUnit.getIconUrl());
-		    ImageView view = new ImageView(img);
-		    view.setFitHeight(45);
-		    view.setPreserveRatio(true);
-		    button.setGraphic(view);
+			ImageView view = new ImageView(img);
+			view.setFitHeight(45);
+			view.setPreserveRatio(true);
+			button.setGraphic(view);
 			Button info = new Button("Info");
 			info.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -155,20 +157,28 @@ public class ShopPanel extends VBox {
 
 				@Override
 				public void handle(ActionEvent arg0) {
-					
+
 					// TODO Auto-generated method stub
-					if(!GameController.isUnitExist(allyUnit)) {
+					if (!GameController.isUnitExist(allyUnit)) {
 						try {
 							GameController.addUnits(allyUnit);
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-					}
-					else {
-						for(int i=0;i<GameController.getUnitsNumber();i++) {
-							if(allyUnit.equals(GameController.getUnits()[i])) {
-								GameController.getUnits()[i].levelup();
+					} else {
+						for (int i = 0; i < GameController.getPlayer().getUnits().length; i++) {
+							if (allyUnit.equals(GameController.getPlayer().getUnits()[i])
+									&& GameController.getPlayer().getUnits()[i].getLevel() < 5) {
+								GameController.getPlayer().getUnits()[i].levelup();
+								GameController.updateAllyInfo();
+							}
+						}
+						for (int i = 0; i < GameController.getPlayer().getBackUnits().length; i++) {
+							if (allyUnit.equals(GameController.getPlayer().getBackUnits()[i])
+									&& GameController.getPlayer().getBackUnits()[i].getLevel() < 5) {
+								GameController.getPlayer().getBackUnits()[i].levelup();
+								GameController.updateAllyInfo();
 							}
 						}
 					}
@@ -186,5 +196,5 @@ public class ShopPanel extends VBox {
 		shopPane.setContent(root);
 		this.getChildren().add(shopPane);
 	}
-	
+
 }

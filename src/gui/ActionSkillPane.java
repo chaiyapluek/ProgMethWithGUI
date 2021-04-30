@@ -13,6 +13,7 @@ import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import logic.BattleController;
 import logic.GameController;
 
 public class ActionSkillPane extends HBox {
@@ -53,13 +54,20 @@ public class ActionSkillPane extends HBox {
 
 		for (ActionButton button : skillList) {
 			button.setOnAction(new EventHandler<ActionEvent>() {
-
 				@Override
 				public void handle(ActionEvent arg0) {
 					// TODO Auto-generated method stub
-					if (GameController.getSelectAllyUnit().getLevel() < 5) {
-						GameController.getSelectAllyUnit().levelup();
-						GameController.updateAllyInfo();
+					if(GameController.getOnBattle()) {
+						if(button.getSkill() instanceof NormalSkill) {
+							NormalSkill skill = (NormalSkill)button.getSkill();
+							System.out.println("HELLO");
+							System.out.println(skill.getCooldown());
+							if(skill.getCooldown() == 0) {
+								BattleController.takeAction(button);
+							}
+						}else {
+							BattleController.takeAction(button);
+						}
 					}
 				}
 

@@ -99,11 +99,13 @@ public class UnitButton extends VBox {
 				if (unit != null && unit instanceof AllyUnit) {
 					GameController.setSelectAllyUnit((AllyUnit) unit);
 					GameController.updateAllyInfo();
+					/*
 					if (GameController.getOnBattle()) {
 						GameController.updateBattlePanel();
 					} else {
 						GameController.updateAllyView();
 					}
+					*/
 					setChooseIcon();
 				} else if (((unit instanceof BasicUnit) || (unit instanceof AdvanceUnit))
 						&& !((UnitStats) unit).getIsDead()) {
@@ -112,9 +114,7 @@ public class UnitButton extends VBox {
 				}
 			}
 		});
-		if (this.unit != null) {
-			setTooltip();
-		}
+		setTooltip();
 
 		this.getChildren().addAll(chooseIconPane, button);
 	}
@@ -163,12 +163,15 @@ public class UnitButton extends VBox {
 	}
 
 	public void setTooltip() {
+		if(unit == null) {
+			return ;
+		}
 		tooltip = new Tooltip();
 		tooltip.setFont(new Font(12));
 		String txt = "Effect(s) : \n";
 		UnitStats unit = (UnitStats) this.unit;
 		for (Effect e : unit.getEffects()) {
-			txt += e.toString();
+			txt += e.toString() + "\n";
 		}
 		tooltip.setText(txt);
 		if (GameController.getOnBattle()) {

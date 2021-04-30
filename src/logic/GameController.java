@@ -8,6 +8,7 @@ import UnitBase.*;
 import gui.ChooseMerPanel;
 import gui.ControlPanel;
 import gui.MainPanel;
+import gui.SelectTargetSkillPanel;
 
 public class GameController {
 
@@ -22,6 +23,7 @@ public class GameController {
 	private static ChooseMerPanel chooseMerPanel;
 	private static ControlPanel controlPanel;
 	private static MainPanel mainPanel;
+	private static SelectTargetSkillPanel selectTargetPanel;
 	
 	private static boolean moveToggle = false;
 	private static boolean onBattle = false;
@@ -33,8 +35,12 @@ public class GameController {
 	}
 	
 	public static boolean isUnitExist(AllyUnit unit) {
-		for(int i=0;i<6;i++) {
-			if(unit.equals(units[i]))
+		for(int i=0;i<3;i++) {
+			if(unit.equals(player.getUnits()[i]))
+				return true;
+		}
+		for(int i=0;i<3;i++) {
+			if(unit.equals(player.getBackUnits()[i]))
 				return true;
 		}
 		return false;
@@ -46,8 +52,20 @@ public class GameController {
 
 	public static void addUnits(AllyUnit unit) throws Exception {
 		if(unitsNumber<6) {
-			units[unitsNumber]=unit;
-			unitsNumber++;
+			for(int i=0;i<3;i++) {
+				if(player.getUnits()[i] == null) {
+					player.getUnits()[i] = unit;
+					updateAllyView();
+					return;
+				}
+			}
+			for(int i=0;i<3;i++) {
+				if(player.getBackUnits()[i] == null) {
+					player.getBackUnits()[i] = unit;
+					updateAllyView();
+					return;
+				}
+			}
 		}
 		else {
 			throw new Exception();
@@ -103,6 +121,9 @@ public class GameController {
 	
 	public static void setMainPanel(MainPanel panel) {
 		GameController.mainPanel = panel;
+		selectTargetPanel = new SelectTargetSkillPanel();
+		selectTargetPanel.setVisible(false);
+		mainPanel.getChildren().add(selectTargetPanel);
 	}
 	
 	public static void updateAllyInfo() {
@@ -194,4 +215,12 @@ public class GameController {
 	public static void updateInventory() {
 		controlPanel.updateInventoryPanel();
 	}
+	
+	public static void setSelectTarget(boolean bool) {
+		if(bool) {
+			selectTargetPanel.update();
+		}
+		selectTargetPanel.setVisible(bool);
+	}
+
 }

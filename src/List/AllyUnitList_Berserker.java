@@ -47,8 +47,8 @@ public class AllyUnitList_Berserker {
 		s3 = new RemoveDebuff();
 		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1, s2, s3));
 		description = "Increase gauge, attack and remove debuff to one ally";
-		Skill Kiyohime_ThirdSkill = new NormalSkill("Flame-Coloured Kiss", description, SubSkills, 6, true, false,
-				false);
+		Skill Kiyohime_ThirdSkill = new NormalSkill("Flame-Coloured Kiss", description, SubSkills, 6, false, true,
+				true);
 		Kiyohime_ThirdSkill.setUrl("Skill/Attack.png");
 		
 		s1 = new Damage(160, 3);

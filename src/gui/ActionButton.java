@@ -51,7 +51,7 @@ public class ActionButton extends Button {
 			@Override
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				mouseEnter(isLock);
+				mouseEnter(isLock,skill);
 			}
 			
 		});
@@ -66,10 +66,16 @@ public class ActionButton extends Button {
 		});
 	}
 	
-	private void mouseEnter(boolean isLock) {
+	private void mouseEnter(boolean isLock,Skill s) {
 		boolean check = true;
 		if(type.equals("skill") && isLock)
 			check = false;
+		if(type.equals("skill") && (s instanceof NormalSkill)) {
+			NormalSkill skill = (NormalSkill)s;
+			if(skill.getCooldown() != 0) {
+				check = false;
+			}
+		}
 		if(GameController.getOnBattle() && GameController.getSelectAllyUnit().canTakeAction() && check) {
 			this.setCursor(Cursor.HAND);
 			this.setBorder(new Border(
@@ -140,7 +146,11 @@ public class ActionButton extends Button {
 			tooltip.hide();
 		});
 	}
-
+	
+	public Skill getSkill() {
+		return skill;
+	}
+	
 	public String getType() {
 		return type;
 	}

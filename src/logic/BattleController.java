@@ -15,6 +15,8 @@ public class BattleController {
 	private static int numberOfTakenAction;
 	private static Skill skill;
 
+	private static boolean enemyTurn = false;
+
 	public static void initializeBattle() {
 
 		bot = new Bot(GameController.getNowStage().getUnitAtWave(0));
@@ -32,9 +34,9 @@ public class BattleController {
 		if (type.equals("attack")) {
 			attack(GameController.getSelectAllyUnit(), GameController.getSelectEnemyUnit());
 		} else if (type.equals("defense")) {
-			GameController.getSelectAllyUnit().defense();
+			defense();
 		} else if (type.equals("swap")) {
-
+			swap();
 		} else if (type.equals("skill")) {
 			skill = action.getSkill();
 			if (skill.getToYourSelf()) {
@@ -43,7 +45,7 @@ public class BattleController {
 				if (skill.getIsSingle()) {
 					GameController.setSelectTarget(true);
 				} else {
-					for (AllyUnit unit : GameController.getUnits()) {
+					for (AllyUnit unit : GameController.getPlayer().getUnits()) {
 						if (unit == null)
 							continue;
 						if (unit.getIsDead())
@@ -63,6 +65,9 @@ public class BattleController {
 				}
 			}
 		}
+	}
+
+	private static void afterTakeAction() {
 
 		UnitStats unit = (UnitStats) GameController.getSelectEnemyUnit();
 		if (unit.getCurrentHP() <= 0) {
@@ -82,13 +87,16 @@ public class BattleController {
 			GameController.updateAllyInfo();
 			GameController.updateEnemyInfoPanel();
 		}
+
 	}
 
 	public static void checkPlayerTurnEnd() {
 		if (numberOfTakenAction == 3) {
 			// pass turn
-			System.out.println("TEST!!");
+			System.out.println("ENEMYTURN");
+			enemyTurn = true;
 			bot.play(GameController.getPlayer().getUnits());
+			enemyTurn = false;
 			nextTurn();
 		}
 	}
@@ -166,18 +174,36 @@ public class BattleController {
 		} catch (Exception e) {
 			System.out.println(e.getMessage() + " can Dodged!!");
 		}
+		if (!enemyTurn) {
+			afterTakeAction();
+		}
+	}
+
+	public static void defense() {
+		GameController.getSelectAllyUnit().defense();
+		if (!enemyTurn) {
+			afterTakeAction();
+		}
+	}
+
+	public static void swap() {
+		GameController.updateBattlePanelView();
+		afterTakeAction();
 	}
 
 	public static void useSkillTo(Unit target) {
 		skill.use(GameController.getSelectAllyUnit(), target);
-		if(skill instanceof NormalSkill) {
-			NormalSkill s = (NormalSkill)skill;
+		if (skill instanceof NormalSkill) {
+			NormalSkill s = (NormalSkill) skill;
 			s.setCooldown(s.getCooldownTime());
+		}
+		if (!enemyTurn) {
+			afterTakeAction();
 		}
 		GameController.updateBattlePanel();
 		GameController.updateAllyInfo();
 	}
-	
+
 	public static int getWave() {
 		return wave;
 	}

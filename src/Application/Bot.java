@@ -39,6 +39,7 @@ public class Bot {
 		// Random ran = new Random();
 		System.out.println("------Enemy turn------");
 		for (int i = 0; i < 3; i++) {
+			System.out.println(i);
 			if (nullOrDead(i))
 				continue;
 			if (((UnitStats) units[i]).getIsStun())

@@ -31,7 +31,7 @@ public class ActionPane extends HBox {
 			@Override
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
-				if(GameController.getOnBattle() && GameController.getSelectAllyUnit().canTakeAction()) {
+				if (GameController.getOnBattle() && GameController.getSelectAllyUnit().canTakeAction()) {
 					GameController.getSelectAllyUnit().setCanTakeAction(false);
 					BattleController.increaseNumberOfTakenAction();
 					BattleController.takeAction(attack);
@@ -42,14 +42,27 @@ public class ActionPane extends HBox {
 			@Override
 			public void handle(ActionEvent event) {
 				// TODO Auto-generated method stub
-				if(GameController.getOnBattle() && GameController.getSelectAllyUnit().canTakeAction()) {
+				if (GameController.getOnBattle() && GameController.getSelectAllyUnit().canTakeAction()) {
 					GameController.getSelectAllyUnit().setCanTakeAction(false);
 					BattleController.increaseNumberOfTakenAction();
 					BattleController.takeAction(defense);
 				}
 			}
 		});
+		swap.setOnAction(new EventHandler<ActionEvent>() {
 
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				if (GameController.getOnBattle()) {
+					if (GameController.getSelectAllyUnit().canTakeAction()) {
+						GameController.setSwapPanel(true);
+					}
+				} else {
+					GameController.setSwapPanel(true);
+				}
+			}
+		});
 		this.getChildren().addAll(attack, defense, swap);
 	}
 

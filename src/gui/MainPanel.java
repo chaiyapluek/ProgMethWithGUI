@@ -54,6 +54,10 @@ public class MainPanel extends StackPane {
 		battlePanel.update();
 	}
 	
+	public void updateBattlePanelView() {
+		battlePanel.updateView();
+	}
+	
 	public void setNewWave() {
 		battlePanel.setNewWave();
 	}

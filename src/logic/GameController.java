@@ -9,6 +9,7 @@ import gui.ChooseMerPanel;
 import gui.ControlPanel;
 import gui.MainPanel;
 import gui.SelectTargetSkillPanel;
+import gui.SwapPanel;
 
 public class GameController {
 
@@ -24,6 +25,7 @@ public class GameController {
 	private static ControlPanel controlPanel;
 	private static MainPanel mainPanel;
 	private static SelectTargetSkillPanel selectTargetPanel;
+	private static SwapPanel swapPanel;
 	
 	private static boolean moveToggle = false;
 	private static boolean onBattle = false;
@@ -122,8 +124,11 @@ public class GameController {
 	public static void setMainPanel(MainPanel panel) {
 		GameController.mainPanel = panel;
 		selectTargetPanel = new SelectTargetSkillPanel();
+		swapPanel = new SwapPanel();
 		selectTargetPanel.setVisible(false);
+		swapPanel.setVisible(false);
 		mainPanel.getChildren().add(selectTargetPanel);
+		mainPanel.getChildren().add(swapPanel);
 	}
 	
 	public static void updateAllyInfo() {
@@ -137,6 +142,10 @@ public class GameController {
 	
 	public static void updateBattlePanel() {
 		GameController.mainPanel.updateBattlePanel();
+	}
+	
+	public static void updateBattlePanelView() {
+		GameController.mainPanel.updateBattlePanelView();
 	}
 	
 	public static void updateAllyView() {
@@ -221,6 +230,13 @@ public class GameController {
 			selectTargetPanel.update();
 		}
 		selectTargetPanel.setVisible(bool);
+	}
+	
+	public static void setSwapPanel(boolean bool) {
+		if(bool) {
+			swapPanel.update();
+		}
+		swapPanel.setVisible(bool);
 	}
 
 }

@@ -37,25 +37,25 @@ public class ActionButton extends Button {
 		} else {
 			this.skill = null;
 		}
-		
+
 		this.setMinSize(50, 50);
 		this.setMaxSize(50, 50);
 		this.setAlignment(Pos.CENTER);
-		
+
 		setBackground(isLock);
-		
+
 		this.setTooltip(isLock, level);
-		
+
 		this.setOnMouseEntered(new EventHandler<MouseEvent>() {
 
 			@Override
 			public void handle(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				mouseEnter(isLock,skill);
+				mouseEnter(isLock, skill);
 			}
-			
+
 		});
-		
+
 		this.setOnMouseExited(new EventHandler<MouseEvent>() {
 
 			@Override
@@ -65,24 +65,37 @@ public class ActionButton extends Button {
 			}
 		});
 	}
-	
-	private void mouseEnter(boolean isLock,Skill s) {
-		boolean check = true;
-		if(type.equals("skill") && isLock)
-			check = false;
-		if(type.equals("skill") && (s instanceof NormalSkill)) {
-			NormalSkill skill = (NormalSkill)s;
-			if(skill.getCooldown() != 0) {
+
+	private void mouseEnter(boolean isLock, Skill s) {
+		if (type.equals("swap")) {
+			boolean check = true;
+			if (GameController.getOnBattle() && !GameController.getSelectAllyUnit().canTakeAction()) {
 				check = false;
 			}
+			if (check) {
+				this.setCursor(Cursor.HAND);
+				this.setBorder(new Border(new BorderStroke(Color.AQUA, BorderStrokeStyle.SOLID, CornerRadii.EMPTY,
+						BorderWidths.DEFAULT)));
+			}
+		} else {
+			boolean check = true;
+			if (type.equals("skill") && isLock)
+				check = false;
+			if (type.equals("skill") && (s instanceof NormalSkill)) {
+				NormalSkill skill = (NormalSkill) s;
+				if (skill.getCooldown() != 0) {
+					check = false;
+				}
+			}
+			if (GameController.getOnBattle() && GameController.getSelectAllyUnit().canTakeAction() && check) {
+				this.setCursor(Cursor.HAND);
+				this.setBorder(new Border(new BorderStroke(Color.AQUA, BorderStrokeStyle.SOLID, CornerRadii.EMPTY,
+						BorderWidths.DEFAULT)));
+			}
 		}
-		if(GameController.getOnBattle() && GameController.getSelectAllyUnit().canTakeAction() && check) {
-			this.setCursor(Cursor.HAND);
-			this.setBorder(new Border(
-					new BorderStroke(Color.AQUA, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-		}
+
 	}
-	
+
 	private void mouseExit(boolean isLock) {
 		tooltip.hide();
 		this.setCursor(Cursor.DEFAULT);
@@ -118,7 +131,7 @@ public class ActionButton extends Button {
 			}
 		}
 	}
-	
+
 	private void setTooltip(boolean isLock, int level) {
 		tooltip = new Tooltip();
 		tooltip.setFont(new Font(12));
@@ -146,11 +159,11 @@ public class ActionButton extends Button {
 			tooltip.hide();
 		});
 	}
-	
+
 	public Skill getSkill() {
 		return skill;
 	}
-	
+
 	public String getType() {
 		return type;
 	}

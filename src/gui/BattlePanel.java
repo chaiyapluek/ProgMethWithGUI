@@ -25,6 +25,7 @@ public class BattlePanel extends VBox {
 	private Label wave;
 	private Label turn;
 
+	private HBox allyPane;
 	private HBox enemyPane;
 
 	private ObservableList<UnitButton> allyUnits = FXCollections.observableArrayList();
@@ -48,7 +49,7 @@ public class BattlePanel extends VBox {
 		unitPane.setAlignment(Pos.BOTTOM_CENTER);
 		unitPane.setSpacing(100);
 
-		HBox allyPane = new HBox();
+		allyPane = new HBox();
 		allyPane.setSpacing(35);
 		allyPane.setAlignment(Pos.BOTTOM_CENTER);
 		for (int i = 2; i >= 0; i--) {
@@ -73,18 +74,31 @@ public class BattlePanel extends VBox {
 	public void update() {
 		setLabel();
 		setDeadImg();
+		updateEffect();
+	}
+
+	public void updateView() {
+		allyPane.getChildren().clear();
+		for (int i = 2; i >= 0; i--) {
+			AllyUnit unit = GameController.getPlayer().getUnits()[i];
+			UnitButton button = new UnitButton(unit);
+			allyPane.getChildren().add(button);
+			allyUnits.add(button);
+		}
+		enemyPane.getChildren().clear();
+		for (Unit unit : GameController.getNowStage().getUnitAtWave(0)) {
+			UnitButton button = new UnitButton(unit);
+			enemyPane.getChildren().add(button);
+			enemyUnits.add(button);
+		}
+	}
+	
+	private void updateEffect() {
 		for (UnitButton button : allyUnits) {
 			button.setTooltip();
 			button.setBackground();
 		}
 		for (UnitButton button : enemyUnits) {
-			button.setTooltip();
-			button.setBackground();
-		}
-	}
-
-	public void updateEffect() {
-		for (UnitButton button : allyUnits) {
 			button.setTooltip();
 			button.setBackground();
 		}

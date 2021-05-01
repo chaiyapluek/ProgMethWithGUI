@@ -138,9 +138,9 @@ public class SwapPanel extends StackPane {
 						GameController.setSelectAllyUnit(GameController.getPlayer().getBackUnits()[sourceIdx]);
 					}
 					if (GameController.getOnBattle()) {
-						BattleController.swap();
 						BattleController.increaseNumberOfTakenAction();
 						GameController.getSelectAllyUnit().setCanTakeAction(false);
+						BattleController.swap();
 					} else {
 						GameController.updateAllyView();
 					}

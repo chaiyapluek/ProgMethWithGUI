@@ -24,7 +24,7 @@ public class MainPanel extends StackPane {
 	private AllyUnitsPanel allyUnitsPanel;
 	private BattlePanel battlePanel;
 	private ViewStagePane stagePane;
-	
+
 	public MainPanel(Player player) {
 		this.setPadding(new Insets(10));
 		this.setAlignment(Pos.CENTER);
@@ -34,11 +34,11 @@ public class MainPanel extends StackPane {
 		panel.setPadding(new Insets(10));
 		panel.setSpacing(10);
 		panel.setAlignment(Pos.BOTTOM_CENTER);
-		
+
 		viewPanel = new StackPane();
 		allyUnitsPanel = new AllyUnitsPanel(player);
 		viewPanel.getChildren().add(allyUnitsPanel);
-		
+
 		ControlPanel controlPane = new ControlPanel(GameController.getSelectAllyUnit());
 		GameController.setControlPanel(controlPane);
 
@@ -49,30 +49,38 @@ public class MainPanel extends StackPane {
 	public void updateAllyPanel() {
 		allyUnitsPanel.update();
 	}
-	
+
 	public void updateBattlePanel() {
 		battlePanel.update();
 	}
-	
+
 	public void updateBattlePanelView() {
 		battlePanel.updateView();
 	}
 	
+	public void setChooseIcon() {
+		if (GameController.getOnBattle()) {
+			battlePanel.setChooseIcon();
+		} else {
+			allyUnitsPanel.setChooseIcon();
+		}
+	}
+
 	public void setNewWave() {
 		battlePanel.setNewWave();
 	}
-	
+
 	public void viewStage() {
 		stagePane = new ViewStagePane(GameController.getNowStage());
 		viewPanel.getChildren().clear();
 		viewPanel.getChildren().add(stagePane);
 	}
-	
+
 	public void viewAllyPane() {
 		viewPanel.getChildren().clear();
 		viewPanel.getChildren().add(allyUnitsPanel);
 	}
-	
+
 	public void viewBattlePanel() {
 		viewPanel.getChildren().clear();
 		battlePanel = new BattlePanel();

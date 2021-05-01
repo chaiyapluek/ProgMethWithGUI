@@ -1,9 +1,15 @@
 package logic;
 
+import java.util.ArrayList;
+
 import Application.Bot;
 import Map.Stage;
+import Skill.Effect;
 import Skill.NormalSkill;
 import Skill.Skill;
+import SubSkill.DOTDamage;
+import SubSkill.Heal;
+import SubSkill.IncreaseUltiGauge;
 import UnitBase.*;
 import gui.ActionButton;
 
@@ -24,7 +30,16 @@ public class BattleController {
 		turn = 1;
 		numberOfTakenAction = 0;
 		GameController.updateEnemyInfoPanel();
-
+		for (int i = 0; i < 3; i++) {
+			AllyUnit u = GameController.getPlayer().getUnits()[i];
+			if (u == null || u.getIsDead()) {
+				continue;
+			}
+			GameController.setSelectAllyUnit(u);
+			GameController.updateAllyInfo();
+			GameController.setChooseIcon();
+			break;
+		}
 	}
 
 	public static void takeAction(ActionButton action) {
@@ -39,8 +54,14 @@ public class BattleController {
 			swap();
 		} else if (type.equals("skill")) {
 			skill = action.getSkill();
+			System.out.println(skill.getName());
 			if (skill.getToYourSelf()) {
 				useSkillTo(GameController.getSelectAllyUnit());
+				if (!enemyTurn) {
+					afterTakeAction();
+				}
+				GameController.updateBattlePanel();
+				GameController.updateAllyInfo();
 			} else if (skill.getToAlly()) {
 				if (skill.getIsSingle()) {
 					GameController.setSelectTarget(true);
@@ -52,6 +73,11 @@ public class BattleController {
 							continue;
 						useSkillTo(unit);
 					}
+					if (!enemyTurn) {
+						afterTakeAction();
+					}
+					GameController.updateBattlePanel();
+					GameController.updateAllyInfo();
 				}
 			} else if (!skill.getToAlly()) {
 				if (skill.getIsSingle()) {
@@ -63,11 +89,16 @@ public class BattleController {
 						useSkillTo(unit);
 					}
 				}
+				if (!enemyTurn) {
+					afterTakeAction();
+				}
+				GameController.updateBattlePanel();
+				GameController.updateAllyInfo();
 			}
 		}
 	}
 
-	private static void afterTakeAction() {
+	public static void afterTakeAction() {
 
 		UnitStats unit = (UnitStats) GameController.getSelectEnemyUnit();
 		if (unit.getCurrentHP() <= 0) {
@@ -93,10 +124,15 @@ public class BattleController {
 	public static void checkPlayerTurnEnd() {
 		if (numberOfTakenAction == 3) {
 			// pass turn
+			
 			System.out.println("ENEMYTURN");
 			enemyTurn = true;
+			decreaseSkillCooldown(bot.getUnits());
+			decreaseEffectDuration(bot.getUnits());
+			checkEffect(bot.getUnits());
 			bot.play(GameController.getPlayer().getUnits());
 			enemyTurn = false;
+			increseUltiGauge(bot.getUnits());
 			nextTurn();
 		}
 	}
@@ -112,6 +148,7 @@ public class BattleController {
 				break;
 			}
 		}
+		GameController.setChooseIcon();
 	}
 
 	private static boolean isWaveEnd() {
@@ -129,6 +166,12 @@ public class BattleController {
 				unit.setCanTakeAction(true);
 			}
 		}
+		decreaseSkillCooldown(GameController.getPlayer().getUnits());
+		decreaseEffectDuration(GameController.getPlayer().getUnits());
+		checkEffect(GameController.getPlayer().getUnits());
+		increseUltiGauge(GameController.getPlayer().getUnits());
+		GameController.updateAllyInfo();
+		GameController.updateEnemyInfoPanel();
 		GameController.updateBattlePanel();
 	}
 
@@ -142,6 +185,7 @@ public class BattleController {
 					unit.setCanTakeAction(true);
 				}
 			}
+			reset();
 			GameController.updateAllyInfo();
 			GameController.updateAllyView();
 			GameController.updateMapPanel();
@@ -153,6 +197,7 @@ public class BattleController {
 			bot = new Bot(GameController.getNowStage().getUnitAtWave(wave - 1));
 			setSelectEnemyUnit();
 			GameController.setNewWave();
+			GameController.setChooseIcon();
 			GameController.updateAllyInfo();
 			GameController.updateEnemyInfoPanel();
 		}
@@ -197,13 +242,107 @@ public class BattleController {
 			NormalSkill s = (NormalSkill) skill;
 			s.setCooldown(s.getCooldownTime());
 		}
-		if (!enemyTurn) {
-			afterTakeAction();
-		}
-		GameController.updateBattlePanel();
-		GameController.updateAllyInfo();
 	}
 
+	public static void checkEffect(Unit[] units) {
+		for (Unit u : units) {
+			if (u == null)
+				continue;
+			for (Effect e : ((UnitStats) u).getEffects()) {
+				if (e.getSubSkill() instanceof Heal && e.getDuration() != (e.getSubSkill()).getDuration()) {
+					Heal skill = (Heal) e.getSubSkill();
+					skill.heal(u);
+					System.out.println(u.getName() + " " + (int) (1.0 * ((UnitStats)u).getMaxHP() * skill.getHealAmount() / 100) + " HP up");
+				} else if (e.getSubSkill() instanceof DOTDamage && e.getDuration() != (e.getSubSkill()).getDuration()) {
+					DOTDamage dot = (DOTDamage) e.getSubSkill();
+					dot.damaged(u);
+				} else if (e.getSubSkill() instanceof IncreaseUltiGauge && e.getDuration() != (e.getSubSkill()).getDuration()) {
+					IncreaseUltiGauge skill = (IncreaseUltiGauge) e.getSubSkill();
+					skill.increaseGauge(u);
+					System.out.println(u.getName() + " gauge up by " + skill.getIncreaseAmount() );
+				}
+			}
+		}
+	}
+	
+	public static void decreaseEffectDuration(Unit[] units) {
+		for (Unit u : units) {
+			if (u == null)
+				continue;
+			ArrayList<Effect> removed = new ArrayList<Effect>();
+			for (Effect e : ((UnitStats) u).getEffects()) {
+				e.setDuration(e.getDuration() - 1);
+				if (e.getDuration() == 0) {
+					removed.add(e);
+				}
+			}
+			for (Effect e : removed) {
+				((UnitStats) u).removeEffect(e);
+			}
+		}
+	}
+	
+	public static void decreaseSkillCooldown(Unit[] units) {
+		for (Unit u : units) {
+			if (u == null)
+				continue;
+			if (u instanceof AdvanceUnit) {
+				for (Skill s : ((AdvanceUnit) u).getSkills()) {
+					if(s instanceof NormalSkill)
+						((NormalSkill) s).setCooldown(((NormalSkill) s).getCooldown() - 1);
+				}
+			}
+		}
+	}
+	
+	public static void reset() {
+		for(AllyUnit u : GameController.getPlayer().getUnits()) {
+			if(u == null) {
+				continue;
+			}
+			for (Skill s : ((AdvanceUnit) u).getSkills()) {
+				if(s instanceof NormalSkill)
+					((NormalSkill) s).setCooldown(0);
+			}
+			ArrayList<Effect> removed = new ArrayList<Effect>();
+			for (Effect e : ((UnitStats) u).getEffects()) {
+				removed.add(e);
+			}
+			for (Effect e : removed) {
+				((UnitStats) u).removeEffect(e);
+			}
+		}
+		for(AllyUnit u : GameController.getPlayer().getBackUnits()) {
+			if(u == null) {
+				continue;
+			}
+			for (Skill s : ((AdvanceUnit) u).getSkills()) {
+				if(s instanceof NormalSkill)
+					((NormalSkill) s).setCooldown(0);
+			}
+			ArrayList<Effect> removed = new ArrayList<Effect>();
+			for (Effect e : ((UnitStats) u).getEffects()) {
+				removed.add(e);
+			}
+			for (Effect e : removed) {
+				((UnitStats) u).removeEffect(e);
+			}
+		}
+	}
+	
+	public static void increseUltiGauge(Unit[] units) {
+		for (int i = 0; i < units.length; i++) {
+			if (units[i] == null)
+				continue;
+			if (units[i] instanceof AdvanceUnit) {
+				AdvanceUnit unit = (AdvanceUnit) units[i];
+				if (unit.getIsDead())
+					continue;
+				unit.setUltiGauge(unit.getUltiGauge() + 1);
+			}
+		}
+	}
+	
 	public static int getWave() {
 		return wave;
 	}

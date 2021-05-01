@@ -57,6 +57,14 @@ public class StageList_Difficulty3 {
 		Unit[][] units = new Unit[][] { { enemyUnit1, enemyUnit2, enemyUnit3 }, { enemyUnit4, enemyUnit5, enemyUnit6 },
 				{ null, enemyUnit7, null } };
 
+		enemyUnit1.setID(1);
+		enemyUnit2.setID(2);
+		enemyUnit3.setID(3);
+		enemyUnit4.setID(4);
+		enemyUnit5.setID(5);
+		enemyUnit6.setID(6);
+		enemyUnit7.setID(7);
+
 		Stage stage1 = new Stage(3, false, units);
 		return stage1;
 

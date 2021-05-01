@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -20,6 +21,7 @@ import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import logic.GameController;
@@ -66,7 +68,7 @@ public class ActionButton extends Button {
 		});
 	}
 
-	private void mouseEnter(boolean isLock, Skill s) {
+	public void mouseEnter(boolean isLock, Skill s) {
 		if (type.equals("swap")) {
 			boolean check = true;
 			if (GameController.getOnBattle() && !GameController.getSelectAllyUnit().canTakeAction()) {
@@ -96,7 +98,7 @@ public class ActionButton extends Button {
 
 	}
 
-	private void mouseExit(boolean isLock) {
+	public void mouseExit(boolean isLock) {
 		tooltip.hide();
 		this.setCursor(Cursor.DEFAULT);
 		this.setBorder(new Border(
@@ -128,6 +130,23 @@ public class ActionButton extends Button {
 				imgView.setFitHeight(35);
 				imgView.setPreserveRatio(true);
 				this.setGraphic(imgView);
+			} else {
+				if (skill instanceof NormalSkill) {
+					NormalSkill s = (NormalSkill) skill;
+					if (s.getCooldown() != 0) {
+						StackPane p = new StackPane();
+						Label label = new Label("" + s.getCooldown());
+						label.setFont(Font.font("Berlin Sans FB", 48));
+						label.setTextFill(Color.WHITE);
+						Image img = new Image("black.jpg");
+						ImageView imgView = new ImageView(img);
+						imgView.setFitHeight(50);
+						imgView.setFitWidth(50);
+						imgView.setOpacity(0.8);
+						p.getChildren().addAll(imgView, label);
+						this.setGraphic(p);
+					}
+				}
 			}
 		}
 	}

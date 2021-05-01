@@ -35,7 +35,7 @@ public class BattlePanel extends VBox {
 
 		this.setAlignment(Pos.CENTER);
 		this.setPadding(new Insets(10));
-		this.setSpacing(25);
+		this.setSpacing(15);
 		this.setBorder(new Border(
 				new BorderStroke(Color.GOLD, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
@@ -78,6 +78,8 @@ public class BattlePanel extends VBox {
 	}
 
 	public void updateView() {
+		allyUnits.clear();
+		enemyUnits.clear();
 		allyPane.getChildren().clear();
 		for (int i = 2; i >= 0; i--) {
 			AllyUnit unit = GameController.getPlayer().getUnits()[i];
@@ -92,7 +94,7 @@ public class BattlePanel extends VBox {
 			enemyUnits.add(button);
 		}
 	}
-	
+
 	private void updateEffect() {
 		for (UnitButton button : allyUnits) {
 			button.setTooltip();
@@ -136,6 +138,27 @@ public class BattlePanel extends VBox {
 	private void setLabel() {
 		wave.setText("WAVE : " + BattleController.getWave());
 		turn.setText("TURN : " + BattleController.getTurn());
+	}
+
+	public void setChooseIcon() {
+		for (UnitButton button : allyUnits) {
+			button.removeChooseIcon();
+		}
+		for (UnitButton button : enemyUnits) {
+			button.removeChooseIcon();
+		}
+		for (UnitButton button : allyUnits) {
+			if(GameController.getSelectAllyUnit().equals(button.getUnit())) {
+				button.setChooseIcon();
+				break;
+			}
+		}
+		for (UnitButton button : enemyUnits) {
+			if(GameController.getSelectEnemyUnit().equals(button.getUnit())) {
+				button.setChooseIcon();
+				break;
+			}
+		}
 	}
 
 }

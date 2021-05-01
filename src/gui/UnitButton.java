@@ -99,18 +99,13 @@ public class UnitButton extends VBox {
 				if (unit != null && unit instanceof AllyUnit) {
 					GameController.setSelectAllyUnit((AllyUnit) unit);
 					GameController.updateAllyInfo();
-					/*
-					if (GameController.getOnBattle()) {
-						GameController.updateBattlePanel();
-					} else {
-						GameController.updateAllyView();
-					}
-					*/
-					setChooseIcon();
+					GameController.setChooseIcon();
+
 				} else if (((unit instanceof BasicUnit) || (unit instanceof AdvanceUnit))
 						&& !((UnitStats) unit).getIsDead()) {
 					GameController.setSelectEnemyUnit(unit);
 					GameController.updateEnemyInfoPanel();
+					GameController.setChooseIcon();
 				}
 			}
 		});
@@ -140,7 +135,7 @@ public class UnitButton extends VBox {
 			}
 		}
 	}
-
+	
 	public void setChooseIcon() {
 		Image imgIcon = new Image("choose.png");
 		ImageView Icon = new ImageView(imgIcon);

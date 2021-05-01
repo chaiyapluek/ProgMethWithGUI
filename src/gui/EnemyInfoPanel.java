@@ -30,6 +30,8 @@ public class EnemyInfoPanel extends VBox {
 	private Label critdmg;
 	private Label dodge;
 	private Label gauge;
+	
+	private Button back;
 
 	public EnemyInfoPanel() {
 
@@ -71,7 +73,7 @@ public class EnemyInfoPanel extends VBox {
 		
 		HBox backPanel = new HBox();
 		backPanel.setAlignment(Pos.CENTER_RIGHT);
-		Button back = new Button("X");
+		back = new Button("X");
 		backPanel.getChildren().add(back);
 		back.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -87,6 +89,12 @@ public class EnemyInfoPanel extends VBox {
 
 	public void update() {
 
+		if(GameController.getOnBattle()) {
+			back.setVisible(false);
+		}else {
+			back.setVisible(true);
+		}
+		
 		if (GameController.getSelectEnemyUnit() != null) {
 
 			UnitStats unit = (UnitStats) GameController.getSelectEnemyUnit();
@@ -101,6 +109,7 @@ public class EnemyInfoPanel extends VBox {
 			crit.setText("CritChance : " + Math.max(0, unit.getCritChance()));
 			critdmg.setText("CritDamage : " + Math.max(0, unit.getCritDamage()));
 			dodge.setText("Dodge : " + Math.max(0, unit.getDodgeChance()));
+			gauge.setText("");
 
 			if (unit instanceof AdvanceUnit) {
 				AdvanceUnit u = (AdvanceUnit) unit;

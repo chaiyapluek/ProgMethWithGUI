@@ -7,12 +7,12 @@ import UnitBase.BasicUnit;
 import UnitBase.Unit;
 
 public class StageList_Difficulty2 {
-	
+
 	public static Stage[] getStage_Difficulty2() {
-		Stage[] stages = new Stage[] {Stage1(),Stage2(),Stage3(),Stage4(),Stage5()};
+		Stage[] stages = new Stage[] { Stage1(), Stage2(), Stage3(), Stage4(), Stage5() };
 		return stages;
 	}
-	
+
 	public static int getHP(int HP) {
 		Random r = new Random();
 		int num = r.nextInt(16) + 95;
@@ -48,9 +48,16 @@ public class StageList_Difficulty2 {
 		Unit[][] units = new Unit[][] { { enemyUnit1, enemyUnit2, enemyUnit3 },
 				{ enemyUnit4, enemyUnit5, enemyUnit6 } };
 
-		Stage stage1 = new Stage(2,false,units);	
+		enemyUnit1.setID(1);
+		enemyUnit2.setID(2);
+		enemyUnit3.setID(3);
+		enemyUnit4.setID(4);
+		enemyUnit5.setID(5);
+		enemyUnit6.setID(6);
+
+		Stage stage1 = new Stage(2, false, units);
 		return stage1;
-		
+
 	}
 
 	public static Stage Stage2() {
@@ -76,11 +83,18 @@ public class StageList_Difficulty2 {
 		Unit[][] units = new Unit[][] { { enemyUnit1, enemyUnit2, enemyUnit3 },
 				{ enemyUnit4, enemyUnit5, enemyUnit6 } };
 
-		Stage stage2 = new Stage(2,false,units);	
+		enemyUnit1.setID(1);
+		enemyUnit2.setID(2);
+		enemyUnit3.setID(3);
+		enemyUnit4.setID(4);
+		enemyUnit5.setID(5);
+		enemyUnit6.setID(6);
+
+		Stage stage2 = new Stage(2, false, units);
 		return stage2;
-		
+
 	}
-	
+
 	public static Stage Stage3() {
 
 		int[] stats = new int[] { getHP(2000), 10, getAttack(300), 5, 100, 5, 0 };
@@ -104,11 +118,18 @@ public class StageList_Difficulty2 {
 		Unit[][] units = new Unit[][] { { enemyUnit1, enemyUnit2, enemyUnit3 },
 				{ enemyUnit4, enemyUnit5, enemyUnit6 } };
 
-		Stage stage3 = new Stage(2,false,units);	
+		enemyUnit1.setID(1);
+		enemyUnit2.setID(2);
+		enemyUnit3.setID(3);
+		enemyUnit4.setID(4);
+		enemyUnit5.setID(5);
+		enemyUnit6.setID(6);
+
+		Stage stage3 = new Stage(2, false, units);
 		return stage3;
-		
+
 	}
-	
+
 	public static Stage Stage4() {
 
 		int[] stats = new int[] { getHP(2500), 12, getAttack(300), 5, 100, 5, 0 };
@@ -132,11 +153,18 @@ public class StageList_Difficulty2 {
 		Unit[][] units = new Unit[][] { { enemyUnit1, enemyUnit2, enemyUnit3 },
 				{ enemyUnit4, enemyUnit5, enemyUnit6 } };
 
-		Stage stage4 = new Stage(2,false,units);	
+		enemyUnit1.setID(1);
+		enemyUnit2.setID(2);
+		enemyUnit3.setID(3);
+		enemyUnit4.setID(4);
+		enemyUnit5.setID(5);
+		enemyUnit6.setID(6);
+
+		Stage stage4 = new Stage(2, false, units);
 		return stage4;
-		
+
 	}
-	
+
 	public static Stage Stage5() {
 
 		int[] stats = new int[] { getHP(6500), 10, getAttack(450), 5, 100, 5, 0 };
@@ -148,11 +176,15 @@ public class StageList_Difficulty2 {
 		stats = new int[] { getHP(9000), 15, getAttack(750), 5, 100, 5, 0 };
 		BasicUnit enemyUnit3 = BasicUnitList.Wyvern(stats);
 
-		Unit[][] units = new Unit[][] { { null, enemyUnit1, null },
-			{ null, enemyUnit2, null } , { null, enemyUnit3, null } };
+		Unit[][] units = new Unit[][] { { null, enemyUnit1, null }, { null, enemyUnit2, null },
+				{ null, enemyUnit3, null } };
 
-		Stage stage5 = new Stage(3,false,units);	
+		enemyUnit1.setID(1);
+		enemyUnit2.setID(2);
+		enemyUnit3.setID(3);
+
+		Stage stage5 = new Stage(3, false, units);
 		return stage5;
-		
+
 	}
 }

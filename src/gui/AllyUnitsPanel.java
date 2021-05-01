@@ -1,6 +1,7 @@
 package gui;
 
 import Application.Player;
+import UnitBase.AllyUnit;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -54,10 +55,11 @@ public class AllyUnitsPanel extends HBox{
 		viewStagePane.setBorder(new Border(
 				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		this.getChildren().addAll(backUnit,frontUnit,viewStagePane);
-		
+		setChooseIcon();
 	}
 	
 	public void update() {
+		allyUnits.clear();
 		frontUnit.getChildren().clear();
 		for (int i = 2; i >= 0; i--) {
 			UnitButton button = new UnitButton(GameController.getPlayer().getUnits()[i]);
@@ -84,9 +86,24 @@ public class AllyUnitsPanel extends HBox{
 		}else {
 			viewStagePane.getChildren().clear();
 		}
-		
+		setChooseIcon();
+	}
+	
+	public void resetChoose() {
 		for(UnitButton button : allyUnits) {
 			button.removeChooseIcon();
+		}
+	}
+	
+	public void setChooseIcon() {
+		for(UnitButton button : allyUnits) {
+			button.removeChooseIcon();
+		}
+		for(UnitButton button : allyUnits) {
+			if(GameController.getSelectAllyUnit().equals(button.getUnit())) {
+				button.setChooseIcon();
+				break;
+			}
 		}
 	}
 }

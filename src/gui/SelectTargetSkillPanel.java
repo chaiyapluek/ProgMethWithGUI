@@ -90,6 +90,9 @@ public class SelectTargetSkillPanel extends StackPane {
 				public void handle(ActionEvent arg0) {
 					// TODO Auto-generated method stub
 					BattleController.useSkillTo(u);
+					BattleController.afterTakeAction();
+					GameController.updateBattlePanel();
+					GameController.updateAllyInfo();
 					GameController.setSelectTarget(false);
 				}
 			});

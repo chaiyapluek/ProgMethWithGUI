@@ -129,6 +129,7 @@ public class GameController {
 		swapPanel.setVisible(false);
 		mainPanel.getChildren().add(selectTargetPanel);
 		mainPanel.getChildren().add(swapPanel);
+		setChooseIcon();
 	}
 	
 	public static void updateAllyInfo() {
@@ -150,6 +151,10 @@ public class GameController {
 	
 	public static void updateAllyView() {
 		GameController.mainPanel.updateAllyPanel();
+	}
+	
+	public static void setChooseIcon() {
+		mainPanel.setChooseIcon();
 	}
 	
 	public static void setToButtonPanel() {

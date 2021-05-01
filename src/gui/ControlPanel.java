@@ -133,6 +133,16 @@ public class ControlPanel extends HBox {
 		left.add(skillPane, 3, 1, 4, 1);
 		left.add(Stats, 0, 2, 2, 2);
 		
+		Button test = new Button("test");
+		test.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				GameController.setReplacePanel(true);
+			}
+		});
+		left.add(test, 3, 2);
+		
 		this.rightPanel = rightPanel();
 		
 		mapButton.setOnAction(new EventHandler<ActionEvent>() {

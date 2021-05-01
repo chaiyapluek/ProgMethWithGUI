@@ -3,11 +3,13 @@ package logic;
 import Application.Main;
 import Application.Player;
 import Coordinate.Coordinate;
+import List.AllyUnitList_Saber;
 import Map.*;
 import UnitBase.*;
 import gui.ChooseMerPanel;
 import gui.ControlPanel;
 import gui.MainPanel;
+import gui.ReplacePanel;
 import gui.SelectTargetSkillPanel;
 import gui.SwapPanel;
 
@@ -19,6 +21,7 @@ public class GameController {
 	
 	private static Map gameMap;
 	private static AllyUnit selectAllyUnit;
+	private static AllyUnit deathUnit;
 	private static Unit selectEnemyUnit;
 	
 	private static ChooseMerPanel chooseMerPanel;
@@ -26,6 +29,7 @@ public class GameController {
 	private static MainPanel mainPanel;
 	private static SelectTargetSkillPanel selectTargetPanel;
 	private static SwapPanel swapPanel;
+	private static ReplacePanel replacePanel;
 	
 	private static boolean moveToggle = false;
 	private static boolean onBattle = false;
@@ -100,6 +104,14 @@ public class GameController {
 		selectAllyUnit = unit;
 	}
 	
+	public static AllyUnit getDeathUnit() {
+		return deathUnit;
+	}
+	
+	public static void setDeathUnit(AllyUnit unit) {
+		deathUnit = unit;
+	}
+	
 	public static Unit getSelectEnemyUnit() {
 		return selectEnemyUnit;
 	}
@@ -123,12 +135,16 @@ public class GameController {
 	
 	public static void setMainPanel(MainPanel panel) {
 		GameController.mainPanel = panel;
+		GameController.setDeathUnit(AllyUnitList_Saber.Artoria());
 		selectTargetPanel = new SelectTargetSkillPanel();
 		swapPanel = new SwapPanel();
+		replacePanel = new ReplacePanel();
 		selectTargetPanel.setVisible(false);
 		swapPanel.setVisible(false);
+		replacePanel.setVisible(false);
 		mainPanel.getChildren().add(selectTargetPanel);
 		mainPanel.getChildren().add(swapPanel);
+		mainPanel.getChildren().add(replacePanel);
 		setChooseIcon();
 	}
 	
@@ -242,6 +258,13 @@ public class GameController {
 			swapPanel.update();
 		}
 		swapPanel.setVisible(bool);
+	}
+	
+	public static void setReplacePanel(boolean bool) {
+		if(bool) {
+			replacePanel.update();
+		}
+		replacePanel.setVisible(bool);
 	}
 
 }

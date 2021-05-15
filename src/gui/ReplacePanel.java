@@ -73,7 +73,7 @@ public class ReplacePanel extends StackPane {
 	public void update() {
 
 		buttons.getChildren().clear();
-		
+
 		if (GameController.getDeathUnit() == null) {
 			return;
 		}
@@ -92,8 +92,8 @@ public class ReplacePanel extends StackPane {
 		box.getChildren().addAll(button, label);
 
 		buttons.getChildren().add(box);
-		for (int i = 2; i >= 0; i--) {
-			AllyUnit unit = GameController.getPlayer().getBackUnits()[i];
+		for (int j = 2; j >= 0; j--) {
+			AllyUnit unit = GameController.getPlayer().getBackUnits()[j];
 			if (unit == null) {
 				continue;
 			}
@@ -103,7 +103,48 @@ public class ReplacePanel extends StackPane {
 			imgView.setFitWidth(85);
 			imgView.setPreserveRatio(true);
 			button.setGraphic(imgView);
-		
+
+			button.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent arg0) {
+					// TODO Auto-generated method stub
+					System.out.println("CLICKED");
+					int sourceIdx = 0;
+					int targetIdx = 0;
+					for (int i = 0; i < 3; i++) {
+						if(GameController.getDeathUnit().equals(GameController.getPlayer().getUnits()[i])) {
+							sourceIdx = i;
+						}
+						if(unit.equals(GameController.getPlayer().getBackUnits()[i])) {
+							targetIdx = i;
+						}	
+					}
+					AllyUnit temp = GameController.getPlayer().getUnits()[sourceIdx];
+					GameController.getPlayer().getUnits()[sourceIdx] = GameController.getPlayer().getBackUnits()[targetIdx];
+					GameController.getPlayer().getBackUnits()[targetIdx] = temp;
+					GameController.getPlayer().getBackUnits()[targetIdx] = null;
+					GameController.setSelectAllyUnit(GameController.getPlayer().getUnits()[sourceIdx]);
+					GameController.updateAllyInfo();
+					GameController.updateBattlePanel();
+					GameController.updateBattlePanelView();
+					GameController.setChooseIcon();
+					if(GameController.getPlayer().getNumberOfFrontUnit()<3 && GameController.getPlayer().getNumberOfBackUnit()>0) {
+						for(AllyUnit u : GameController.getPlayer().getUnits()) {
+							if(u == null) {
+								continue;
+							}
+							if(u.getIsDead()) {
+								GameController.setDeathUnit(u);
+								break;
+							}
+						}
+						update();
+					}else {
+						GameController.setReplacePanel(false);
+					}
+				}
+			});
+
 			buttons.getChildren().add(button);
 		}
 

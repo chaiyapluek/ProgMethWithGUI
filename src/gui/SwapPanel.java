@@ -84,12 +84,12 @@ public class SwapPanel extends StackPane {
 				break;
 			}
 		}
-		for (int i = 2; i >= 0; i--) {
+		for (int j = 2; j >= 0; j--) {
 			AllyUnit u;
 			if (isFront) {
-				u = GameController.getPlayer().getBackUnits()[i];
+				u = GameController.getPlayer().getBackUnits()[j];
 			} else {
-				u = GameController.getPlayer().getUnits()[i];
+				u = GameController.getPlayer().getUnits()[j];
 			}
 			if (u == null || u.getIsDead()) {
 				continue;

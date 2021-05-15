@@ -2,6 +2,7 @@ package gui;
 
 import UnitBase.AllyUnit;
 import UnitBase.Unit;
+import UnitBase.UnitStats;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -133,12 +134,15 @@ public class ControlPanel extends HBox {
 		left.add(skillPane, 3, 1, 4, 1);
 		left.add(Stats, 0, 2, 2, 2);
 		
-		Button test = new Button("test");
+		Button test = new Button("KILL");
 		test.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				GameController.setReplacePanel(true);
+				UnitStats unit = (UnitStats)GameController.getSelectEnemyUnit();
+				unit.setCurrentHP(0);
+				unit.setIsDead(true);
+				GameController.updateBattlePanel();
 			}
 		});
 		left.add(test, 3, 2);

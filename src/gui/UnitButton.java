@@ -58,7 +58,7 @@ public class UnitButton extends VBox {
 		this.setSpacing(50);
 		Image img;
 		ImageView imgView;
-		if (u == null) {
+		if (u == null || ((UnitStats)unit).getIsDead()) {
 			img = new Image("grave.png");
 			imgView = new ImageView(img);
 			imgView.setFitHeight(150);
@@ -96,7 +96,7 @@ public class UnitButton extends VBox {
 		button.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				if (unit != null && unit instanceof AllyUnit) {
+				if (unit != null && unit instanceof AllyUnit && !((UnitStats) unit).getIsDead()) {
 					GameController.setSelectAllyUnit((AllyUnit) unit);
 					GameController.updateAllyInfo();
 					GameController.setChooseIcon();
@@ -135,7 +135,7 @@ public class UnitButton extends VBox {
 			}
 		}
 	}
-	
+
 	public void setChooseIcon() {
 		Image imgIcon = new Image("choose.png");
 		ImageView Icon = new ImageView(imgIcon);
@@ -158,8 +158,8 @@ public class UnitButton extends VBox {
 	}
 
 	public void setTooltip() {
-		if(unit == null) {
-			return ;
+		if (unit == null) {
+			return;
 		}
 		tooltip = new Tooltip();
 		tooltip.setFont(new Font(12));
@@ -169,7 +169,7 @@ public class UnitButton extends VBox {
 			txt += e.toString() + "\n";
 		}
 		tooltip.setText(txt);
-		if (GameController.getOnBattle()) {
+		if (GameController.getOnBattle() && unit != null && !((UnitStats) unit).getIsDead()) {
 			button.setOnMouseMoved((MouseEvent e) -> {
 				tooltip.show(this, e.getScreenX(), e.getScreenY() + 10);
 			});

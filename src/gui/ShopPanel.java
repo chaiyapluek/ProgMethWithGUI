@@ -3,6 +3,7 @@ package gui;
 import Item.Gear;
 import Item.Item;
 import Item.Potion;
+import List.AllyUnitList;
 import Shop.Shop;
 import UnitBase.AllyUnit;
 import javafx.event.ActionEvent;
@@ -161,7 +162,12 @@ public class ShopPanel extends VBox {
 					// TODO Auto-generated method stub
 					if (!GameController.isUnitExist(allyUnit)) {
 						try {
-							GameController.addUnits(allyUnit);
+							int idx = AllyUnitList.getAllUnit().indexOf(allyUnit);
+							AllyUnit addedUnit = AllyUnitList.getAllUnit().get(idx);
+							GameController.addUnits(addedUnit);
+							GameController.setSelectAllyUnit(addedUnit);
+							GameController.updateAllyInfo();
+							GameController.setChooseIcon();
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -171,14 +177,18 @@ public class ShopPanel extends VBox {
 							if (allyUnit.equals(GameController.getPlayer().getUnits()[i])
 									&& GameController.getPlayer().getUnits()[i].getLevel() < 5) {
 								GameController.getPlayer().getUnits()[i].levelup();
+								GameController.setSelectAllyUnit(GameController.getPlayer().getUnits()[i]);
 								GameController.updateAllyInfo();
+								GameController.setChooseIcon();
 							}
 						}
 						for (int i = 0; i < GameController.getPlayer().getBackUnits().length; i++) {
 							if (allyUnit.equals(GameController.getPlayer().getBackUnits()[i])
 									&& GameController.getPlayer().getBackUnits()[i].getLevel() < 5) {
 								GameController.getPlayer().getBackUnits()[i].levelup();
+								GameController.setSelectAllyUnit(GameController.getPlayer().getBackUnits()[i]);
 								GameController.updateAllyInfo();
+								GameController.setChooseIcon();
 							}
 						}
 					}

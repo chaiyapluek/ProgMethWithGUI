@@ -186,8 +186,8 @@ public class AllyUnitList_Archer {
 		s2 = new Stun(1);
 		s3 = new DecreaseDef(3, 50);
 		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1, s2, s3));
-		description = "Deals damage and decrease crit chance [3 turns] to one enemy";
-		Skill Elmelloid_Ultimate = new UltimateSkill("Unreturning Formation", description, SubSkills, false, true,
+		description = "Decrease enemy's Gauge, stun [1 turn] and Decrease all enemies's defense [3 turns]";
+		Skill Elmelloid_Ultimate = new UltimateSkill("Unreturning Formation", description, SubSkills, false, false,
 				false);
 		Elmelloid_Ultimate.setUrl("Skill/NP.png");
 		

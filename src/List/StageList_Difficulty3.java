@@ -51,7 +51,7 @@ public class StageList_Difficulty3 {
 		stats = new int[] { getHP(3500), 15, getAttack(380), 5, 100, 5, 0 };
 		BasicUnit enemyUnit6 = BasicUnitList.DemonBoar(stats);
 
-		stats = new int[] { getHP(10000), 30, getAttack(600), 8, 100, 13, 3 };
+		stats = new int[] { getHP(20000), 30, getAttack(600), 8, 100, 13, 3 };
 		AdvanceUnit enemyUnit7 = AdvanceUnitList.MechaBore(stats);
 
 		Unit[][] units = new Unit[][] { { enemyUnit1, enemyUnit2, enemyUnit3 }, { enemyUnit4, enemyUnit5, enemyUnit6 },
@@ -235,5 +235,18 @@ public class StageList_Difficulty3 {
 		Stage stage5 = new Stage(2, false, units);
 		return stage5;
 
+	}
+
+	public static Stage testStage() {
+
+		int[] stats = new int[] { getHP(1), 0, getAttack(999999), 0, 0, 0, 0 };
+		AdvanceUnit enemyUnit1 = AdvanceUnitList.MechaBore(stats);
+
+		enemyUnit1.setID(1);
+
+		Unit[][] units = new Unit[][] { { enemyUnit1} };
+
+		Stage stage5 = new Stage(1, false, units);
+		return stage5;
 	}
 }

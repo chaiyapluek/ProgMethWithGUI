@@ -39,7 +39,7 @@ public class Battle {
 
 	public static void PlayerTurn(Player player,Bot enemy) {
 		decreaseSkillCooldown(player.getUnits());
-		player.play(enemy.getUnits());
+		//player.play(enemy.getUnits());
 		decreaseEffectDuration(player.getUnits());
 		checkEffect(player.getUnits());
 		increseUltiGauge(player.getUnits());

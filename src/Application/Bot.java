@@ -8,6 +8,7 @@ import Skill.Skill;
 import SubSkill.*;
 import UnitBase.AdvanceUnit;
 import logic.BattleController;
+import logic.GameController;
 import UnitBase.*;
 
 public class Bot {
@@ -39,6 +40,10 @@ public class Bot {
 		// Random ran = new Random();
 		System.out.println("------Enemy turn------");
 		for (int i = 0; i < 3; i++) {
+			if(BattleController.getEnemyWin()) {
+				System.out.println("You lose, FOOL!!");
+				break;
+			}
 			System.out.println(i);
 			if (nullOrDead(i))
 				continue;
@@ -103,17 +108,17 @@ public class Bot {
 			useSkill(targets, unit, unit.getMaxSkill() - 1, targetIdx);
 			return;
 		}
-		if (num < 50) {
+		if (num < 0) {
 			// Attack
 			if (tauntCheck(targets) != -1)
 				targetIdx = tauntCheck(targets);
 			System.out.println(units[idx].getName() + " attacked " + targets[targetIdx].getName());
 			BattleController.attack(units[idx], targets[targetIdx]);
-		} else if (num < 60) {
+		} else if (num < 0) {
 			// Defense
 			System.out.println(this.units[idx].getName() + " defense up");
 			((UnitAction) units[idx]).defense();
-		} else if (num >= 60 && useableSkill.size() > 0) {
+		} else if (num >= 0 && useableSkill.size() > 0) {
 			// Use Skill
 			int rand = ran.nextInt(useableSkill.size());
 			int skillIdx = useableSkill.get(rand);
@@ -155,33 +160,48 @@ public class Bot {
 
 	public void useSkill(Unit[] targets, AdvanceUnit skillUser, int skillIdx, int targetIdx) {
 		Skill skill = skillUser.getSkills()[skillIdx];
-		if (skill.getIsSingle()) {
-			if (skill.getToAlly()) {
-				System.out.println(skillUser.getName() + " used skill to " + units[targetIdx].getName());
-				skill.use(skillUser, units[targetIdx]);
-			} else {
-				System.out.println(skillUser.getName() + " used skill to " + targets[targetIdx].getName());
-				skill.use(skillUser, targets[targetIdx]);
-			}
+		if (skill.getToYourSelf()) {
+			skill.use(skillUser, skillUser);
 		} else {
-			if (skill.getToAlly()) {
-				for (int i = 0; i < 3; i++) {
-					if (nullOrDead(i))
-						continue;
-					skill.use(skillUser, units[i]);
+			if (skill.getIsSingle()) {
+				if (skill.getToAlly()) {
+					System.out.println(skillUser.getName() + " used skill to " + units[targetIdx].getName());
+					skill.use(skillUser, units[targetIdx]);
+				} else {
+					System.out.println(skillUser.getName() + " used skill to " + targets[targetIdx].getName());
+					skill.use(skillUser, targets[targetIdx]);
+					if(((UnitStats)targets[targetIdx]).getCurrentHP()<=0) {
+						((UnitStats) targets[targetIdx]).setIsDead(true);
+						BattleController.setPlayerUnitKilled(true);
+					}
 				}
-				System.out.println(skillUser.getName() + " used skill to all of their units");
 			} else {
-				for (int i = 0; i < 3; i++) {
-					if (targets[i] == null)
-						continue;
-					if (((UnitStats) targets[i]).getIsDead())
-						continue;
-					skill.use(skillUser, targets[i]);
+				if (skill.getToAlly()) {
+					for (int i = 0; i < 3; i++) {
+						if (nullOrDead(i))
+							continue;
+						skill.use(skillUser, units[i]);
+					}
+					System.out.println(skillUser.getName() + " used skill to all of their units");
+				} else {
+					for (int i = 0; i < 3; i++) {
+						if (targets[i] == null)
+							continue;
+						if (((UnitStats) targets[i]).getIsDead())
+							continue;
+						skill.use(skillUser, targets[i]);
+						if(((UnitStats)targets[i]).getCurrentHP()<=0) {
+							((UnitStats) targets[i]).setIsDead(true);
+							BattleController.setPlayerUnitKilled(true);
+						}
+					}
+					System.out.println(skillUser.getName() + " used skill to all of your units");
 				}
-				System.out.println(skillUser.getName() + " used skill to all of your units");
 			}
 		}
+		GameController.updateBattlePanel();
+		GameController.updateAllyInfo();
+		GameController.updateEnemyInfoPanel();
 	}
 
 	public boolean nullOrDead(int idx) {

@@ -47,7 +47,7 @@ public class BasicUnitList {
 	}
 	
 	public static BasicUnit SteelGolem(int[] stats) {
-		BasicUnit unit = new BasicUnit("Golem", "Berserker", stats);
+		BasicUnit unit = new BasicUnit("SteelGolem", "Berserker", stats);
 		unit.setUrl("EnemyUnit/Steel_Golem.png");
 		return unit;
 	}

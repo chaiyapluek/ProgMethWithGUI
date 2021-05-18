@@ -70,7 +70,7 @@ public class ViewStagePane extends HBox {
 		if (unit != null) {
 			Image img = new Image(unit.getUrl());
 			ImageView imgView = new ImageView(img);
-			if (unit.getName().equals("Wyvern")) {
+			if (unit.getName().equals("Wyvern") || unit.getName().equals("Knight Enforcer")) {
 				imgView.setFitHeight(200);
 			} else {
 				imgView.setFitHeight(150);

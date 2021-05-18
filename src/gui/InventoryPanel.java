@@ -28,11 +28,11 @@ import javafx.scene.paint.Color;
 import logic.GameController;
 
 public class InventoryPanel extends VBox {
-	
+
 	private Item item;
-	private int i,j;
+	private int i, j;
 	private GridPane inventory;
-	
+
 	public InventoryPanel() {
 
 		this.setMaxSize(400, 300);
@@ -60,141 +60,108 @@ public class InventoryPanel extends VBox {
 		panel.setPadding(new Insets(10));
 		panel.setBorder(new Border(
 				new BorderStroke(Color.DARKGRAY, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-		Label money = new Label();
-		money.setText("Money : XXX ");
 		inventory = new GridPane();
 		inventory.setAlignment(Pos.CENTER);
 		inventory.setVgap(10);
 		inventory.setHgap(10);
+		update();
+		
+		panel.getChildren().addAll(inventory);
+		this.getChildren().addAll(backPanel, panel);
+	}
+
+	public void update() {
+		for (int i = 0; i < 2; i++) {
+			for (int j = 0; j < 5; j++) {
+				int idx = 5 * i + j;
+				Button button = new Button();
+				button.setMaxSize(60, 60);
+				button.setMinSize(60, 60);
+				inventory.add(button, j, i);
+				if(idx >= GameController.getPlayer().getInventory().getInventorySize()) {
+					continue;
+				}
+				Item item = GameController.getPlayer().getInventory().getInventory().get(idx);
+				Image img = new Image(item.getUrl());
+				ImageView view = new ImageView(img);
+				view.setFitHeight(45);
+				button.setGraphic(view);
+				view.setPreserveRatio(true);
+				button.setOnAction(new EventHandler<ActionEvent>() {
+
+					@Override
+					public void handle(ActionEvent arg0) {
+						// TODO Auto-generated method stub
+						if(item instanceof Potion) {
+							GameController.showItemInfo(true, item, false, true);
+						}else {
+							GameController.showItemInfo(true, item, false, false);
+						}
+					}
+				});
+			}
+		}
+		/*
 		Button itemButton[] = new Button[10];
 		for (i = 0; i < 2; i++) {
 			for (j = 0; j < 5; j++) {
-				if(i*5+j>=GameController.getPlayer().getInventory().getInventorySize()) {
-					itemButton[i*5+j] = new Button();
-					itemButton[i*5+j].setMaxSize(60, 60);
-					itemButton[i*5+j].setMinSize(60, 60);
-					inventory.add(itemButton[i*5+j], j, i);
+				// System.out.println(i);
+				if (i * 5 + j >= GameController.getPlayer().getInventory().getInventorySize()) {
+					itemButton[i * 5 + j] = new Button();
+					itemButton[i * 5 + j].setMaxSize(60, 60);
+					itemButton[i * 5 + j].setMinSize(60, 60);
+					inventory.add(itemButton[i * 5 + j], j, i);
 					continue;
 				}
 				// item button (didn't create yet cus so lazy =.=)
-				if(GameController.getPlayer().getInventory().getInventorySize()>i*5+j)
-					item = GameController.getPlayer().getInventory().getInventory().get(i*5+j);
-				itemButton[i*5+j] = new Button();
+				// System.out.println(GameController.getPlayer().getInventory().getInventorySize()+"
+				// "+(i*5+j));
+				if (GameController.getPlayer().getInventory().getInventorySize() > i * 5 + j)
+					item = GameController.getPlayer().getInventory().getInventory().get(i * 5 + j);
+				itemButton[i * 5 + j] = new Button();
 				Image img = new Image(item.getUrl());
-			    ImageView view = new ImageView(img);
-			    view.setFitHeight(45);
-			    view.setPreserveRatio(true);
-			    itemButton[i*5+j].setGraphic(view);
-				itemButton[i*5+j].setMaxSize(60, 60);
-				itemButton[i*5+j].setMinSize(60, 60);
-				itemButton[i*5+j].setOnAction(new EventHandler<ActionEvent>() {
-					int select = i*5+j;
-					int ii=i,jj=j;
+				ImageView view = new ImageView(img);
+				view.setFitHeight(45);
+				view.setPreserveRatio(true);
+				itemButton[i * 5 + j].setGraphic(view);
+				itemButton[i * 5 + j].setMaxSize(60, 60);
+				itemButton[i * 5 + j].setMinSize(60, 60);
+				itemButton[i * 5 + j].setOnAction(new EventHandler<ActionEvent>() {
+					int select = i * 5 + j;
+					int ii = i, jj = j;
+
 					@Override
 					public void handle(ActionEvent arg0) {
 						// TODO Auto-generated method stub
 						Alert alert = new Alert(AlertType.INFORMATION);
 						item = GameController.getPlayer().getInventory().getInventory().get(select);
-						if(item instanceof Potion) {
+						if (item instanceof Potion) {
 							alert.setTitle("Potion");
 							alert.setHeaderText(item.getName());
 							alert.setContentText(item.toString());
 							ButtonType use = new ButtonType("Use");
 							ButtonType cancel = new ButtonType("Cancel");
 							alert.getButtonTypes().clear();
-							alert.getButtonTypes().addAll(use,cancel);
+							alert.getButtonTypes().addAll(use, cancel);
 							Optional<ButtonType> option = alert.showAndWait();
+							// System.out.println(i);
 							if (option.get() == use) {
 								try {
-									//System.out.println(i);
-									((Potion)GameController.getPlayer().getInventory().getInventory().get(ii*5+jj)).healUnit(GameController.getSelectAllyUnit());
-									if(((Potion)GameController.getPlayer().getInventory().getInventory().get(ii*5+jj)).getNumberOfPotion()>1) {
-									}
-									else {
-										GameController.getPlayer().getInventory().removeFromInventory(ii*5+jj);
+									// System.out.println(i);
+									((Potion) GameController.getPlayer().getInventory().getInventory().get(ii * 5 + jj))
+											.healUnit(GameController.getSelectAllyUnit());
+									if (((Potion) GameController.getPlayer().getInventory().getInventory()
+											.get(ii * 5 + jj)).getNumberOfPotion() > 1) {
+									} else {
+										GameController.getPlayer().getInventory().removeFromInventory(ii * 5 + jj);
 									}
 									GameController.updateInventory();
 								} catch (Exception e) {
 									// TODO Auto-generated catch block
 									e.printStackTrace();
 								}
-						    }
-						}
-						else if(item instanceof Gear) {
-							alert.setTitle("Gear");
-							alert.setHeaderText(item.getName());
-							alert.setContentText(item.toString());
-
-							alert.showAndWait();
-						}
-					}
-				});
-				inventory.add(itemButton[i*5+j], j, i);
-			}
-		}
-		panel.getChildren().addAll(money, inventory);
-		this.getChildren().addAll(backPanel, panel);
-	}
-	
-	public void update() {
-		Button itemButton[] = new Button[10];
-		for (i = 0; i < 2; i++) {
-			for (j = 0; j < 5; j++) {
-				//System.out.println(i);
-				if(i*5+j>=GameController.getPlayer().getInventory().getInventorySize()) {
-					itemButton[i*5+j] = new Button();
-					itemButton[i*5+j].setMaxSize(60, 60);
-					itemButton[i*5+j].setMinSize(60, 60);
-					inventory.add(itemButton[i*5+j], j, i);
-					continue;
-				}
-				// item button (didn't create yet cus so lazy =.=)
-				//System.out.println(GameController.getPlayer().getInventory().getInventorySize()+" "+(i*5+j));
-				if(GameController.getPlayer().getInventory().getInventorySize()>i*5+j)
-					item = GameController.getPlayer().getInventory().getInventory().get(i*5+j);
-				itemButton[i*5+j] = new Button();
-				Image img = new Image(item.getUrl());
-			    ImageView view = new ImageView(img);
-			    view.setFitHeight(45);
-			    view.setPreserveRatio(true);
-			    itemButton[i*5+j].setGraphic(view);
-				itemButton[i*5+j].setMaxSize(60, 60);
-				itemButton[i*5+j].setMinSize(60, 60);
-				itemButton[i*5+j].setOnAction(new EventHandler<ActionEvent>() {
-					int select = i*5+j;
-					int ii=i,jj=j;
-					@Override
-					public void handle(ActionEvent arg0) {
-						// TODO Auto-generated method stub
-						Alert alert= new Alert(AlertType.INFORMATION);
-						item = GameController.getPlayer().getInventory().getInventory().get(select);
-						if(item instanceof Potion) {
-							alert.setTitle("Potion");
-							alert.setHeaderText(item.getName());
-							alert.setContentText(item.toString());
-							ButtonType use = new ButtonType("Use");
-							ButtonType cancel = new ButtonType("Cancel");
-							alert.getButtonTypes().clear();
-							alert.getButtonTypes().addAll(use,cancel);
-							Optional<ButtonType> option = alert.showAndWait();
-							//System.out.println(i);
-							if (option.get() == use) {
-								try {
-									//System.out.println(i);
-									((Potion)GameController.getPlayer().getInventory().getInventory().get(ii*5+jj)).healUnit(GameController.getSelectAllyUnit());
-									if(((Potion)GameController.getPlayer().getInventory().getInventory().get(ii*5+jj)).getNumberOfPotion()>1) {
-									}
-									else {
-										GameController.getPlayer().getInventory().removeFromInventory(ii*5+jj);
-									}
-									GameController.updateInventory();
-								} catch (Exception e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
-						    }
-						}
-						else if(item instanceof Gear) {
+							}
+						} else if (item instanceof Gear) {
 							alert.setTitle("Gear");
 							alert.setHeaderText(item.getName());
 							alert.setContentText(item.toString());
@@ -202,11 +169,11 @@ public class InventoryPanel extends VBox {
 							ButtonType discard = new ButtonType("Discard");
 							ButtonType cancel = new ButtonType("Cancel");
 							alert.getButtonTypes().clear();
-							alert.getButtonTypes().addAll(equip,discard,cancel);
+							alert.getButtonTypes().addAll(equip, discard, cancel);
 							Optional<ButtonType> option = alert.showAndWait();
-							if(option.get()==discard) {
+							if (option.get() == discard) {
 								try {
-									GameController.getPlayer().getInventory().removeFromInventory(ii*5+jj);
+									GameController.getPlayer().getInventory().removeFromInventory(ii * 5 + jj);
 								} catch (Exception e) {
 									// TODO Auto-generated catch block
 									e.printStackTrace();
@@ -216,8 +183,9 @@ public class InventoryPanel extends VBox {
 						}
 					}
 				});
-				inventory.add(itemButton[i*5+j], j, i);
+				inventory.add(itemButton[i * 5 + j], j, i);
 			}
 		}
+		*/
 	}
 }

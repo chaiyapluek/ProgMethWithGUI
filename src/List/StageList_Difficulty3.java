@@ -1,14 +1,8 @@
 package List;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 import Map.Stage;
-import Skill.NormalSkill;
-import Skill.Skill;
-import Skill.UltimateSkill;
-import SubSkill.*;
 import UnitBase.AdvanceUnit;
 import UnitBase.BasicUnit;
 import UnitBase.Unit;
@@ -33,25 +27,25 @@ public class StageList_Difficulty3 {
 
 	public static Stage Stage1() {
 
-		int[] stats = new int[] { getHP(3000), 10, getAttack(300), 5, 100, 5, 0 };
+		int[] stats = new int[] { getHP(5100), 10, getAttack(310), 5, 100, 5, 0 };
 		BasicUnit enemyUnit1 = BasicUnitList.DemonBoar(stats);
 
-		stats = new int[] { getHP(3000), 10, getAttack(300), 5, 100, 5, 0 };
+		stats = new int[] { getHP(5200), 10, getAttack(330), 5, 100, 5, 0 };
 		BasicUnit enemyUnit2 = BasicUnitList.DemonBoar(stats);
 
-		stats = new int[] { getHP(3000), 10, getAttack(320), 5, 100, 5, 0 };
+		stats = new int[] { getHP(5500), 10, getAttack(340), 5, 100, 5, 0 };
 		BasicUnit enemyUnit3 = BasicUnitList.DemonBoar(stats);
 
-		stats = new int[] { getHP(3500), 15, getAttack(350), 5, 100, 5, 0 };
+		stats = new int[] { getHP(5500), 15, getAttack(350), 5, 100, 5, 0 };
 		BasicUnit enemyUnit4 = BasicUnitList.DemonBoar(stats);
 
-		stats = new int[] { getHP(3500), 15, getAttack(350), 5, 100, 5, 0 };
+		stats = new int[] { getHP(5700), 15, getAttack(355), 5, 100, 5, 0 };
 		BasicUnit enemyUnit5 = BasicUnitList.DemonBoar(stats);
 
-		stats = new int[] { getHP(3500), 15, getAttack(380), 5, 100, 5, 0 };
+		stats = new int[] { getHP(6500), 15, getAttack(380), 5, 100, 5, 0 };
 		BasicUnit enemyUnit6 = BasicUnitList.DemonBoar(stats);
 
-		stats = new int[] { getHP(20000), 30, getAttack(600), 8, 100, 13, 3 };
+		stats = new int[] { getHP(20000), 30, getAttack(600), 8, 150, 13, 3 };
 		AdvanceUnit enemyUnit7 = AdvanceUnitList.MechaBore(stats);
 
 		Unit[][] units = new Unit[][] { { enemyUnit1, enemyUnit2, enemyUnit3 }, { enemyUnit4, enemyUnit5, enemyUnit6 },
@@ -72,165 +66,138 @@ public class StageList_Difficulty3 {
 
 	public static Stage Stage2() {
 
-		int[] stats = new int[] { getHP(1500), 15, getAttack(150), 5, 100, 5, 0 };
-		BasicUnit enemyUnit1 = new BasicUnit("Demon Boar", "Lancer", stats);
+		int[] stats = new int[] { getHP(3500), 15, getAttack(350), 20, 60, 10, 4 };
+		AdvanceUnit enemyUnit1 = AdvanceUnitList.Yaga_Saber(stats);
 
-		stats = new int[] { getHP(1500), 15, getAttack(150), 5, 100, 5, 0 };
-		BasicUnit enemyUnit2 = new BasicUnit("Demon Boar", "Lancer", stats);
+		stats = new int[] { getHP(3200), 15, getAttack(350), 20, 60, 10, 4 };
+		AdvanceUnit enemyUnit2 = AdvanceUnitList.Yaga_Saber(stats);
 
-		stats = new int[] { getHP(2000), 15, getAttack(200), 5, 100, 5, 0 };
-		BasicUnit enemyUnit3 = new BasicUnit("Demon Boar", "Berserker", stats);
+		stats = new int[] { getHP(3700), 15, getAttack(370), 20, 65, 10, 4 };
+		AdvanceUnit enemyUnit3 = AdvanceUnitList.Yaga_Saber(stats);
 
-		stats = new int[] { getHP(2000), 15, getAttack(200), 5, 100, 5, 0 };
-		BasicUnit enemyUnit4 = new BasicUnit("Demon Boar", "Lancer", stats);
+		stats = new int[] { getHP(4200), 15, getAttack(370), 20, 60, 10, 4 };
+		AdvanceUnit enemyUnit4 = AdvanceUnitList.Yaga_Saber(stats);
 
-		stats = new int[] { getHP(2000), 15, getAttack(200), 5, 100, 5, 0 };
-		BasicUnit enemyUnit5 = new BasicUnit("Demon Boar", "Lancer", stats);
+		stats = new int[] { getHP(4000), 15, getAttack(370), 20, 60, 10, 4 };
+		AdvanceUnit enemyUnit5 = AdvanceUnitList.Yaga_Saber(stats);
 
-		stats = new int[] { getHP(3000), 20, getAttack(300), 10, 200, 10, 10 };
-		SubSkill s1, s2;
-		s1 = new IncreaseCritDamage(3, 100);
-		s2 = new IncreaseCritChance(3, 10);
-		ArrayList<SubSkill> SubSkills;
-		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1, s2));
-		String description = "Increases own critical damage by 100% for 3 turns and Increases own critical attack chance by 10% for 3 turns";
-		Skill enemyUnit6Skill = new NormalSkill("High Voltage", description, SubSkills, 3, true, false, false);
+		stats = new int[] { getHP(3500), 12, getAttack(390), 25, 80, 15, 4 };
+		AdvanceUnit enemyUnit6 = AdvanceUnitList.Yaga_Archer(stats);
 
-		s1 = new Stun(1);
-		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1));
-		description = "Stun all enemies.";
-		Skill enemyUnit6UltiSkill = new UltimateSkill("High Voltage", description, SubSkills, false, false, false);
+		stats = new int[] { getHP(4500), 12, getAttack(410), 25, 80, 15, 4 };
+		AdvanceUnit enemyUnit7 = AdvanceUnitList.Yaga_Archer(stats);
 
-		Skill[] skills = new Skill[] { enemyUnit6Skill, enemyUnit6UltiSkill };
-		AdvanceUnit enemyUnit6 = new AdvanceUnit("Mecha Demon Boar", "Berserker", stats, skills);
+		stats = new int[] { getHP(5000), 13, getAttack(420), 25, 85, 15, 4 };
+		AdvanceUnit enemyUnit8 = AdvanceUnitList.Yaga_Archer(stats);
 
-		Unit[][] units = new Unit[][] { { enemyUnit1, enemyUnit2, enemyUnit3 },
-				{ enemyUnit4, enemyUnit5, enemyUnit6 } };
+		Unit[][] units = new Unit[][] { { enemyUnit1, enemyUnit2, enemyUnit3 }, { enemyUnit4, enemyUnit5, enemyUnit6 },
+				{ null, enemyUnit7, enemyUnit8 } };
 
-		Stage stage2 = new Stage(2, false, units);
+		enemyUnit1.setID(1);
+		enemyUnit2.setID(2);
+		enemyUnit3.setID(3);
+		enemyUnit4.setID(4);
+		enemyUnit5.setID(5);
+		enemyUnit6.setID(6);
+		enemyUnit7.setID(7);
+		enemyUnit8.setID(8);
+
+		Stage stage2 = new Stage(3, false, units);
 		return stage2;
 
 	}
 
 	public static Stage Stage3() {
 
-		int[] stats = new int[] { getHP(1500), 15, getAttack(150), 5, 100, 5, 0 };
-		BasicUnit enemyUnit1 = new BasicUnit("Demon Boar", "Archer", stats);
+		int[] stats = new int[] { getHP(12000), 20, getAttack(650), 15, 65, 10, 3 };
+		AdvanceUnit enemyUnit1 = AdvanceUnitList.Krichat(stats);
 
-		stats = new int[] { getHP(1500), 15, getAttack(150), 5, 100, 5, 0 };
-		BasicUnit enemyUnit2 = new BasicUnit("Demon Boar", "Archer", stats);
+		stats = new int[] { getHP(13000), 22, getAttack(750), 18, 70, 12, 3 };
+		AdvanceUnit enemyUnit2 = AdvanceUnitList.Krichat(stats);
 
-		stats = new int[] { getHP(2000), 15, getAttack(200), 5, 100, 5, 0 };
-		BasicUnit enemyUnit3 = new BasicUnit("Demon Boar", "Berserker", stats);
+		stats = new int[] { getHP(15000), 25, getAttack(850), 25, 70, 15, 3 };
+		AdvanceUnit enemyUnit3 = AdvanceUnitList.Krichat(stats);
 
-		stats = new int[] { getHP(2000), 15, getAttack(200), 5, 100, 5, 0 };
-		BasicUnit enemyUnit4 = new BasicUnit("Demon Boar", "Archer", stats);
+		Unit[][] units = new Unit[][] { { null, enemyUnit1, null }, { null, enemyUnit2, null },
+				{ null, enemyUnit3, null } };
 
-		stats = new int[] { getHP(2000), 15, getAttack(200), 5, 100, 5, 0 };
-		BasicUnit enemyUnit5 = new BasicUnit("Demon Boar", "Archer", stats);
+		enemyUnit1.setID(1);
+		enemyUnit2.setID(2);
+		enemyUnit3.setID(3);
 
-		stats = new int[] { getHP(3000), 20, getAttack(300), 10, 200, 10, 10 };
-		SubSkill s1, s2;
-		s1 = new IncreaseAttack(3, 100);
-		s2 = new IncreaseDef(3, 10);
-		ArrayList<SubSkill> SubSkills;
-		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1, s2));
-		String description = "Increases own Attack and Defense for 3 turns";
-		Skill enemyUnit6Skill = new NormalSkill("High Voltage", description, SubSkills, 3, true, false, false);
-
-		s1 = new DOTDamage(5, 50);
-		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1));
-		description = "50 damage to all enemies for 5 turns.";
-		Skill enemyUnit6UltiSkill = new UltimateSkill("High Voltage", description, SubSkills, false, false, false);
-
-		Skill[] skills = new Skill[] { enemyUnit6Skill, enemyUnit6UltiSkill };
-		AdvanceUnit enemyUnit6 = new AdvanceUnit("Mecha Demon Boar", "Berserker", stats, skills);
-
-		Unit[][] units = new Unit[][] { { enemyUnit1, enemyUnit2, enemyUnit3 },
-				{ enemyUnit4, enemyUnit5, enemyUnit6 } };
-
-		Stage stage3 = new Stage(2, false, units);
+		Stage stage3 = new Stage(3, false, units);
 		return stage3;
 
 	}
 
 	public static Stage Stage4() {
 
-		int[] stats = new int[] { getHP(1500), 15, getAttack(150), 5, 100, 5, 0 };
-		BasicUnit enemyUnit1 = new BasicUnit("Demon Boar", "Saber", stats);
+		int[] stats = new int[] { getHP(3500), 15, getAttack(365), 20, 60, 10, 4 };
+		AdvanceUnit enemyUnit1 = AdvanceUnitList.Yaga_Saber(stats);
 
-		stats = new int[] { getHP(1500), 15, getAttack(150), 5, 100, 5, 0 };
-		BasicUnit enemyUnit2 = new BasicUnit("Demon Boar", "Archer", stats);
+		stats = new int[] { getHP(3700), 15, getAttack(375), 20, 60, 10, 4 };
+		AdvanceUnit enemyUnit2 = AdvanceUnitList.Yaga_Saber(stats);
 
-		stats = new int[] { getHP(2200), 15, getAttack(200), 5, 100, 5, 0 };
-		BasicUnit enemyUnit3 = new BasicUnit("Demon Boar", "Archer", stats);
+		stats = new int[] { getHP(3500), 15, getAttack(370), 20, 65, 10, 4 };
+		AdvanceUnit enemyUnit3 = AdvanceUnitList.Yaga_Saber(stats);
 
-		stats = new int[] { getHP(2000), 15, getAttack(200), 5, 100, 5, 0 };
-		BasicUnit enemyUnit4 = new BasicUnit("Demon Boar", "Lancer", stats);
+		stats = new int[] { getHP(4200), 15, getAttack(390), 20, 60, 10, 4 };
+		AdvanceUnit enemyUnit4 = AdvanceUnitList.Yaga_Saber(stats);
 
-		stats = new int[] { getHP(2000), 15, getAttack(200), 5, 100, 5, 0 };
-		BasicUnit enemyUnit5 = new BasicUnit("Demon Boar", "Archer", stats);
+		stats = new int[] { getHP(3900), 15, getAttack(390), 20, 60, 10, 4 };
+		AdvanceUnit enemyUnit5 = AdvanceUnitList.Yaga_Saber(stats);
 
-		stats = new int[] { getHP(3000), 20, getAttack(300), 10, 200, 10, 10 };
-		SubSkill s1;
-		s1 = new IncreaseUltiGauge(3, 1);
-		ArrayList<SubSkill> SubSkills;
-		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1));
-		String description = "Increases own Ulti gauge by 1 for 3 turns";
-		Skill enemyUnit6Skill = new NormalSkill("High Voltage", description, SubSkills, 3, true, false, false);
+		stats = new int[] { getHP(3600), 12, getAttack(450), 25, 80, 15, 4 };
+		AdvanceUnit enemyUnit6 = AdvanceUnitList.Yaga_Archer(stats);
 
-		s1 = new Damage(300, 1);
-		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1));
-		description = "300% damage to all enemies.";
-		Skill enemyUnit6UltiSkill = new UltimateSkill("High Voltage", description, SubSkills, false, false, false);
+		stats = new int[] { getHP(19500), 25, getAttack(850), 25, 70, 15, 3 };
+		AdvanceUnit enemyUnit7 = AdvanceUnitList.Krichat(stats);
 
-		Skill[] skills = new Skill[] { enemyUnit6Skill, enemyUnit6UltiSkill };
-		AdvanceUnit enemyUnit6 = new AdvanceUnit("Mecha Demon Boar", "Berserker", stats, skills);
+		Unit[][] units = new Unit[][] { { enemyUnit1, enemyUnit2, enemyUnit3 }, { enemyUnit4, enemyUnit5, enemyUnit6 },
+				{ null, enemyUnit7, null } };
 
-		Unit[][] units = new Unit[][] { { enemyUnit1, enemyUnit2, enemyUnit3 },
-				{ enemyUnit4, enemyUnit5, enemyUnit6 } };
+		enemyUnit1.setID(1);
+		enemyUnit2.setID(2);
+		enemyUnit3.setID(3);
+		enemyUnit4.setID(4);
+		enemyUnit5.setID(5);
+		enemyUnit6.setID(6);
+		enemyUnit7.setID(7);
 
-		Stage stage4 = new Stage(2, false, units);
+		Stage stage4 = new Stage(3, false, units);
 		return stage4;
 
 	}
 
 	public static Stage Stage5() {
 
-		int[] stats = new int[] { getHP(2000), 15, getAttack(200), 5, 100, 5, 0 };
-		BasicUnit enemyUnit1 = new BasicUnit("Demon Boar", "Berserker", stats);
+		int[] stats = new int[] { getHP(4500), 15, getAttack(370), 20, 60, 10, 4 };
+		AdvanceUnit enemyUnit1 = AdvanceUnitList.Yaga_Saber(stats);
 
-		stats = new int[] { getHP(2000), 15, getAttack(200), 5, 100, 5, 0 };
-		BasicUnit enemyUnit2 = new BasicUnit("Demon Boar", "Berserker", stats);
+		stats = new int[] { getHP(4200), 15, getAttack(375), 20, 60, 10, 4 };
+		AdvanceUnit enemyUnit2 = AdvanceUnitList.Yaga_Saber(stats);
 
-		stats = new int[] { getHP(2000), 15, getAttack(200), 5, 100, 5, 0 };
-		BasicUnit enemyUnit3 = new BasicUnit("Demon Boar", "Berserker", stats);
+		stats = new int[] { getHP(4700), 15, getAttack(390), 20, 65, 10, 4 };
+		AdvanceUnit enemyUnit3 = AdvanceUnitList.Yaga_Saber(stats);
 
-		stats = new int[] { getHP(2000), 15, getAttack(200), 5, 100, 5, 0 };
-		BasicUnit enemyUnit4 = new BasicUnit("Demon Boar", "Berserker", stats);
+		stats = new int[] { getHP(4200), 15, getAttack(400), 20, 60, 10, 4 };
+		AdvanceUnit enemyUnit4 = AdvanceUnitList.Yaga_Saber(stats);
 
-		stats = new int[] { getHP(2000), 15, getAttack(200), 5, 100, 5, 0 };
-		BasicUnit enemyUnit5 = new BasicUnit("Demon Boar", "Berserker", stats);
+		stats = new int[] { getHP(4200), 12, getAttack(450), 25, 80, 15, 4 };
+		AdvanceUnit enemyUnit5 = AdvanceUnitList.Yaga_Archer(stats);
 
-		stats = new int[] { getHP(3000), 20, getAttack(300), 10, 200, 10, 10 };
-		SubSkill s1, s2;
-		s1 = new IncreaseUltiGauge(1, 1);
-		s2 = new IncreaseCritChance(3, 10);
-		ArrayList<SubSkill> SubSkills;
-		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1, s2));
-		String description = "Increases own Ulti gauge by 1 and Increases own critical attack chance by 10% for 3 turns";
-		Skill enemyUnit6Skill = new NormalSkill("High Voltage", description, SubSkills, 3, true, false, false);
-
-		s1 = new Damage(400, 1);
-		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1));
-		description = "400% damage to all enemies.";
-		Skill enemyUnit6UltiSkill = new UltimateSkill("High Voltage", description, SubSkills, false, false, false);
-
-		Skill[] skills = new Skill[] { enemyUnit6Skill, enemyUnit6UltiSkill };
-		AdvanceUnit enemyUnit6 = new AdvanceUnit("Mecha Demon Boar", "Berserker", stats, skills);
+		stats = new int[] { getHP(5500), 12, getAttack(475), 25, 80, 15, 4 };
+		AdvanceUnit enemyUnit6 = AdvanceUnitList.Yaga_Archer(stats);
 
 		Unit[][] units = new Unit[][] { { enemyUnit1, enemyUnit2, enemyUnit3 },
 				{ enemyUnit4, enemyUnit5, enemyUnit6 } };
+
+		enemyUnit1.setID(1);
+		enemyUnit2.setID(2);
+		enemyUnit3.setID(3);
+		enemyUnit4.setID(4);
+		enemyUnit5.setID(5);
+		enemyUnit6.setID(6);
 
 		Stage stage5 = new Stage(2, false, units);
 		return stage5;
@@ -244,7 +211,7 @@ public class StageList_Difficulty3 {
 
 		enemyUnit1.setID(1);
 
-		Unit[][] units = new Unit[][] { { enemyUnit1} };
+		Unit[][] units = new Unit[][] { { enemyUnit1 } };
 
 		Stage stage5 = new Stage(1, false, units);
 		return stage5;

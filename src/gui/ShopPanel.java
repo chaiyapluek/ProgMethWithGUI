@@ -23,6 +23,8 @@ import logic.GameController;
 
 public class ShopPanel extends VBox {
 
+	private Label money;
+
 	public ShopPanel() {
 
 		this.setMaxSize(400, 300);
@@ -32,8 +34,8 @@ public class ShopPanel extends VBox {
 
 		HBox backPanel = new HBox();
 		backPanel.setAlignment(Pos.CENTER_RIGHT);
-		Label money = new Label();
-		money.setText("Money : XXX");
+		money = new Label();
+		setMoneyText();
 		money.setPadding(new Insets(0, 250, 0, 0));
 		Button back = new Button("X");
 		backPanel.getChildren().add(money);
@@ -62,6 +64,7 @@ public class ShopPanel extends VBox {
 		root.getChildren().add(itemLabel);
 		for (int i = 0; i < 10; i++) {
 			Item item = shop.getItems()[i];
+
 			HBox hbox = new HBox();
 			Button button = new Button();
 			button.setMaxSize(45, 45);
@@ -78,12 +81,8 @@ public class ShopPanel extends VBox {
 				@Override
 				public void handle(ActionEvent arg0) {
 					// TODO Auto-generated method stub
-					Alert alert = new Alert(AlertType.INFORMATION);
-					alert.setTitle("Item Information");
-					alert.setHeaderText(item.getName());
-					alert.setContentText(item.toString());
-
-					alert.showAndWait();
+					System.out.println(item.getName());
+					GameController.showItemInfo(true, item, true, true);
 				}
 			});
 			Button buy = new Button("Buy");
@@ -92,6 +91,9 @@ public class ShopPanel extends VBox {
 				@Override
 				public void handle(ActionEvent arg0) {
 					// TODO Auto-generated method stub
+					if (GameController.getPlayer().getMoney() < item.getPrice()) {
+						return;
+					}
 					try {
 						if (item instanceof Gear) {
 							GameController.getPlayer().getInventory().addToInventory(item);
@@ -145,12 +147,7 @@ public class ShopPanel extends VBox {
 				@Override
 				public void handle(ActionEvent arg0) {
 					// TODO Auto-generated method stub
-					Alert alert = new Alert(AlertType.INFORMATION);
-					alert.setTitle("Unit Information");
-					alert.setHeaderText(allyUnit.getName());
-					alert.setContentText(allyUnit.getShopInfo());
-
-					alert.showAndWait();
+					GameController.showMercenaryInfo(true, allyUnit);
 				}
 			});
 			Button buy = new Button("Buy");
@@ -158,7 +155,9 @@ public class ShopPanel extends VBox {
 
 				@Override
 				public void handle(ActionEvent arg0) {
-
+					if (GameController.getPlayer().getMoney() < 1000) {
+						return;
+					}
 					// TODO Auto-generated method stub
 					if (!GameController.isUnitExist(allyUnit)) {
 						try {
@@ -205,6 +204,10 @@ public class ShopPanel extends VBox {
 
 		shopPane.setContent(root);
 		this.getChildren().add(shopPane);
+	}
+
+	public void setMoneyText() {
+		money.setText("Money : " + GameController.getPlayer().getMoney());
 	}
 
 }

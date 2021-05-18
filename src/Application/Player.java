@@ -11,8 +11,10 @@ public class Player {
 	private AllyUnit[] backUnits;
 	private Coordinate coordinate;
 	private Inventory inventory;
+	private int money;
 
 	public Player(AllyUnit[] units,Coordinate coordinate) {
+		money = 10000;
 		this.units = new AllyUnit[3];
 		this.backUnits = new AllyUnit[3];
 		this.inventory = new Inventory(10);
@@ -78,6 +80,14 @@ public class Player {
 	
 	public AllyUnit[] getBackUnits() {
 		return this.backUnits;
+	}
+	
+	public int getMoney() {
+		return money;
+	}
+	
+	public void setMoney(int money) {
+		this.money = money;
 	}
 
 }

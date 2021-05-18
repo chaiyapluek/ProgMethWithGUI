@@ -51,7 +51,7 @@ public class AllyUnitList_Archer {
 
 		s1 = new DecreaseDodgeChance(1, 50);
 		s2 = new Damage(1100, 1);
-		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1));
+		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1, s2));
 		description = "Decrease Dodge chance and Deal damage to one enemy";
 		Skill David_Ultimate = new UltimateSkill("Hamesh Avanim", description, SubSkills, false, true, false);
 		David_Ultimate.setUrl("Skill/NP.png");
@@ -121,21 +121,21 @@ public class AllyUnitList_Archer {
 		description = "Increases crit chance and crit damage [3 turns]";
 		Skill Billy_FirstSkill = new NormalSkill("Marksmanship", description, SubSkills, 5, true, false, false);
 		Billy_FirstSkill.setUrl("Skill/Critdmg.png");
-		
+
 		s1 = new Damage(25, 6);
 		s2 = new Stun(1);
 		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1, s2));
 		description = "Deal damage and Inflicts Stun to one enemy [1 turn]";
 		Skill Billy_SecondSkill = new NormalSkill("Quick Draw", description, SubSkills, 3, false, true, false);
 		Billy_SecondSkill.setUrl("Skill/Damage.png");
-		
+
 		s1 = new Evade(1);
 		s2 = new IncreaseCritDamage(3, 80);
 		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1, s2));
 		description = "Applies Evade to yourself[1 turn] and increase crit damage [3 turns]";
 		Skill Billy_ThirdSkill = new NormalSkill("Eye of the Mind", description, SubSkills, 6, true, false, false);
 		Billy_ThirdSkill.setUrl("Skill/Evade.png");
-		
+
 		s1 = new DecreaseDodgeChance(1, 100);
 		s2 = new Damage(1500, 1);
 		s3 = new DecreaseCritChance(3, 20);
@@ -143,7 +143,7 @@ public class AllyUnitList_Archer {
 		description = "Deals damage and decrease crit chance [3 turns] to one enemy";
 		Skill Billy_Ultimate = new UltimateSkill("Pashupata", description, SubSkills, false, true, false);
 		Billy_Ultimate.setUrl("Skill/NP.png");
-		
+
 		Skill[] skills = new Skill[] { Billy_FirstSkill, Billy_SecondSkill, Billy_ThirdSkill, Billy_Ultimate };
 		AllyUnit Billy = new AllyUnit("Billy The Kid", "Archer", stats, skills, statsFactors, skillRequirement);
 		Billy.setUrl("AllyUnit/Billy.png");
@@ -165,7 +165,7 @@ public class AllyUnitList_Archer {
 		description = "Increase one ally Gauge and crit chance [3 turns]";
 		Skill Elmelloid_FirstSkill = new NormalSkill("Discerning Eye", description, SubSkills, 5, false, true, true);
 		Elmelloid_FirstSkill.setUrl("Skill/Critchance.png");
-		
+
 		s1 = new IncreaseDef(3, 30);
 		s2 = new IncreaseUltiGauge(0, 8);
 		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1, s2));
@@ -173,7 +173,7 @@ public class AllyUnitList_Archer {
 		Skill Elmelloid_SecondSkill = new NormalSkill("Advice of the Strategist", description, SubSkills, 6, false,
 				false, true);
 		Elmelloid_SecondSkill.setUrl("Skill/Def.png");
-		
+
 		s1 = new IncreaseAttack(3, 30);
 		s2 = new IncreaseUltiGauge(0, 8);
 		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1, s2));
@@ -190,7 +190,7 @@ public class AllyUnitList_Archer {
 		Skill Elmelloid_Ultimate = new UltimateSkill("Unreturning Formation", description, SubSkills, false, false,
 				false);
 		Elmelloid_Ultimate.setUrl("Skill/NP.png");
-		
+
 		Skill[] skills = new Skill[] { Elmelloid_FirstSkill, Elmelloid_SecondSkill, Elmelloid_ThirdSkill,
 				Elmelloid_Ultimate };
 		AllyUnit Elmelloid = new AllyUnit("Lord El-Melloi II", "Archer", stats, skills, statsFactors, skillRequirement);
@@ -212,14 +212,14 @@ public class AllyUnitList_Archer {
 		description = "Increase attack [3 turns] to all allies";
 		Skill Gilgamesh_FirstSkill = new NormalSkill("Charisma", description, SubSkills, 5, false, false, true);
 		Gilgamesh_FirstSkill.setUrl("Skill/Attack.png");
-		
+
 		s1 = new IncreaseUltiGauge(3, 5);
 		s2 = new Heal(3, 10);
 		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1, s2));
 		description = "Increases Gauge and recovers HP every turn [3 turns]";
 		Skill Gilgamesh_SecondSkill = new NormalSkill("Golden Rule", description, SubSkills, 5, true, false, false);
 		Gilgamesh_SecondSkill.setUrl("Skill/Gauge.png");
-		
+
 		s1 = new IncreaseAttack(3, 30);
 		s2 = new IncreaseUltiGauge(0, 10);
 		s3 = new IncreaseDodgeChance(3, 20);
@@ -228,14 +228,14 @@ public class AllyUnitList_Archer {
 		Skill Gilgamesh_ThirdSkill = new NormalSkill("Treasury of Babylon", description, SubSkills, 6, true, false,
 				false);
 		Gilgamesh_ThirdSkill.setUrl("Skill/Burst.png");
-		
+
 		s1 = new DecreaseDodgeChance(1, 100);
 		s2 = new Damage(600, 1);
 		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1, s2));
 		description = "Deals damage to all enemies";
 		Skill Gilgamesh_Ultimate = new UltimateSkill("Enuma Elis", description, SubSkills, false, false, false);
 		Gilgamesh_Ultimate.setUrl("Skill/NP.png");
-		
+
 		Skill[] skills = new Skill[] { Gilgamesh_FirstSkill, Gilgamesh_SecondSkill, Gilgamesh_ThirdSkill,
 				Gilgamesh_Ultimate };
 		AllyUnit Gilgamesh = new AllyUnit("Gilgamesh", "Archer", stats, skills, statsFactors, skillRequirement);

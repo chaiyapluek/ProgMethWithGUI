@@ -103,6 +103,8 @@ public class Bot {
 				break;
 			targetIdx = ran.nextInt(3);
 		}
+		if (tauntCheck(targets) != -1)
+				targetIdx = tauntCheck(targets);
 		if (unit.getUltiGauge() == unit.getMaxUltigauge()) {
 			// useUlti
 			useSkill(targets, unit, unit.getMaxSkill() - 1, targetIdx);
@@ -110,8 +112,7 @@ public class Bot {
 		}
 		if (num < 0) {
 			// Attack
-			if (tauntCheck(targets) != -1)
-				targetIdx = tauntCheck(targets);
+			
 			System.out.println(units[idx].getName() + " attacked " + targets[targetIdx].getName());
 			BattleController.attack(units[idx], targets[targetIdx]);
 		} else if (num < 0) {

@@ -58,7 +58,7 @@ public class UnitButton extends VBox {
 		this.setSpacing(50);
 		Image img;
 		ImageView imgView;
-		if (u == null || ((UnitStats)unit).getIsDead()) {
+		if (u == null || ((UnitStats) unit).getIsDead()) {
 			img = new Image("grave.png");
 			imgView = new ImageView(img);
 			imgView.setFitHeight(150);
@@ -69,8 +69,15 @@ public class UnitButton extends VBox {
 				imgView.setFitHeight(280);
 			} else if (u.getName().equals("Ereshkigal") || u.getName().equals("Wyvern")) {
 				imgView.setFitHeight(300);
-			} else if (u.getName().equals("Heracles")) {
+			} else if (u.getName().equals("Heracles") || u.getName().equals("Sigurd")) {
 				imgView.setFitHeight(260);
+			} else if (u.getName().equals("Knight Enforcer")) {
+				if(u.get_Class().equals("Lancer")) {
+					imgView.setFitHeight(325);
+				}else {
+					imgView.setFitHeight(300);
+				}
+				
 			} else {
 				imgView.setFitHeight(220);
 			}

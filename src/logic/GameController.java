@@ -3,15 +3,20 @@ package logic;
 import Application.Main;
 import Application.Player;
 import Coordinate.Coordinate;
+import Item.Item;
 import List.AllyUnitList_Saber;
 import Map.*;
 import UnitBase.*;
 import gui.ChooseMerPanel;
 import gui.ControlPanel;
+import gui.InfoItem;
+import gui.InfoMercenary;
+import gui.InventoryPanel;
 import gui.MainPanel;
 import gui.ReplacePanel;
 import gui.SelectTargetSkillPanel;
 import gui.SwapPanel;
+import javafx.scene.canvas.Canvas;
 
 public class GameController {
 
@@ -22,6 +27,8 @@ public class GameController {
 	private static AllyUnit selectAllyUnit;
 	private static AllyUnit deathUnit;
 	private static Unit selectEnemyUnit;
+	
+	private static Item selectItem;
 
 	private static ChooseMerPanel chooseMerPanel;
 	private static ControlPanel controlPanel;
@@ -29,6 +36,8 @@ public class GameController {
 	private static SelectTargetSkillPanel selectTargetPanel;
 	private static SwapPanel swapPanel;
 	private static ReplacePanel replacePanel;
+	private static InfoItem infoItem;
+	private static InfoMercenary infoMercenary;
 
 	private static boolean moveToggle = false;
 	private static boolean onBattle = false;
@@ -108,6 +117,14 @@ public class GameController {
 	public static void setSelectEnemyUnit(Unit unit) {
 		selectEnemyUnit = unit;
 	}
+	
+	public static Item getSelecItem() {
+		return selectItem;
+	}
+	
+	public static void setSelectItem(Item item) {
+		selectItem = item;
+	}
 
 	public static void setChooseMerPanel(ChooseMerPanel chooseMerPanel) {
 		GameController.chooseMerPanel = chooseMerPanel;
@@ -117,6 +134,10 @@ public class GameController {
 		GameController.controlPanel = panel;
 	}
 
+	public static MainPanel getMainPanel() {
+		return mainPanel;
+	}
+
 	public static void startBattle() {
 		GameController.mainPanel.viewBattlePanel();
 		BattleController.initializeBattle();
@@ -124,16 +145,25 @@ public class GameController {
 
 	public static void setMainPanel(MainPanel panel) {
 		GameController.mainPanel = panel;
-		GameController.setDeathUnit(AllyUnitList_Saber.Artoria());
+		setDeathUnit(null);
+
 		selectTargetPanel = new SelectTargetSkillPanel();
 		swapPanel = new SwapPanel();
 		replacePanel = new ReplacePanel();
+		infoItem = new InfoItem();
+		infoMercenary = new InfoMercenary();
+
 		selectTargetPanel.setVisible(false);
 		swapPanel.setVisible(false);
 		replacePanel.setVisible(false);
+		infoItem.setVisible(false);
+		infoMercenary.setVisible(false);
+
 		mainPanel.getChildren().add(selectTargetPanel);
 		mainPanel.getChildren().add(swapPanel);
 		mainPanel.getChildren().add(replacePanel);
+		mainPanel.getChildren().add(infoItem);
+		mainPanel.getChildren().add(infoMercenary);
 		setChooseIcon();
 	}
 
@@ -256,4 +286,22 @@ public class GameController {
 		replacePanel.setVisible(bool);
 	}
 
+	public static void showItemInfo(boolean bool, Item item, boolean onShop, boolean isPotion) {
+		if (bool) {
+			infoItem.update(item, onShop, isPotion);
+		}
+		if (!onShop) {
+			infoItem.showButtons(isPotion);
+		} else {
+			infoItem.removeButton();
+		}
+		infoItem.setVisible(bool);
+	}
+
+	public static void showMercenaryInfo(boolean bool, AllyUnit unit) {
+		if (bool) {
+			infoMercenary.update(unit);
+		}
+		infoMercenary.setVisible(bool);
+	}
 }

@@ -27,7 +27,7 @@ public class AdvanceUnit extends UnitAction {
 		this.maxSkill = unit.getMaxSkill();
 		this.skills = new Skill[maxSkill];
 		for (int i = 0; i < maxSkill; i++) {
-			if( unit.getSkills()[i] instanceof NormalSkill)
+			if (unit.getSkills()[i] instanceof NormalSkill)
 				this.skills[i] = new NormalSkill(unit.getSkills()[i]);
 			else
 				this.skills[i] = new UltimateSkill(unit.getSkills()[i]);
@@ -39,6 +39,8 @@ public class AdvanceUnit extends UnitAction {
 	}
 
 	public void setUltiGauge(int ultiGauge) {
+		if (ultiGauge < 0)
+			ultiGauge = 0;
 		this.ultiGauge = Math.min(ultiGauge, this.maxUltigauge);
 	}
 
@@ -70,13 +72,6 @@ public class AdvanceUnit extends UnitAction {
 		return stats;
 	}
 
-	public String getInfo() {
-		String str = "[ " + this.getName() + " : " + this.get_Class() + " ] --> ";
-		str += "HP : " + this.getCurrentHP() + "/" + this.getMaxHP() + " , ";
-		str += "Guage : " + this.getUltiGauge() + "/" + this.getMaxUltigauge() + "\n";
-		return str;
-	}
-
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
@@ -92,7 +87,8 @@ public class AdvanceUnit extends UnitAction {
 
 		info += "Skill(s)\n";
 		for (int i = 0; i < this.maxSkill; i++) {
-			info += "[" + (i+1) + "] " + skills[i].getName() + "\tCooldown " + ((NormalSkill) skills[i]).getCooldownTime() + " turn(s)";
+			info += "[" + (i + 1) + "] " + skills[i].getName() + "\tCooldown "
+					+ ((NormalSkill) skills[i]).getCooldownTime() + " turn(s)";
 			info += "\n" + ((NormalSkill) skills[i]).getCooldown();
 			info += "\n    " + skills[i].getDescription() + "\n";
 		}

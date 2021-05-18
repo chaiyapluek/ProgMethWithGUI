@@ -160,5 +160,19 @@ public class BattlePanel extends VBox {
 			}
 		}
 	}
+	
+	public UnitButton getUnitButton(Unit unit) {
+		for(UnitButton button : allyUnits) {
+			if(unit.equals(button.getUnit())) {
+				return button;
+			}
+		}
+		for(UnitButton button : enemyUnits) {
+			if(unit.equals(button.getUnit())) {
+				return button;
+			}
+		}
+		return null;
+	}
 
 }

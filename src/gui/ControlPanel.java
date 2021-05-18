@@ -44,21 +44,21 @@ public class ControlPanel extends HBox {
 	private Label critdmg;
 	private Label dodge;
 	private Label level;
-	
+
 	private ActionSkillPane skillPane;
-	
+
 	private StackPane rightPanel;
 	private VBox buttonPane;
 	private Button mapButton;
 	private Button inventoryButton;
 	private Button shopButton;
 	private Button fightButton;
-	
+
 	private MapPanel mapPanel;
 	private InventoryPanel inventoryPanel;
 	private ShopPanel shopPanel;
 	private EnemyInfoPanel enemyInfo;
-	
+
 	public ControlPanel(Unit u) {
 
 		this.setMaxSize(1000, 300);
@@ -133,22 +133,20 @@ public class ControlPanel extends HBox {
 		left.add(HPAndGauge, 0, 1, 2, 1);
 		left.add(skillPane, 3, 1, 4, 1);
 		left.add(Stats, 0, 2, 2, 2);
-		
+
 		Button test = new Button("KILL");
 		test.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				UnitStats unit = (UnitStats)GameController.getSelectEnemyUnit();
-				unit.setCurrentHP(0);
-				unit.setIsDead(true);
-				GameController.updateBattlePanel();
+				GameController.getPlayer().setMoney(GameController.getPlayer().getMoney()-1);
+				shopPanel.setMoneyText();
 			}
 		});
 		left.add(test, 3, 2);
-		
+
 		this.rightPanel = rightPanel();
-		
+
 		mapButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
@@ -157,7 +155,7 @@ public class ControlPanel extends HBox {
 				rightPanel.getChildren().add(mapPanel);
 			}
 		});
-		
+
 		inventoryButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
@@ -166,7 +164,7 @@ public class ControlPanel extends HBox {
 				rightPanel.getChildren().add(inventoryPanel);
 			}
 		});
-		
+
 		shopButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
@@ -175,7 +173,7 @@ public class ControlPanel extends HBox {
 				rightPanel.getChildren().add(shopPanel);
 			}
 		});
-		
+
 		fightButton.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -184,7 +182,7 @@ public class ControlPanel extends HBox {
 				GameController.setOnBattle(true);
 				GameController.startBattle();
 			}
-			
+
 		});
 
 		this.getChildren().add(left);
@@ -198,64 +196,64 @@ public class ControlPanel extends HBox {
 		pane.setMaxSize(400, 300);
 		pane.setMinSize(400, 300);
 		pane.setAlignment(Pos.CENTER);
-		
+
 		buttonPane = new VBox();
 		buttonPane.setAlignment(Pos.CENTER);
 		buttonPane.setSpacing(10);
-		
+
 		mapButton = new Button("MAP");
 		inventoryButton = new Button("INVENTORY");
 		shopButton = new Button("SHOP");
 		fightButton = new Button("FIGHT");
-		
+
 		setButtonProp(mapButton);
 		setButtonProp(inventoryButton);
 		setButtonProp(shopButton);
 		setButtonProp(fightButton);
-		
+
 		updateButton();
-		
+
 		pane.getChildren().add(buttonPane);
-		
+
 		mapPanel = new MapPanel();
 		inventoryPanel = new InventoryPanel();
 		shopPanel = new ShopPanel();
 		enemyInfo = new EnemyInfoPanel();
-		
+
 		return pane;
 	}
-	
+
 	public void setToButtonPanel() {
 		rightPanel.getChildren().clear();
 		rightPanel.getChildren().add(buttonPane);
 	}
-	
+
 	public void setToEnemyInfoPanel() {
 		rightPanel.getChildren().clear();
 		enemyInfo.update();
 		rightPanel.getChildren().add(enemyInfo);
 	}
-	
+
 	public void updateButton() {
 		buttonPane.getChildren().clear();
-		buttonPane.getChildren().addAll(mapButton,inventoryButton);
-		if(GameController.getNowStage().isHasShop()) {
+		buttonPane.getChildren().addAll(mapButton, inventoryButton);
+		if (GameController.getNowStage().isHasShop()) {
 			buttonPane.getChildren().add(shopButton);
-		}else {
+		} else {
 			buttonPane.getChildren().remove(shopButton);
 		}
-		if(!GameController.getNowStage().isClear()) {
+		if (!GameController.getNowStage().isClear()) {
 			buttonPane.getChildren().add(fightButton);
-		}else {
+		} else {
 			buttonPane.getChildren().remove(fightButton);
 		}
 	}
-	
+
 	public void setButtonProp(Button button) {
 		button.setMaxSize(200, 40);
 		button.setMinSize(200, 40);
 	}
-	
+
 	public void updateInfo() {
 		updateLabel();
 		setIcon();
@@ -268,6 +266,7 @@ public class ControlPanel extends HBox {
 						BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
 						new BackgroundSize(0, 100, false, true, false, true))));
 	}
+
 	private void updateLabel() {
 		AllyUnit unit = GameController.getSelectAllyUnit();
 		name.setText(unit.getName());
@@ -283,11 +282,11 @@ public class ControlPanel extends HBox {
 		dodge.setText("Dodge : " + Math.max(0, unit.getDodgeChance()));
 		level.setText("Level : " + unit.getLevel());
 	}
-	
+
 	public MapPanel getMapPanel() {
 		return mapPanel;
 	}
-	
+
 	public void updateInventoryPanel() {
 		inventoryPanel.update();
 	}

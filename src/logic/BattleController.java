@@ -35,22 +35,8 @@ public class BattleController {
 		maxPlayerAction = GameController.getPlayer().getNumberOfFrontUnit();
 		GameController.updateEnemyInfoPanel();
 		setSelectAllyUnit();
-		for(AllyUnit u : GameController.getPlayer().getUnits()) {
-			if(u == null) {
-				System.out.println("NULL");
-			}else {
-				System.out.println(u.getName());
-			}
-		}
-		for(AllyUnit u : GameController.getPlayer().getBackUnits()) {
-			if(u == null) {
-				System.out.println("NULL");
-			}else {
-				System.out.println(u.getName());
-			}
-		}
-		System.out.println(GameController.getPlayer().getNumberOfFrontUnit());
-		System.out.println(GameController.getPlayer().getNumberOfBackUnit());
+		setSelectEnemyUnit();
+		GameController.getMainPanel().textTransition("Wave 1");
 	}
 
 	public static void takeAction(ActionButton action) {
@@ -205,20 +191,7 @@ public class BattleController {
 
 	private static void nextWave() {
 		if (wave == GameController.getNowStage().getNumberOfWave()) {
-			System.out.println("VICTORY");
-			GameController.getNowStage().setClear(true);
-			GameController.setOnBattle(false);
-			for (AllyUnit unit : GameController.getPlayer().getUnits()) {
-				if (unit != null) {
-					unit.setCanTakeAction(true);
-				}
-			}
-			reset();
-			GameController.updateAllyInfo();
-			GameController.updateAllyView();
-			GameController.updateMapPanel();
-			GameController.setToButtonPanel();
-			GameController.viewAllyUnit();
+			GameController.getMainPanel().textTransition("Victory");
 		} else {
 			wave += 1;
 			nextTurn();
@@ -228,6 +201,7 @@ public class BattleController {
 			GameController.setChooseIcon();
 			GameController.updateAllyInfo();
 			GameController.updateEnemyInfoPanel();
+			GameController.getMainPanel().textTransition("Wave " + wave);
 		}
 
 	}
@@ -341,32 +315,8 @@ public class BattleController {
 	public static void playerUnitKilled() {
 		setSelectAllyUnit();
 		GameController.setChooseIcon();
-		System.out.println("IN");
-		for(AllyUnit u : GameController.getPlayer().getUnits()) {
-			if(u == null) {
-				System.out.println("NULL");
-			}else {
-				if(u.getIsDead()) {
-					System.out.print("DEAD - ");
-				}
-				System.out.println(u.getName());
-			}
-		}
-		for(AllyUnit u : GameController.getPlayer().getBackUnits()) {
-			if(u == null) {
-				System.out.println("NULL");
-			}else {
-				if(u.getIsDead()) {
-					System.out.print("DEAD - ");
-				}
-				System.out.println(u.getName());
-			}
-		}
-		System.out.println(GameController.getPlayer().getNumberOfFrontUnit());
-		System.out.println(GameController.getPlayer().getNumberOfBackUnit());
 		if (GameController.getPlayer().getNumberOfBackUnit() > 0) {
 			// replace unit
-			System.out.println("REPLACE");
 			for(AllyUnit u : GameController.getPlayer().getUnits()) {
 				if(u == null) {
 					continue;
@@ -389,6 +339,13 @@ public class BattleController {
 	}
 
 	public static void reset() {
+		GameController.getNowStage().setClear(true);
+		GameController.setOnBattle(false);
+		for (AllyUnit unit : GameController.getPlayer().getUnits()) {
+			if (unit != null) {
+				unit.setCanTakeAction(true);
+			}
+		}
 		for (AllyUnit u : GameController.getPlayer().getUnits()) {
 			if (u == null) {
 				System.out.println("NULL");
@@ -425,6 +382,11 @@ public class BattleController {
 				((UnitStats) u).removeEffect(e);
 			}
 		}
+		GameController.updateAllyInfo();
+		GameController.updateAllyView();
+		GameController.updateMapPanel();
+		GameController.setToButtonPanel();
+		GameController.viewAllyUnit();
 	}
 
 	public static void increseUltiGauge(Unit[] units) {

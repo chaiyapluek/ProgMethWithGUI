@@ -145,7 +145,7 @@ public class InfoItem extends StackPane {
 			@Override
 			public void handle(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				
+				GameController.useItem();
 			}
 		
 		});
@@ -154,9 +154,8 @@ public class InfoItem extends StackPane {
 			@Override
 			public void handle(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				
+				GameController.discardItem();
 			}
-		
 		});
 
 		this.getChildren().addAll(bg, pane);
@@ -169,6 +168,7 @@ public class InfoItem extends StackPane {
 	}
 
 	public void showButtons(boolean isPotion) {
+		removeButton();
 		if (isPotion) {
 			pane.getChildren().add(potionButtons);
 		} else {

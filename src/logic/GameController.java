@@ -27,7 +27,7 @@ public class GameController {
 	private static AllyUnit selectAllyUnit;
 	private static AllyUnit deathUnit;
 	private static Unit selectEnemyUnit;
-	
+
 	private static Item selectItem;
 
 	private static ChooseMerPanel chooseMerPanel;
@@ -117,11 +117,11 @@ public class GameController {
 	public static void setSelectEnemyUnit(Unit unit) {
 		selectEnemyUnit = unit;
 	}
-	
+
 	public static Item getSelecItem() {
 		return selectItem;
 	}
-	
+
 	public static void setSelectItem(Item item) {
 		selectItem = item;
 	}
@@ -262,7 +262,15 @@ public class GameController {
 	}
 
 	public static void updateInventory() {
-		controlPanel.updateInventoryPanel();
+		controlPanel.getInventoryPanel().update();
+	}
+
+	public static void discardItem() {
+		controlPanel.getInventoryPanel().discardItem();
+	}
+	
+	public static void useItem() {
+		controlPanel.getInventoryPanel().useItem();
 	}
 
 	public static void setSelectTarget(boolean bool) {
@@ -289,11 +297,11 @@ public class GameController {
 	public static void showItemInfo(boolean bool, Item item, boolean onShop, boolean isPotion) {
 		if (bool) {
 			infoItem.update(item, onShop, isPotion);
-		}
-		if (!onShop) {
-			infoItem.showButtons(isPotion);
-		} else {
-			infoItem.removeButton();
+			if (!onShop) {
+				infoItem.showButtons(isPotion);
+			} else {
+				infoItem.removeButton();
+			}
 		}
 		infoItem.setVisible(bool);
 	}

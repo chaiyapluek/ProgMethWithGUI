@@ -287,7 +287,7 @@ public class ControlPanel extends HBox {
 		return mapPanel;
 	}
 
-	public void updateInventoryPanel() {
-		inventoryPanel.update();
+	public InventoryPanel getInventoryPanel() {
+		return inventoryPanel;
 	}
 }

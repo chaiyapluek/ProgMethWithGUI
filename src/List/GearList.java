@@ -63,6 +63,7 @@ public class GearList {
 		int stats[] = {200, 2, 200, 2, 2, 2};
 		String url = "Item/abdominal-armor.png";
 		Gear abdominalArmor = new Gear(name, description, price, stats);
+		abdominalArmor.setType(2);
 		abdominalArmor.setUrl(url);
 		return abdominalArmor;
 	}
@@ -74,6 +75,7 @@ public class GearList {
 		int stats[] = {0, 0, 100, 10, 0, 0};
 		String url = "Item/cape-armor.png";
 		Gear capeArmor = new Gear(name, description, price, stats);
+		capeArmor.setType(2);
 		capeArmor.setUrl(url);
 		return capeArmor;
 	}
@@ -85,6 +87,7 @@ public class GearList {
 		int stats[] = {200, 0, 0, 0, 0, 0};
 		String url = "Item/heart-armor.png";
 		Gear heartArmor = new Gear(name, description, price, stats);
+		heartArmor.setType(2);
 		heartArmor.setUrl(url);
 		return heartArmor;
 	}
@@ -96,6 +99,7 @@ public class GearList {
 		int stats[] = {100, 1, 100, 1, 1, 1};
 		String url = "Item/leather-armor.png";
 		Gear leatherArmor = new Gear(name, description, price, stats);
+		leatherArmor.setType(2);
 		leatherArmor.setUrl(url);
 		return leatherArmor;
 	}
@@ -107,6 +111,7 @@ public class GearList {
 		int stats[] = {800, 8, 800, 8, 25, 8};
 		String url = "Item/shoulder-armor.png";
 		Gear shoulderArmor = new Gear(name, description, price, stats);
+		shoulderArmor.setType(2);
 		shoulderArmor.setUrl(url);
 		return shoulderArmor;
 	}
@@ -118,6 +123,7 @@ public class GearList {
 		int stats[] = {1000, 50, 1000, 10, 10, 10};
 		String url = "Item/lamellar.png";
 		Gear lamellar = new Gear(name, description, price, stats);
+		lamellar.setType(2);
 		lamellar.setUrl(url);
 		return lamellar;
 	}
@@ -129,6 +135,7 @@ public class GearList {
 		int stats[] = {1200, 12, 1200, 12, 12, 35};
 		String url = "Item/chain-mail.png";
 		Gear chainMail = new Gear(name, description, price, stats);
+		chainMail.setType(2);
 		chainMail.setUrl(url);
 		return chainMail;
 	}
@@ -140,6 +147,7 @@ public class GearList {
 		int stats[] = {2000, 20, 2000, 20, 20, 20};
 		String url = "Item/breastplate.png";
 		Gear breastplate = new Gear(name, description, price, stats);
+		breastplate.setType(2);
 		breastplate.setUrl(url);
 		return breastplate;
 	}
@@ -164,6 +172,7 @@ public class GearList {
 		int stats[] = {0, 0, 1000, 0, 0, 0};
 		String url = "Item/brutal-helm.png";
 		Gear brutalHelm = new Gear(name, description, price, stats);
+		brutalHelm.setType(1);
 		brutalHelm.setUrl(url);
 		return brutalHelm;
 	}
@@ -175,6 +184,7 @@ public class GearList {
 		int stats[] = {0, 0, 0, 15, 15, 0};
 		String url = "Item/brutal-helm.png";
 		Gear blackKnightHelm = new Gear(name, description, price, stats);
+		blackKnightHelm.setType(1);
 		blackKnightHelm.setUrl(url);
 		return blackKnightHelm;
 	}
@@ -186,6 +196,7 @@ public class GearList {
 		int stats[] = {0, 15, 0, 0, 0, 15};
 		String url = "Item/closed-barbute.png";
 		Gear closedBarbute = new Gear(name, description, price, stats);
+		closedBarbute.setType(1);
 		closedBarbute.setUrl(url);
 		return closedBarbute;
 	}
@@ -197,6 +208,7 @@ public class GearList {
 		int stats[] = {1000, 10, 1000, 10, 10, 10};
 		String url = "Item/crenel-crown.png";
 		Gear crenelCrown = new Gear(name, description, price, stats);
+		crenelCrown.setType(1);
 		crenelCrown.setUrl(url);
 		return crenelCrown;
 	}
@@ -208,6 +220,7 @@ public class GearList {
 		int stats[] = {500, 5, 500, 5, 5, 20};
 		String url = "Item/jester-hat.png";
 		Gear jesterHat = new Gear(name, description, price, stats);
+		jesterHat.setType(1);
 		jesterHat.setUrl(url);
 		return jesterHat;
 	}
@@ -219,6 +232,7 @@ public class GearList {
 		int stats[] = {800, 8, 3000, 8, 8, 8};
 		String url = "Item/samurai-helmet.png";
 		Gear samuraiHelm = new Gear(name, description, price, stats);
+		samuraiHelm.setType(1);
 		samuraiHelm.setUrl(url);
 		return samuraiHelm;
 	}
@@ -230,6 +244,7 @@ public class GearList {
 		int stats[] = {2000, 7, 700, 20, 7, 7};
 		String url = "Item/elf-helmet.png";
 		Gear elfHelm = new Gear(name, description, price, stats);
+		elfHelm.setType(1);
 		elfHelm.setUrl(url);
 		return elfHelm;
 	}
@@ -241,6 +256,7 @@ public class GearList {
 		int stats[] = {2000, 20, 2000, 20, 20, 20};
 		String url = "Item/overlord-helm.png";
 		Gear overlordHelm = new Gear(name, description, price, stats);
+		overlordHelm.setType(1);
 		overlordHelm.setUrl(url);
 		return overlordHelm;
 	}
@@ -265,6 +281,7 @@ public class GearList {
 		int stats[] = {200, 2, 200, 2, 2, 2};
 		String url = "Item/tabi-boot.png";
 		Gear tabiBoot = new Gear(name, description, price, stats);
+		tabiBoot.setType(4);
 		tabiBoot.setUrl(url);
 		return tabiBoot;
 	}
@@ -276,6 +293,7 @@ public class GearList {
 		int stats[] = {0, 0, 0, 10, 0, 0};
 		String url = "Item/cowboy-boot.png";
 		Gear cowboyBoot = new Gear(name, description, price, stats);
+		cowboyBoot.setType(4);
 		cowboyBoot.setUrl(url);
 		return cowboyBoot;
 	}
@@ -287,6 +305,7 @@ public class GearList {
 		int stats[] = {1000, 0, 0, 0, 0, 0};
 		String url = "Item/fur-boot.png";
 		Gear furBoot = new Gear(name, description, price, stats);
+		furBoot.setType(4);
 		furBoot.setUrl(url);
 		return furBoot;
 	}
@@ -298,6 +317,7 @@ public class GearList {
 		int stats[] = {300, 20, 300, 3, 3, 3};
 		String url = "Item/leg-armor.png";
 		Gear legArmor = new Gear(name, description, price, stats);
+		legArmor.setType(4);
 		legArmor.setUrl(url);
 		return legArmor;
 	}
@@ -309,6 +329,7 @@ public class GearList {
 		int stats[] = {200, 2, 200, 2, 2, 25};
 		String url = "Item/metal-boot.png";
 		Gear metalBoot = new Gear(name, description, price, stats);
+		metalBoot.setType(4);
 		metalBoot.setUrl(url);
 		return metalBoot;
 	}
@@ -320,6 +341,7 @@ public class GearList {
 		int stats[] = {500, 25, 2500, 5, 5, 5};
 		String url = "Item/sonic-shoes.png";
 		Gear tabiBoot = new Gear(name, description, price, stats);
+		tabiBoot.setType(4);
 		tabiBoot.setUrl(url);
 		return tabiBoot;
 	}
@@ -331,6 +353,7 @@ public class GearList {
 		int stats[] = {200, 2, 200, 30, 30, 2};
 		String url = "Item/walking-boot.png";
 		Gear walkingBoot = new Gear(name, description, price, stats);
+		walkingBoot.setType(4);
 		walkingBoot.setUrl(url);
 		return walkingBoot;
 	}
@@ -342,6 +365,7 @@ public class GearList {
 		int stats[] = {2000, 20, 2000, 20, 20, 20};
 		String url = "Item/wingfoot.png";
 		Gear wingfoot = new Gear(name, description, price, stats);
+		wingfoot.setType(4);
 		wingfoot.setUrl(url);
 		return wingfoot;
 	}
@@ -366,6 +390,7 @@ public class GearList {
 		int stats[] = {0, 0, 2000, 0, 0, 20};
 		String url = "Item/crossbow.png";
 		Gear crossbow = new Gear(name, description, price, stats);
+		crossbow.setType(0);
 		crossbow.setUrl(url);
 		return crossbow;
 	}
@@ -377,6 +402,7 @@ public class GearList {
 		int stats[] = {1000, 10, 4000, 10, 10, 40};
 		String url = "Item/pocket-bow.png";
 		Gear pocketBow = new Gear(name, description, price, stats);
+		pocketBow.setType(0);
 		pocketBow.setUrl(url);
 		return pocketBow;
 	}
@@ -388,6 +414,7 @@ public class GearList {
 		int stats[] = {0, 0, 2000, 20, 0, 0};
 		String url = "Item/barbed-spear.png";
 		Gear barbedSpear = new Gear(name, description, price, stats);
+		barbedSpear.setType(0);
 		barbedSpear.setUrl(url);
 		return barbedSpear;
 	}
@@ -399,6 +426,7 @@ public class GearList {
 		int stats[] = {1000, 10, 4000, 40, 10, 10};
 		String url = "Item/spear-hook.png";
 		Gear spearHook = new Gear(name, description, price, stats);
+		spearHook.setType(0);
 		spearHook.setUrl(url);
 		return spearHook;
 	}
@@ -410,6 +438,7 @@ public class GearList {
 		int stats[] = {0, 0, 2000, 0, 20, 0};
 		String url = "Item/broadsword.png";
 		Gear broadsword = new Gear(name, description, price, stats);
+		broadsword.setType(0);
 		broadsword.setUrl(url);
 		return broadsword;
 	}
@@ -421,6 +450,7 @@ public class GearList {
 		int stats[] = {1000, 10, 4000, 10, 40, 10};
 		String url = "Item/relic-blade.png";
 		Gear relicBlade = new Gear(name, description, price, stats);
+		relicBlade.setType(0);
 		relicBlade.setUrl(url);
 		return relicBlade;
 	}
@@ -430,8 +460,9 @@ public class GearList {
 		String description = "Increased Defense";
 		int price = 2500;
 		int stats[] = {1000, 35, 1000, 10, 10, 10};
-		String url = "Item/broadsword.png";
+		String url = "Item/dragon-shield.png";
 		Gear broadsword = new Gear(name, description, price, stats);
+		broadsword.setType(0);
 		broadsword.setUrl(url);
 		return broadsword;
 	}
@@ -443,6 +474,7 @@ public class GearList {
 		int stats[] = {5000, 10, 1000, 10, 40, 10};
 		String url = "Item/winged-scepter.png";
 		Gear wingedScepter = new Gear(name, description, price, stats);
+		wingedScepter.setType(0);
 		wingedScepter.setUrl(url);
 		return wingedScepter;
 	}

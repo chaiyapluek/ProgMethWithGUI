@@ -94,9 +94,9 @@ public class InventoryPanel extends VBox {
 						// TODO Auto-generated method stub
 						GameController.setSelectItem(item);
 						if (item instanceof Potion) {
-							GameController.showItemInfo(true, item, false, true);
+							GameController.showItemInfo(true, item, false, true, true);
 						} else {
-							GameController.showItemInfo(true, item, false, false);
+							GameController.showItemInfo(true, item, false, false, true);
 						}
 					}
 				});
@@ -106,16 +106,17 @@ public class InventoryPanel extends VBox {
 
 	public void useItem() {
 		try {
-			Potion potion = (Potion)GameController.getSelecItem();
+			Potion potion = (Potion) GameController.getSelecItem();
 			potion.healUnit(GameController.getSelectAllyUnit());
-			if(potion.getNumberOfPotion() == 0) {
-				int idx = GameController.getPlayer().getInventory().getInventory().indexOf(GameController.getSelecItem());
+			if (potion.getNumberOfPotion() == 0) {
+				int idx = GameController.getPlayer().getInventory().getInventory()
+						.indexOf(GameController.getSelecItem());
 				GameController.getPlayer().getInventory().removeFromInventory(idx);
 			}
 			GameController.updateInventory();
 			GameController.updateAllyInfo();
-			GameController.showItemInfo(false, null, false, false);
-		}catch(Exception e) {
+			GameController.showItemInfo(false, null, false, false, true);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -125,10 +126,56 @@ public class InventoryPanel extends VBox {
 			int idx = GameController.getPlayer().getInventory().getInventory().indexOf(GameController.getSelecItem());
 			GameController.getPlayer().getInventory().removeFromInventory(idx);
 			GameController.updateInventory();
-			GameController.showItemInfo(false, null, false, false);
+			GameController.showItemInfo(false, null, false, false, true);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public void equipItem() {
+		Gear gear = (Gear) GameController.getSelecItem();
+		int idx = gear.getType();
+		if (GameController.getSelectAllyUnit().getGears()[idx] == null) {
+			gear.equip(GameController.getSelectAllyUnit());
+			GameController.getSelectAllyUnit().getGears()[gear.getType()] = gear;
+			discardItem();
+		} else {
+			Gear old = GameController.getSelectAllyUnit().getGears()[idx];
+			old.unequip(GameController.getSelectAllyUnit());
+			gear.equip(GameController.getSelectAllyUnit());
+			GameController.getSelectAllyUnit().getGears()[idx] = gear;
+			discardItem();
+			try {
+				GameController.getPlayer().getInventory().addToInventory(old);
+			} catch (Exception e) {
+
+			}
+			GameController.updateInventory();
+		}
+		GameController.updateAllyInfo();
+	}
+
+	public void unequipItem() {
+		try {
+			Gear gear = (Gear) GameController.getSelecItem();
+			GameController.getPlayer().getInventory().addToInventory(gear);
+			gear.unequip(GameController.getSelectAllyUnit());
+			GameController.getSelectAllyUnit().getGears()[gear.getType()] = null;
+			GameController.updateAllyInfo();
+			GameController.updateInventory();
+			GameController.showItemInfo(false, null, false, false, false);
+		}catch(Exception e) {
+			GameController.showAleart(true, "Inventory full");
+		}
+	}
+	
+	public void discardEquippedItem() {
+		Gear gear = (Gear) GameController.getSelecItem();
+		gear.unequip(GameController.getSelectAllyUnit());
+		GameController.getSelectAllyUnit().getGears()[gear.getType()] = null;
+		GameController.updateAllyInfo();
+		GameController.updateInventory();
+		GameController.showItemInfo(false, null, false, false, false);
 	}
 }

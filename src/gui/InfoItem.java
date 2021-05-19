@@ -32,12 +32,19 @@ public class InfoItem extends StackPane {
 	private VBox text;
 	private Label name;
 	private Label des;
+	private Label price;
 	private Label potionAmount;
 	private StackPane pic;
 	private VBox pane;
 
 	private HBox potionButtons;
 	private HBox gearButtons;
+
+	private Button equip;
+	private Button unequip;
+	private Button discard;
+	private Button cancelGear;
+	private Button discardGear;
 
 	public InfoItem() {
 		this.setMinSize(1280, 720);
@@ -71,7 +78,7 @@ public class InfoItem extends StackPane {
 			@Override
 			public void handle(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				GameController.showItemInfo(false, null, true, true);
+				GameController.showItemInfo(false, null, true, true, true);
 			}
 		});
 
@@ -88,11 +95,13 @@ public class InfoItem extends StackPane {
 		text.setSpacing(15);
 		name = new Label();
 		des = new Label();
+		price = new Label();
 		potionAmount = new Label();
 		name.setFont(new Font("Berlin Sans FB", 20));
 		des.setFont(new Font("Berlin Sans FB", 14));
+		price.setFont(new Font("Berlin Sans FB", 14));
 		potionAmount.setFont(new Font("Berlin Sans FB", 14));
-		text.getChildren().addAll(name, des, potionAmount);
+		text.getChildren().addAll(name, des, potionAmount, price);
 		potionAmount.setVisible(false);
 
 		pic = new StackPane();
@@ -114,31 +123,35 @@ public class InfoItem extends StackPane {
 		gearButtons = new HBox();
 		gearButtons.setSpacing(10);
 		gearButtons.setAlignment(Pos.CENTER);
-		Button equip = new Button("EQUIP");
-		Button discard = new Button("DISCARD");
-		Button cancel2 = new Button("CANCEL");
+		equip = new Button("EQUIP");
+		unequip = new Button("UNEQUIP");
+		discard = new Button("DISCARD");
+		cancelGear = new Button("CANCEL");
+		discardGear = new Button("DISCARD");
 		setUpButton(equip);
 		setUpButton(discard);
-		setUpButton(cancel2);
-		gearButtons.getChildren().addAll(equip, discard, cancel2);
-		
+		setUpButton(cancelGear);
+		setUpButton(unequip);
+		setUpButton(discardGear);
+		gearButtons.getChildren().addAll(equip, discard, cancelGear);
+
 		cancel.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				GameController.showItemInfo(false, null, true, true);
+				GameController.showItemInfo(false, null, true, true, true);
 			}
-		
+
 		});
-		cancel2.setOnAction(new EventHandler<ActionEvent>() {
+		cancelGear.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				GameController.showItemInfo(false, null, true, true);
+				GameController.showItemInfo(false, null, true, true, true);
 			}
-		
+
 		});
 		use.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -147,14 +160,37 @@ public class InfoItem extends StackPane {
 				// TODO Auto-generated method stub
 				GameController.useItem();
 			}
-		
+
+		});
+		equip.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				GameController.equipItem();
+			}
 		});
 		discard.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				GameController.discardItem();
+				GameController.discardItemInInventory();
+			}
+		});
+		discardGear.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				GameController.discardEquippedGear();
+			}
+		});
+		unequip.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				GameController.unequipItem();
 			}
 		});
 
@@ -167,11 +203,18 @@ public class InfoItem extends StackPane {
 		button.setFont(new Font("Berlin Sans FB", 20));
 	}
 
-	public void showButtons(boolean isPotion) {
+	public void showButtons(boolean isPotion, boolean onInventory) {
 		removeButton();
 		if (isPotion) {
 			pane.getChildren().add(potionButtons);
 		} else {
+			gearButtons.getChildren().clear();
+			if (onInventory) {
+				gearButtons.getChildren().addAll(equip, discard);
+			} else {
+				gearButtons.getChildren().addAll(unequip, discardGear);
+			}
+			gearButtons.getChildren().add(cancelGear);
 			pane.getChildren().add(gearButtons);
 		}
 	}
@@ -191,10 +234,16 @@ public class InfoItem extends StackPane {
 		pic.getChildren().add(imgView);
 		name.setText(item.getName());
 		des.setText(item.getDescription());
-		if(!onShop && isPotion) {
-			potionAmount.setVisible(true);
-			potionAmount.setText("Amount : " + ((Potion)item).getNumberOfPotion());
-		}else {
+		if (!onShop) {
+			price.setVisible(false);
+			potionAmount.setVisible(false);
+			if (isPotion) {
+				potionAmount.setVisible(true);
+				potionAmount.setText("Amount : " + ((Potion) item).getNumberOfPotion());
+			}
+		} else {
+			price.setVisible(true);
+			price.setText("Price : " + item.getPrice());
 			potionAmount.setVisible(false);
 		}
 

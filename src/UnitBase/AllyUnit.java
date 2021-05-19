@@ -1,5 +1,6 @@
 package UnitBase;
 
+import Item.Gear;
 import Skill.*;
 
 public class AllyUnit extends AdvanceUnit {
@@ -9,7 +10,8 @@ public class AllyUnit extends AdvanceUnit {
 	private int[] statFactors;
 	private int[] skillRequirement;
 	private boolean canTakeAction = true;
-	
+	private Gear[] gears;
+
 	public AllyUnit(String name, String _class, int[] stats, Skill[] skills, int[] statFactors,
 			int[] skillRequirement) {
 		super(name, _class, stats, skills);
@@ -21,6 +23,8 @@ public class AllyUnit extends AdvanceUnit {
 		this.skillRequirement = new int[skillRequirement.length];
 		for (int i = 0; i < skillRequirement.length; i++)
 			this.skillRequirement[i] = skillRequirement[i];
+
+		gears = new Gear[5];
 	}
 
 	public int getLevel() {
@@ -34,20 +38,34 @@ public class AllyUnit extends AdvanceUnit {
 	public int getSkillRequirement(int i) {
 		return skillRequirement[i];
 	}
-	
+
 	public boolean canTakeAction() {
 		return canTakeAction;
 	}
-	
+
 	public void setCanTakeAction(boolean bool) {
 		canTakeAction = bool;
 	}
+
+	public Gear[] getGears() {
+		return gears;
+	}
 	
 	public void levelup() {
+		for (int i = 0; i < 5; i++) {
+			if(gears[i] != null) {
+				gears[i].unequip(this);
+			}
+		}
 		double factor = statFactors[getLevel()] + 100;
 		this.setMaxHP((int) (0.01 * factor * this.getMaxHP()));
 		this.setAttack((int) (0.01 * factor * this.getAttack()));
 		setLevel(getLevel() + 1);
+		for (int i = 0; i < 5; i++) {
+			if(gears[i] != null) {
+				gears[i].equip(this);
+			}
+		}
 	}
-		
+
 }

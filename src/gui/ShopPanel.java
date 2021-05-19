@@ -82,7 +82,7 @@ public class ShopPanel extends VBox {
 				public void handle(ActionEvent arg0) {
 					// TODO Auto-generated method stub
 					System.out.println(item.getName());
-					GameController.showItemInfo(true, item, true, true);
+					GameController.showItemInfo(true, item, true, true, false);
 				}
 			});
 			Button buy = new Button("Buy");
@@ -116,7 +116,7 @@ public class ShopPanel extends VBox {
 						}
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
-						e.printStackTrace();
+						GameController.showAleart(true, "Inventory full");
 					}
 					GameController.updateInventory();
 				}

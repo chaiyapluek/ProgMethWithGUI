@@ -7,6 +7,7 @@ import Item.Item;
 import List.AllyUnitList_Saber;
 import Map.*;
 import UnitBase.*;
+import gui.AleartPanel;
 import gui.ChooseMerPanel;
 import gui.ControlPanel;
 import gui.InfoItem;
@@ -38,6 +39,7 @@ public class GameController {
 	private static ReplacePanel replacePanel;
 	private static InfoItem infoItem;
 	private static InfoMercenary infoMercenary;
+	private static AleartPanel aleartPanel;
 
 	private static boolean moveToggle = false;
 	private static boolean onBattle = false;
@@ -152,18 +154,21 @@ public class GameController {
 		replacePanel = new ReplacePanel();
 		infoItem = new InfoItem();
 		infoMercenary = new InfoMercenary();
+		aleartPanel = new AleartPanel();
 
 		selectTargetPanel.setVisible(false);
 		swapPanel.setVisible(false);
 		replacePanel.setVisible(false);
 		infoItem.setVisible(false);
 		infoMercenary.setVisible(false);
+		aleartPanel.setVisible(false);
 
 		mainPanel.getChildren().add(selectTargetPanel);
 		mainPanel.getChildren().add(swapPanel);
 		mainPanel.getChildren().add(replacePanel);
 		mainPanel.getChildren().add(infoItem);
 		mainPanel.getChildren().add(infoMercenary);
+		mainPanel.getChildren().add(aleartPanel);
 		setChooseIcon();
 	}
 
@@ -265,12 +270,24 @@ public class GameController {
 		controlPanel.getInventoryPanel().update();
 	}
 
-	public static void discardItem() {
+	public static void discardItemInInventory() {
 		controlPanel.getInventoryPanel().discardItem();
 	}
 	
+	public static void discardEquippedGear() {
+		controlPanel.getInventoryPanel().discardEquippedItem();
+	}
+
 	public static void useItem() {
 		controlPanel.getInventoryPanel().useItem();
+	}
+
+	public static void equipItem() {
+		controlPanel.getInventoryPanel().equipItem();
+	}
+	
+	public static void unequipItem() {
+		controlPanel.getInventoryPanel().unequipItem();
 	}
 
 	public static void setSelectTarget(boolean bool) {
@@ -294,11 +311,11 @@ public class GameController {
 		replacePanel.setVisible(bool);
 	}
 
-	public static void showItemInfo(boolean bool, Item item, boolean onShop, boolean isPotion) {
+	public static void showItemInfo(boolean bool, Item item, boolean onShop, boolean isPotion, boolean onInventory) {
 		if (bool) {
 			infoItem.update(item, onShop, isPotion);
 			if (!onShop) {
-				infoItem.showButtons(isPotion);
+				infoItem.showButtons(isPotion, onInventory);
 			} else {
 				infoItem.removeButton();
 			}
@@ -311,5 +328,12 @@ public class GameController {
 			infoMercenary.update(unit);
 		}
 		infoMercenary.setVisible(bool);
+	}
+
+	public static void showAleart(boolean bool, String text) {
+		if (bool) {
+			aleartPanel.setText(text);
+		}
+		aleartPanel.setVisible(bool);
 	}
 }

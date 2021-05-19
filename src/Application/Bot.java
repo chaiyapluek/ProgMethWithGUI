@@ -110,16 +110,16 @@ public class Bot {
 			useSkill(targets, unit, unit.getMaxSkill() - 1, targetIdx);
 			return;
 		}
-		if (num < 0) {
+		if (num < 50) {
 			// Attack
 			
 			System.out.println(units[idx].getName() + " attacked " + targets[targetIdx].getName());
 			BattleController.attack(units[idx], targets[targetIdx]);
-		} else if (num < 0) {
+		} else if (num < 60) {
 			// Defense
 			System.out.println(this.units[idx].getName() + " defense up");
 			((UnitAction) units[idx]).defense();
-		} else if (num >= 0 && useableSkill.size() > 0) {
+		} else if (num >= 60 && useableSkill.size() > 0) {
 			// Use Skill
 			int rand = ran.nextInt(useableSkill.size());
 			int skillIdx = useableSkill.get(rand);

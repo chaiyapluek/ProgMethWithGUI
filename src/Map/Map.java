@@ -49,7 +49,7 @@ public class Map {
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
 				if (mark[i][j] == 1) {
-					stages[i][j] = StageList_Difficulty4.Stage1();
+					stages[i][j] = StageList_Difficulty3.testStage();
 				} else {
 					stages[i][j] = null;
 				}

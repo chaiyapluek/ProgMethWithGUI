@@ -1,8 +1,12 @@
 package gui;
 
+import java.util.Observable;
+
 import UnitBase.AllyUnit;
 import UnitBase.Unit;
 import UnitBase.UnitStats;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -10,6 +14,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -58,6 +63,7 @@ public class ControlPanel extends HBox {
 	private InventoryPanel inventoryPanel;
 	private ShopPanel shopPanel;
 	private EnemyInfoPanel enemyInfo;
+	private ObservableList<GearButton> gearsButton = FXCollections.observableArrayList();
 
 	public ControlPanel(Unit u) {
 
@@ -134,16 +140,16 @@ public class ControlPanel extends HBox {
 		left.add(skillPane, 3, 1, 4, 1);
 		left.add(Stats, 0, 2, 2, 2);
 
-		Button test = new Button("KILL");
-		test.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				GameController.getPlayer().setMoney(GameController.getPlayer().getMoney()-1);
-				shopPanel.setMoneyText();
-			}
-		});
-		left.add(test, 3, 2);
+		HBox gearsPane = new HBox();
+		gearsPane.setSpacing(10);
+		gearsPane.setAlignment(Pos.CENTER_LEFT);
+
+		for (int i = 0; i < 5; i++) {
+			GearButton button = new GearButton();
+			gearsPane.getChildren().add(button);
+			gearsButton.add(button);
+		}
+		left.add(gearsPane, 2, 2, 5, 2);
 
 		this.rightPanel = rightPanel();
 
@@ -258,6 +264,18 @@ public class ControlPanel extends HBox {
 		updateLabel();
 		setIcon();
 		skillPane.update();
+		updateGear();
+	}
+
+	public void updateGear() {
+		AllyUnit unit = GameController.getSelectAllyUnit();
+		int cnt = 0;
+		for (GearButton button : gearsButton) {
+			button.setGear(unit.getGears()[cnt]);
+			button.update();
+			cnt++;
+		}
+
 	}
 
 	public void setIcon() {

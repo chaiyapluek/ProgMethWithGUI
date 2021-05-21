@@ -48,18 +48,9 @@ public class ReplacePanel extends StackPane {
 		BorderPane top = new BorderPane();
 		Label label = new Label("Select Unit to Replace");
 		label.setFont(Font.font("Berlin Sans FB", 36));
-		Button back = new Button("X");
-		top.setRight(back);
+		Button back = new Button();
+		GameController.setBackButton(back);
 		top.setCenter(label);
-
-		back.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				GameController.setReplacePanel(false);
-			}
-		});
 
 		buttons = new HBox();
 		buttons.setAlignment(Pos.CENTER);

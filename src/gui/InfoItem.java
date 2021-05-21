@@ -72,7 +72,7 @@ public class InfoItem extends StackPane {
 		Button back = new Button("X");
 		top.setRight(back);
 		top.setCenter(label);
-
+		GameController.setBackButton(back);
 		back.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override

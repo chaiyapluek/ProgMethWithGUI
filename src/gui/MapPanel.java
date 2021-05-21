@@ -1,5 +1,9 @@
 package gui;
 
+import org.w3c.dom.events.EventTarget;
+import org.w3c.dom.events.MouseEvent;
+import org.w3c.dom.views.AbstractView;
+
 import Coordinate.Coordinate;
 import Map.Map;
 import javafx.collections.FXCollections;
@@ -9,9 +13,15 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import logic.GameController;
 
 public class MapPanel extends VBox {
@@ -23,16 +33,17 @@ public class MapPanel extends VBox {
 
 		this.setMaxSize(400, 300);
 		this.setMinSize(400, 300);
-		this.setPadding(new Insets(20));
-		this.setSpacing(30);
+		this.setPadding(new Insets(10));
+		this.setSpacing(10);
 		this.setAlignment(Pos.TOP_CENTER);
 
 		HBox pane = new HBox();
 		pane.setAlignment(Pos.CENTER_RIGHT);
-		Button back = new Button("X");
+		Button back = new Button();
+		GameController.setBackButton(back);
 		pane.getChildren().add(back);
 		back.setOnAction(new EventHandler<ActionEvent>() {
-			
+
 			@Override
 			public void handle(ActionEvent arg0) {
 				// TODO Auto-generated method stub
@@ -41,7 +52,7 @@ public class MapPanel extends VBox {
 				update();
 			}
 		});
-		
+
 		GridPane mapPanel = new GridPane();
 		mapPanel.setAlignment(Pos.CENTER);
 		map = GameController.getMap();
@@ -57,37 +68,31 @@ public class MapPanel extends VBox {
 			}
 		}
 		update();
-		this.getChildren().addAll(pane,mapPanel);
+		this.getChildren().addAll(pane, mapPanel);
 	}
 
 	public void update() {
-
 		for (StageButton button : stageList) {
 			if (button.getCoordinate().equals(GameController.getPlayerCoordinate())) {
-				button.setText("PLAYER");
+				button.setPlayerIcon();
 			} else {
-				button.setText("");
+				button.setGraphic(null);
+				if (button.getStage().isHasShop()) {
+					button.setShopIcon();
+				} else if (button.getStage().isBoss()) {
+					button.setBossIcon();
+				}
 			}
 			if (GameController.getMoveToggle()) {
-				int nowi = GameController.getPlayerCoordinate().getX();
-				int nowj = GameController.getPlayerCoordinate().getY();
-				int nexti = button.getCoordinate().getX();
-				int nextj = button.getCoordinate().getY();
-				if(GameController.getNowStage().isClear()) {
-					if ((Math.abs(nowi - nexti) + Math.abs(nowj - nextj)) <= 1) {
+				if (button.getStage().isClear()) {
+					button.setCanGo(true);
+					button.setCanMoveBackground(true);
+				} else {
+					if(GameController.getMap().isNearbyClear(button.getCoordinate())) {
 						button.setCanGo(true);
-						button.setCanMoveBackground();
-					}
-				}else {
-					if(nowi==nexti && nowj==nextj) {
-						button.setCanGo(true);
-						button.setCanMoveBackground();
-					}else if ((Math.abs(nowi - nexti) + Math.abs(nowj - nextj)) <= 1 && button.getStage().isClear()) {
-						button.setCanGo(true);
-						button.setCanMoveBackground();
+						button.setCanMoveBackground(false);
 					}
 				}
-				
 			} else {
 				if (!button.getStage().isClear()) {
 					button.setCanGo(false);

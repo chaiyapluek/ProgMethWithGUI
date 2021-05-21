@@ -49,7 +49,8 @@ public class SelectTargetSkillPanel extends StackPane {
 		BorderPane top = new BorderPane();
 		Label label = new Label("Select Target");
 		label.setStyle("-fx-font-size: 24px; -fx-font-family:\"Arial Black\";-fx-fill: #555;");
-		Button back = new Button("X");
+		Button back = new Button();
+		GameController.setBackButton(back);
 		top.setRight(back);
 		top.setCenter(label);
 
@@ -90,6 +91,7 @@ public class SelectTargetSkillPanel extends StackPane {
 				public void handle(ActionEvent arg0) {
 					// TODO Auto-generated method stub
 					BattleController.useSkillTo(u);
+					GameController.getMainPanel().showText();
 					BattleController.afterTakeAction();
 					GameController.updateBattlePanel();
 					GameController.updateAllyInfo();

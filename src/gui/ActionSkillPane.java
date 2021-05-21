@@ -24,8 +24,6 @@ public class ActionSkillPane extends HBox {
 
 		this.setSpacing(10);
 		this.setAlignment(Pos.CENTER_LEFT);
-		this.setBorder(new Border(
-				new BorderStroke(Color.GOLD, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		this.setMinWidth(275);
 		// this.setMinHeight(75);
 

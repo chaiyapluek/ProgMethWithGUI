@@ -49,7 +49,8 @@ public class SwapPanel extends StackPane {
 		BorderPane top = new BorderPane();
 		Label label = new Label("Select Target to Swap");
 		label.setStyle("-fx-font-size: 24px; -fx-font-family:\"Arial Black\";-fx-fill: #555;");
-		Button back = new Button("X");
+		Button back = new Button();
+		GameController.setBackButton(back);
 		top.setRight(back);
 		top.setCenter(label);
 

@@ -4,6 +4,8 @@ import java.util.Random;
 
 import UnitBase.Unit;
 import UnitBase.UnitAction;
+import logic.BattleController;
+import logic.GameController;
 
 public class Damage extends SubSkill {
 
@@ -29,7 +31,8 @@ public class Damage extends SubSkill {
 
 	}
 
-	public void damaged(Unit u, Unit t) {
+	public void damaged(Unit u, Unit t, int cnt) {
+		int sum = 0;
 		Random ran = new Random();
 		UnitAction User = (UnitAction) u;
 		UnitAction Target = (UnitAction) t;
@@ -52,11 +55,23 @@ public class Damage extends SubSkill {
 			double damageCut = Math.ceil(defense * damageDealed / 100.0);
 			int totalDamage = (int) (damageDealed - damageCut);
 			Target.setCurrentHP(Target.getCurrentHP() - totalDamage);
+			sum += totalDamage;
 			System.out.println(totalDamage);
+		}
+		if (BattleController.getEnemyTurn()) {
+			int currentTime = BattleController.getEnemyTimeCount();
+			GameController.getMainPanel().addTextToShow("" + sum, Target, currentTime);
+			BattleController.setEnemyTimeCount(currentTime + 500);
+		} else {
+			GameController.getMainPanel().addTextToShow("" + sum, Target, 500 * cnt);
 		}
 		if (Target.getCurrentHP() <= 0) {
 			Target.setIsDead(true);
 		}
+	}
+
+	public int getHitCount() {
+		return hitAmount;
 	}
 
 }

@@ -48,7 +48,8 @@ public class InfoMercenary extends StackPane {
 		BorderPane top = new BorderPane();
 		Label label = new Label("Mercenary Information");
 		label.setStyle("-fx-font-size: 24px; -fx-font-family:\"Arial Black\";-fx-fill: #555;");
-		Button back = new Button("X");
+		Button back = new Button();
+		GameController.setBackButton(back);
 		top.setRight(back);
 		top.setCenter(label);
 
@@ -72,6 +73,7 @@ public class InfoMercenary extends StackPane {
 
 		info = new MercenaryCell(unit);
 		info.getChildren().remove(info.getChildren().size() - 1);
+		info.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
 
 		pane.getChildren().remove(pane.getChildren().size() - 1);
 		pane.getChildren().add(info);

@@ -6,6 +6,8 @@ import Item.Potion;
 import List.AllyUnitList;
 import Shop.Shop;
 import UnitBase.AllyUnit;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -17,29 +19,42 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import logic.GameController;
 
 public class ShopPanel extends VBox {
 
 	private Label money;
+	private ObservableList<ShopButton> shopButtons = FXCollections.observableArrayList();
+	private VBox root;
+
+	private ScrollPane shopPane;
+	private Shop shop;
 
 	public ShopPanel() {
 
 		this.setMaxSize(400, 300);
 		this.setMinSize(400, 300);
-		this.setPadding(new Insets(20));
+		this.setPadding(new Insets(10));
 		this.setSpacing(10);
+		this.setAlignment(Pos.CENTER);
 
-		HBox backPanel = new HBox();
-		backPanel.setAlignment(Pos.CENTER_RIGHT);
+		BorderPane backPanel = new BorderPane();
+		backPanel.setMaxSize(400, 60);
+		backPanel.setMinSize(400, 60);
+		backPanel.setPadding(new Insets(25));
 		money = new Label();
+		money.setFont(new Font("Arial Black", 16));
 		setMoneyText();
-		money.setPadding(new Insets(0, 250, 0, 0));
-		Button back = new Button("X");
-		backPanel.getChildren().add(money);
-		backPanel.getChildren().add(back);
+		Button back = new Button();
+		GameController.setBackButton(back);
+		backPanel.setAlignment(money, Pos.CENTER);
+		backPanel.setAlignment(back, Pos.CENTER);
+		backPanel.setLeft(money);
+		backPanel.setRight(back);
 		back.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -50,156 +65,33 @@ public class ShopPanel extends VBox {
 		});
 		this.getChildren().add(backPanel);
 
-		ScrollPane shopPane = new ScrollPane();
+		shopPane = new ScrollPane();
 
-		VBox root = new VBox();
+		root = new VBox();
 		root.setAlignment(Pos.CENTER_LEFT);
 		root.setSpacing(10);
 		root.setMaxWidth(250);
 		root.setMinWidth(250);
-		root.setPadding(new Insets(10));
+		root.setPadding(new Insets(20));
 
-		Shop shop = new Shop();
+		shop = new Shop();
 		Label itemLabel = new Label("Items");
+		itemLabel.setFont(new Font("Arial Black", 16));
 		root.getChildren().add(itemLabel);
 		for (int i = 0; i < 10; i++) {
 			Item item = shop.getItems()[i];
-
-			HBox hbox = new HBox();
-			Button button = new Button();
-			button.setMaxSize(45, 45);
-			button.setMinSize(45, 45);
-			// System.out.println(item.getUrl());
-			Image img = new Image(item.getUrl());
-			ImageView view = new ImageView(img);
-			view.setFitHeight(45);
-			view.setPreserveRatio(true);
-			button.setGraphic(view);
-			Button info = new Button("Info");
-			info.setOnAction(new EventHandler<ActionEvent>() {
-
-				@Override
-				public void handle(ActionEvent arg0) {
-					// TODO Auto-generated method stub
-					System.out.println(item.getName());
-					GameController.showItemInfo(true, item, true, true, false);
-				}
-			});
-			Button buy = new Button("Buy");
-			buy.setOnAction(new EventHandler<ActionEvent>() {
-
-				@Override
-				public void handle(ActionEvent arg0) {
-					// TODO Auto-generated method stub
-					if (GameController.getPlayer().getMoney() < item.getPrice()) {
-						return;
-					}
-					try {
-						if (item instanceof Gear) {
-							GameController.getPlayer().getInventory().addToInventory(item);
-						} else {
-							if (GameController.getPlayer().getInventory().isPotionExist((Potion) item) == false) {
-								GameController.getPlayer().getInventory().addToInventory(item);
-							} else {
-								for (int i = 0; i < GameController.getPlayer().getInventory().getInventorySize(); i++) {
-									if (GameController.getPlayer().getInventory().getInventory()
-											.get(i) instanceof Potion
-											&& ((Potion) item).equals(
-													GameController.getPlayer().getInventory().getInventory().get(i))) {
-										((Potion) GameController.getPlayer().getInventory().getInventory().get(i))
-												.setNumberOfPotion(((Potion) GameController.getPlayer().getInventory()
-														.getInventory().get(i)).getNumberOfPotion() + 1);
-									}
-								}
-								GameController.updateInventory();
-							}
-						}
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						GameController.showAleart(true, "Inventory full");
-					}
-					GameController.updateInventory();
-				}
-			});
-			hbox.getChildren().add(button);
-			hbox.getChildren().add(info);
-			hbox.getChildren().add(buy);
-			hbox.setAlignment(Pos.CENTER_LEFT);
-			hbox.setSpacing(10);
-			root.getChildren().add(hbox);
+			ShopButton button = new ShopButton(item);
+			root.getChildren().add(button);
+			shopButtons.add(button);
 		}
 		Label unitLabel = new Label("Mercenaries");
+		unitLabel.setFont(new Font("Arial Black", 16));
 		root.getChildren().add(unitLabel);
 		for (int i = 0; i < 10; i++) {
 			AllyUnit allyUnit = shop.getAllyUnits()[i];
-			HBox hbox = new HBox();
-			Button button = new Button();
-			button.setMaxSize(45, 45);
-			button.setMinSize(45, 45);
-			Image img = new Image(allyUnit.getIconUrl());
-			ImageView view = new ImageView(img);
-			view.setFitHeight(45);
-			view.setPreserveRatio(true);
-			button.setGraphic(view);
-			Button info = new Button("Info");
-			info.setOnAction(new EventHandler<ActionEvent>() {
-
-				@Override
-				public void handle(ActionEvent arg0) {
-					// TODO Auto-generated method stub
-					GameController.showMercenaryInfo(true, allyUnit);
-				}
-			});
-			Button buy = new Button("Buy");
-			buy.setOnAction(new EventHandler<ActionEvent>() {
-
-				@Override
-				public void handle(ActionEvent arg0) {
-					if (GameController.getPlayer().getMoney() < 1000) {
-						return;
-					}
-					// TODO Auto-generated method stub
-					if (!GameController.isUnitExist(allyUnit)) {
-						try {
-							int idx = AllyUnitList.getAllUnit().indexOf(allyUnit);
-							AllyUnit addedUnit = AllyUnitList.getAllUnit().get(idx);
-							GameController.addUnits(addedUnit);
-							GameController.setSelectAllyUnit(addedUnit);
-							GameController.updateAllyInfo();
-							GameController.setChooseIcon();
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					} else {
-						for (int i = 0; i < GameController.getPlayer().getUnits().length; i++) {
-							if (allyUnit.equals(GameController.getPlayer().getUnits()[i])
-									&& GameController.getPlayer().getUnits()[i].getLevel() < 5) {
-								GameController.getPlayer().getUnits()[i].levelup();
-								GameController.setSelectAllyUnit(GameController.getPlayer().getUnits()[i]);
-								GameController.updateAllyInfo();
-								GameController.setChooseIcon();
-							}
-						}
-						for (int i = 0; i < GameController.getPlayer().getBackUnits().length; i++) {
-							if (allyUnit.equals(GameController.getPlayer().getBackUnits()[i])
-									&& GameController.getPlayer().getBackUnits()[i].getLevel() < 5) {
-								GameController.getPlayer().getBackUnits()[i].levelup();
-								GameController.setSelectAllyUnit(GameController.getPlayer().getBackUnits()[i]);
-								GameController.updateAllyInfo();
-								GameController.setChooseIcon();
-							}
-						}
-					}
-					GameController.updateInventory();
-				}
-			});
-			hbox.getChildren().add(button);
-			hbox.getChildren().add(info);
-			hbox.getChildren().add(buy);
-			hbox.setAlignment(Pos.CENTER_LEFT);
-			hbox.setSpacing(10);
-			root.getChildren().add(hbox);
+			ShopButton button = new ShopButton(allyUnit);
+			root.getChildren().add(button);
+			shopButtons.add(button);
 		}
 
 		shopPane.setContent(root);
@@ -208,6 +100,48 @@ public class ShopPanel extends VBox {
 
 	public void setMoneyText() {
 		money.setText("Money : " + GameController.getPlayer().getMoney());
+	}
+
+	public void removeItem() {
+		for (ShopButton button : shopButtons) {
+			if (button.getIsBought()) {
+				root.getChildren().remove(button);
+			}
+		}
+	}
+
+	public void update() {
+
+		if (GameController.getNowStage().isHasShop()) {
+			Shop shop = GameController.getNowStage().getShop();
+			root.getChildren().clear();
+			shopButtons.clear();
+			Label itemLabel = new Label("Items");
+			itemLabel.setFont(new Font("Arial Black", 16));
+			root.getChildren().add(itemLabel);
+			for (int i = 0; i < 10; i++) {
+				if (shop.getMarkItem(i)) {
+					continue;
+				}
+				Item item = shop.getItems()[i];
+				ShopButton button = new ShopButton(item);
+				root.getChildren().add(button);
+				shopButtons.add(button);
+			}
+			Label unitLabel = new Label("Mercenaries");
+			unitLabel.setFont(new Font("Arial Black", 16));
+			root.getChildren().add(unitLabel);
+			for (int i = 0; i < 10; i++) {
+				AllyUnit allyUnit = shop.getAllyUnits()[i];
+				if (shop.getMarkUnit(i)) {
+					continue;
+				}
+				ShopButton button = new ShopButton(allyUnit);
+				root.getChildren().add(button);
+				shopButtons.add(button);
+			}
+		}
+
 	}
 
 }

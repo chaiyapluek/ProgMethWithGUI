@@ -4,9 +4,17 @@ import gui.StartPanel;
 import gui.ChooseMerPanel;
 import gui.MainPanel;
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import logic.GameController;
 
@@ -79,4 +87,5 @@ public class Main extends Application{
 	public static Scene getMainScene() {
 		return mainScene;
 	}
+
 }

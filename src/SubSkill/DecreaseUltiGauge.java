@@ -8,7 +8,7 @@ public class DecreaseUltiGauge extends SubSkill {
 	private int decreaseAmount;
 
 	public DecreaseUltiGauge(int decreaseAmount) {
-		super("[ Gauge up ]", 0);
+		super("[ Gauge Down ]", 0);
 		this.decreaseAmount = decreaseAmount;
 		// TODO Auto-generated constructor stub
 	}

@@ -1,5 +1,6 @@
 package Map;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import Coordinate.Coordinate;
@@ -19,8 +20,10 @@ public class Map {
 		this.height = mark.length;
 		this.width = mark[0].length;
 		assignStage(mark);
-		stages[height-1][0].setClear(true);
-		stages[height-1][0].setHasShop(true);
+		stages[height - 1][0] = StageList_Difficulty1.Stage1();
+		stages[height - 1][0].setClear(true);
+		stages[height - 1][0].setHasShop(true);
+		stages[height - 1][0].createShop();
 	}
 
 	public boolean isEmpty(Coordinate coordinate) {
@@ -36,7 +39,7 @@ public class Map {
 	public Stage getStage(Coordinate coordinate) {
 		return stages[coordinate.getX()][coordinate.getY()];
 	}
-	
+
 	public int getHeight() {
 		return height;
 	}
@@ -46,14 +49,87 @@ public class Map {
 	}
 
 	public void assignStage(int[][] mark) {
+		int sti = height - 1;
+		int stj = 0;
+		int eni = 0;
+		int enj = width - 1;
+		Stage[][] stageDiff = new Stage[6][5];
+		stageDiff[0] = StageList_Difficulty1.getStage_Difficulty1();
+		stageDiff[1] = StageList_Difficulty2.getStage_Difficulty2();
+		stageDiff[2] = StageList_Difficulty3.getStage_Difficulty3();
+		stageDiff[3] = StageList_Difficulty4.getStage_Difficulty4();
+		stageDiff[4] = StageList_Difficulty5.getStage_Difficulty5();
+		stageDiff[5] = StageList_Boss.getMiniBossStage();
+		boolean[][] mark2 = new boolean[6][10];
+		Random r = new Random();
 		for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
 				if (mark[i][j] == 1) {
-					stages[i][j] = StageList_Difficulty3.testStage();
+					if (i == eni && j == enj) {
+						stages[i][j] = StageList_Boss.Boss();
+						stages[i][j].setIsBoss(true);
+					} else if ((i == eni + 1 && j == enj) || (i == eni && j == enj - 1)) {
+						int idx = r.nextInt(4);
+						while (mark2[5][idx]) {
+							idx = r.nextInt(4);
+						}
+						stages[i][j] = stageDiff[5][idx];
+						mark2[5][idx] = true;
+					} else {
+						int dis = Math.abs(sti - i) + Math.abs(stj - j);
+						int diff = (dis - 1) / 2;
+						if (dis == 0) {
+							continue;
+						}
+						boolean check = true;
+						for (int k = 0; k < 5; k++) {
+							if (!mark2[diff][k]) {
+								check = false;
+								break;
+							}
+						}
+						if (check) {
+							for (int k = 0; k < 5; k++) {
+								mark2[diff][k] = false;
+							}
+						}
+						int idx = r.nextInt(5);
+						while (mark2[diff][idx]) {
+							idx = r.nextInt(5);
+						}
+						stages[i][j] = stageDiff[diff][idx];
+						mark2[diff][idx] = true;
+					}
 				} else {
 					stages[i][j] = null;
 				}
 			}
+		}
+		for (int k = 1; k <= 5; k++) {
+			ArrayList<Stage> s = new ArrayList<Stage>();
+			for (int i = 0; i < height; i++) {
+				for (int j = 0; j < width; j++) {
+					if (mark[i][j] != 1) {
+						continue;
+					}
+					if ((i == sti && j == stj) || (i == eni && j == enj) || (i == eni + 1 && j == enj)
+							|| (i == eni && j == enj - 1)) {
+						continue;
+					}
+					int dis = Math.abs(sti - i) + Math.abs(stj - j);
+					int diff = (dis - 1) / 2 + 1;
+					if (diff == k) {
+						s.add(stages[i][j]);
+					}
+				}
+
+			}
+			if (s.size() <= 0) {
+				continue;
+			}
+			int idx = r.nextInt(s.size());
+			s.get(idx).setHasShop(true);
+			s.get(idx).createShop();
 		}
 	}
 
@@ -118,5 +194,28 @@ public class Map {
 			}
 		}
 		return (1.0 * num) / (n * m) * 100.0;
+	}
+
+	public boolean isNearbyClear(Coordinate coor) {
+		boolean isClear = false;
+		int nowi = coor.getX();
+		int nowj = coor.getY();
+		int[] dir = { 1, -1, 0, 0 };
+		int[] dic = { 0, 0, 1, -1 };
+		for (int k = 0; k < 4; k++) {
+			int nexti = nowi + dir[k];
+			int nextj = nowj + dic[k];
+			if(nexti<0 || nextj<0 || nexti>=height || nextj>=width) {
+				continue;
+			}
+			if(stages[nexti][nextj] == null) {
+				continue;
+			}
+			if(stages[nexti][nextj].isClear()) {
+				isClear = true;
+				break;
+			}
+		}
+		return isClear;
 	}
 }

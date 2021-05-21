@@ -17,6 +17,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import logic.BattleController;
 import logic.GameController;
 
@@ -36,13 +37,15 @@ public class BattlePanel extends VBox {
 		this.setAlignment(Pos.CENTER);
 		this.setPadding(new Insets(10));
 		this.setSpacing(15);
-		this.setBorder(new Border(
-				new BorderStroke(Color.GOLD, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
 		VBox labelPane = new VBox();
 		labelPane.setAlignment(Pos.CENTER);
 		wave = new Label("WAVE : 1");
 		turn = new Label("TURN : 1");
+		wave.setFont(new Font("Arial Black",20));
+		wave.setTextFill(Color.ANTIQUEWHITE);
+		turn.setFont(new Font("Arial Black",20));
+		turn.setTextFill(Color.ANTIQUEWHITE);
 		labelPane.getChildren().addAll(wave, turn);
 
 		HBox unitPane = new HBox();

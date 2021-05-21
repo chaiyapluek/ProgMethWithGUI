@@ -7,13 +7,14 @@ import Skill.NormalSkill;
 import Skill.Skill;
 import SubSkill.*;
 import UnitBase.AdvanceUnit;
+import javafx.application.Platform;
 import logic.BattleController;
 import logic.GameController;
 import UnitBase.*;
 
 public class Bot {
 
-	public Unit[] units;
+	private Unit[] units;
 
 	public Bot(Unit[] units) {
 		this.units = new Unit[3];
@@ -38,27 +39,29 @@ public class Bot {
 
 	public void play(Unit[] targets) {
 		// Random ran = new Random();
-		System.out.println("------Enemy turn------");
+		BattleController.setEnemyTimeCount(0);
 		for (int i = 0; i < 3; i++) {
-			if(BattleController.getEnemyWin()) {
-				System.out.println("You lose, FOOL!!");
-				break;
-			}
-			System.out.println(i);
 			if (nullOrDead(i))
 				continue;
 			if (((UnitStats) units[i]).getIsStun())
 				continue;
-			// sleep(1000);
-			System.out.println(this.units[i].getName() + " turn");
-			// sleep(1000);
 			if (units[i] instanceof BasicUnit) {
 				BasicUnitAction(targets, i);
-			} else if (this.units[i] instanceof AdvanceUnit) {
+			} else if (units[i] instanceof AdvanceUnit) {
 				AdvanceUnitAction(targets, i);
 			}
 		}
-		System.out.println("----------------------");
+		Thread thread = new Thread(() -> {
+			GameController.getMainPanel().showText();
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					BattleController.enemyTurnEnd();
+				}
+			});
+		});
+		thread.start();
 	}
 
 	public void BasicUnitAction(Unit[] targets, int idx) {
@@ -104,7 +107,7 @@ public class Bot {
 			targetIdx = ran.nextInt(3);
 		}
 		if (tauntCheck(targets) != -1)
-				targetIdx = tauntCheck(targets);
+			targetIdx = tauntCheck(targets);
 		if (unit.getUltiGauge() == unit.getMaxUltigauge()) {
 			// useUlti
 			useSkill(targets, unit, unit.getMaxSkill() - 1, targetIdx);
@@ -112,7 +115,6 @@ public class Bot {
 		}
 		if (num < 50) {
 			// Attack
-			
 			System.out.println(units[idx].getName() + " attacked " + targets[targetIdx].getName());
 			BattleController.attack(units[idx], targets[targetIdx]);
 		} else if (num < 60) {
@@ -162,6 +164,7 @@ public class Bot {
 	public void useSkill(Unit[] targets, AdvanceUnit skillUser, int skillIdx, int targetIdx) {
 		Skill skill = skillUser.getSkills()[skillIdx];
 		if (skill.getToYourSelf()) {
+			System.out.println("Use skill to itself");
 			skill.use(skillUser, skillUser);
 		} else {
 			if (skill.getIsSingle()) {
@@ -171,7 +174,7 @@ public class Bot {
 				} else {
 					System.out.println(skillUser.getName() + " used skill to " + targets[targetIdx].getName());
 					skill.use(skillUser, targets[targetIdx]);
-					if(((UnitStats)targets[targetIdx]).getCurrentHP()<=0) {
+					if (((UnitStats) targets[targetIdx]).getCurrentHP() <= 0) {
 						((UnitStats) targets[targetIdx]).setIsDead(true);
 						BattleController.setPlayerUnitKilled(true);
 					}
@@ -191,7 +194,7 @@ public class Bot {
 						if (((UnitStats) targets[i]).getIsDead())
 							continue;
 						skill.use(skillUser, targets[i]);
-						if(((UnitStats)targets[i]).getCurrentHP()<=0) {
+						if (((UnitStats) targets[i]).getCurrentHP() <= 0) {
 							((UnitStats) targets[i]).setIsDead(true);
 							BattleController.setPlayerUnitKilled(true);
 						}

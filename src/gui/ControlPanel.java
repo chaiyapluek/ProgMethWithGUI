@@ -1,21 +1,20 @@
 package gui;
 
-import java.util.Observable;
-
 import UnitBase.AllyUnit;
 import UnitBase.Unit;
-import UnitBase.UnitStats;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
@@ -31,6 +30,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import logic.GameController;
 
 public class ControlPanel extends HBox {
@@ -70,7 +70,9 @@ public class ControlPanel extends HBox {
 		this.setMaxSize(1000, 300);
 		this.setMinSize(1000, 300);
 		this.setAlignment(Pos.CENTER_LEFT);
-
+		
+		this.setBackground(new Background(new BackgroundFill(Color.rgb(135, 152, 153), CornerRadii.EMPTY, Insets.EMPTY)));
+		
 		GridPane left = new GridPane();
 		left.setPadding(new Insets(20));
 		left.setHgap(10);
@@ -79,10 +81,10 @@ public class ControlPanel extends HBox {
 		left.setMinSize(600, 300);
 		left.setMaxSize(600, 300);
 		left.setBorder(new Border(
-				new BorderStroke(Color.CHOCOLATE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		Icon = new Pane();
 		Icon.setBorder(new Border(
-				new BorderStroke(Color.GRAY, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(3))));
+				new BorderStroke(Color.AQUAMARINE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(3))));
 		Icon.setMinSize(75, 75);
 		Icon.setMaxSize(75, 75);
 		setIcon();
@@ -93,6 +95,7 @@ public class ControlPanel extends HBox {
 		NameAndClass.setBorder(new Border(
 				new BorderStroke(Color.GOLD, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		NameAndClass.setAlignment(Pos.CENTER_RIGHT);
+		NameAndClass.setPadding(new Insets(5));
 		name = new Label(u.getName());
 		Class = new Label(u.get_Class());
 		name.setStyle("-fx-font-size: 14px; -fx-font-family:\"Arial Black\";-fx-fill: #555;");
@@ -102,6 +105,7 @@ public class ControlPanel extends HBox {
 		AllyUnit unit = (AllyUnit) u;
 		VBox HPAndGauge = new VBox();
 		HPAndGauge.setAlignment(Pos.CENTER_LEFT);
+		HPAndGauge.setPadding(new Insets(5));
 		HPAndGauge.setBorder(new Border(
 				new BorderStroke(Color.GOLD, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		HP = new Label("HP : " + unit.getCurrentHP() + "/" + unit.getMaxHP());
@@ -128,8 +132,8 @@ public class ControlPanel extends HBox {
 
 		Stats.getChildren().addAll(attack, def, crit, critdmg, dodge, level);
 		Stats.setBorder(new Border(
-				new BorderStroke(Color.DARKGRAY, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-
+				new BorderStroke(Color.GOLD, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		Stats.setPadding(new Insets(5));
 		ActionPane actionPane = new ActionPane();
 		skillPane = new ActionSkillPane();
 
@@ -175,8 +179,13 @@ public class ControlPanel extends HBox {
 			@Override
 			public void handle(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				rightPanel.getChildren().clear();
-				rightPanel.getChildren().add(shopPanel);
+				if (GameController.getNowStage().isClear()) {
+					rightPanel.getChildren().clear();
+					rightPanel.getChildren().add(shopPanel);
+					shopPanel.setMoneyText();
+				}else {
+					GameController.showAleart(true, "This stage is not clear yet.");
+				}
 			}
 		});
 
@@ -191,10 +200,38 @@ public class ControlPanel extends HBox {
 
 		});
 
+		setButton(mapButton);
+		setButton(inventoryButton);
+		setButton(shopButton);
+		setButton(fightButton);
+		
 		this.getChildren().add(left);
 		this.getChildren().add(rightPanel);
 		this.setBorder(new Border(
-				new BorderStroke(Color.GOLD, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		rightPanel.setBorder(new Border(
+				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+	}
+	
+	private void setButton(Button button) {
+		button.setBorder(new Border(
+				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		button.setFont(new Font("Arial Black",15));
+		button.setBackground(new Background(new BackgroundFill(Color.rgb(255, 207, 72), CornerRadii.EMPTY, Insets.EMPTY)));
+		button.setOnMouseEntered(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				// TODO Auto-generated method stub
+				button.setCursor(Cursor.HAND);
+			}
+		});
+		button.setOnMouseExited(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				// TODO Auto-generated method stub
+				button.setCursor(Cursor.HAND);
+			}
+		});
 	}
 
 	private StackPane rightPanel() {
@@ -307,5 +344,9 @@ public class ControlPanel extends HBox {
 
 	public InventoryPanel getInventoryPanel() {
 		return inventoryPanel;
+	}
+	
+	public ShopPanel getShopPanel() {
+		return shopPanel;
 	}
 }

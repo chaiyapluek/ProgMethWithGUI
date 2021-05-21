@@ -241,7 +241,7 @@ public class AllyUnitList_Saber {
 		Skill[] skills = new Skill[] { Musashi_FirstSkill, Musashi_SecondSkill, Musashi_ThirdSkill,
 				Musashi_Ultimate };
 
-		AllyUnit Musashi = new AllyUnit("Miyamoto Musashi", "Saber", stats, skills, statsFactors, skillRequirement);
+		AllyUnit Musashi = new AllyUnit("Musashi", "Saber", stats, skills, statsFactors, skillRequirement);
 		Musashi.setUrl("AllyUnit/Musashi.png");
 		Musashi.setIconUrl("AllyUnit/Icon/Musashi_Icon.png");
 		return Musashi;

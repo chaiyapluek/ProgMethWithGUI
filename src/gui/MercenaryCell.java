@@ -8,11 +8,14 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
@@ -44,6 +47,8 @@ public class MercenaryCell extends VBox {
 		this.setSpacing(20);
 		this.setMaxSize(400, 560);
 		this.setMinSize(400, 560);
+		this.setBackground(new Background(new BackgroundFill(Color.rgb(131, 242, 249), CornerRadii.EMPTY, Insets.EMPTY)));
+		
 		StatsPane statsPane = new StatsPane(u);
 		Pane merImage = new Pane();
 		merImage.setMaxSize(400, 250);
@@ -66,10 +71,28 @@ public class MercenaryCell extends VBox {
 		info.setSpacing(20);
 		info.getChildren().addAll(statsPane, skills);
 		info.setBorder(new Border(
-				new BorderStroke(Color.GOLD, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(2))));
 		
 		Button choose = new Button("CHOOSE");
+		choose.setFont(new Font("Arial Black",18));
 		choose.setPrefWidth(150);
+		choose.setBackground(new Background(new BackgroundFill(Color.rgb(255, 207, 72), CornerRadii.EMPTY, Insets.EMPTY)));
+		choose.setBorder(new Border(
+				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		choose.setOnMouseEntered(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				// TODO Auto-generated method stub
+				choose.setCursor(Cursor.HAND);
+			}
+		});
+		choose.setOnMouseExited(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				// TODO Auto-generated method stub
+				choose.setCursor(Cursor.HAND);
+			}
+		});
 		
 		choose.setOnAction(new EventHandler<ActionEvent>() {
 			

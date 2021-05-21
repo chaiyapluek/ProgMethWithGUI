@@ -5,7 +5,10 @@ import Map.Stage;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -22,12 +25,27 @@ public class StageButton extends Button {
 	private Stage stage;
 	private Coordinate coordinate;
 	private boolean canGo;
+	private final ImageView playerIcon = new ImageView(new Image("player-icon.png"));
+	private final ImageView shopIcon = new ImageView(new Image("shop-icon.png"));
+	private final ImageView bossIcon = new ImageView(new Image("boss-icon.png"));
 
 	public StageButton(Stage stage, Coordinate coor) {
 
 		this.stage = stage;
 		this.coordinate = coor;
 		this.canGo = false;
+		this.setAlignment(Pos.CENTER);
+
+		playerIcon.setFitWidth(30);
+		playerIcon.setPreserveRatio(true);
+		shopIcon.setFitWidth(30);
+		shopIcon.setPreserveRatio(true);
+		bossIcon.setFitWidth(30);
+		bossIcon.setPreserveRatio(true);
+
+		if (stage != null && stage.isHasShop()) {
+			this.setGraphic(shopIcon);
+		}
 
 		this.setMaxSize(35, 35);
 		this.setMinSize(35, 35);
@@ -58,6 +76,9 @@ public class StageButton extends Button {
 					GameController.updateMapPanel();
 				} else if (GameController.getMoveToggle() && canGo) {
 					GameController.movePlayer(coordinate);
+					if (stage.isHasShop()) {
+						GameController.updateShop();
+					}
 					GameController.setMoveToggle(false);
 					GameController.updateMapPanel();
 					GameController.updateAllyView();
@@ -72,8 +93,12 @@ public class StageButton extends Button {
 		this.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
 	}
 
-	public void setCanMoveBackground() {
-		this.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
+	public void setCanMoveBackground(boolean isClear) {
+		if (isClear) {
+			this.setBackground(new Background(new BackgroundFill(Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
+		}else {
+			this.setBackground(new Background(new BackgroundFill(Color.ORANGE, CornerRadii.EMPTY, Insets.EMPTY)));
+		}
 	}
 
 	public void setOnEnter() {
@@ -105,12 +130,24 @@ public class StageButton extends Button {
 			GameController.setSelectEnemyUnit(null);
 		} else {
 			for (int i = 0; i < stage.getUnitAtWave(0).length; i++) {
-				if(stage.getUnitAtWave(0)[i] != null) {
+				if (stage.getUnitAtWave(0)[i] != null) {
 					GameController.setSelectEnemyUnit(stage.getUnitAtWave(0)[i]);
 					break;
 				}
 			}
 		}
+	}
+
+	public void setPlayerIcon() {
+		this.setGraphic(playerIcon);
+	}
+
+	public void setShopIcon() {
+		this.setGraphic(shopIcon);
+	}
+
+	public void setBossIcon() {
+		this.setGraphic(bossIcon);
 	}
 
 	public Coordinate getCoordinate() {

@@ -42,7 +42,8 @@ public class AleartPanel extends StackPane {
 		top.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE, CornerRadii.EMPTY, Insets.EMPTY)));
 		label = new Label();
 		label.setStyle("-fx-font-size: 24px; -fx-font-family:\"Arial Black\";-fx-fill: #555;");
-		Button back = new Button("X");
+		Button back = new Button();
+		GameController.setBackButton(back);
 		back.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {

@@ -12,6 +12,7 @@ import SubSkill.Heal;
 import SubSkill.IncreaseUltiGauge;
 import UnitBase.*;
 import gui.ActionButton;
+import javafx.application.Platform;
 
 public class BattleController {
 
@@ -25,6 +26,7 @@ public class BattleController {
 	private static boolean enemyTurn = false;
 	private static boolean playerUnitKilled = false;
 	private static boolean enemyWin = false;
+	private static int enemyTimeCount = 0;
 
 	public static void initializeBattle() {
 
@@ -36,6 +38,7 @@ public class BattleController {
 		GameController.updateEnemyInfoPanel();
 		setSelectAllyUnit();
 		setSelectEnemyUnit();
+		GameController.playBattleSound();
 		GameController.getMainPanel().textTransition("Wave 1");
 	}
 
@@ -96,25 +99,33 @@ public class BattleController {
 	}
 
 	public static void afterTakeAction() {
+		GameController.updateBattlePanel();
+		Thread thread = new Thread(() -> {
 
-		UnitStats unit = (UnitStats) GameController.getSelectEnemyUnit();
-		if (unit.getCurrentHP() <= 0) {
-			unit.setIsDead(true);
-			GameController.updateBattlePanel();
-			if (!isWaveEnd()) {
-				setSelectEnemyUnit();
-			}
-		}
-
-		if (isWaveEnd()) {
-			nextWave();
-		} else {
-			System.out.println("ACTION");
-			System.out.println("-->" + numberOfTakenAction);
-			BattleController.checkPlayerTurnEnd();
-			GameController.updateAllyInfo();
-			GameController.updateEnemyInfoPanel();
-		}
+			GameController.getMainPanel().showText();
+			Platform.runLater(new Runnable() {
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					UnitStats unit = (UnitStats) GameController.getSelectEnemyUnit();
+					if (unit.getCurrentHP() <= 0) {
+						unit.setIsDead(true);
+						GameController.updateBattlePanel();
+						if (!isWaveEnd()) {
+							setSelectEnemyUnit();
+						}
+					}
+					if (isWaveEnd()) {
+						nextWave();
+					} else {
+						BattleController.checkPlayerTurnEnd();
+						GameController.updateAllyInfo();
+						GameController.updateEnemyInfoPanel();
+					}
+				}
+			});
+		});
+		thread.start();
 
 	}
 
@@ -125,20 +136,24 @@ public class BattleController {
 			System.out.println("ENEMYTURN");
 			enemyTurn = true;
 			decreaseSkillCooldown(bot.getUnits());
-			bot.play(GameController.getPlayer().getUnits());
 			decreaseEffectDuration(bot.getUnits());
+			bot.play(GameController.getPlayer().getUnits());
 			checkEffect(bot.getUnits());
-			enemyTurn = false;
-			if (playerUnitKilled) {
-				playerUnitKilled();
-			}
-			playerUnitKilled = false;
 			increseUltiGauge(bot.getUnits());
-			nextTurn();
+
 		}
 	}
 
-	private static void setSelectEnemyUnit() {
+	public static void enemyTurnEnd() {
+		enemyTurn = false;
+		if (playerUnitKilled) {
+			playerUnitKilled();
+		}
+		playerUnitKilled = false;
+		nextTurn();
+	}
+
+	public static void setSelectEnemyUnit() {
 		Stage stage = GameController.getNowStage();
 		for (int i = 0; i < stage.getUnitAtWave(wave - 1).length; i++) {
 			if (stage.getUnitAtWave(wave - 1)[i] == null)
@@ -152,7 +167,7 @@ public class BattleController {
 		GameController.setChooseIcon();
 	}
 
-	private static void setSelectAllyUnit() {
+	public static void setSelectAllyUnit() {
 		for (int i = 0; i < 3; i++) {
 			AllyUnit u = GameController.getPlayer().getUnits()[i];
 			if (u == null || u.getIsDead()) {
@@ -191,7 +206,10 @@ public class BattleController {
 
 	private static void nextWave() {
 		if (wave == GameController.getNowStage().getNumberOfWave()) {
+			GameController.getPlayer()
+					.setMoney(GameController.getPlayer().getMoney() + GameController.getNowStage().getMoneyDrop());
 			GameController.getMainPanel().textTransition("Victory");
+			GameController.playBGSound();
 		} else {
 			wave += 1;
 			nextTurn();
@@ -210,29 +228,26 @@ public class BattleController {
 	}
 
 	public static void attack(Unit attack, Unit defense) {
-		try {
-			UnitStats attacker = (UnitStats) attack;
-			UnitStats defender = (UnitStats) defense;
-			attacker.attack(defender);
-			if (defender.getCurrentHP() <= 0) {
-				defender.setIsDead(true);
-				GameController.updateBattlePanelView();
-				if (defender instanceof AllyUnit) {
-					if (defender.equals(GameController.getSelectAllyUnit())) {
-						setSelectAllyUnit();
-					}
-					if (GameController.getPlayer().getNumberOfBackUnit() <= 0
-							&& GameController.getPlayer().getNumberOfFrontUnit() == 1) {
-						enemyWin = true;
-					}
-					playerUnitKilled = true;
+		UnitStats attacker = (UnitStats) attack;
+		UnitStats defender = (UnitStats) defense;
+		attacker.attack(defender);
+		if (defender.getCurrentHP() <= 0) {
+			defender.setIsDead(true);
+			GameController.updateBattlePanelView();
+			if (defender instanceof AllyUnit) {
+				if (defender.equals(GameController.getSelectAllyUnit())) {
+					setSelectAllyUnit();
 				}
-				GameController.setChooseIcon();
+				if (GameController.getPlayer().getNumberOfBackUnit() <= 0
+						&& GameController.getPlayer().getNumberOfFrontUnit() == 1) {
+					enemyWin = true;
+				}
+				playerUnitKilled = true;
 			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage() + " can Dodged!!");
+			GameController.setChooseIcon();
 		}
 		if (!enemyTurn) {
+			GameController.playSound(GameController.getAttackSound());
 			afterTakeAction();
 		}
 	}
@@ -240,6 +255,7 @@ public class BattleController {
 	public static void defense() {
 		GameController.getSelectAllyUnit().defense();
 		if (!enemyTurn) {
+			GameController.playSound(GameController.getBuffSound());
 			afterTakeAction();
 		}
 	}
@@ -422,11 +438,25 @@ public class BattleController {
 		playerUnitKilled = bool;
 	}
 
+	public static boolean getEnemyTurn() {
+		return enemyTurn;
+	}
+
 	public static void setEnemyWin(boolean bool) {
 		enemyWin = bool;
 	}
 
 	public static boolean getEnemyWin() {
 		return enemyWin;
+	}
+
+	public static int getEnemyTimeCount() {
+		return enemyTimeCount;
+	}
+
+	public static void setEnemyTimeCount(int time) {
+		if (time < 0)
+			time = 0;
+		enemyTimeCount = time;
 	}
 }

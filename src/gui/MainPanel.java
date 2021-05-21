@@ -1,5 +1,7 @@
 package gui;
 
+import java.util.ArrayList;
+
 import Application.Player;
 import List.AllyUnitList_Saber;
 import UnitBase.AllyUnit;
@@ -12,6 +14,12 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
@@ -33,13 +41,15 @@ public class MainPanel extends StackPane {
 	private VBox panel;
 	private Canvas canvas;
 
-	private int time;
+	private ArrayList<TextToShow> texts = new ArrayList<TextToShow>();
 
 	public MainPanel(Player player) {
 		this.setPadding(new Insets(10));
 		this.setAlignment(Pos.CENTER);
-		this.setBorder(new Border(
-				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		BackgroundImage sky = new BackgroundImage(new Image("BG_Main.jpg",1440,900,false,true),
+		        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+		          BackgroundSize.DEFAULT);
+		this.setBackground(new Background(sky));
 		panel = new VBox();
 		panel.setPadding(new Insets(10));
 		panel.setSpacing(10);
@@ -108,41 +118,18 @@ public class MainPanel extends StackPane {
 		TextAnimation.textTrasition(gc, text);
 	}
 
-	public void textAtUnitButton(String text, Unit target) {
-
+	public void addTextToShow(String text, Unit target, int showTime) {
 		UnitButton button = battlePanel.getUnitButton(target);
-		double x = button.getScene().getWindow().getX();
-		double y = button.getScene().getWindow().getY();
 		Bounds localBounds = button.localToScene(button.getBoundsInLocal());
-		canvas.setVisible(true);
-		GraphicsContext gc = canvas.getGraphicsContext2D();
-		Font font = new Font("Berlin Sans FB", 100);
-		gc.setFont(font);
-		gc.setFill(Color.RED);
-		gc.fillText(text, localBounds.getMinX(), localBounds.getMinY());
-		gc.fillText(text, localBounds.getCenterX(), localBounds.getCenterY());
-		gc.fillText(text, localBounds.getMaxX(), localBounds.getMaxY());
-		System.out.println(x + localBounds.getMinX());
-		System.out.println(y + localBounds.getMinY());
-		System.out.println(localBounds);
-		Thread thread = new Thread(() -> {
-			try {
-				Thread.sleep(2000);
-				Platform.runLater(new Runnable() {
+		double x = localBounds.getCenterX();
+		double y = localBounds.getCenterY();
+		TextToShow textToShow = new TextToShow(x, y, showTime, text);
+		texts.add(textToShow);
+	}
 
-					@Override
-					public void run() {
-						// TODO Auto-generated method stub
-						gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
-						canvas.setVisible(false);
-					}
-				});
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		});
-		thread.start();
+	public void showText() {
+		GraphicsContext gc = canvas.getGraphicsContext2D();
+		TextAnimation.textAtUnitButton(gc, texts);
 	}
 
 }

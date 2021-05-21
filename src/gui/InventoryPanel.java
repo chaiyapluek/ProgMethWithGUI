@@ -37,13 +37,14 @@ public class InventoryPanel extends VBox {
 
 		this.setMaxSize(400, 300);
 		this.setMinSize(400, 300);
-		this.setPadding(new Insets(20));
-		this.setSpacing(30);
+		this.setPadding(new Insets(10));
+		this.setSpacing(15);
 		this.setAlignment(Pos.TOP_CENTER);
 
 		HBox backPanel = new HBox();
 		backPanel.setAlignment(Pos.CENTER_RIGHT);
-		Button back = new Button("X");
+		Button back = new Button();
+		GameController.setBackButton(back);
 		backPanel.getChildren().add(back);
 		back.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -59,7 +60,7 @@ public class InventoryPanel extends VBox {
 		panel.setSpacing(10);
 		panel.setPadding(new Insets(10));
 		panel.setBorder(new Border(
-				new BorderStroke(Color.DARKGRAY, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		inventory = new GridPane();
 		inventory.setAlignment(Pos.CENTER);
 		inventory.setVgap(10);

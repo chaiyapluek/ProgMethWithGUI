@@ -16,6 +16,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import logic.GameController;
 
 public class EnemyInfoPanel extends VBox {
@@ -30,34 +31,36 @@ public class EnemyInfoPanel extends VBox {
 	private Label critdmg;
 	private Label dodge;
 	private Label gauge;
-	
+
 	private Button back;
 
 	public EnemyInfoPanel() {
 
 		this.setMaxSize(400, 300);
 		this.setMinSize(400, 300);
-		this.setPadding(new Insets(20));
-		this.setSpacing(10);
+		this.setPadding(new Insets(10));
 		this.setAlignment(Pos.TOP_CENTER);
-
+		
 		HBox pane = new HBox();
-		pane.setSpacing(10);
-
+		pane.setAlignment(Pos.CENTER);
+		
+		
 		VBox info = new VBox();
 		info.setSpacing(10);
+		info.setAlignment(Pos.CENTER);
 		VBox NameAndClass = new VBox();
 		NameAndClass.setMinWidth(150);
 		NameAndClass.setMaxWidth(150);
-		NameAndClass.setBorder(new Border(
-				new BorderStroke(Color.GOLD, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		NameAndClass.setAlignment(Pos.CENTER_LEFT);
 		name = new Label();
 		Class = new Label();
 		NameAndClass.getChildren().addAll(name, Class);
 
 		VBox Stats = new VBox();
+		Stats.setSpacing(5);
 		Stats.setAlignment(Pos.CENTER_LEFT);
+		VBox HPandGauge = new VBox();
+		VBox other = new VBox();
 		HP = new Label();
 		attack = new Label();
 		def = new Label();
@@ -65,16 +68,22 @@ public class EnemyInfoPanel extends VBox {
 		critdmg = new Label();
 		dodge = new Label();
 		gauge = new Label();
-		Stats.getChildren().addAll(HP, attack, def, crit, critdmg, dodge, gauge);
+		HPandGauge.getChildren().addAll(HP,gauge);
+		other.getChildren().addAll(attack,def,crit,critdmg,dodge,gauge);
+		Stats.getChildren().addAll(HPandGauge,other);
 
 		info.getChildren().addAll(NameAndClass, Stats);
-		
+		info.setBorder(new Border(
+				new BorderStroke(Color.GOLD, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+		info.setAlignment(Pos.CENTER);
+		info.setPadding(new Insets(10));
 		pane.getChildren().add(info);
-		
+
 		HBox backPanel = new HBox();
 		backPanel.setAlignment(Pos.CENTER_RIGHT);
-		back = new Button("X");
+		back = new Button();
 		backPanel.getChildren().add(back);
+		GameController.setBackButton(back);
 		back.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -83,18 +92,33 @@ public class EnemyInfoPanel extends VBox {
 				GameController.setToButtonPanel();
 			}
 		});
+		setFont(16, name);
+		setFont(14, Class);
+		setFont(14,HP);
+		setFont(14,gauge);
+		setFont(12,attack);
+		setFont(12,def);
+		setFont(12,crit);
+		setFont(12,critdmg);
+		setFont(12,dodge);
 		
-		this.getChildren().addAll(backPanel,pane);
+		this.getChildren().addAll(backPanel, pane);
+	}
+
+	private void setFont(int size, Label label) {
+		
+		label.setFont(new Font("Arial Black",size));
+	
 	}
 
 	public void update() {
 
-		if(GameController.getOnBattle()) {
+		if (GameController.getOnBattle()) {
 			back.setVisible(false);
-		}else {
+		} else {
 			back.setVisible(true);
 		}
-		
+
 		if (GameController.getSelectEnemyUnit() != null) {
 
 			UnitStats unit = (UnitStats) GameController.getSelectEnemyUnit();

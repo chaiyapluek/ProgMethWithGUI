@@ -8,7 +8,14 @@ import UnitBase.AllyUnit;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class ChooseMerPanel extends VBox {
@@ -24,8 +31,14 @@ public class ChooseMerPanel extends VBox {
 		this.setSpacing(10);
 		this.setAlignment(Pos.CENTER);
 		
+		BackgroundImage sky = new BackgroundImage(new Image("BG_Sky.jpg",1280,720,false,true),
+		        BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+		          BackgroundSize.DEFAULT);
+		this.setBackground(new Background(sky));
+		
 		label = new Label("Choose your mercenary (" + (count+1) + "/3)");
-		label.setFont(new Font(48));
+		label.setFont(new Font("Arial Black",48));
+		label.setTextFill(Color.ANTIQUEWHITE);
 		
 		allUnits = new ArrayList<AllyUnit>();
 		for (AllyUnit unit : AllyUnitList.getAllUnit())

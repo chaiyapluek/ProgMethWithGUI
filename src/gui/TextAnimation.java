@@ -1,14 +1,19 @@
 package gui;
 
+import java.util.ArrayList;
+
 import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import logic.BattleController;
+import logic.GameController;
 
 public class TextAnimation {
 
 	private static int time;
+	private static int num;
+	private static int size;
 
 	private static double func(double t, double width) {
 		t /= 1000;
@@ -46,7 +51,7 @@ public class TextAnimation {
 					public void run() {
 						// TODO Auto-generated method stub
 						if (text.equals("Victory")) {
-							BattleController.reset();
+							GameController.showReward(true);
 						}
 					}
 				});
@@ -57,9 +62,53 @@ public class TextAnimation {
 		});
 		thread.start();
 	}
-	
-	public void textAtUnitButton() {
+
+	public static void textAtUnitButton(GraphicsContext gc, ArrayList<TextToShow> texts) {
 		
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				Font font = new Font("Berlin Sans FB", 30);
+				gc.setFont(font);
+				gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
+				gc.getCanvas().setVisible(true);
+			}
+		});
+		time = 0;
+		size = texts.size();
+		num = 0;
+		try {
+			while (num < size) {
+				Thread.sleep(10);
+				time += 10;
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
+						for (TextToShow t : texts) {
+							if (t.isFinished()) {
+								continue;
+							}
+							if (t.getShowTime() <= time && t.getTime() < t.getMaxTime()) {
+								gc.setGlobalAlpha(1 - 1.0 * t.getTime() / 1250);
+								gc.fillText(t.getText(), t.getX(), t.getY() - 1.0 * t.getTime() / 25);
+								t.addTime();
+							}
+							if (t.getTime() >= t.getMaxTime()) {
+								t.setIsFinished(true);
+								num += 1;
+							}
+						}
+					}
+				});
+			}
+			texts.clear();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		gc.getCanvas().setVisible(false);
 	}
 
 }

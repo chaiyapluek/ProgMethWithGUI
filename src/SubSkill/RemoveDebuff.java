@@ -9,7 +9,7 @@ import UnitBase.UnitStats;
 public class RemoveDebuff extends SubSkill{
 
 	public RemoveDebuff() {
-		super("[]", 0);
+		super("[Remove Debuff]", 0);
 		// TODO Auto-generated constructor stub
 	}
 

@@ -15,9 +15,21 @@ import gui.InfoMercenary;
 import gui.InventoryPanel;
 import gui.MainPanel;
 import gui.ReplacePanel;
+import gui.RewardPane;
 import gui.SelectTargetSkillPanel;
 import gui.SwapPanel;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.media.AudioClip;
+import javafx.scene.paint.Color;
 
 public class GameController {
 
@@ -40,13 +52,29 @@ public class GameController {
 	private static InfoItem infoItem;
 	private static InfoMercenary infoMercenary;
 	private static AleartPanel aleartPanel;
+	private static RewardPane rewardPane;
+	
+	private static AudioClip BGSound;
+	private static AudioClip BattleSound;
+	private static AudioClip buySound;
+	private static AudioClip attackSound;
+	private static AudioClip buffSound;
 
 	private static boolean moveToggle = false;
 	private static boolean onBattle = false;
 
 	public static void Intialize() {
+		
 		gameMap = new Map();
 		units = new AllyUnit[6];
+		BGSound = new AudioClip(ClassLoader.getSystemResource("BG-sound.mp3").toString());
+		BattleSound = new AudioClip(ClassLoader.getSystemResource("Battle-sound.mp3").toString());
+		buySound = new AudioClip(ClassLoader.getSystemResource("buy-sound.mp3").toString());
+		attackSound = new AudioClip(ClassLoader.getSystemResource("attack-sound.mp3").toString());
+		buffSound = new AudioClip(ClassLoader.getSystemResource("buff-sound.mp3").toString());
+		
+		playBGSound();
+		
 	}
 
 	public static boolean isUnitExist(AllyUnit unit) {
@@ -155,6 +183,7 @@ public class GameController {
 		infoItem = new InfoItem();
 		infoMercenary = new InfoMercenary();
 		aleartPanel = new AleartPanel();
+		rewardPane = new RewardPane();
 
 		selectTargetPanel.setVisible(false);
 		swapPanel.setVisible(false);
@@ -162,6 +191,7 @@ public class GameController {
 		infoItem.setVisible(false);
 		infoMercenary.setVisible(false);
 		aleartPanel.setVisible(false);
+		rewardPane.setVisible(false);
 
 		mainPanel.getChildren().add(selectTargetPanel);
 		mainPanel.getChildren().add(swapPanel);
@@ -169,6 +199,7 @@ public class GameController {
 		mainPanel.getChildren().add(infoItem);
 		mainPanel.getChildren().add(infoMercenary);
 		mainPanel.getChildren().add(aleartPanel);
+		mainPanel.getChildren().add(rewardPane);
 		setChooseIcon();
 	}
 
@@ -289,6 +320,15 @@ public class GameController {
 	public static void unequipItem() {
 		controlPanel.getInventoryPanel().unequipItem();
 	}
+	
+	public static void updateShop() {
+		controlPanel.getShopPanel().update();
+	}
+	
+	public static void boughtItem() {
+		controlPanel.getShopPanel().setMoneyText();
+		controlPanel.getShopPanel().removeItem();
+	}
 
 	public static void setSelectTarget(boolean bool) {
 		if (bool) {
@@ -335,5 +375,60 @@ public class GameController {
 			aleartPanel.setText(text);
 		}
 		aleartPanel.setVisible(bool);
+	}
+	
+	public static void showReward(boolean bool) {
+		if(bool) {
+			rewardPane.setText();
+		}
+		rewardPane.setVisible(bool);
+	}
+	
+	public static void setBackButton(Button button) {
+		ImageView backView = new ImageView(new Image("cross-icon.png"));
+		backView.setFitWidth(35);
+		backView.setPreserveRatio(true);
+		button.setGraphic(backView);
+		button.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
+		button.setOnMouseEntered(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				button.setCursor(javafx.scene.Cursor.HAND);
+			}
+		});
+		button.setOnMouseExited(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				button.setCursor(javafx.scene.Cursor.DEFAULT);
+			}
+		});
+	}
+	
+	public static void playBGSound() {
+		BattleSound.stop();
+		BGSound.setCycleCount(AudioClip.INDEFINITE);
+		BGSound.play();
+	}
+	
+	public static void playBattleSound() {
+		BGSound.stop();
+		BattleSound.setCycleCount(AudioClip.INDEFINITE);
+		BattleSound.play();
+	}
+	
+	public static void playSound(AudioClip sound) {
+		sound.play();
+	}
+	
+	public static AudioClip getAttackSound() {
+		return attackSound;
+	}
+	
+	public static AudioClip getBuffSound() {
+		return buffSound;
+	}
+	
+	public static AudioClip getBuySound() {
+		return buySound;
 	}
 }

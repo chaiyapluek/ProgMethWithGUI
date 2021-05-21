@@ -46,7 +46,7 @@ public abstract class UnitStats extends Unit {
 		effects = new ArrayList<Effect>();
 	}
 
-	public abstract void attack(Unit target) throws Exception;
+	public abstract void attack(Unit target);
 
 	public abstract void defense();
 

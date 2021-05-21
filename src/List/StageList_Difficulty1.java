@@ -13,19 +13,19 @@ public class StageList_Difficulty1 {
 	 * {HP,DEF,ATT,CRIT,CRITDMG,DODGE,ULTI}
 	 */
 
+	private static Random r = new Random();
+	
 	public static Stage[] getStage_Difficulty1() {
 		Stage[] stages = new Stage[] { Stage1(), Stage2(), Stage3(), Stage4(), Stage5() };
 		return stages;
 	}
 
 	public static int getHP(int HP) {
-		Random r = new Random();
 		int num = r.nextInt(16) + 95;
 		return (int) (1.0 * HP * num / 100);
 	}
 
 	public static int getAttack(int Attack) {
-		Random r = new Random();
 		int num = r.nextInt(16) + 95;
 		return (int) (1.0 * Attack * num / 100);
 	}
@@ -61,6 +61,7 @@ public class StageList_Difficulty1 {
 				{ enemyUnit4, enemyUnit5, enemyUnit6 } };
 
 		Stage stage1 = new Stage(2, false, units);
+		stage1.setMoneyDrop(500 + r.nextInt(100));
 		return stage1;
 
 	}
@@ -96,6 +97,7 @@ public class StageList_Difficulty1 {
 		enemyUnit6.setID(6);
 
 		Stage stage2 = new Stage(2, false, units);
+		stage2.setMoneyDrop(500 + r.nextInt(100));
 		return stage2;
 
 	}
@@ -131,6 +133,7 @@ public class StageList_Difficulty1 {
 		enemyUnit6.setID(6);
 
 		Stage stage3 = new Stage(2, false, units);
+		stage3.setMoneyDrop(500 + r.nextInt(100));
 		return stage3;
 
 	}
@@ -166,6 +169,7 @@ public class StageList_Difficulty1 {
 		enemyUnit6.setID(6);
 
 		Stage stage4 = new Stage(2, false, units);
+		stage4.setMoneyDrop(500 + r.nextInt(100));
 		return stage4;
 
 	}
@@ -201,6 +205,7 @@ public class StageList_Difficulty1 {
 		enemyUnit6.setID(6);
 
 		Stage stage5 = new Stage(2, false, units);
+		stage5.setMoneyDrop(500 + r.nextInt(100));
 		return stage5;
 
 	}

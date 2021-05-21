@@ -13,6 +13,7 @@ import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import logic.GameController;
 
 public class StatsPane extends VBox{
@@ -57,6 +58,13 @@ public class StatsPane extends VBox{
 		String dodge = String.valueOf( Math.max(0, unit.getDodgeChance()) );
 		dodgeLabel.setText("DodgeChance : " + dodge);
 	
+		healthLabel.setFont(new Font("Arial",12));
+		attackLabel.setFont(new Font("Arial",12));
+		defenseLabel.setFont(new Font("Arial",12));
+		critDmgLabel.setFont(new Font("Arial",12));
+		critLabel.setFont(new Font("Arial",12));
+		dodgeLabel.setFont(new Font("Arial",12));
+		
 		this.getChildren().add(healthLabel);
 		this.getChildren().add(attackLabel);
 		this.getChildren().add(defenseLabel);
@@ -67,10 +75,9 @@ public class StatsPane extends VBox{
 			
 			gaugeLabel = new Label();
 			gaugeLabel.setText("Gauge 0/" + ((AdvanceUnit)u).getMaxUltigauge() );
+			gaugeLabel.setFont(new Font("Arial",16));
 			
 		}
-		this.setBorder(new Border(
-				new BorderStroke(Color.LIGHTGRAY, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 	}
 
 }

@@ -8,19 +8,22 @@ import UnitBase.Unit;
 
 public class StageList_Difficulty2 {
 
+	private static Random r = new Random();
+	
 	public static Stage[] getStage_Difficulty2() {
 		Stage[] stages = new Stage[] { Stage1(), Stage2(), Stage3(), Stage4(), Stage5() };
+		for(Stage s : stages) {
+			s.setMoneyDrop(1000 + r.nextInt(200));
+		}
 		return stages;
 	}
 
 	public static int getHP(int HP) {
-		Random r = new Random();
 		int num = r.nextInt(16) + 95;
 		return (int) (1.0 * HP * num / 100) + 500;
 	}
 
 	public static int getAttack(int Attack) {
-		Random r = new Random();
 		int num = r.nextInt(16) + 95;
 		return (int) (1.0 * Attack * num / 100) + 50;
 	}

@@ -51,8 +51,6 @@ public class UnitButton extends VBox {
 		chooseIconPane.setAlignment(Pos.TOP_CENTER);
 		chooseIconPane.setMaxSize(150, 50);
 		chooseIconPane.setMinSize(150, 50);
-		chooseIconPane.setBorder(new Border(
-				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
 		this.setAlignment(Pos.BOTTOM_CENTER);
 		this.setSpacing(50);
@@ -65,28 +63,30 @@ public class UnitButton extends VBox {
 		} else {
 			img = new Image(u.getUrl());
 			imgView = new ImageView(img);
-			if (u.getName().equals("Karna") || u.getName().equals("Leonidas")) {
+			if (u.getName().equals("Karna") || u.getName().equals("Leonidas") || u.getName().equals("Black Samurai")
+					|| u.getName().equals("Demon King")) {
 				imgView.setFitHeight(280);
 			} else if (u.getName().equals("Ereshkigal") || u.getName().equals("Wyvern")) {
 				imgView.setFitHeight(300);
 			} else if (u.getName().equals("Heracles") || u.getName().equals("Sigurd")) {
 				imgView.setFitHeight(260);
 			} else if (u.getName().equals("Knight Enforcer")) {
-				if(u.get_Class().equals("Lancer")) {
+				if (u.get_Class().equals("Lancer")) {
 					imgView.setFitHeight(325);
-				}else {
+				} else {
 					imgView.setFitHeight(300);
 				}
-				
+
+			} else if (u.getName().equals("Sphinx")) {
+				imgView.setFitHeight(350);
+			} else if (u.getName().equals("Sea Demon")) {
+				imgView.setFitHeight(150);
 			} else {
 				imgView.setFitHeight(220);
 			}
 		}
 		imgView.setPreserveRatio(true);
 		button.setGraphic(imgView);
-
-		this.setBorder(new Border(
-				new BorderStroke(Color.GOLD, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
 		button.setOnMouseEntered(new EventHandler<MouseEvent>() {
 			@Override

@@ -2,7 +2,6 @@ package Application;
 
 import Coordinate.Coordinate;
 import Inventory.Inventory;
-import Skill.*;
 import Unit.*;
 
 public class Player {

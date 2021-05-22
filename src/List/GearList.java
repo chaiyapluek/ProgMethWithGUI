@@ -125,7 +125,7 @@ public class GearList {
 	
 	public static Gear Lamellar() {
 		String name = "Heavy Armor";
-		String description = "Increased all stats. (Highly Increase Defense)";
+		String description = "Increased all stats. \n(Highly Increase Defense)";
 		int price = 1250;
 		int stats[] = {1000, 50, 1000, 10, 10, 10};
 		String url = "NewItem/A2.png";
@@ -137,7 +137,7 @@ public class GearList {
 	
 	public static Gear ChainMail() {
 		String name = "Lamellar";
-		String description = "Increased all stats. (Highly Increase Dodge Chance.)";
+		String description = "Increased all stats. \n(Highly Increase Dodge Chance.)";
 		int price = 2500;
 		int stats[] = {1200, 12, 1200, 12, 12, 35};
 		String url = "NewItem/A7.png";
@@ -319,7 +319,7 @@ public class GearList {
 	
 	public static Gear LegArmor() {
 		String name = "Leg armor";
-		String description = "Increased all stats.(Highly Increased Defense)";
+		String description = "Increased all stats.\n(Highly Increased Defense)";
 		int price = 999;
 		int stats[] = {300, 20, 300, 3, 3, 3};
 		String url = "NewItem/B4.png";
@@ -331,7 +331,7 @@ public class GearList {
 	
 	public static Gear MetalBoot() {
 		String name = "Metal boot";
-		String description = "Increased all stats.(Highly increased Dodge Chance)";
+		String description = "Increased all stats.\n(Highly increased Dodge Chance)";
 		int price = 1750;
 		int stats[] = {200, 2, 200, 2, 2, 25};
 		String url = "NewItem/B8.png";
@@ -343,7 +343,7 @@ public class GearList {
 	
 	public static Gear SonicShoes() {
 		String name = "Sonic Shoes";
-		String description = "Increased all stats.(Highly increased Attack and Defense)";
+		String description = "Increased all stats.\n(Highly increased Attack and Defense)";
 		int price = 3200;
 		int stats[] = {500, 25, 2500, 5, 5, 5};
 		String url = "NewItem/B5.png";
@@ -355,7 +355,7 @@ public class GearList {
 	
 	public static Gear WalkingBoot() {
 		String name = "Walking boot";
-		String description = "Increased all stats.(Highly increased Critical chance and Critical damage)";
+		String description = "Increased all stats.\n(Highly increased Critical chance and Critical damage)";
 		int price = 1200;
 		int stats[] = {200, 2, 200, 30, 30, 2};
 		String url = "NewItem/B7.png";

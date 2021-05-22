@@ -128,11 +128,11 @@ public class EnemyInfoPanel extends VBox {
 
 			HP.setText("HP : " + unit.getCurrentHP() + "/" + unit.getMaxHP());
 
-			def.setText("Defense : " + Math.max(0, unit.getDefense()));
+			def.setText("Defense : " + Math.max(0, Math.min(100, unit.getDefense())));
 			attack.setText("Attack : " + unit.getTotalAttack());
-			crit.setText("CritChance : " + Math.max(0, unit.getCritChance()));
+			crit.setText("CritChance : " + Math.max(0, Math.min(100, unit.getCritChance())));
 			critdmg.setText("CritDamage : " + Math.max(0, unit.getCritDamage()));
-			dodge.setText("Dodge : " + Math.max(0, unit.getDodgeChance()));
+			dodge.setText("Dodge : " + Math.max(0, Math.min(100, unit.getDodgeChance())));
 			gauge.setText("");
 
 			if (unit instanceof AdvanceUnit) {

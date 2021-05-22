@@ -91,7 +91,7 @@ public class InfoItem extends StackPane {
 		info.setBorder(new Border(
 				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
-		VBox text = new VBox();
+		text = new VBox();
 		text.setSpacing(10);
 		name = new Label();
 		des = new Label();

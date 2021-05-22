@@ -329,12 +329,12 @@ public class ControlPanel extends HBox {
 
 		HP.setText("HP : " + unit.getCurrentHP() + "/" + unit.getMaxHP());
 		Gauge.setText("GAUGE : " + unit.getUltiGauge() + "/" + unit.getMaxUltigauge());
-
-		def.setText("Defense : " + Math.max(0, unit.getDefense()));
+		
+		def.setText("Defense : " + Math.max(0, Math.min(100, unit.getDefense())));
 		attack.setText("Attack : " + unit.getTotalAttack());
-		crit.setText("CritChance : " + Math.max(0, unit.getCritChance()));
+		crit.setText("CritChance : " + Math.max(0, Math.min(100, unit.getCritChance())));
 		critdmg.setText("CritDamage : " + Math.max(0, unit.getCritDamage()));
-		dodge.setText("Dodge : " + Math.max(0, unit.getDodgeChance()));
+		dodge.setText("Dodge : " + Math.max(0, Math.min(100, unit.getDodgeChance())));
 		level.setText("Level : " + unit.getLevel());
 	}
 

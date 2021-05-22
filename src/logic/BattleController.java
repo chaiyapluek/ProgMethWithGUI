@@ -3,7 +3,6 @@ package logic;
 import java.util.ArrayList;
 
 import Application.Bot;
-import Application.Main;
 import Map.Stage;
 import Skill.Effect;
 import Skill.NormalSkill;

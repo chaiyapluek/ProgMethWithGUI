@@ -7,7 +7,9 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -37,7 +39,6 @@ public class StartPanel extends VBox{
 		this.setBackground(new Background(sky));
 		
 		setText();
-		
 		this.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
@@ -51,8 +52,8 @@ public class StartPanel extends VBox{
 	
 	private void setText() {
 		gameNameText = new Text();
-		gameNameText.setText("[Game Name]");
-		gameNameText.setFont(Font.font("Bauhaus 93",FontWeight.BOLD,140));
+		gameNameText.setText("Dungeon Adventure");
+		gameNameText.setFont(Font.font("Bauhaus 93",FontWeight.BOLD,120));
 		gameNameText.setFill(Color.WHITE);
 		
 		space = new Text();

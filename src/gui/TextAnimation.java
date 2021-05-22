@@ -55,6 +55,7 @@ public class TextAnimation {
 							GameController.showReward(true);
 						}else if(BattleController.getEnemyWin() || GameController.isWin()) {
 							GameController.setIsWin(false);
+							BattleController.setEnemyWin(false);
 							Main.setStartScene();
 						}
 					}

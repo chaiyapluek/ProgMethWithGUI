@@ -109,6 +109,7 @@ public class Bot {
 		if (unit.getUltiGauge() == unit.getMaxUltigauge()) {
 			// useUlti
 			useSkill(targets, unit, unit.getMaxSkill() - 1, targetIdx);
+			unit.setUltiGauge(0);
 			return;
 		}
 		if (num < 50) {

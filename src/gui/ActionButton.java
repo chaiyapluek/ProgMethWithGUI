@@ -81,12 +81,20 @@ public class ActionButton extends Button {
 			}
 		} else {
 			boolean check = true;
-			if (type.equals("skill") && isLock)
-				check = false;
-			if (type.equals("skill") && (s instanceof NormalSkill)) {
-				NormalSkill skill = (NormalSkill) s;
-				if (skill.getCooldown() != 0) {
+			if (type.equals("skill")) {
+				if(isLock) {
 					check = false;
+				}
+				if (s instanceof NormalSkill) {
+					NormalSkill skill = (NormalSkill) s;
+					if (skill.getCooldown() != 0) {
+						check = false;
+					}
+				} else {
+					if (GameController.getSelectAllyUnit().getUltiGauge() < GameController.getSelectAllyUnit()
+							.getMaxUltigauge()) {
+						check = false;
+					}
 				}
 			}
 			if (GameController.getOnBattle() && GameController.getSelectAllyUnit().canTakeAction() && check) {

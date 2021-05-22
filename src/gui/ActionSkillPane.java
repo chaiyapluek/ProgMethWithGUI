@@ -55,16 +55,17 @@ public class ActionSkillPane extends HBox {
 				@Override
 				public void handle(ActionEvent arg0) {
 					// TODO Auto-generated method stub
-					if(GameController.getOnBattle()) {
-						if(button.getSkill() instanceof NormalSkill) {
-							NormalSkill skill = (NormalSkill)button.getSkill();
-							System.out.println("HELLO");
-							System.out.println(skill.getCooldown());
-							if(skill.getCooldown() == 0) {
+					if (GameController.getOnBattle()) {
+						if (button.getSkill() instanceof NormalSkill) {
+							NormalSkill skill = (NormalSkill) button.getSkill();
+							if (skill.getCooldown() == 0) {
 								BattleController.takeAction(button);
 							}
-						}else {
-							BattleController.takeAction(button);
+						} else {
+							if (GameController.getSelectAllyUnit().getUltiGauge() == GameController.getSelectAllyUnit()
+									.getMaxUltigauge()) {
+								BattleController.takeAction(button);
+							}
 						}
 					}
 				}

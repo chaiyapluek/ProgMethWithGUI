@@ -129,6 +129,13 @@ public class BattleController {
 
 	public static void checkPlayerTurnEnd() {
 		if (numberOfTakenAction == maxPlayerAction) {
+			decreaseSkillCooldown(GameController.getPlayer().getUnits());
+			decreaseEffectDuration(GameController.getPlayer().getUnits());
+			checkEffect(GameController.getPlayer().getUnits());
+			increseUltiGauge(GameController.getPlayer().getUnits());
+			GameController.updateAllyInfo();
+			GameController.updateEnemyInfoPanel();
+			GameController.updateBattlePanel();
 			// pass turn
 			enemyTurn = true;
 			bot.play(GameController.getPlayer().getUnits());
@@ -194,13 +201,13 @@ public class BattleController {
 				maxPlayerAction += 1;
 			}
 		}
-		decreaseSkillCooldown(GameController.getPlayer().getUnits());
-		decreaseEffectDuration(GameController.getPlayer().getUnits());
-		checkEffect(GameController.getPlayer().getUnits());
-		increseUltiGauge(GameController.getPlayer().getUnits());
-		GameController.updateAllyInfo();
-		GameController.updateEnemyInfoPanel();
-		GameController.updateBattlePanel();
+//		decreaseSkillCooldown(GameController.getPlayer().getUnits());
+//		decreaseEffectDuration(GameController.getPlayer().getUnits());
+//		checkEffect(GameController.getPlayer().getUnits());
+//		increseUltiGauge(GameController.getPlayer().getUnits());
+//		GameController.updateAllyInfo();
+//		GameController.updateEnemyInfoPanel();
+//		GameController.updateBattlePanel();
 	}
 
 	private static void nextWave() {
@@ -276,6 +283,8 @@ public class BattleController {
 		if (skill instanceof NormalSkill) {
 			NormalSkill s = (NormalSkill) skill;
 			s.setCooldown(s.getCooldownTime());
+		}else {
+			GameController.getSelectAllyUnit().setUltiGauge(0);
 		}
 	}
 

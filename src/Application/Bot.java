@@ -6,11 +6,10 @@ import java.util.Random;
 import Skill.NormalSkill;
 import Skill.Skill;
 import SubSkill.*;
-import UnitBase.AdvanceUnit;
+import Unit.*;
 import javafx.application.Platform;
 import logic.BattleController;
 import logic.GameController;
-import UnitBase.*;
 
 public class Bot {
 
@@ -45,12 +44,14 @@ public class Bot {
 				continue;
 			if (((UnitStats) units[i]).getIsStun())
 				continue;
+			System.out.println(units[i].getName() + " NOT STUN");
 			if (units[i] instanceof BasicUnit) {
 				BasicUnitAction(targets, i);
 			} else if (units[i] instanceof AdvanceUnit) {
 				AdvanceUnitAction(targets, i);
 			}
 		}
+		System.out.println(BattleController.getEnemyTimeCount());
 		Thread thread = new Thread(() -> {
 			GameController.getMainPanel().showText();
 			Platform.runLater(new Runnable() {

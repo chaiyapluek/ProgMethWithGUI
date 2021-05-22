@@ -10,9 +10,9 @@ import Skill.Skill;
 import SubSkill.DOTDamage;
 import SubSkill.Heal;
 import SubSkill.IncreaseUltiGauge;
-import UnitBase.AdvanceUnit;
-import UnitBase.Unit;
-import UnitBase.UnitStats;
+import Unit.AdvanceUnit;
+import Unit.Unit;
+import Unit.UnitStats;
 
 public class Battle {
 

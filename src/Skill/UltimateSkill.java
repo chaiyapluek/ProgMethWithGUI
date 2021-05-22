@@ -4,8 +4,9 @@ import java.util.ArrayList;
 
 import SubSkill.Damage;
 import SubSkill.SubSkill;
-import UnitBase.Unit;
-import UnitBase.UnitStats;
+import SubSkillBase.Activatable;
+import Unit.Unit;
+import Unit.UnitStats;
 import logic.BattleController;
 import logic.GameController;
 
@@ -32,7 +33,7 @@ public class UltimateSkill extends Skill {
 				((Damage) s).damaged(user, target, cnt);
 				cnt += 1;
 			} else {
-				s.activate(target);
+				((Activatable)s).activate(target);
 				if (BattleController.getEnemyTurn()) {
 					int currentTime = BattleController.getEnemyTimeCount();
 					GameController.getMainPanel().addTextToShow(s.getDescription(), target, currentTime);

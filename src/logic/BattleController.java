@@ -3,6 +3,7 @@ package logic;
 import java.util.ArrayList;
 
 import Application.Bot;
+import Application.Main;
 import Map.Stage;
 import Skill.Effect;
 import Skill.NormalSkill;
@@ -10,7 +11,7 @@ import Skill.Skill;
 import SubSkill.DOTDamage;
 import SubSkill.Heal;
 import SubSkill.IncreaseUltiGauge;
-import UnitBase.*;
+import Unit.*;
 import gui.ActionButton;
 import javafx.application.Platform;
 
@@ -54,7 +55,6 @@ public class BattleController {
 			swap();
 		} else if (type.equals("skill")) {
 			skill = action.getSkill();
-			System.out.println(skill.getName());
 			if (skill.getToYourSelf()) {
 				useSkillTo(GameController.getSelectAllyUnit());
 				if (!enemyTurn) {
@@ -101,7 +101,6 @@ public class BattleController {
 	public static void afterTakeAction() {
 		GameController.updateBattlePanel();
 		Thread thread = new Thread(() -> {
-
 			GameController.getMainPanel().showText();
 			Platform.runLater(new Runnable() {
 				@Override
@@ -126,14 +125,12 @@ public class BattleController {
 			});
 		});
 		thread.start();
-
 	}
 
 	public static void checkPlayerTurnEnd() {
 		if (numberOfTakenAction == maxPlayerAction) {
 			// pass turn
 
-			System.out.println("ENEMYTURN");
 			enemyTurn = true;
 			decreaseSkillCooldown(bot.getUnits());
 			decreaseEffectDuration(bot.getUnits());
@@ -150,6 +147,11 @@ public class BattleController {
 			playerUnitKilled();
 		}
 		playerUnitKilled = false;
+		if (enemyWin) {
+			GameController.setOnBattle(false);
+			GameController.getMainPanel().textTransition("You lose");
+			return;
+		}
 		nextTurn();
 	}
 
@@ -187,12 +189,11 @@ public class BattleController {
 	private static void nextTurn() {
 		turn += 1;
 		numberOfTakenAction = 0;
-		// replace death unit with back unit
-		//
-		// -----
+		maxPlayerAction = 0;
 		for (AllyUnit unit : GameController.getPlayer().getUnits()) {
-			if (unit != null) {
+			if (unit != null && !unit.getIsStun()) {
 				unit.setCanTakeAction(true);
+				maxPlayerAction += 1;
 			}
 		}
 		decreaseSkillCooldown(GameController.getPlayer().getUnits());
@@ -208,7 +209,14 @@ public class BattleController {
 		if (wave == GameController.getNowStage().getNumberOfWave()) {
 			GameController.getPlayer()
 					.setMoney(GameController.getPlayer().getMoney() + GameController.getNowStage().getMoneyDrop());
-			GameController.getMainPanel().textTransition("Victory");
+			if (GameController.getNowStage().isBoss()) {
+				GameController.setIsWin(true);
+				GameController.setOnBattle(false);
+				GameController.getMainPanel().textTransition("You win");
+				return ;
+			} else {
+				GameController.getMainPanel().textTransition("Victory");
+			}
 			GameController.playBGSound();
 		} else {
 			wave += 1;
@@ -239,7 +247,7 @@ public class BattleController {
 					setSelectAllyUnit();
 				}
 				if (GameController.getPlayer().getNumberOfBackUnit() <= 0
-						&& GameController.getPlayer().getNumberOfFrontUnit() == 1) {
+						&& GameController.getPlayer().getNumberOfFrontUnit() == 0) {
 					enemyWin = true;
 				}
 				playerUnitKilled = true;
@@ -281,8 +289,6 @@ public class BattleController {
 				if (e.getSubSkill() instanceof Heal && e.getDuration() != (e.getSubSkill()).getDuration()) {
 					Heal skill = (Heal) e.getSubSkill();
 					skill.heal(u);
-					System.out.println(u.getName() + " "
-							+ (int) (1.0 * ((UnitStats) u).getMaxHP() * skill.getHealAmount() / 100) + " HP up");
 				} else if (e.getSubSkill() instanceof DOTDamage && e.getDuration() != (e.getSubSkill()).getDuration()) {
 					DOTDamage dot = (DOTDamage) e.getSubSkill();
 					dot.damaged(u);
@@ -290,7 +296,6 @@ public class BattleController {
 						&& e.getDuration() != (e.getSubSkill()).getDuration()) {
 					IncreaseUltiGauge skill = (IncreaseUltiGauge) e.getSubSkill();
 					skill.increaseGauge(u);
-					System.out.println(u.getName() + " gauge up by " + skill.getIncreaseAmount());
 				}
 			}
 		}
@@ -342,12 +347,14 @@ public class BattleController {
 				}
 			}
 		} else {
-			maxPlayerAction -= 1;
 			for (int i = 0; i < 3; i++) {
 				if (GameController.getPlayer().getUnits()[i] != null
 						&& GameController.getPlayer().getUnits()[i].getIsDead()) {
 					GameController.getPlayer().getUnits()[i] = null;
 				}
+			}
+			if (GameController.getPlayer().getNumberOfUnit() <= 0) {
+				enemyWin = true;
 			}
 		}
 	}
@@ -372,10 +379,8 @@ public class BattleController {
 		}
 		for (AllyUnit u : GameController.getPlayer().getUnits()) {
 			if (u == null) {
-				System.out.println("NULL");
 				continue;
 			}
-			System.out.println(u.getName());
 			for (Skill s : ((AdvanceUnit) u).getSkills()) {
 				if (s instanceof NormalSkill)
 					((NormalSkill) s).setCooldown(0);
@@ -390,10 +395,8 @@ public class BattleController {
 		}
 		for (AllyUnit u : GameController.getPlayer().getBackUnits()) {
 			if (u == null) {
-				System.out.println("NULL");
 				continue;
 			}
-			System.out.println(u.getName());
 			for (Skill s : ((AdvanceUnit) u).getSkills()) {
 				if (s instanceof NormalSkill)
 					((NormalSkill) s).setCooldown(0);

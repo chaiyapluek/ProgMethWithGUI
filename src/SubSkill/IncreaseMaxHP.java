@@ -1,10 +1,12 @@
 package SubSkill;
 
 import Skill.Effect;
-import UnitBase.Unit;
-import UnitBase.UnitStats;
+import SubSkillBase.Activatable;
+import SubSkillBase.Deactivatable;
+import Unit.Unit;
+import Unit.UnitStats;
 
-public class IncreaseMaxHP extends BuffType {
+public class IncreaseMaxHP extends BuffType implements Activatable, Deactivatable{
 
 	public IncreaseMaxHP(int duration,int increaseAmount) {
 		super("[ MaxHp up ]",duration,increaseAmount);

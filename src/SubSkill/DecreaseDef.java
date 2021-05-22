@@ -1,10 +1,12 @@
 package SubSkill;
 
 import Skill.Effect;
-import UnitBase.Unit;
-import UnitBase.UnitStats;
+import SubSkillBase.Activatable;
+import SubSkillBase.Deactivatable;
+import Unit.Unit;
+import Unit.UnitStats;
 
-public class DecreaseDef extends DebuffType{
+public class DecreaseDef extends DebuffType implements Activatable, Deactivatable{
 
 	public DecreaseDef(int duration,int increaseAmount) {
 		super("[ Def down ]",duration,increaseAmount);

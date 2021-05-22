@@ -92,6 +92,17 @@ public class Map {
 							for (int k = 0; k < 5; k++) {
 								mark2[diff][k] = false;
 							}
+							if (diff == 0) {
+								stageDiff[diff] = StageList_Difficulty1.getStage_Difficulty1();
+							} else if (diff == 1) {
+								stageDiff[diff] = StageList_Difficulty2.getStage_Difficulty2();
+							} else if (diff == 2) {
+								stageDiff[diff] = StageList_Difficulty3.getStage_Difficulty3();
+							} else if (diff == 3) {
+								stageDiff[diff] = StageList_Difficulty4.getStage_Difficulty4();
+							} else if (diff == 4) {
+								stageDiff[diff] = StageList_Difficulty5.getStage_Difficulty5();
+							}
 						}
 						int idx = r.nextInt(5);
 						while (mark2[diff][idx]) {
@@ -131,6 +142,8 @@ public class Map {
 			s.get(idx).setHasShop(true);
 			s.get(idx).createShop();
 		}
+		stages[height-1][1] = StageList_Difficulty3.testStage();
+		stages[height-1][1].setIsBoss(true);
 	}
 
 	public int[][] GenerateMap() {
@@ -205,13 +218,13 @@ public class Map {
 		for (int k = 0; k < 4; k++) {
 			int nexti = nowi + dir[k];
 			int nextj = nowj + dic[k];
-			if(nexti<0 || nextj<0 || nexti>=height || nextj>=width) {
+			if (nexti < 0 || nextj < 0 || nexti >= height || nextj >= width) {
 				continue;
 			}
-			if(stages[nexti][nextj] == null) {
+			if (stages[nexti][nextj] == null) {
 				continue;
 			}
-			if(stages[nexti][nextj].isClear()) {
+			if (stages[nexti][nextj].isClear()) {
 				isClear = true;
 				break;
 			}

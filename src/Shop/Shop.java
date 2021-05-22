@@ -6,7 +6,7 @@ import Item.Item;
 import Item.Potion;
 import List.AllyUnitList;
 import List.GearList;
-import UnitBase.AllyUnit;
+import Unit.AllyUnit;
 
 public class Shop {
 
@@ -18,10 +18,14 @@ public class Shop {
 
 	public Shop() {
 		items = new Item[10];
-		items[0] = new Potion("Small Potion", "Heal HP by 250.", 50, 250, 1);
+		items[0] = new Potion("Small Potion", "Heal HP by 300.", 50, 300, 1);
+		items[0].setUrl("NewItem/potion1.png");
 		items[1] = new Potion("Medium Potion", "Heal HP by 1000.", 150, 1000, 1);
+		items[1].setUrl("NewItem/potion2.png");
 		items[2] = new Potion("Large Potion", "Heal HP by 2500.", 300, 2500, 1);
+		items[2].setUrl("NewItem/potion3.png");
 		items[3] = new Potion("Max Potion", "Heal HP by 10000.", 1000, 10000, 1);
+		items[3].setUrl("NewItem/potion4.png");
 		Item[] result = getRandomItem();
 		for (int i = 4; i < 10; i++)
 			items[i] = result[i];
@@ -35,12 +39,12 @@ public class Shop {
 	}
 
 	private Item[] getRandomItem() {
-		int[] mark = new int[35];
-		Item[] result = new Item[35];
+		int[] mark = new int[40];
+		Item[] result = new Item[40];
 		for (int i = 4; i <= 9; i++) {
-			int idx = getRandomNum(0, 32);
+			int idx = getRandomNum(0, 39);
 			while (mark[idx] == 1) {
-				idx = getRandomNum(0, 32);
+				idx = getRandomNum(0, 39);
 			}
 			mark[idx] = 1;
 			result[i] = GearList.getAllGear().get(idx);

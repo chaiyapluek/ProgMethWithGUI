@@ -1,7 +1,5 @@
 package SubSkill;
 
-import UnitBase.Unit;
-
 public abstract class BuffType extends SubSkill{
 
 	private int increaseAmount;
@@ -18,9 +16,5 @@ public abstract class BuffType extends SubSkill{
 	public void setIncreaseAmount(int increaseAmount) {
 		this.increaseAmount = increaseAmount;
 	}
-	
-	public abstract void activate(Unit target) ;
-	public abstract void deactivate(Unit target);
-	
 	
 }

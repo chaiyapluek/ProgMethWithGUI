@@ -2,10 +2,11 @@ package SubSkill;
 
 
 import Skill.Effect;
-import UnitBase.Unit;
-import UnitBase.UnitStats;
+import SubSkillBase.Activatable;
+import Unit.Unit;
+import Unit.UnitStats;
 
-public class DOTDamage extends SubSkill{
+public class DOTDamage extends SubSkill implements Activatable{
 
 	private int damageAmount;
 	
@@ -25,16 +26,14 @@ public class DOTDamage extends SubSkill{
 			Target.getEffects().add(effect);
 		}
 	}
-
-	@Override
-	public void deactivate(Unit target) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	public void damaged(Unit target) {
 		UnitStats Target = (UnitStats)target;
 		Target.setCurrentHP(Target.getCurrentHP() - damageAmount);
+	}
+	
+	public int getDamage() {
+		return damageAmount;
 	}
 	
 }

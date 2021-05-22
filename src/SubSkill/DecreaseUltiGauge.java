@@ -1,9 +1,10 @@
 package SubSkill;
 
-import UnitBase.AdvanceUnit;
-import UnitBase.Unit;
+import SubSkillBase.Activatable;
+import Unit.AdvanceUnit;
+import Unit.Unit;
 
-public class DecreaseUltiGauge extends SubSkill {
+public class DecreaseUltiGauge extends SubSkill implements Activatable{
 
 	private int decreaseAmount;
 
@@ -22,10 +23,5 @@ public class DecreaseUltiGauge extends SubSkill {
 		}
 	}
 
-	@Override
-	public void deactivate(Unit target) {
-		// TODO Auto-generated method stub
-
-	}
 	
 }

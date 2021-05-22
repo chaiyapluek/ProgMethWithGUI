@@ -1,7 +1,7 @@
 package Map;
 
 import Shop.Shop;
-import UnitBase.*;
+import Unit.*;
 
 public class Stage {
 

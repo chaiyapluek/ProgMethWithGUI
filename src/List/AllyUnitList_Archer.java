@@ -5,7 +5,7 @@ import java.util.Arrays;
 
 import Skill.*;
 import SubSkill.*;
-import UnitBase.AllyUnit;
+import Unit.AllyUnit;
 
 public class AllyUnitList_Archer {
 

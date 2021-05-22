@@ -1,19 +1,21 @@
 package SubSkill;
 
 import Skill.Effect;
-import UnitBase.Unit;
-import UnitBase.UnitStats;
+import SubSkillBase.Activatable;
+import SubSkillBase.Deactivatable;
+import Unit.Unit;
+import Unit.UnitStats;
 
-public class DecreaseAttack extends DebuffType{
+public class DecreaseAttack extends DebuffType implements Activatable, Deactivatable {
 
-	public DecreaseAttack(int duration,int increaseAmount) {
-		super("[ Attack down ]",duration,increaseAmount);
+	public DecreaseAttack(int duration, int increaseAmount) {
+		super("[ Attack down ]", duration, increaseAmount);
 	}
-	
+
 	@Override
 	public void activate(Unit target) {
 		// TODO Auto-generated method stub
-		UnitStats Target = (UnitStats)target;
+		UnitStats Target = (UnitStats) target;
 		Target.setIncreaseAttackAmount(Target.getIncreaseAttackAmount() - this.getDecreaseAmount());
 		// add effect to target
 		Effect effect = new Effect(this.getDescription(), this.getDuration(), this);
@@ -23,8 +25,8 @@ public class DecreaseAttack extends DebuffType{
 	@Override
 	public void deactivate(Unit target) {
 		// TODO Auto-generated method stub
-		UnitStats Target = (UnitStats)target;
+		UnitStats Target = (UnitStats) target;
 		Target.setIncreaseAttackAmount(Target.getIncreaseAttackAmount() + this.getDecreaseAmount());
 	}
-	
+
 }

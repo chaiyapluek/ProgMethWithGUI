@@ -1,7 +1,7 @@
 package gui;
 
 import Map.Stage;
-import UnitBase.Unit;
+import Unit.Unit;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -106,14 +106,16 @@ public class ViewStagePane extends HBox {
 			}
 			imgView.setPreserveRatio(true);
 			unitButton.setGraphic(imgView);
-			unitButton.setBackground(
-					new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
 		}
+		unitButton
+				.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
 		unitButton.setOnMouseEntered(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
 				// TODO Auto-generated method stub
-				unitButton.setCursor(Cursor.HAND);
+				if (unit != null) {
+					unitButton.setCursor(Cursor.HAND);
+				}
 			}
 		});
 		unitButton.setOnMouseExited(new EventHandler<MouseEvent>() {
@@ -127,8 +129,10 @@ public class ViewStagePane extends HBox {
 			@Override
 			public void handle(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				GameController.setSelectEnemyUnit(unit);
-				GameController.updateEnemyInfoPanel();
+				if (unit != null) {
+					GameController.setSelectEnemyUnit(unit);
+					GameController.updateEnemyInfoPanel();
+				}
 			}
 		});
 		return unitButton;

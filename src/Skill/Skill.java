@@ -3,7 +3,7 @@ package Skill;
 import java.util.ArrayList;
 
 import SubSkill.SubSkill;
-import UnitBase.Unit;
+import Unit.Unit;
 
 public abstract class Skill {
 

@@ -3,10 +3,11 @@ package SubSkill;
 import java.util.ArrayList;
 
 import Skill.Effect;
-import UnitBase.Unit;
-import UnitBase.UnitStats;
+import SubSkillBase.Activatable;
+import Unit.Unit;
+import Unit.UnitStats;
 
-public class RemoveDebuff extends SubSkill{
+public class RemoveDebuff extends SubSkill implements Activatable{
 
 	public RemoveDebuff() {
 		super("[Remove Debuff]", 0);
@@ -26,12 +27,6 @@ public class RemoveDebuff extends SubSkill{
 		for (Effect e : removed) {
 			Target.removeEffect(e);
 		}
-	}
-
-	@Override
-	public void deactivate(Unit target) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

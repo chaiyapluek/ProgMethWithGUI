@@ -1,10 +1,12 @@
 package SubSkill;
 
 import Skill.Effect;
-import UnitBase.Unit;
-import UnitBase.UnitStats;
+import SubSkillBase.Activatable;
+import SubSkillBase.Deactivatable;
+import Unit.Unit;
+import Unit.UnitStats;
 
-public class IgnoreDef extends SubSkill{
+public class IgnoreDef extends SubSkill implements Activatable, Deactivatable{
 
 	public IgnoreDef(int duration) {
 		super("[ Ignore Def ]", duration);

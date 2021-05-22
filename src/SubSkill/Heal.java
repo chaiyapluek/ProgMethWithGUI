@@ -1,10 +1,11 @@
 package SubSkill;
 
 import Skill.Effect;
-import UnitBase.Unit;
-import UnitBase.UnitStats;
+import SubSkillBase.Activatable;
+import Unit.Unit;
+import Unit.UnitStats;
 
-public class Heal extends SubSkill {
+public class Heal extends SubSkill implements Activatable{
 
 	private int healAmount;
 
@@ -25,21 +26,13 @@ public class Heal extends SubSkill {
 		UnitStats Target = (UnitStats) target;
 		int healAmount = (int) (1.0 * Target.getMaxHP() * this.healAmount / 100);
 		Target.setCurrentHP(healAmount + Target.getCurrentHP());
-		System.out.println("GEAL");
 		if (this.getDuration() > 1) {
 			Effect effect = new Effect(this.getDescription(), this.getDuration(), this);
 			Target.getEffects().add(effect);
 		}
 	}
 
-	@Override
-	public void deactivate(Unit target) {
-		// TODO Auto-generated method stub
-
-	}
-
 	public void heal(Unit target) {
-		System.out.println("HEAL");
 		UnitStats Target = (UnitStats) target;
 		int healAmount = (int) (1.0 * Target.getMaxHP() * this.healAmount / 100);
 		Target.setCurrentHP(healAmount + Target.getCurrentHP());

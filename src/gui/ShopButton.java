@@ -4,7 +4,7 @@ import Item.Gear;
 import Item.Item;
 import Item.Potion;
 import List.AllyUnitList;
-import UnitBase.AllyUnit;
+import Unit.AllyUnit;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -13,8 +13,14 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import logic.GameController;
 
@@ -27,9 +33,12 @@ public class ShopButton extends HBox {
 		this.setAlignment(Pos.CENTER_LEFT);
 		this.setSpacing(10);
 
-		Pane pic = new Pane();
-		pic.setMaxSize(45, 45);
-		pic.setMinSize(45, 45);
+		StackPane pic = new StackPane();
+		pic.setAlignment(Pos.CENTER);
+		pic.setMaxSize(47, 47);
+		pic.setMinSize(47, 47);
+		pic.setBorder(new Border(
+				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		Button info = new Button("Info");
 		info.setFont(new Font("Arial", 12));
 		Button buy = new Button("Buy");

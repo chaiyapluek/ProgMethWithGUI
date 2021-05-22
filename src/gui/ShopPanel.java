@@ -5,7 +5,7 @@ import Item.Item;
 import Item.Potion;
 import List.AllyUnitList;
 import Shop.Shop;
-import UnitBase.AllyUnit;
+import Unit.AllyUnit;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

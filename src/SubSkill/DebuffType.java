@@ -1,7 +1,5 @@
 package SubSkill;
 
-import UnitBase.Unit;
-
 public abstract class DebuffType extends SubSkill{
 
 	private int decreaseAmount;
@@ -14,8 +12,5 @@ public abstract class DebuffType extends SubSkill{
 	public int getDecreaseAmount() {
 		return this.decreaseAmount;
 	}
-	
-	public abstract void activate(Unit target) ;
-	public abstract void deactivate(Unit target);
 	
 }

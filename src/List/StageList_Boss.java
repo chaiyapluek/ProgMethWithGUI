@@ -3,8 +3,8 @@ package List;
 import java.util.Random;
 
 import Map.Stage;
-import UnitBase.AdvanceUnit;
-import UnitBase.Unit;
+import Unit.AdvanceUnit;
+import Unit.Unit;
 
 public class StageList_Boss {
 
@@ -12,7 +12,7 @@ public class StageList_Boss {
 
 	public static Stage[] getMiniBossStage() {
 		Stage[] stages = new Stage[] { MiniBoss1(), MiniBoss2(), MiniBoss3(), MiniBoss4() };
-		for(Stage s : stages) {
+		for (Stage s : stages) {
 			s.setMoneyDrop(3000 + r.nextInt(1000));
 		}
 		return stages;
@@ -42,6 +42,11 @@ public class StageList_Boss {
 		stats = new int[] { getHP(100000), 20, getAttack(2000), 10, 100, 0, 10 };
 		AdvanceUnit enemyUnit4 = BossList.Mordred(stats);
 
+		enemyUnit1.setID(1);
+		enemyUnit2.setID(2);
+		enemyUnit3.setID(3);
+		enemyUnit4.setID(4);
+
 		Unit[][] units = new Unit[][] { { enemyUnit1, enemyUnit2, enemyUnit3 }, { null, enemyUnit4, null } };
 
 		Stage stage = new Stage(2, false, units);
@@ -57,6 +62,9 @@ public class StageList_Boss {
 		AdvanceUnit enemyUnit2 = BossList.Ozymandias(stats);
 
 		Unit[][] units = new Unit[][] { { null, enemyUnit1, null }, { null, enemyUnit2, null } };
+
+		enemyUnit1.setID(1);
+		enemyUnit2.setID(2);
 
 		Stage stage = new Stage(2, false, units);
 		return stage;
@@ -78,6 +86,11 @@ public class StageList_Boss {
 
 		Unit[][] units = new Unit[][] { { enemyUnit1, enemyUnit2, enemyUnit3 }, { null, enemyUnit4, null } };
 
+		enemyUnit1.setID(1);
+		enemyUnit2.setID(2);
+		enemyUnit3.setID(3);
+		enemyUnit4.setID(4);
+
 		Stage stage = new Stage(2, false, units);
 		return stage;
 
@@ -95,6 +108,10 @@ public class StageList_Boss {
 
 		Unit[][] units = new Unit[][] { { null, enemyUnit1, null }, { null, enemyUnit2, null },
 				{ null, enemyUnit3, null } };
+
+		enemyUnit1.setID(1);
+		enemyUnit2.setID(2);
+		enemyUnit3.setID(3);
 
 		Stage stage = new Stage(3, false, units);
 		return stage;

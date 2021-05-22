@@ -1,7 +1,7 @@
 package gui;
 
-import UnitBase.AllyUnit;
-import UnitBase.Unit;
+import Unit.AllyUnit;
+import Unit.Unit;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -149,7 +149,7 @@ public class ControlPanel extends HBox {
 		gearsPane.setAlignment(Pos.CENTER_LEFT);
 
 		for (int i = 0; i < 5; i++) {
-			GearButton button = new GearButton();
+			GearButton button = new GearButton(i);
 			gearsPane.getChildren().add(button);
 			gearsButton.add(button);
 		}
@@ -229,7 +229,7 @@ public class ControlPanel extends HBox {
 			@Override
 			public void handle(MouseEvent event) {
 				// TODO Auto-generated method stub
-				button.setCursor(Cursor.HAND);
+				button.setCursor(Cursor.DEFAULT);
 			}
 		});
 	}

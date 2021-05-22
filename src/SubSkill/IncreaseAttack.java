@@ -1,10 +1,12 @@
 package SubSkill;
 
 import Skill.Effect;
-import UnitBase.Unit;
-import UnitBase.UnitStats;
+import SubSkillBase.Activatable;
+import SubSkillBase.Deactivatable;
+import Unit.Unit;
+import Unit.UnitStats;
 
-public class IncreaseAttack extends BuffType {
+public class IncreaseAttack extends BuffType implements Activatable, Deactivatable{
 	
 	public IncreaseAttack(int duration, int increaseAmount) {
 		super("[ Attack up ]", duration, increaseAmount);

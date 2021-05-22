@@ -1,7 +1,7 @@
 package gui;
 
 import Application.Player;
-import UnitBase.AllyUnit;
+import Unit.AllyUnit;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

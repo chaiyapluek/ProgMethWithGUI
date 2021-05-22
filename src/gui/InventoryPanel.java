@@ -1,6 +1,5 @@
 package gui;
 
-import java.util.Optional;
 
 import Item.Gear;
 import Item.Item;
@@ -9,13 +8,13 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Alert;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
@@ -29,8 +28,6 @@ import logic.GameController;
 
 public class InventoryPanel extends VBox {
 
-	private Item item;
-	private int i, j;
 	private GridPane inventory;
 
 	public InventoryPanel() {
@@ -78,6 +75,9 @@ public class InventoryPanel extends VBox {
 				Button button = new Button();
 				button.setMaxSize(60, 60);
 				button.setMinSize(60, 60);
+				button.setBorder(new Border(
+						new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+				button.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
 				inventory.add(button, j, i);
 				if (idx >= GameController.getPlayer().getInventory().getInventorySize()) {
 					continue;
@@ -88,6 +88,20 @@ public class InventoryPanel extends VBox {
 				view.setFitHeight(45);
 				button.setGraphic(view);
 				view.setPreserveRatio(true);
+				button.setOnMouseEntered(new EventHandler<MouseEvent>() {
+					@Override
+					public void handle(MouseEvent event) {
+						// TODO Auto-generated method stub
+						button.setCursor(Cursor.HAND);
+					}
+				});
+				button.setOnMouseExited(new EventHandler<MouseEvent>() {
+					@Override
+					public void handle(MouseEvent event) {
+						// TODO Auto-generated method stub
+						button.setCursor(Cursor.DEFAULT);
+					}
+				});
 				button.setOnAction(new EventHandler<ActionEvent>() {
 
 					@Override

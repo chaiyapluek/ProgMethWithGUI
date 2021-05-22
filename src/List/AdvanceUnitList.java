@@ -7,7 +7,7 @@ import Skill.NormalSkill;
 import Skill.Skill;
 import Skill.UltimateSkill;
 import SubSkill.*;
-import UnitBase.AdvanceUnit;
+import Unit.AdvanceUnit;
 
 public class AdvanceUnitList {
 
@@ -31,7 +31,7 @@ public class AdvanceUnitList {
 		Skill ulti = new UltimateSkill("High Voltage", description, SubSkills, false, false, false);
 
 		Skill[] skills = new Skill[] { skill1, skill2, ulti };
-		AdvanceUnit unit = new AdvanceUnit("Mecha Demon Boar", "Berserker", stats, skills);
+		AdvanceUnit unit = new AdvanceUnit("Mecha Boar", "Berserker", stats, skills);
 		unit.setUrl("EnemyUnit/Mecha_Demon_Boar.png");
 
 		return unit;

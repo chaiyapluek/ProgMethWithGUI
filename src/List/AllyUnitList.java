@@ -2,7 +2,7 @@ package List;
 
 import java.util.ArrayList;
 
-import UnitBase.AllyUnit;
+import Unit.AllyUnit;
 
 public class AllyUnitList {
 

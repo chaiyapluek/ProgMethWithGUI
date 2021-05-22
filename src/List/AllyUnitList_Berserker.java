@@ -7,7 +7,7 @@ import Skill.NormalSkill;
 import Skill.Skill;
 import Skill.UltimateSkill;
 import SubSkill.*;
-import UnitBase.AllyUnit;
+import Unit.AllyUnit;
 
 public class AllyUnitList_Berserker {
 
@@ -240,7 +240,7 @@ public class AllyUnitList_Berserker {
 		
 		s1 = new Damage(80, 12);
 		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1));
-		description = "Deals damage to all enemies";
+		description = "Deals damage to one enemies";
 		Skill Mysterious_Ultimate = new UltimateSkill("Cross-Calibur", description, SubSkills, false, true, false);
 		Mysterious_Ultimate.setUrl("Skill/NP.png");
 		

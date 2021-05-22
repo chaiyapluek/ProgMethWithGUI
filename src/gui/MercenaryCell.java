@@ -1,9 +1,9 @@
 package gui;
 
 import Application.Main;
-import UnitBase.AdvanceUnit;
-import UnitBase.AllyUnit;
-import UnitBase.Unit;
+import Unit.AdvanceUnit;
+import Unit.AllyUnit;
+import Unit.Unit;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -57,7 +57,7 @@ public class MercenaryCell extends VBox {
 		
 		
 		Label name = new Label(u.getName() + " [ " + u.get_Class() + " ]");
-		name.setFont(new Font(24));
+		name.setFont(new Font("Arial Black",24));
 		
 		merImage.setBackground(new Background(
 				new BackgroundImage(new Image(u.getUrl()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
@@ -74,7 +74,7 @@ public class MercenaryCell extends VBox {
 				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(2))));
 		
 		Button choose = new Button("CHOOSE");
-		choose.setFont(new Font("Arial Black",18));
+		choose.setFont(new Font("Arial Black",16));
 		choose.setPrefWidth(150);
 		choose.setBackground(new Background(new BackgroundFill(Color.rgb(255, 207, 72), CornerRadii.EMPTY, Insets.EMPTY)));
 		choose.setBorder(new Border(

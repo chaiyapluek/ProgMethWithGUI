@@ -7,7 +7,7 @@ import Skill.NormalSkill;
 import Skill.Skill;
 import Skill.UltimateSkill;
 import SubSkill.*;
-import UnitBase.AllyUnit;
+import Unit.AllyUnit;
 
 public class AllyUnitList_Saber {
 

@@ -1,8 +1,9 @@
-package UnitBase;
+package Unit;
 
 import java.util.Random;
 
 import SubSkill.*;
+import SubSkillBase.Activatable;
 import logic.BattleController;
 import logic.GameController;
 
@@ -91,8 +92,8 @@ public abstract class UnitAction extends UnitStats {
 	public void defense() {
 		SubSkill DefUp = new IncreaseDef(1, 20);
 		SubSkill DodgeUp = new IncreaseDodgeChance(1, 10);
-		DefUp.activate(this);
-		DodgeUp.activate(this);
+		((Activatable) DefUp).activate(this);
+		((Activatable) DodgeUp).activate(this);
 		if (BattleController.getEnemyTurn()) {
 			int currentTime = BattleController.getEnemyTimeCount();
 			GameController.getMainPanel().addTextToShow(DefUp.getDescription(), this, currentTime);

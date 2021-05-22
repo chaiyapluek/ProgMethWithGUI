@@ -1,10 +1,12 @@
 package SubSkill;
 
 import Skill.Effect;
-import UnitBase.Unit;
-import UnitBase.UnitStats;
+import SubSkillBase.Activatable;
+import SubSkillBase.Deactivatable;
+import Unit.Unit;
+import Unit.UnitStats;
 
-public class IncreaseDodgeChance extends BuffType{
+public class IncreaseDodgeChance extends BuffType implements Activatable, Deactivatable{
 
 	public IncreaseDodgeChance(int duration,int increaseAmount) {
 		super("[ Dodge chance up ]",duration,increaseAmount);

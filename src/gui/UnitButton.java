@@ -2,11 +2,11 @@ package gui;
 
 import Skill.Effect;
 import Skill.NormalSkill;
-import UnitBase.AdvanceUnit;
-import UnitBase.AllyUnit;
-import UnitBase.BasicUnit;
-import UnitBase.Unit;
-import UnitBase.UnitStats;
+import Unit.AdvanceUnit;
+import Unit.AllyUnit;
+import Unit.BasicUnit;
+import Unit.Unit;
+import Unit.UnitStats;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;

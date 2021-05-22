@@ -1,4 +1,4 @@
-package UnitBase;
+package Unit;
 
 public class BasicUnit extends UnitAction {
 

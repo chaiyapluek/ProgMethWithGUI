@@ -1,7 +1,9 @@
-package UnitBase;
+package Unit;
 
 import java.util.ArrayList;
+
 import Skill.Effect;
+import SubSkillBase.Deactivatable;
 
 public abstract class UnitStats extends Unit {
 
@@ -176,7 +178,9 @@ public abstract class UnitStats extends Unit {
 	}
 
 	public void removeEffect(Effect e) {
-		e.getSubSkill().deactivate(this);
+		if(e.getSubSkill() instanceof Deactivatable) {
+			((Deactivatable)e.getSubSkill()).deactivate(this);
+		}
 		this.effects.remove(e);
 	}
 

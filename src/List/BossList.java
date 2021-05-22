@@ -7,7 +7,7 @@ import Skill.NormalSkill;
 import Skill.Skill;
 import Skill.UltimateSkill;
 import SubSkill.*;
-import UnitBase.AdvanceUnit;
+import Unit.AdvanceUnit;
 
 public class BossList {
 
@@ -53,10 +53,10 @@ public class BossList {
 
 		s1 = new IncreaseAttack(3, 20);
 		s2 = new IncreaseDef(3, 20);
-		s3 = new Heal(3, 2000);
+		s3 = new Heal(1, 1);
 		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1, s2, s3));
 		description = "";
-		Skill skill2 = new NormalSkill("Imperial Privilege", description, SubSkills, 3, true, false, false);
+		Skill skill2 = new NormalSkill("Imperial Privilege", description, SubSkills, 5, true, false, false);
 
 		s1 = new IncreaseUltiGauge(1, 2);
 		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1));

@@ -6,7 +6,7 @@ import Coordinate.Coordinate;
 import Item.Item;
 import List.AllyUnitList_Saber;
 import Map.*;
-import UnitBase.*;
+import Unit.*;
 import gui.AleartPanel;
 import gui.ChooseMerPanel;
 import gui.ControlPanel;
@@ -62,10 +62,10 @@ public class GameController {
 
 	private static boolean moveToggle = false;
 	private static boolean onBattle = false;
+	private static boolean isWin = false;
 
 	public static void Intialize() {
 		
-		gameMap = new Map();
 		units = new AllyUnit[6];
 		BGSound = new AudioClip(ClassLoader.getSystemResource("BG-sound.mp3").toString());
 		BattleSound = new AudioClip(ClassLoader.getSystemResource("Battle-sound.mp3").toString());
@@ -115,6 +115,7 @@ public class GameController {
 	}
 
 	public static void createPlayer() {
+		gameMap = new Map();
 		Coordinate coordinate = new Coordinate(gameMap.getHeight() - 1, 0);
 		player = new Player(units, coordinate);
 		selectAllyUnit = player.getUnits()[0];
@@ -295,6 +296,14 @@ public class GameController {
 
 	public static boolean getOnBattle() {
 		return onBattle;
+	}
+	
+	public static boolean isWin() {
+		return isWin;
+	}
+	
+	public static void setIsWin(boolean bool) {
+		isWin = bool;
 	}
 
 	public static void updateInventory() {

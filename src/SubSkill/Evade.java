@@ -1,10 +1,12 @@
 package SubSkill;
 
 import Skill.Effect;
-import UnitBase.Unit;
-import UnitBase.UnitStats;
+import SubSkillBase.Activatable;
+import SubSkillBase.Deactivatable;
+import Unit.Unit;
+import Unit.UnitStats;
 
-public class Evade extends SubSkill{
+public class Evade extends SubSkill implements Activatable, Deactivatable{
 	
 	public Evade(int duration) {
 		super("[ Evade ]", duration);

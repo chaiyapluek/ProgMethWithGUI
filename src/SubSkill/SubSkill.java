@@ -1,7 +1,5 @@
 package SubSkill;
 
-import UnitBase.Unit;
-
 public abstract class SubSkill {
 
 	private String description;
@@ -19,9 +17,6 @@ public abstract class SubSkill {
 	public int getDuration() {
 		return this.duration;
 	}
-
-	public abstract void activate(Unit target);
-	public abstract void deactivate(Unit target);
 	
 	public String toString() {
 		return this.description + "\t" + this.duration + " turn(s) left";

@@ -1,10 +1,12 @@
 package SubSkill;
 
 import Skill.Effect;
-import UnitBase.Unit;
-import UnitBase.UnitStats;
+import SubSkillBase.Activatable;
+import SubSkillBase.Deactivatable;
+import Unit.Unit;
+import Unit.UnitStats;
 
-public class Stun extends SubSkill {
+public class Stun extends SubSkill implements Activatable, Deactivatable{
 
 	public Stun(int duration) {
 		super("[ stun ]", duration);

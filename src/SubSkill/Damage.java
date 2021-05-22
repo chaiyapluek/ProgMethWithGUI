@@ -2,8 +2,8 @@ package SubSkill;
 
 import java.util.Random;
 
-import UnitBase.Unit;
-import UnitBase.UnitAction;
+import Unit.Unit;
+import Unit.UnitAction;
 import logic.BattleController;
 import logic.GameController;
 
@@ -13,22 +13,10 @@ public class Damage extends SubSkill {
 	private int hitAmount;
 
 	public Damage(int percentDamage, int hitAmount) {
-		super("[]", 0);
+		super("", 0);
 		// TODO Auto-generated constructor stub
 		this.percentDamage = percentDamage;
 		this.hitAmount = hitAmount;
-	}
-
-	@Override
-	public void activate(Unit target) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void deactivate(Unit target) {
-		// TODO Auto-generated method stub
-
 	}
 
 	public void damaged(Unit u, Unit t, int cnt) {

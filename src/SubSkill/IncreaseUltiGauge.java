@@ -1,10 +1,11 @@
 package SubSkill;
 
 import Skill.Effect;
-import UnitBase.AdvanceUnit;
-import UnitBase.Unit;
+import SubSkillBase.Activatable;
+import Unit.AdvanceUnit;
+import Unit.Unit;
 
-public class IncreaseUltiGauge extends SubSkill {
+public class IncreaseUltiGauge extends SubSkill implements Activatable{
 
 	private int increaseAmount;
 
@@ -29,12 +30,6 @@ public class IncreaseUltiGauge extends SubSkill {
 				Target.getEffects().add(effect);
 			}
 		}
-	}
-
-	@Override
-	public void deactivate(Unit target) {
-		// TODO Auto-generated method stub
-
 	}
 
 	public void increaseGauge(Unit target) {

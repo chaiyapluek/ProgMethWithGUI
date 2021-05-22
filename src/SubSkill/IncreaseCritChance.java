@@ -1,10 +1,12 @@
 package SubSkill;
 
 import Skill.Effect;
-import UnitBase.Unit;
-import UnitBase.UnitStats;
+import SubSkillBase.Activatable;
+import SubSkillBase.Deactivatable;
+import Unit.Unit;
+import Unit.UnitStats;
 
-public class IncreaseCritChance extends BuffType{
+public class IncreaseCritChance extends BuffType implements Activatable, Deactivatable{
 
 	public IncreaseCritChance(int duration,int increaseAmount) {
 		super("[ Crit chance up ]",duration,increaseAmount);

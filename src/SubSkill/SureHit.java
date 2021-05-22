@@ -1,10 +1,12 @@
 package SubSkill;
 
 import Skill.Effect;
-import UnitBase.Unit;
-import UnitBase.UnitStats;
+import SubSkillBase.Activatable;
+import SubSkillBase.Deactivatable;
+import Unit.Unit;
+import Unit.UnitStats;
 
-public class SureHit extends SubSkill{
+public class SureHit extends SubSkill implements Activatable, Deactivatable{
 
 	public SureHit(int duration) {
 		super("[ Sure hit ]", duration);

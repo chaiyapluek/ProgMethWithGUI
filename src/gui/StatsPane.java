@@ -1,8 +1,8 @@
 package gui;
 
-import UnitBase.AdvanceUnit;
-import UnitBase.Unit;
-import UnitBase.UnitStats;
+import Unit.AdvanceUnit;
+import Unit.Unit;
+import Unit.UnitStats;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;

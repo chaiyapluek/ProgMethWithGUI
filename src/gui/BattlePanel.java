@@ -1,6 +1,6 @@
 package gui;
 
-import UnitBase.*;
+import Unit.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -42,9 +42,9 @@ public class BattlePanel extends VBox {
 		labelPane.setAlignment(Pos.CENTER);
 		wave = new Label("WAVE : 1");
 		turn = new Label("TURN : 1");
-		wave.setFont(new Font("Arial Black",20));
+		wave.setFont(new Font("Arial Black", 20));
 		wave.setTextFill(Color.ANTIQUEWHITE);
-		turn.setFont(new Font("Arial Black",20));
+		turn.setFont(new Font("Arial Black", 20));
 		turn.setTextFill(Color.ANTIQUEWHITE);
 		labelPane.getChildren().addAll(wave, turn);
 
@@ -91,7 +91,7 @@ public class BattlePanel extends VBox {
 			allyUnits.add(button);
 		}
 		enemyPane.getChildren().clear();
-		for (Unit unit : GameController.getNowStage().getUnitAtWave(0)) {
+		for (Unit unit : GameController.getNowStage().getUnitAtWave(BattleController.getWave() - 1)) {
 			UnitButton button = new UnitButton(unit);
 			enemyPane.getChildren().add(button);
 			enemyUnits.add(button);
@@ -151,27 +151,27 @@ public class BattlePanel extends VBox {
 			button.removeChooseIcon();
 		}
 		for (UnitButton button : allyUnits) {
-			if(GameController.getSelectAllyUnit().equals(button.getUnit())) {
+			if (GameController.getSelectAllyUnit().equals(button.getUnit())) {
 				button.setChooseIcon();
 				break;
 			}
 		}
 		for (UnitButton button : enemyUnits) {
-			if(GameController.getSelectEnemyUnit().equals(button.getUnit())) {
+			if (GameController.getSelectEnemyUnit().equals(button.getUnit())) {
 				button.setChooseIcon();
 				break;
 			}
 		}
 	}
-	
+
 	public UnitButton getUnitButton(Unit unit) {
-		for(UnitButton button : allyUnits) {
-			if(unit.equals(button.getUnit())) {
+		for (UnitButton button : allyUnits) {
+			if (unit.equals(button.getUnit())) {
 				return button;
 			}
 		}
-		for(UnitButton button : enemyUnits) {
-			if(unit.equals(button.getUnit())) {
+		for (UnitButton button : enemyUnits) {
+			if (unit.equals(button.getUnit())) {
 				return button;
 			}
 		}

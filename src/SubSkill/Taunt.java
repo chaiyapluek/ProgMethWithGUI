@@ -1,10 +1,12 @@
 package SubSkill;
 
 import Skill.Effect;
-import UnitBase.Unit;
-import UnitBase.UnitStats;
+import SubSkillBase.Activatable;
+import SubSkillBase.Deactivatable;
+import Unit.Unit;
+import Unit.UnitStats;
 
-public class Taunt extends SubSkill{
+public class Taunt extends SubSkill implements Activatable, Deactivatable{
 
 	public Taunt(int duration) {
 		super("[ Taunt ]", duration);

@@ -1,6 +1,6 @@
 package gui;
 
-import UnitBase.AllyUnit;
+import Unit.AllyUnit;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -91,7 +91,6 @@ public class SelectTargetSkillPanel extends StackPane {
 				public void handle(ActionEvent arg0) {
 					// TODO Auto-generated method stub
 					BattleController.useSkillTo(u);
-					GameController.getMainPanel().showText();
 					BattleController.afterTakeAction();
 					GameController.updateBattlePanel();
 					GameController.updateAllyInfo();

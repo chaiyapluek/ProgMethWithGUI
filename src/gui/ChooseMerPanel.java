@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import List.AllyUnitList;
-import UnitBase.AllyUnit;
+import Unit.AllyUnit;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -27,6 +27,7 @@ public class ChooseMerPanel extends VBox {
 	private MercenaryPanel panel;
 	
 	public ChooseMerPanel() {
+		count = 0;
 		this.setPadding(new Insets(10));
 		this.setSpacing(10);
 		this.setAlignment(Pos.CENTER);

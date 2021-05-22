@@ -2,6 +2,7 @@ package gui;
 
 import java.util.ArrayList;
 
+import Application.Main;
 import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -52,6 +53,9 @@ public class TextAnimation {
 						// TODO Auto-generated method stub
 						if (text.equals("Victory")) {
 							GameController.showReward(true);
+						}else if(BattleController.getEnemyWin() || GameController.isWin()) {
+							GameController.setIsWin(false);
+							Main.setStartScene();
 						}
 					}
 				});

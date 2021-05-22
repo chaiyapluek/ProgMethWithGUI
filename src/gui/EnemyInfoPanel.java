@@ -1,7 +1,7 @@
 package gui;
 
-import UnitBase.AdvanceUnit;
-import UnitBase.UnitStats;
+import Unit.AdvanceUnit;
+import Unit.UnitStats;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -69,7 +69,7 @@ public class EnemyInfoPanel extends VBox {
 		dodge = new Label();
 		gauge = new Label();
 		HPandGauge.getChildren().addAll(HP,gauge);
-		other.getChildren().addAll(attack,def,crit,critdmg,dodge,gauge);
+		other.getChildren().addAll(attack,def,crit,critdmg,dodge);
 		Stats.getChildren().addAll(HPandGauge,other);
 
 		info.getChildren().addAll(NameAndClass, Stats);

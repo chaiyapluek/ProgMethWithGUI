@@ -1,6 +1,6 @@
 package gui;
 
-import UnitBase.AllyUnit;
+import Unit.AllyUnit;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;

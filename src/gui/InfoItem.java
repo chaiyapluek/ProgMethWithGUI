@@ -69,7 +69,7 @@ public class InfoItem extends StackPane {
 		BorderPane top = new BorderPane();
 		Label label = new Label("Item Information");
 		label.setStyle("-fx-font-size: 24px; -fx-font-family:\"Arial Black\";-fx-fill: #555;");
-		Button back = new Button("X");
+		Button back = new Button();
 		top.setRight(back);
 		top.setCenter(label);
 		GameController.setBackButton(back);
@@ -89,18 +89,18 @@ public class InfoItem extends StackPane {
 		info.setMinSize(500, 150);
 		info.setMaxSize(500, 150);
 		info.setBorder(new Border(
-				new BorderStroke(Color.GOLD, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+				new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
 		VBox text = new VBox();
-		text.setSpacing(15);
+		text.setSpacing(10);
 		name = new Label();
 		des = new Label();
 		price = new Label();
 		potionAmount = new Label();
-		name.setFont(new Font("Berlin Sans FB", 20));
-		des.setFont(new Font("Berlin Sans FB", 14));
-		price.setFont(new Font("Berlin Sans FB", 14));
-		potionAmount.setFont(new Font("Berlin Sans FB", 14));
+		name.setFont(new Font("Arial Black", 18));
+		des.setFont(new Font("Arial", 16));
+		price.setFont(new Font("Arial", 16));
+		potionAmount.setFont(new Font("Arial", 16));
 		text.getChildren().addAll(name, des, potionAmount, price);
 		potionAmount.setVisible(false);
 

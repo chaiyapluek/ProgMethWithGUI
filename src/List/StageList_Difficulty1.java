@@ -3,8 +3,8 @@ package List;
 import java.util.Random;
 
 import Map.Stage;
-import UnitBase.BasicUnit;
-import UnitBase.Unit;
+import Unit.BasicUnit;
+import Unit.Unit;
 
 public class StageList_Difficulty1 {
 

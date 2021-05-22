@@ -1,7 +1,7 @@
 package Item;
 
-import UnitBase.Unit;
-import UnitBase.UnitStats;
+import Unit.Unit;
+import Unit.UnitStats;
 
 public class Gear extends Item {
 	

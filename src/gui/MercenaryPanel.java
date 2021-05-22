@@ -2,7 +2,7 @@ package gui;
 
 import java.util.ArrayList;
 
-import UnitBase.AllyUnit;
+import Unit.AllyUnit;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;

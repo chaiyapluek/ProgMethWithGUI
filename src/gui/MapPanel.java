@@ -34,7 +34,7 @@ public class MapPanel extends VBox {
 		this.setMaxSize(400, 300);
 		this.setMinSize(400, 300);
 		this.setPadding(new Insets(10));
-		this.setSpacing(10);
+		this.setSpacing(15);
 		this.setAlignment(Pos.TOP_CENTER);
 
 		HBox pane = new HBox();

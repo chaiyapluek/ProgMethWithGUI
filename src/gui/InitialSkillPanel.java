@@ -1,7 +1,7 @@
 package gui;
 
 import Skill.Skill;
-import UnitBase.AdvanceUnit;
+import Unit.AdvanceUnit;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.FlowPane;

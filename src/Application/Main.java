@@ -4,17 +4,9 @@ import gui.StartPanel;
 import gui.ChooseMerPanel;
 import gui.MainPanel;
 import javafx.application.Application;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import logic.GameController;
 
@@ -36,11 +28,11 @@ public class Main extends Application{
 		primaryStage.setScene(startScene);
 		primaryStage.setTitle("Test Project");
 		primaryStage.sizeToScene();
+		primaryStage.setResizable(false);
 		primaryStage.show();
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(javafx.scene.text.Font.getFamilies());
 		launch(args);
 	}
 
@@ -86,6 +78,10 @@ public class Main extends Application{
 	
 	public static Scene getMainScene() {
 		return mainScene;
+	}
+	
+	public static void setStartScene() {
+		stage.setScene(startScene);
 	}
 
 }

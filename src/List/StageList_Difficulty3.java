@@ -3,17 +3,17 @@ package List;
 import java.util.Random;
 
 import Map.Stage;
-import UnitBase.AdvanceUnit;
-import UnitBase.BasicUnit;
-import UnitBase.Unit;
+import Unit.AdvanceUnit;
+import Unit.BasicUnit;
+import Unit.Unit;
 
 public class StageList_Difficulty3 {
-	
+
 	private static Random r = new Random();
-	
+
 	public static Stage[] getStage_Difficulty3() {
 		Stage[] stages = new Stage[] { Stage1(), Stage2(), Stage3(), Stage4(), Stage5() };
-		for(Stage s : stages) {
+		for (Stage s : stages) {
 			s.setMoneyDrop(1500 + r.nextInt(350));
 		}
 		return stages;
@@ -215,7 +215,7 @@ public class StageList_Difficulty3 {
 
 		enemyUnit1.setID(1);
 
-		Unit[][] units = new Unit[][] { { enemyUnit1 } };
+		Unit[][] units = new Unit[][] { { null, enemyUnit1, null } };
 
 		Stage stage5 = new Stage(1, false, units);
 		return stage5;

@@ -1,7 +1,7 @@
 package Item;
 
-import UnitBase.Unit;
-import UnitBase.UnitStats;
+import Unit.Unit;
+import Unit.UnitStats;
 
 public class Potion extends Item{
 	private int healPoint;
@@ -12,7 +12,6 @@ public class Potion extends Item{
 		// TODO Auto-generated constructor stub
 		this.healPoint = healPoint;
 		this.numberOfPotion = numberOfPotion;
-		this.setUrl("Item/potion-ball.png");
 	}
 	 
 	public void healUnit(Unit unit) throws Exception {
@@ -41,7 +40,7 @@ public class Potion extends Item{
 	public void setNumberOfPotion(int numberOfPotion) {
 		this.numberOfPotion = numberOfPotion;
 	}
-
+	
 	public String toString() {
 		String info = "Name \t\t\t: " + this.getName() + "\n";
 		info += "Description \t\t: " + this.getDescription() + "\n";

@@ -42,16 +42,15 @@ public class Bot {
 		for (int i = 0; i < 3; i++) {
 			if (nullOrDead(i))
 				continue;
-			if (((UnitStats) units[i]).getIsStun())
+			if (((UnitStats) units[i]).getIsStun()) {
 				continue;
-			System.out.println(units[i].getName() + " NOT STUN");
+			}
 			if (units[i] instanceof BasicUnit) {
 				BasicUnitAction(targets, i);
 			} else if (units[i] instanceof AdvanceUnit) {
 				AdvanceUnitAction(targets, i);
 			}
 		}
-		System.out.println(BattleController.getEnemyTimeCount());
 		Thread thread = new Thread(() -> {
 			GameController.getMainPanel().showText();
 			Platform.runLater(new Runnable() {
@@ -82,12 +81,10 @@ public class Bot {
 			}
 			if (tauntCheck(targets) != -1)
 				targetIdx = tauntCheck(targets);
-			System.out.println(units[idx].getName() + " attacked " + targets[targetIdx].getName());
 			// sleep(1000);
 			BattleController.attack(units[idx], targets[targetIdx]);
 		} else {
 			// Defense
-			System.out.println(this.units[idx].getName() + " defense up");
 			((UnitAction) units[idx]).defense();
 		}
 	}
@@ -116,11 +113,9 @@ public class Bot {
 		}
 		if (num < 50) {
 			// Attack
-			System.out.println(units[idx].getName() + " attacked " + targets[targetIdx].getName());
 			BattleController.attack(units[idx], targets[targetIdx]);
 		} else if (num < 60) {
 			// Defense
-			System.out.println(this.units[idx].getName() + " defense up");
 			((UnitAction) units[idx]).defense();
 		} else if (num >= 60 && useableSkill.size() > 0) {
 			// Use Skill
@@ -128,7 +123,6 @@ public class Bot {
 			int skillIdx = useableSkill.get(rand);
 			useSkill(targets, (AdvanceUnit) units[idx], skillIdx, targetIdx);
 		} else {
-			System.out.println(units[idx].getName() + " attacked " + targets[targetIdx].getName());
 			// sleep(1000);
 			BattleController.attack(units[idx], targets[targetIdx]);
 		}
@@ -165,15 +159,12 @@ public class Bot {
 	public void useSkill(Unit[] targets, AdvanceUnit skillUser, int skillIdx, int targetIdx) {
 		Skill skill = skillUser.getSkills()[skillIdx];
 		if (skill.getToYourSelf()) {
-			System.out.println("Use skill to itself");
 			skill.use(skillUser, skillUser);
 		} else {
 			if (skill.getIsSingle()) {
 				if (skill.getToAlly()) {
-					System.out.println(skillUser.getName() + " used skill to " + units[targetIdx].getName());
 					skill.use(skillUser, units[targetIdx]);
 				} else {
-					System.out.println(skillUser.getName() + " used skill to " + targets[targetIdx].getName());
 					skill.use(skillUser, targets[targetIdx]);
 					if (((UnitStats) targets[targetIdx]).getCurrentHP() <= 0) {
 						((UnitStats) targets[targetIdx]).setIsDead(true);
@@ -187,7 +178,6 @@ public class Bot {
 							continue;
 						skill.use(skillUser, units[i]);
 					}
-					System.out.println(skillUser.getName() + " used skill to all of their units");
 				} else {
 					for (int i = 0; i < 3; i++) {
 						if (targets[i] == null)
@@ -200,7 +190,6 @@ public class Bot {
 							BattleController.setPlayerUnitKilled(true);
 						}
 					}
-					System.out.println(skillUser.getName() + " used skill to all of your units");
 				}
 			}
 		}
@@ -215,22 +204,6 @@ public class Bot {
 		if (((UnitStats) units[idx]).getIsDead())
 			return true;
 		return false;
-	}
-
-	public boolean shouldHeal(int idx) {
-		int num = 0;
-		for (int i = 0; i < 3; i++) {
-			if (units[i] == null)
-				continue;
-			UnitStats unit = (UnitStats) units[i];
-			if ((int) (unit.getCurrentHP() * 100 / unit.getMaxHP()) < 60) {
-				if (units[i] instanceof BasicUnit)
-					num += 1;
-				else
-					num += 2;
-			}
-		}
-		return num >= 2;
 	}
 
 	public void sleep(int mi) {

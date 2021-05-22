@@ -130,6 +130,7 @@ public class MainPanel extends StackPane {
 	public void showText() {
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		TextAnimation.textAtUnitButton(gc, texts);
+		gc.getCanvas().setVisible(false);
 	}
 
 }

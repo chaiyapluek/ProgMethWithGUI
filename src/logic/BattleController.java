@@ -130,14 +130,12 @@ public class BattleController {
 	public static void checkPlayerTurnEnd() {
 		if (numberOfTakenAction == maxPlayerAction) {
 			// pass turn
-
 			enemyTurn = true;
+			bot.play(GameController.getPlayer().getUnits());
 			decreaseSkillCooldown(bot.getUnits());
 			decreaseEffectDuration(bot.getUnits());
-			bot.play(GameController.getPlayer().getUnits());
 			checkEffect(bot.getUnits());
 			increseUltiGauge(bot.getUnits());
-
 		}
 	}
 

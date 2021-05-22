@@ -90,8 +90,8 @@ public abstract class UnitAction extends UnitStats {
 	}
 
 	public void defense() {
-		SubSkill DefUp = new IncreaseDef(1, 20);
-		SubSkill DodgeUp = new IncreaseDodgeChance(1, 10);
+		SubSkill DefUp = new IncreaseDef(2, 20);
+		SubSkill DodgeUp = new IncreaseDodgeChance(2, 10);
 		((Activatable) DefUp).activate(this);
 		((Activatable) DodgeUp).activate(this);
 		if (BattleController.getEnemyTurn()) {

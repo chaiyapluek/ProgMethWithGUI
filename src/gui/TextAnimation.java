@@ -97,6 +97,7 @@ public class TextAnimation {
 							}
 							if (t.getShowTime() <= time && t.getTime() < t.getMaxTime()) {
 								gc.setGlobalAlpha(1 - 1.0 * t.getTime() / 1250);
+								gc.setFill(Color.LIGHTYELLOW);
 								gc.fillText(t.getText(), t.getX(), t.getY() - 1.0 * t.getTime() / 25);
 								t.addTime();
 							}
@@ -109,10 +110,20 @@ public class TextAnimation {
 				});
 			}
 			texts.clear();
+			//gc.getCanvas().setVisible(false);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		gc.getCanvas().setVisible(false);
+		//System.out.println(gc.getCanvas().isVisible());
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				//gc.setFill(Color.BLACK);
+				//System.out.println(gc.getCanvas().isVisible());
+				//gc.fillRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
+				gc.getCanvas().setVisible(false);	
+			}
+		});
 	}
-
 }

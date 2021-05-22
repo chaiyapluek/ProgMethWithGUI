@@ -137,10 +137,10 @@ public class AllyUnitList_Archer {
 		Billy_ThirdSkill.setUrl("Skill/Evade.png");
 
 		s1 = new DecreaseDodgeChance(1, 100);
-		s2 = new Damage(1500, 1);
+		s2 = new Damage(1200, 1);
 		s3 = new DecreaseCritChance(3, 20);
 		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1, s2, s3));
-		description = "Deals damage and decrease crit chance [3 turns] to one enemy";
+		description = "Decreases dodge chance, deals damage and decrease crit chance [3 turns] to one enemy";
 		Skill Billy_Ultimate = new UltimateSkill("Pashupata", description, SubSkills, false, true, false);
 		Billy_Ultimate.setUrl("Skill/NP.png");
 

@@ -142,6 +142,8 @@ public class Map {
 			s.get(idx).setHasShop(true);
 			s.get(idx).createShop();
 		}
+//		stages[height - 1][1] = StageList_Difficulty3.testStage();
+//		stages[height - 1][1].setIsBoss(true);
 	}
 
 	public int[][] GenerateMap() {

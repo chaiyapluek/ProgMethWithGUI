@@ -44,7 +44,6 @@ public class Damage extends SubSkill {
 			int totalDamage = (int) (damageDealed - damageCut);
 			Target.setCurrentHP(Target.getCurrentHP() - totalDamage);
 			sum += totalDamage;
-			System.out.println(totalDamage);
 		}
 		if (BattleController.getEnemyTurn()) {
 			int currentTime = BattleController.getEnemyTimeCount();

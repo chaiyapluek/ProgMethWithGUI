@@ -147,6 +147,7 @@ public class SwapPanel extends StackPane {
 					}
 					GameController.setSwapPanel(false);
 					GameController.updateAllyInfo();
+					GameController.setChooseIcon();
 				}
 			});
 			buttons.getChildren().add(button);

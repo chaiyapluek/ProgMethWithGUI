@@ -9,12 +9,14 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -25,7 +27,7 @@ import javafx.scene.text.Text;
 import logic.GameController;
 
 public class StartPanel extends VBox{
-	private Text gameNameText;
+	private ImageView gameNameText;
 	private Text space;
 	private Text clickToContText;
 	
@@ -51,14 +53,12 @@ public class StartPanel extends VBox{
 	}
 	
 	private void setText() {
-		gameNameText = new Text();
-		gameNameText.setText("Dungeon Adventure");
-		gameNameText.setFont(Font.font("Bauhaus 93",FontWeight.BOLD,120));
-		gameNameText.setFill(Color.WHITE);
+		gameNameText = new ImageView(new Image("DungeonAdventure.png",1100,250,false,true));
+		gameNameText.setPreserveRatio(true);
 		
 		space = new Text();
 		space.setText("");
-		space.setFont(Font.font("Bauhaus 93",FontWeight.BOLD,140));
+		space.setFont(Font.font("Bauhaus 93",FontWeight.BOLD,120));
 		
 		clickToContText = new Text();
 		clickToContText.setText("- CLICK TO CONTINUE -");

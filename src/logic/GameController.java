@@ -410,6 +410,11 @@ public class GameController {
 		});
 	}
 	
+	public static void stopSound() {
+		BGSound.stop();
+		BattleSound.stop();
+	}
+	
 	public static void playBGSound() {
 		BattleSound.stop();
 		BGSound.setCycleCount(AudioClip.INDEFINITE);
@@ -419,6 +424,7 @@ public class GameController {
 	public static void playBattleSound() {
 		BGSound.stop();
 		BattleSound.setCycleCount(AudioClip.INDEFINITE);
+		BattleSound.setVolume(85);
 		BattleSound.play();
 	}
 	

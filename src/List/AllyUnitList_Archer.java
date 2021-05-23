@@ -35,7 +35,7 @@ public class AllyUnitList_Archer {
 				false);
 		David_FirstSkill.setUrl("Skill/Def.png");
 
-		s1 = new Evade(1);
+		s1 = new Evade(2);
 		s2 = new Heal(1, 10);
 		s3 = new RemoveDebuff();
 		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1, s2, s3));
@@ -129,7 +129,7 @@ public class AllyUnitList_Archer {
 		Skill Billy_SecondSkill = new NormalSkill("Quick Draw", description, SubSkills, 3, false, true, false);
 		Billy_SecondSkill.setUrl("Skill/Damage.png");
 
-		s1 = new Evade(1);
+		s1 = new Evade(2);
 		s2 = new IncreaseCritDamage(3, 80);
 		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1, s2));
 		description = "Applies Evade to yourself[1 turn] and increase crit damage [3 turns]";
@@ -137,11 +137,11 @@ public class AllyUnitList_Archer {
 		Billy_ThirdSkill.setUrl("Skill/Evade.png");
 
 		s1 = new DecreaseDodgeChance(1, 100);
-		s2 = new Damage(1200, 1);
+		s2 = new Damage(400, 3);
 		s3 = new DecreaseCritChance(3, 20);
 		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1, s2, s3));
 		description = "Decreases dodge chance, deals damage and decrease crit chance [3 turns] to one enemy";
-		Skill Billy_Ultimate = new UltimateSkill("Pashupata", description, SubSkills, false, true, false);
+		Skill Billy_Ultimate = new UltimateSkill("Triple show", description, SubSkills, false, true, false);
 		Billy_Ultimate.setUrl("Skill/NP.png");
 
 		Skill[] skills = new Skill[] { Billy_FirstSkill, Billy_SecondSkill, Billy_ThirdSkill, Billy_Ultimate };
@@ -160,7 +160,7 @@ public class AllyUnitList_Archer {
 		ArrayList<SubSkill> SubSkills;
 
 		s1 = new IncreaseCritChance(3, 20);
-		s2 = new IncreaseUltiGauge(0, 15);
+		s2 = new IncreaseUltiGauge(0, 8);
 		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1, s2));
 		description = "Increase one ally Gauge and crit chance [3 turns]";
 		Skill Elmelloid_FirstSkill = new NormalSkill("Discerning Eye", description, SubSkills, 5, false, true, true);
@@ -230,9 +230,9 @@ public class AllyUnitList_Archer {
 		Gilgamesh_ThirdSkill.setUrl("Skill/Burst.png");
 
 		s1 = new DecreaseDodgeChance(1, 100);
-		s2 = new Damage(600, 1);
+		s2 = new Damage(200, 3);
 		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1, s2));
-		description = "Deals damage to all enemies";
+		description = "Decrease Dodge chance and Deals damage to all enemies";
 		Skill Gilgamesh_Ultimate = new UltimateSkill("Enuma Elis", description, SubSkills, false, false, false);
 		Gilgamesh_Ultimate.setUrl("Skill/NP.png");
 

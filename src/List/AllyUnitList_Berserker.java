@@ -82,7 +82,7 @@ public class AllyUnitList_Berserker {
 		Skill Harecles_FirstSkill = new NormalSkill("Bravery", description, SubSkills, 5, true, false, false);
 		Harecles_FirstSkill.setUrl("Skill/Burst.png");
 		
-		s1 = new Evade(1);
+		s1 = new Evade(2);
 		s2 = new IncreaseCritChance(3, 10);
 		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1, s2));
 		description = "Grants self Evasion[1 turn] and increases  crit chance [3 turns]";
@@ -97,7 +97,7 @@ public class AllyUnitList_Berserker {
 		Skill Harecles_ThirdSkill = new NormalSkill("Indomitable", description, SubSkills, 8, true, false, false);
 		Harecles_ThirdSkill.setUrl("Skill/Def.png");
 		
-		s1 = new Damage(60, 10);
+		s1 = new Damage(60, 15);
 		s2 = new DecreaseDef(3, 15);
 		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1, s2));
 		description = "Deals damage and decrease defense [3 turns] to one enemy";
@@ -214,7 +214,7 @@ public class AllyUnitList_Berserker {
 		ArrayList<SubSkill> SubSkills;
 
 		s1 = new Heal(1, 30);
-		s2 = new Evade(1);
+		s2 = new Evade(2);
 		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1, s2));
 		description = "Recovers own HP and grants self Evasion [1 turn]";
 		Skill Mysterious_FirstSkill = new NormalSkill("Black Bean Paste", description, SubSkills, 5, true, false,

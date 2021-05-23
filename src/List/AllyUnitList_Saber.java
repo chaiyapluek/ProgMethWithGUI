@@ -225,11 +225,11 @@ public class AllyUnitList_Saber {
 		Skill Musashi_SecondSkill = new NormalSkill("Empyrean Eye", description, SubSkills, 5, true, false, false);
 		Musashi_SecondSkill.setUrl("Skill/Ignoredef.png");
 		
-		s1 = new Evade(1);
+		s1 = new Evade(2);
 		s2 = new RemoveDebuff();
-		s3 = new Heal(0,18);
+		s3 = new Heal(0,10);
 		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1,s2,s3));
-		description = "Removes debuff and recovers own HP and applies Evade to yourself [1 turns]";
+		description = "Removes debuff and recovers own HP and applies Evade to all units [1 turns]";
 		Skill Musashi_ThirdSkill = new NormalSkill("Nothingness", description, SubSkills, 6, false, false, true);
 		Musashi_ThirdSkill.setUrl("Skill/Evade.png");
 		

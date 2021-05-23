@@ -9,6 +9,8 @@ import logic.GameController;
 
 public abstract class UnitAction extends UnitStats {
 
+	private static Random ran = new Random();
+	
 	public UnitAction(String name, String _class, int[] stats) {
 		super(name, _class, stats);
 		// TODO Auto-generated constructor stub
@@ -82,7 +84,6 @@ public abstract class UnitAction extends UnitStats {
 	}
 
 	public static boolean isChance(int chance) {
-		Random ran = new Random();
 		double number = ran.nextDouble() * 100;
 		if (number <= chance)
 			return true;

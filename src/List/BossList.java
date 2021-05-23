@@ -151,7 +151,7 @@ public class BossList {
 		String description = "";
 		Skill skill1 = new NormalSkill("It's Inevitable", description, SubSkills, 3, true, false, false);
 
-		s1 = new Evade(1);
+		s1 = new Evade(2);
 		s2 = new RemoveDebuff();
 		s3 = new IncreaseDef(3, 30);
 		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1, s2, s3));

@@ -39,7 +39,7 @@ public class AllyUnitList_Lancer {
 		Skill Enkidu_FirstSkill = new NormalSkill("Transfiguration", description, SubSkills, 5, true, false, false);
 		Enkidu_FirstSkill.setUrl("Skill/Attack.png");
 		
-		s1 = new Evade(2);
+		s1 = new Evade(3);
 		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1));
 		description = "Grants self Evasion[2 turns]";
 		Skill Enkidu_SecondSkill = new NormalSkill("Presence Detection", description, SubSkills, 6, true, false, false);
@@ -54,7 +54,7 @@ public class AllyUnitList_Lancer {
 		
 		s1 = new DecreaseDef(3, 15);
 		s2 = new Stun(1);
-		s3 = new Damage(1100, 1);
+		s3 = new Damage(200, 5);
 		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1, s2, s3));
 		description = "Deals damage to one enemy and Stun enemy [1 turn] and reduce enemy defense [3 turns]";
 		Skill Enkidu_Ultimate = new UltimateSkill("Enuma Elis", description, SubSkills, false, true, false);
@@ -122,7 +122,7 @@ public class AllyUnitList_Lancer {
 		String description;
 		ArrayList<SubSkill> SubSkills;
 
-		s1 = new Taunt(1);
+		s1 = new Taunt(2);
 		s2 = new IncreaseUltiGauge(3, 2);
 		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1, s2));
 		description = "Applies Taunt [1 turn] and generate Gauge [3 turns] to yourself";
@@ -143,7 +143,7 @@ public class AllyUnitList_Lancer {
 		Skill Leonidas_ThirdSkill = new NormalSkill("War cry", description, SubSkills, 7, false, false, true);
 		Leonidas_ThirdSkill.setUrl("Skill/Def.png");
 		
-		s1 = new Taunt(3);
+		s1 = new Taunt(4);
 		s2 = new IncreaseDef(3, 30);
 		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1, s2));
 		description = "Increases own defense [3 turns] and applies Taunt to yourself [3 turns]";
@@ -231,7 +231,7 @@ public class AllyUnitList_Lancer {
 		Skill Jaguar_SecondSkill = new NormalSkill("Jaguar Kick", description, SubSkills, 3, false, true, false);
 		Jaguar_SecondSkill.setUrl("Skill/Damage.png");
 		
-		s1 = new Taunt(1);
+		s1 = new Taunt(2);
 		s2 = new Heal(3,10);
 		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1, s2));
 		description = "Applies taunt to your self [1 turn] and recovers HP every turn [3 turns]";

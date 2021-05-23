@@ -174,7 +174,7 @@ public class ShopButton extends HBox {
 							GameController.playSound(GameController.getBuySound());
 						} catch (Exception e) {
 							// TODO Auto-generated catch block
-							e.printStackTrace();
+							GameController.showAleart(true, "Unit Full");
 						}
 					} else {
 						for (int i = 0; i < GameController.getPlayer().getUnits().length; i++) {

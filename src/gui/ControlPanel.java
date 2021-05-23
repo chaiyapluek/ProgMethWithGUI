@@ -51,6 +51,7 @@ public class ControlPanel extends HBox {
 	private Label level;
 
 	private ActionSkillPane skillPane;
+	private ActionPane actionPane;
 
 	private StackPane rightPanel;
 	private VBox buttonPane;
@@ -134,7 +135,7 @@ public class ControlPanel extends HBox {
 		Stats.setBorder(new Border(
 				new BorderStroke(Color.GOLD, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		Stats.setPadding(new Insets(5));
-		ActionPane actionPane = new ActionPane();
+		actionPane = new ActionPane();
 		skillPane = new ActionSkillPane();
 
 		left.add(Icon, 0, 0, 1, 1);

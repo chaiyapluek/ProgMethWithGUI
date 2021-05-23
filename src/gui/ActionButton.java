@@ -159,18 +159,18 @@ public class ActionButton extends Button {
 		}
 	}
 
-	private void setTooltip(boolean isLock, int level) {
+	public void setTooltip(boolean isLock, int level) {
 		tooltip = new Tooltip();
 		tooltip.setFont(new Font(12));
-		String txt;
+		String txt = "";
 		if (type.equals("attack")) {
-			txt = "Normal attack\n" + "Deal damage to one enemy";
+			txt += "Normal attack\n" + "Deal damage to one enemy";
 		} else if (type.equals("defense")) {
-			txt = "Defense\n" + "Increases own defenses and dodge chance";
+			txt += "Defense\n" + "Increases own defenses and dodge chance";
 		} else if (type.equals("swap")) {
-			txt = "Swap\n" + "Swap with unit in back row";
+			txt += "Swap\n" + "Swap with unit in back row";
 		} else {
-			txt = skill.getName() + "\n" + skill.getDescription() + "\n";
+			txt += skill.getName() + "\n" + skill.getDescription() + "\n";
 			if (skill instanceof NormalSkill) {
 				txt += "Cooldown : " + ((NormalSkill) skill).getCooldownTime() + " turn(s)";
 				if (isLock) {

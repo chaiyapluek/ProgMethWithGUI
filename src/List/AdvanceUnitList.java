@@ -264,5 +264,24 @@ public class AdvanceUnitList {
 		unit.setUrl("EnemyUnit/Gazer_Sprite.png");
 		return unit;
 	}
+	
+	public static AdvanceUnit Soulless(int[] stats) {
+		SubSkill s1, s2;
+		s1 = new Stun(1);
+		ArrayList<SubSkill> SubSkills;
+		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1));
+		String description = "";
+		Skill skill1 = new NormalSkill("Stun", description, SubSkills, 3, false, true, false);
+
+		s1 = new Damage(200, 1);
+		s2 = new DOTDamage(10,100);
+		SubSkills = new ArrayList<SubSkill>(Arrays.asList(s1, s2));
+		Skill ulti = new UltimateSkill("Heat Vision", description, SubSkills, false, false, false);
+
+		Skill[] skills = new Skill[] { skill1, ulti };
+		AdvanceUnit unit = new AdvanceUnit("Gazer", "Archer", stats, skills);
+		unit.setUrl("EnemyUnit/Soulless_Archer.png");
+		return unit;
+	}
 
 }

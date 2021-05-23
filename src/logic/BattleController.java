@@ -114,6 +114,13 @@ public class BattleController {
 						}
 					}
 					if (isWaveEnd()) {
+						decreaseSkillCooldown(GameController.getPlayer().getUnits());
+						decreaseEffectDuration(GameController.getPlayer().getUnits());
+						checkEffect(GameController.getPlayer().getUnits());
+						increseUltiGauge(GameController.getPlayer().getUnits());
+						GameController.updateAllyInfo();
+						GameController.updateEnemyInfoPanel();
+						GameController.updateBattlePanel();
 						nextWave();
 					} else {
 						BattleController.checkPlayerTurnEnd();
@@ -200,13 +207,17 @@ public class BattleController {
 				maxPlayerAction += 1;
 			}
 		}
+		if(maxPlayerAction == 0) {
+			checkPlayerTurnEnd();
+			return ;
+		}
 //		decreaseSkillCooldown(GameController.getPlayer().getUnits());
 //		decreaseEffectDuration(GameController.getPlayer().getUnits());
 //		checkEffect(GameController.getPlayer().getUnits());
 //		increseUltiGauge(GameController.getPlayer().getUnits());
-//		GameController.updateAllyInfo();
-//		GameController.updateEnemyInfoPanel();
-//		GameController.updateBattlePanel();
+		GameController.updateAllyInfo();
+		GameController.updateEnemyInfoPanel();
+		GameController.updateBattlePanel();
 	}
 
 	private static void nextWave() {

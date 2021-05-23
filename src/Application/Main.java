@@ -26,7 +26,7 @@ public class Main extends Application{
 		createStartScene();
 		
 		primaryStage.setScene(startScene);
-		primaryStage.setTitle("Test Project");
+		primaryStage.setTitle("Dungeon Adventure");
 		primaryStage.sizeToScene();
 		primaryStage.setResizable(false);
 		primaryStage.show();

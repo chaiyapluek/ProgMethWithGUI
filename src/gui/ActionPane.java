@@ -9,6 +9,10 @@ import logic.GameController;
 
 public class ActionPane extends HBox {
 
+	private ActionButton attack;
+	private ActionButton defense;
+	private ActionButton swap;
+
 	public ActionPane() {
 
 		this.setSpacing(10);
@@ -16,9 +20,9 @@ public class ActionPane extends HBox {
 		this.setMinWidth(275);
 		this.setMinHeight(75);
 
-		ActionButton attack = new ActionButton("attack", null, false, 0);
-		ActionButton defense = new ActionButton("defense", null, false, 0);
-		ActionButton swap = new ActionButton("swap", null, false, 0);
+		attack = new ActionButton("attack", null, false, 0);
+		defense = new ActionButton("defense", null, false, 0);
+		swap = new ActionButton("swap", null, false, 0);
 		attack.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {

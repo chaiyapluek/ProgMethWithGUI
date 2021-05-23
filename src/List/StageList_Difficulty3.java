@@ -210,8 +210,8 @@ public class StageList_Difficulty3 {
 
 	public static Stage testStage() {
 
-		int[] stats = new int[] { getHP(1), 0, getAttack(999999), 0, 0, 0, 0 };
-		AdvanceUnit enemyUnit1 = AdvanceUnitList.MechaBore(stats);
+		int[] stats = new int[] { getHP(1), 0, getAttack(100), 0, 0, 0, 3 };
+		AdvanceUnit enemyUnit1 = AdvanceUnitList.Soulless(stats);
 
 		enemyUnit1.setID(1);
 
